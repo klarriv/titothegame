@@ -1,6 +1,5 @@
 import javax.swing.JFrame;
 
-
 public class AnimationTestFrame extends JFrame {
 	
 	private TestAnimationPanel p = new TestAnimationPanel();
