@@ -32,6 +32,7 @@ public class TestAnimationPanel extends JPanel {
 	}
 	private int i = 0;//index loader
 	private int j = 0;
+	private int x = 0; //position
 	Timer t = new Timer(1000/10, new ActionListener(){
 
 		@Override
@@ -53,6 +54,10 @@ public class TestAnimationPanel extends JPanel {
 				i++;
 				j++;
 			}
+			
+			x+= 5;
+			if (x > 1280)
+				x =-300;
 			repaint();
 		}
 		
@@ -60,11 +65,11 @@ public class TestAnimationPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g){
 		g.setColor(Color.gray);
-		g.fillRect(0, 210, 300, 90);
+		g.fillRect(0, 630, 1280, 90);
 		g.setColor(Color.black);
-		g.drawLine(0, 210, 300, 210);
+		g.drawLine(0, 630, 1280, 630);
 		
-		g.drawImage(sprite, 0,0, 100, 100, null);
+		g.drawImage(sprite, x,550, 100, 100, null);
 		
 	}
 
