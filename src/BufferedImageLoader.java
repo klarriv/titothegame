@@ -1,4 +1,5 @@
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -8,7 +9,8 @@ import javax.imageio.ImageIO;
 public class BufferedImageLoader {
 	
 	public BufferedImage loadImage(String pathRelativeToThis) throws IOException{
-		URL url = this.getClass().getResource(pathRelativeToThis);
+		File file = new File(pathRelativeToThis);
+		URL url = file.toURI().toURL();
 		BufferedImage img = ImageIO.read(url);
 		return img;
 	}
