@@ -1,5 +1,5 @@
 package objects;
 
-public class SeeSaw {
+public class SeeSaw extends Physics{
 
 }

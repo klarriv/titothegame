@@ -1,5 +1,5 @@
 package objects;
 
-public class Tree {
+public class Tree extends Physics{
 
 }

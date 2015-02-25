@@ -1,5 +1,5 @@
 package objects;
 
-public class Rope extends Physics{
+public class Rope extends Physics {
 
 }

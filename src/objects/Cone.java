@@ -1,5 +1,5 @@
 package objects;
 
-public class Cone {
+public class Cone extends Physics {
 
 }

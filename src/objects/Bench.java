@@ -1,5 +1,5 @@
 package objects;
 
-public class Bench {
+public class Bench extends Physics {
 
 }
