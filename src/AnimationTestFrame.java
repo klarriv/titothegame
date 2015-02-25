@@ -13,7 +13,6 @@ public class AnimationTestFrame extends JFrame {
 		frame.setSize(1280,720);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		
 
 	}
 
