@@ -1,5 +1,5 @@
 package objects;
 
-public abstract class Physics {
+public abstract class Physics implements ObjectInterface {
 
 }

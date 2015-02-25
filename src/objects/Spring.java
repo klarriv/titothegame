@@ -1,5 +1,5 @@
 package objects;
 
-public class Spring extends Physics implements ObjectInterface{
+public class Spring extends Physics{
 
 }
