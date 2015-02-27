@@ -3,6 +3,7 @@ package objects;
 import javax.swing.Timer;
 
 public abstract class Physics implements ObjectInterface {
+// test
 	private final double GRAVITY = 9.8;//probably not....
 	private int xi;
 	private int yi;
