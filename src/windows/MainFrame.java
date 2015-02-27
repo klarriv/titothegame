@@ -3,6 +3,10 @@ package windows;
 import java.awt.*;
 import javax.swing.*;
 
+/**
+ * This class creates a new main menu so the game can be started.
+ * @author Keven-Matthew
+ */
 public class MainFrame extends JFrame{
 	
 	/**
@@ -19,7 +23,7 @@ public class MainFrame extends JFrame{
 	private JPanel cardLayout;
 	
 	/**
-	 * This creates a new 
+	 * This creates a new main JFrame
 	 */
 	public MainFrame(){
 		setSize(new Dimension(1280, 720));
@@ -34,15 +38,7 @@ public class MainFrame extends JFrame{
 		return levelSelectMenu;
 	}
 
-	public void setLevelSelectMenu(LevelSelectMenu levelSelectMenu) {
-		this.levelSelectMenu = levelSelectMenu;
-	}
-
 	public MainMenu getMainMenu() {
 		return mainMenu;
-	}
-
-	public void setMainMenu(MainMenu mainMenu) {
-		this.mainMenu = mainMenu;
 	}
 }

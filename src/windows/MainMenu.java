@@ -5,6 +5,10 @@ import java.awt.Image;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
+/**
+ * This class creates a new main menu so the game can be started. 
+ * @author Keven-Matthew
+ */
 public class MainMenu extends JPanel{
 	
 	/**

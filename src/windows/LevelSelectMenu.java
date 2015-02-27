@@ -3,6 +3,10 @@ package windows;
 import java.awt.Image;
 import javax.swing.*;
 
+/**
+ * This class creates a new level select menu so the player can navigate through the different levels 
+ * @author Keven-Matthew
+ */
 public class LevelSelectMenu extends JPanel{
 	/**
 	 * Holds the background image for the level select menu.

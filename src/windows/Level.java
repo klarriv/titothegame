@@ -9,7 +9,6 @@ import javax.swing.Timer;
 /**
  * This class loads the level file and creates the GUI with the objects that are
  * passed with the .lvl file.
- * 
  * @author Keven-Matthew
  */
 public class Level extends JPanel implements ActionListener {
