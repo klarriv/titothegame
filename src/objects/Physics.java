@@ -8,6 +8,7 @@ import javax.swing.Timer;
  *
  */
 public abstract class Physics implements ObjectInterface {
+	
 	/**
 	 * The gravity constant
 	 */

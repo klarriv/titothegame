@@ -30,7 +30,7 @@ public interface ObjectInterface {
 	
 	public boolean getUsed();
 	
-	public BufferedImage loadImage(String pathRelativeToThis) throws IOException;//something like that
+	public BufferedImage loadImage() throws IOException;//something like that
 	
 	public void setPosition(Point position);
 	

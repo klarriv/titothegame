@@ -10,7 +10,14 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 public class Tito extends Physics{
+	/**
+	 * Path of the sprite sheet
+	 */
 	private String pathRelativeToThis = "Resources/TitoSpriteSheet.png";
+	
+	
+	
+	
 	
 	public Tito(){
 		
@@ -31,6 +38,7 @@ public class Tito extends Physics{
 	 * @return
 	 * @throws IOException
 	 */
+	@Override
 	public BufferedImage loadImage() throws IOException{
 		File file = new File(pathRelativeToThis);
 		URL url = file.toURI().toURL();
@@ -110,11 +118,6 @@ public class Tito extends Physics{
 		return 0;
 	}
 
-	@Override
-	public BufferedImage loadImage(String pathRelativeToThis)
-			throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 }
