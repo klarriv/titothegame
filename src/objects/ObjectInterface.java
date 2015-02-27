@@ -13,7 +13,9 @@ public interface ObjectInterface {
 	public double vx = 0;
 	public double vy = 0;
 	
-	/** Changing the position of the using a mouse listener*/
+	/**
+	 * Changing the position of the using a mouse listener
+	 */
 	public void move();
 	
 	public void setWeight( int weight);

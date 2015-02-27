@@ -8,9 +8,11 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import objects.Tito;
+
 
 public class TestAnimationPanel extends JPanel {
-	private BufferedImageLoader loader = new BufferedImageLoader();
+	private Tito loader = new Tito();
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = {0, 1, 2, 3, 4, 2, 1};//tito walking algorithm
@@ -22,7 +24,7 @@ public class TestAnimationPanel extends JPanel {
 	public TestAnimationPanel(){
 		this.setBackground(Color.cyan);
 		try{
-			spriteSheet = loader.loadImage("Resources/TitoSpriteSheet.png");
+			spriteSheet = loader.loadImage();
 		} catch(IOException ex){
 			
 		}
