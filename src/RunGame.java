@@ -13,7 +13,6 @@ public class RunGame{
 	
 	LevelSelectMenu lvlSelectMenu = new LevelSelectMenu();
 	MainMenu mainMenu = new MainMenu();
-	OptionMenu optionMenu = new OptionMenu();
 	
 	/**
 	 * 
