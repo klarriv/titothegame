@@ -5,6 +5,8 @@ import java.net.URL;
 
 import javax.imageio.ImageIO;
 
+import objects.Cone;
+
 
 public class BufferedImageLoader {
 	
