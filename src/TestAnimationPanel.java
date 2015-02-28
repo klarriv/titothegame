@@ -22,6 +22,7 @@ public class TestAnimationPanel extends JPanel {
 	private int[] rollingy ={1, 1, 2, 0, 2};
 	
 	public TestAnimationPanel(){
+		this.setOpaque(true);
 		this.setBackground(Color.cyan);
 		try{
 			spriteSheet = loader.loadImage();
@@ -60,18 +61,21 @@ public class TestAnimationPanel extends JPanel {
 			x+= 5;
 			if (x > 1280)
 				x =-300;
+			
 			repaint();
 		}
 		
 	});
 	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
+		
+		g.drawImage(sprite, x,550, 100, 100, null);
 		g.setColor(Color.gray);
 		g.fillRect(0, 630, 1280, 90);
 		g.setColor(Color.black);
 		g.drawLine(0, 630, 1280, 630);
 		
-		g.drawImage(sprite, x,550, 100, 100, null);
 		
 	}
 

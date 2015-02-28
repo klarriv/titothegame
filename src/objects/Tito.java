@@ -15,14 +15,18 @@ public class Tito extends Physics{
 	 */
 	private String pathRelativeToThis = "Resources/TitoSpriteSheet.png";
 	
-	
-	
-	
-	
 	public Tito(){
 		
 	}
 	
+	/**
+	 * This creates a new instance of Tito
+	 * @param x
+	 * @param y
+	 * @param vx
+	 * @param vy
+	 * @param t
+	 */
 	public Tito(int x, int y, double vx, double vy, Timer t) {
 		super(x, y, vx, vy, t);
 		// TODO Auto-generated constructor stub
