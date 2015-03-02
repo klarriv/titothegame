@@ -15,7 +15,7 @@ public class GravityTestPanel extends JPanel {
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Tito loader = new Tito(0, 550, 5, 16, t);
+	private Tito loader = new Tito(0, 550, 4, 16, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
@@ -76,9 +76,15 @@ public class GravityTestPanel extends JPanel {
 		
 		g.setColor(Color.gray);
 		g.fillRect(0, 630, 1280, 90);
+		g.setColor(Color.green);
+		int[] xs = {600, 595, 645, 640};
+		int[] ys = {630, 650, 650, 630};
+		g.fillPolygon(xs, ys, 4);
 		g.setColor(Color.black);
 		g.drawLine(0, 630, 1280, 630);
 		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
+		
+		
 		
 		
 		
@@ -100,7 +106,10 @@ public class GravityTestPanel extends JPanel {
 		else 
 			loader.setX(0);
 		
-			
+		if (loader.getPosition().x >= 600 && loader.getPosition().x <= 640
+				&& loader.getPosition().y == 550)	{
+			this.setBackground(Color.green);
+		}
 			
 		
 	}
