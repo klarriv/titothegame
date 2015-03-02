@@ -10,6 +10,13 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 public class Tito extends Physics{
+	private int weight = 15;
+	private boolean isVisible = true;
+	private boolean isUsed = true;
+	private BufferedImage image = null;
+	private Point position = new Point(600,550);
+	private double vx = 7;
+	private double vy = 10;
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -29,7 +36,11 @@ public class Tito extends Physics{
 	 */
 	public Tito(int x, int y, double vx, double vy, Timer t) {
 		super(x, y, vx, vy, t);
-		// TODO Auto-generated constructor stub
+		this.position.x = x;
+		this.position.y = y;
+		this.vx = vx;
+		this.vy = vy;
+		this.t = t;
 	}
 
 	@Override
@@ -50,78 +61,101 @@ public class Tito extends Physics{
 		return img;
 	}
 
+	
 	@Override
 	public void setWeight(int weight) {
-		// TODO Auto-generated method stub
+		this.weight = weight;
 		
 	}
 
 	@Override
 	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.weight;
 	}
 
 	@Override
 	public void setVisible(boolean visible) {
-		// TODO Auto-generated method stub
+		
+		this.isVisible = visible;
 		
 	}
 
 	@Override
 	public boolean getVisible() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return isVisible;
 	}
 	
 	@Override
 	public void setUsed(boolean used) {
-		// TODO Auto-generated method stub
+		
+		this.isUsed = used;
 		
 	}
 
 	@Override
 	public boolean getUsed() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return isUsed;
 	}
 
 	@Override
 	public void setPosition(Point position) {
-		// TODO Auto-generated method stub
 		
+		this.position = position;
+		
+	}
+	
+	public void setX(int x){
+		
+		this.position.x =x;
+	}
+	
+	public void setY(int y){
+		
+		this.position.y = y;
 	}
 
 	@Override
 	public Point getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return this.position;
 	}
 
 	@Override
 	public void setVx(double vx) {
-		// TODO Auto-generated method stub
+		
+		this.vx = vx;
 		
 	}
 
 	@Override
 	public double getVx() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.vx;
 	}
 
 	@Override
 	public void setVy(double vy) {
-		// TODO Auto-generated method stub
 		
+		this.vy = vy;
+		
+	}
+	
+	public void setVy(){
+		this.vy = this.vyi;
 	}
 
 	@Override
 	public double getVy() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return this.vy;
 	}
-
+	
+	public int getDelay(){
+		return this.t.getDelay();
+	}
 	
 
 }

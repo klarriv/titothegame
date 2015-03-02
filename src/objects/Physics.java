@@ -12,7 +12,7 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The gravity constant
 	 */
-	private final double GRAVITY = 9.8;//probably not....
+	private final double GRAVITY = 0.4;//probably not....
 	/**
 	 * The initial position in x on the screen of the object
 	 */
@@ -28,11 +28,11 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The initial velocity in y
 	 */
-	private double vyi;
+	protected double vyi;
 	/**
 	 * Timer variable set in the constructor
 	 */
-	private Timer t;
+	protected Timer t;
 	
 	public Physics(){
 		
@@ -63,7 +63,12 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int projectileMotions(int weight, int position, double v, int delay){
-		
+		int force = force(weight, GRAVITY);
+		this.vyi = v;
+		this.vyi -= 0.5 * GRAVITY *(delay/10);
+		position -= v*(delay/10) - (0.5 * GRAVITY*((delay/10) * (delay/10)));
+		//System.out.println(position);
+		return position;
 	}
 	
 	/**
@@ -75,7 +80,8 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int motion(int weight, int position, double v, int delay){
-		
+		position += v * (delay/10);
+		return position;
 	}
 	
 	/**
@@ -85,7 +91,7 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int force(int weight, double acceleration){
-		
+		return (int)(weight * acceleration);
 	}
 	
 	/**

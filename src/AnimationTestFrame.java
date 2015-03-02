@@ -1,12 +1,12 @@
 import javax.swing.JFrame;
 
 public class AnimationTestFrame extends JFrame {
-	
+	private GravityTestPanel g = new GravityTestPanel();
 	private TestAnimationPanel p = new TestAnimationPanel();
 
 	public AnimationTestFrame(){
-		p.setVisible(true);
-		add(p);
+		g.setVisible(true);
+		add(g);
 	}
 	public static void main(String[] args) {
 		AnimationTestFrame frame = new AnimationTestFrame();

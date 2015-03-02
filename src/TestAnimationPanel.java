@@ -38,7 +38,7 @@ public class TestAnimationPanel extends JPanel {
 
 	private int i = 0;// index loader
 	private int j = 0;
-	private int x = -50; // position
+	//private int x = 100; // position
 	private boolean direction; // true=to the right, false= to the left.
 
 	Timer t = new Timer(1000 / 10, new ActionListener() {
@@ -63,13 +63,14 @@ public class TestAnimationPanel extends JPanel {
 				i++;
 				j++;
 			}
-			if (direction)
-				x += 7;
+			/**if (direction)
+				x += (int)loader.getVx();
 			else if (!direction)
-				x -= 7;
+				x -= (int)loader.getVx();
 			if (x > 1280 || x < -50) {
 				direction = !direction;
-			}
+			}*/
+			
 
 			repaint();
 		}
@@ -102,9 +103,9 @@ public class TestAnimationPanel extends JPanel {
 		g.setColor(Color.black);
 		g.drawLine(0, 630, 1280, 630);
 		if (direction)
-			g.drawImage(sprite, x,550, 100, 100, null);
+			g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		else if(!direction)
-			g.drawImage(getFlippedImage(sprite), x,550, 100, 100, null);
+			g.drawImage(getFlippedImage(sprite),loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		
 	}
 }
