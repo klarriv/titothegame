@@ -97,6 +97,8 @@ public class GravityTestPanel extends JPanel {
 		
 		if (x < 1280)
 			loader.setX(x);
+		else 
+			loader.setX(0);
 		
 			
 			
