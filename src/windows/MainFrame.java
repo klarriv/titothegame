@@ -28,7 +28,7 @@ public class MainFrame extends JFrame{
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
-	private JPanel menus;
+	private static JPanel menus;
 	
 	/**
 	 * This creates a new main JFrame
@@ -49,6 +49,30 @@ public class MainFrame extends JFrame{
 		
 		CardLayout cardLayout = (CardLayout) menus.getLayout();
 		cardLayout.show(menus, MAINMENUPANEL);
+	}
+
+	public static JPanel getMenus() {
+		return menus;
+	}
+
+	public void setMenus(JPanel menus) {
+		MainFrame.menus = menus;
+	}
+
+	public static String getLevelselectpanel() {
+		return LEVELSELECTPANEL;
+	}
+
+	public static String getMainmenupanel() {
+		return MAINMENUPANEL;
+	}
+
+	public void setLevelSelectMenu(LevelSelectMenu levelSelectMenu) {
+		this.levelSelectMenu = levelSelectMenu;
+	}
+
+	public void setMainMenu(MainMenu mainMenu) {
+		this.mainMenu = mainMenu;
 	}
 
 	public LevelSelectMenu getLevelSelectMenu() {

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import windows.*;
 
 /**
- * 
+ * This is the main class that runs the actual game. 
  * @author Keven-Matthew
  *
  */
