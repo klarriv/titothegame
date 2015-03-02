@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -15,7 +17,7 @@ public class GravityTestPanel extends JPanel {
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Tito loader = new Tito(0, 550, 4, 16, t);
+	private Tito loader = new Tito(0, 550, 4, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
@@ -35,6 +37,41 @@ public class GravityTestPanel extends JPanel {
 		} catch (IOException ex) {
 
 		}
+		
+		this.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				loader.setVy(7);
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		
 		t = new Timer(1000 / 10, new ActionListener(){
 
@@ -108,7 +145,8 @@ public class GravityTestPanel extends JPanel {
 		
 		if (loader.getPosition().x >= 600 && loader.getPosition().x <= 640
 				&& loader.getPosition().y == 550)	{
-			this.setBackground(Color.green);
+			this.setBackground(Color.red);
+			System.exit(0);
 		}
 			
 		
