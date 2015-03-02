@@ -1,6 +1,7 @@
 package windows;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 /**
@@ -8,7 +9,14 @@ import javax.swing.*;
  * @author Keven-Matthew
  */
 public class MainFrame extends JFrame{
-	
+	/**
+	 * This is the identifier string for the level select JPanel.
+	 */
+	private static final String LEVELSELECTPANEL = "LevelSelectPanel";
+	/**
+	 * This is the identifier string for the main menu JPanel.
+	 */
+	private static final String MAINMENUPANEL = "MainMenuPanel";
 	/**
 	 * The level select menu that will be used by the user.
 	 */
@@ -20,18 +28,27 @@ public class MainFrame extends JFrame{
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
-	private JPanel cardLayout;
+	private JPanel menus;
 	
 	/**
 	 * This creates a new main JFrame
 	 */
 	public MainFrame(){
-		setSize(new Dimension(1280, 720));
+		setLayout(new BorderLayout());
+		getContentPane().setPreferredSize(new Dimension(1280, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Game: Tito Escapes the Zoo");
 		setVisible(true);
+		pack();
 		
-		cardLayout.setLayout(new CardLayout());
+		menus = new JPanel(new CardLayout());
+		menus.add(levelSelectMenu, LEVELSELECTPANEL);
+		menus.add(mainMenu, MAINMENUPANEL);
+		
+		add(menus, BorderLayout.CENTER);
+		
+		CardLayout cardLayout = (CardLayout) menus.getLayout();
+		cardLayout.show(menus, MAINMENUPANEL);
 	}
 
 	public LevelSelectMenu getLevelSelectMenu() {
