@@ -18,13 +18,12 @@ public class MainMenu extends JPanel {
 	/**
 	 * This holds the image for the specific buttons.
 	 */
-	private BufferedImage playButtonIcon, playButtonHighlightIcon,
-			newGameButtonIcon, newGameHighlightButtonIcon;
+	private BufferedImage playButtonIcon, playButtonHighlightIcon, newGameButtonIcon, newGameHighlightButtonIcon;
 
 	/**
 	 * Holds the background image for the main menu.
 	 */
-	private Image BACKGROUND_IMAGE = null;
+	private Image backgroundImage = null;
 
 	/**
 	 * Determines if the music should be playing or not.
@@ -44,18 +43,11 @@ public class MainMenu extends JPanel {
 	public MainMenu() {
 		setLayout(null);
 		try {
-			BACKGROUND_IMAGE = ImageIO.read(new File(
-					"Resources/Background_Images/MainMenu/mainmenu.png"));
-			playButtonIcon = ImageIO.read(new File(
-					"Resources/BackGround_Images/MainMenu/playButton.png"));
-			playButtonHighlightIcon = ImageIO
-					.read(new File(
-							"Resources/BackGround_Images/MainMenu/playHighlightButton.png"));
-			newGameButtonIcon = ImageIO.read(new File(
-					"Resources/BackGround_Images/MainMenu/newGameButton.png"));
-			newGameHighlightButtonIcon = ImageIO
-					.read(new File(
-							"Resources/BackGround_Images/MainMenu/newGameHighlightButton.png"));
+			backgroundImage = ImageIO.read(new File("Resources/Menus/MainMenu/mainmenu.png"));
+			playButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/playButton.png"));
+			playButtonHighlightIcon = ImageIO.read(new File("Resources/Menus/MainMenu/playHighlightButton.png"));
+			newGameButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameButton.png"));
+			newGameHighlightButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameHighlightButton.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,8 +75,7 @@ public class MainMenu extends JPanel {
 				if ((JButton) e.getSource() == playButton) {
 					playButton.setIcon(new ImageIcon(playButtonHighlightIcon));
 				} else if ((JButton) e.getSource() == newGameButton) {
-					newGameButton.setIcon(new ImageIcon(
-							newGameHighlightButtonIcon));
+					newGameButton.setIcon(new ImageIcon(newGameHighlightButtonIcon));
 				}
 			}
 
@@ -159,7 +150,7 @@ public class MainMenu extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.drawImage(BACKGROUND_IMAGE, 0, 0, null);
+		g.drawImage(backgroundImage, 0, 0, null);
 	}
 
 }
