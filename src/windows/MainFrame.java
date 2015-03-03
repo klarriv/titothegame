@@ -24,7 +24,7 @@ public class MainFrame extends JFrame{
 	/**
 	 * The main menu that will be used by the user.
 	 */
-	private MainMenu mainMenu = new MainMenu();
+	private static MainMenu mainMenu = new MainMenu();
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
@@ -72,14 +72,14 @@ public class MainFrame extends JFrame{
 	}
 
 	public void setMainMenu(MainMenu mainMenu) {
-		this.mainMenu = mainMenu;
+		MainFrame.mainMenu = mainMenu;
 	}
 
 	public LevelSelectMenu getLevelSelectMenu() {
 		return levelSelectMenu;
 	}
 
-	public MainMenu getMainMenu() {
+	public static MainMenu getMainMenu() {
 		return mainMenu;
 	}
 }
