@@ -14,6 +14,7 @@ import objects.Tito;
 
 
 public class GravityTestPanel extends JPanel {
+	private int counter = 0;
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
@@ -73,7 +74,8 @@ public class GravityTestPanel extends JPanel {
 			
 		});
 		
-		t = new Timer(1000 / 10, new ActionListener(){
+		
+		t = new Timer(1000 / 24, new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -84,8 +86,10 @@ public class GravityTestPanel extends JPanel {
 					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
 					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
 					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+					if (counter % 2 == 0){
 					i++;
 					j++;
+					}
 				} else {
 					i = 0;
 					j = 0;
@@ -96,7 +100,7 @@ public class GravityTestPanel extends JPanel {
 					j++;
 				}
 				
-				
+				counter++;
 				repaint();
 				
 			}
