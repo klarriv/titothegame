@@ -119,7 +119,7 @@ public class PlaneTestPanel extends JPanel {
 		
 		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		
-		loader.frictionMotion(loader.getWeight(), loader.getPosition(), Math.PI/2, 0.1, t.getDelay());	
+		loader.frictionMotion(loader.getWeight(), loader.getPosition(), Math.PI/6, 0.1, t.getDelay());	
 		
 	}
 
