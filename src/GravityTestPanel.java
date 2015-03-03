@@ -145,7 +145,11 @@ public class GravityTestPanel extends JPanel {
 		if (x < 1280)
 			loader.setX(x);
 		else 
-			loader.setX(0);
+			loader.setVx(-1 * loader.getVx());
+		if (x < 0)
+			loader.setVx(-1 * loader.getVx());
+		
+			
 		
 		if (loader.getPosition().x >= 600 && loader.getPosition().x <= 640
 				&& loader.getPosition().y == 550)	{
