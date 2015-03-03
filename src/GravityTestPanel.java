@@ -39,6 +39,7 @@ public class GravityTestPanel extends JPanel {
 
 		}
 		
+		
 		this.addMouseListener(new MouseListener(){
 
 			@Override
@@ -84,8 +85,8 @@ public class GravityTestPanel extends JPanel {
 				if (i < rollingx.length) {
 
 					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
-					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
-					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+					sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
+					//sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
 					if (counter % 2 == 0){
 					i++;
 					j++;
@@ -94,8 +95,8 @@ public class GravityTestPanel extends JPanel {
 					i = 0;
 					j = 0;
 					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
-					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
-					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+					sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
+					//sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
 					i++;
 					j++;
 				}
