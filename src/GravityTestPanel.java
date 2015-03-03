@@ -150,7 +150,7 @@ public class GravityTestPanel extends JPanel {
 		if (loader.getPosition().x >= 600 && loader.getPosition().x <= 640
 				&& loader.getPosition().y == 550)	{
 			this.setBackground(Color.red);
-			System.exit(0);
+			//System.exit(0);
 		}
 			
 		
