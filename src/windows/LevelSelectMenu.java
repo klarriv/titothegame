@@ -22,6 +22,7 @@ import javax.swing.*;
  * @author Keven-Matthew
  */
 public class LevelSelectMenu extends JPanel {
+	
 	/**
 	 * Holds the background image for the level select menu.
 	 */
