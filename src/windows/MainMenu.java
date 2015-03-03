@@ -35,6 +35,9 @@ public class MainMenu extends JPanel {
 	 */
 	private Clip menuSong;
 
+	/**
+	 * These are the variables for the "play" and "new game" buttons.
+	 */
 	private JButton playButton, newGameButton;
 
 	/**
@@ -54,9 +57,7 @@ public class MainMenu extends JPanel {
 		}
 
 		/**
-		 * This is the mouse listener to make the buttons change when the mouse
-		 * hovers over them.
-		 * 
+		 * This is the mouse listener to make the buttons change when the mouse hovers over them.
 		 * @author Keven-Matthew
 		 *
 		 */
