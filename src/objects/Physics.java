@@ -1,5 +1,7 @@
 package objects;
 
+import java.awt.Point;
+
 import javax.swing.Timer;
 /**
  * This class provides a skeletal implementation of ObjectInterface 
@@ -12,7 +14,7 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The gravity constant
 	 */
-	private final double GRAVITY = 0.4;//probably not....
+	private final double GRAVITY = 0.4;
 	/**
 	 * The initial position in x on the screen of the object
 	 */
@@ -63,11 +65,32 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int projectileMotions(int weight, int position, double v, int delay){
-		int force = force(weight, GRAVITY);
+		
 		this.vyi = v;
 		this.vyi -= 0.5 * GRAVITY *(delay/10);
 		position -= v*(delay/10) - (0.5 * GRAVITY*((delay/10) * (delay/10)));
 		//System.out.println(position);
+		return position;
+	}
+	public Point frictionMotion(int weight, Point position, double angle, double u, int delay){
+		//weight should be replaced by GRAVITY * weight to get 
+		//the force but since GRAVITY = 0.4 we will work with weight = force
+		//and try to find something that works force Newton's law
+		double fn = forceY(weight, angle);
+		double fy = -fn;
+		double fx = forceX(weight, angle);
+		double ff = friction(fn, u);
+		double a = acceleration(fx - ff, weight);//don't know how it's gonna work out since weight = force...
+		
+		
+		//this.vyi -= 0.5 * GRAVITY *(delay/10);
+		double ds = 0;
+		ds -= vyi*(delay/10) - (0.5 * a*((delay/10) * (delay/10)));//I don't know why this is working better then
+																	//Math.sqrt(Math.pow(vxi, 2.0) + Math.pow(vyi, 2.0))
+		this.vxi -= a * Math.cos(angle);
+		this.vyi -= a * Math.sin(angle);
+		position.x += ds * Math.cos(angle);
+		position.y += ds * Math.sin(angle);
 		return position;
 	}
 	
@@ -85,13 +108,33 @@ public abstract class Physics implements ObjectInterface {
 	}
 	
 	/**
-	 * Calculates and returns the force on/of an object using Newton's second law
+	 * Calculates and returns the force in x on/of an object using geometry
 	 * @param weight
-	 * @param acceleration
+	 * @param a
 	 * @return
 	 */
-	public int force(int weight, double acceleration){
-		return (int)(weight * acceleration);
+	public double forceX(int force, double a){
+		
+		return (force * GRAVITY) * Math.cos(a);
+	}
+	/**
+	 * Calculates and returns the force in y on/of an object using Newton's second law
+	 * @param weight
+	 * @param a
+	 * @return
+	 */
+	public double forceY(int force, double a){
+		
+		return (force * GRAVITY) * Math.sin(a);
+	}
+	/**
+	 * Calculates the friction force of an object with a constant u and a normal force n
+	 * @param n
+	 * @param u
+	 * @return
+	 */
+	public double friction(double n, double u){
+		return (n * u);
 	}
 	
 	/**
@@ -100,8 +143,8 @@ public abstract class Physics implements ObjectInterface {
 	 * @param force
 	 * @return
 	 */
-	public double acceleration( int weight, int force){
-		
+	public double acceleration( double force, double weight){
+		return force/ weight;
 	}
 	
 	/**
