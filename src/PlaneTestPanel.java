@@ -109,7 +109,7 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		loader.setAcceleration(Math.PI/12, loader.getWeight(), 0.5);
+		loader.setAcceleration(Math.PI/3, loader.getWeight(), 0.5);
 		t.start();
 		
 
