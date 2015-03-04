@@ -109,8 +109,9 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		
+		loader.setAcceleration(Math.PI/12, loader.getWeight(), 0.5);
 		t.start();
+		
 
 	}
 	@Override
@@ -119,7 +120,9 @@ public class PlaneTestPanel extends JPanel {
 		
 		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		
-		loader.frictionMotion(loader.getWeight(), loader.getPosition(), Math.PI/6, 0.1, t.getDelay());	
+		loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay());	
+		loader.setVy();
+		loader.setVx();
 		
 	}
 

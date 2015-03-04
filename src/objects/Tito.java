@@ -129,6 +129,9 @@ public class Tito extends Physics{
 		this.vx = vx;
 		
 	}
+	public void setVx(){
+		this.vx = this.vxi;
+	}
 
 	@Override
 	public double getVx() {

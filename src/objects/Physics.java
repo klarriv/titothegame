@@ -26,7 +26,7 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The initial velocity in x
 	 */
-	private double vxi;
+	protected double vxi;
 	/**
 	 * The initial velocity in y
 	 */
@@ -35,6 +35,18 @@ public abstract class Physics implements ObjectInterface {
 	 * Timer variable set in the constructor
 	 */
 	protected Timer t;
+	/**
+	 * The acceleration of the object on an incline plane
+	 */
+	protected double a = 0;
+	/**
+	 * 
+	 */
+	protected double ax = 0;
+	/**
+	 * 
+	 */
+	protected double ay = 0;
 	
 	public Physics(){
 		
@@ -72,25 +84,14 @@ public abstract class Physics implements ObjectInterface {
 		//System.out.println(position);
 		return position;
 	}
-	public Point frictionMotion(int weight, Point position, double angle, double u, int delay){
-		//weight should be replaced by GRAVITY * weight to get 
-		//the force but since GRAVITY = 0.4 we will work with weight = force
-		//and try to find something that works force Newton's law
-		double fn = forceY(weight, angle);
-		double fy = -fn;
-		double fx = forceX(weight, angle);
-		double ff = friction(fn, u);
-		double a = acceleration(fx - ff, weight);//don't know how it's gonna work out since weight = force...
-		
-		
-		//this.vyi -= 0.5 * GRAVITY *(delay/10);
-		double ds = 0;
-		ds -= vyi*(delay/10) - (0.5 * a*((delay/10) * (delay/10)));//I don't know why this is working better then
-																	//Math.sqrt(Math.pow(vxi, 2.0) + Math.pow(vyi, 2.0))
-		this.vxi -= a * Math.cos(angle);
-		this.vyi -= a * Math.sin(angle);
-		position.x += ds * Math.cos(angle);
-		position.y += ds * Math.sin(angle);
+	public Point frictionMotion(Point position, double vx, double vy, int delay){
+		this.vyi = vy;
+		this.vxi = vx;
+		this.vxi -= 0.5 * ax * (delay/10);
+		this.vyi -= 0.5 * ay * (delay/10);
+		position.x -= vx*(delay/10) - (0.5 * ax*((delay/10) * (delay/10)));
+		position.y -= vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
+		//System.out.println(position);
 		return position;
 	}
 	
@@ -143,8 +144,13 @@ public abstract class Physics implements ObjectInterface {
 	 * @param force
 	 * @return
 	 */
-	public double acceleration( double force, double weight){
-		return force/ weight;
+	public double setAcceleration( double angle, double weight, double u){
+		double force = (weight * GRAVITY);
+		double f = (force * Math.cos(angle)) - ((force * Math.sin(angle)) * u);
+		this.a = f/ weight;
+		this.ax = a * Math.cos(angle);
+		this.ay = a * Math.sin(angle);
+		return a;
 	}
 	
 	/**
@@ -154,7 +160,7 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int spring(double k, int dx){
-		
+		return 0;
 	}
 	
 	/**Inverts the force*/
