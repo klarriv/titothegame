@@ -87,23 +87,22 @@ public abstract class Physics implements ObjectInterface {
 	public Point frictionMotion(Point position, double vx, double vy, int delay){
 		this.vyi = vy;
 		this.vxi = vx;
-		this.vxi -= 0.5 * ax * (delay/10);
-		this.vyi -= 0.5 * ay * (delay/10);
+		this.vxi += 0.5 * ax * (delay/10);
+		this.vyi += 0.5 * ay* (delay/10);
 		position.x -= vx*(delay/10) - (0.5 * ax*((delay/10) * (delay/10)));
-		position.y -= vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
-		//System.out.println(position);
+		position.y += vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
+		System.out.println("vxi: " + vxi + " vyi: " + vyi);
 		return position;
 	}
 	
 	/**
 	 * Calculates and returns the position of an object in movement
-	 * @param weight
 	 * @param position
 	 * @param v
 	 * @param delay
 	 * @return
 	 */
-	public int motion(int weight, int position, double v, int delay){
+	public int motion(int position, double v, int delay){
 		position += v * (delay/10);
 		return position;
 	}
@@ -146,17 +145,13 @@ public abstract class Physics implements ObjectInterface {
 	 */
 	public double setAcceleration( double angle, double weight, double u){
 		double force = (weight * GRAVITY);
-		double f = (force * Math.sin(angle)) - ((force * Math.cos(angle)) * u);
+		double f = (force * Math.cos(angle)) - ((-force * Math.sin(angle)) * u);
 		this.a = f/ weight;
-		if ( a >= 0){
-			this.ax = a * Math.cos(angle);
-			this.ay = a * Math.sin(angle);
-		}
-		else {
-			this.ax = 0;
-			this.ay = 0;
-		}
-		System.out.println(ax + " " + ay);
+		
+		this.ay = a * Math.cos(angle);
+		this.ax = a * Math.sin(angle);
+		
+		System.out.println("a: " + this.ax);
 		return a;
 	}
 	

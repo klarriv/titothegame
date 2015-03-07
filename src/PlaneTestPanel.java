@@ -109,7 +109,9 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		loader.setAcceleration(Math.PI/3, loader.getWeight(), 0.5);
+		loader.setAcceleration(Math.toRadians(320), loader.getWeight(), 0.6);
+		
+		
 		t.start();
 		
 
@@ -117,13 +119,43 @@ public class PlaneTestPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		g.setColor(Color.gray);
+		g.fillRect(0, 630, 1280, 90);
+		int[] x = {0, 422,0};
+		int[] y = {110, 630, 630};
+		
+		g.fillPolygon(x, y, 3);
 		
 		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		
+		if (loader.getPosition().y < 550)
+			frictionMove();
+		else {
+			System.out.println(loader.getPosition().y);
+			xMove();
+		}
+		
+		
+	}
+	
+	public void frictionMove(){
 		loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay());	
 		loader.setVy();
 		loader.setVx();
-		
+	}
+	
+	public void xMove(){
+		int x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
+		if (x < 1280)
+			loader.setX(x);
+		else 
+			loader.setVx(-1 * loader.getVx());
+		if (x < 422){
+			loader.frictionMotion(loader.getPosition(), -loader.getVx() * Math.sin(Math.toRadians(320)),
+					-loader.getVy()* Math.cos(Math.toRadians(320)),  t.getDelay());	
+			loader.setVy();
+			loader.setVx();
+		}
 	}
 
 }

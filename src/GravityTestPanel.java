@@ -130,7 +130,7 @@ public class GravityTestPanel extends JPanel {
 		
 		
 		
-		int x = loader.motion(loader.getWeight(), loader.getPosition().x, loader.getVx(), t.getDelay());
+		int x = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
 		int y = (loader.projectileMotions(loader.getWeight(), loader.getPosition().y, loader.getVy(), t.getDelay()));
 		if (loader.getVy() < 0 && y >= 550){
 			loader.setY(550);
