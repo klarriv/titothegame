@@ -128,10 +128,11 @@ public class PlaneTestPanel extends JPanel {
 		
 		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
 		
-		if (loader.getPosition().y < 550)
+		if (loader.getPosition().x < 422 && loader.getPosition().y < 550)
 			frictionMove();
 		else {
-			System.out.println(loader.getPosition().y);
+			//System.out.println(loader.getPosition().y);
+			loader.setY(550);//we have to find something better than that
 			xMove();
 		}
 		
@@ -152,7 +153,7 @@ public class PlaneTestPanel extends JPanel {
 			loader.setVx(-1 * loader.getVx());
 		if (x < 422){
 			loader.frictionMotion(loader.getPosition(), -loader.getVx() * Math.sin(Math.toRadians(320)),
-					-loader.getVy()* Math.cos(Math.toRadians(320)),  t.getDelay());	
+					-loader.getVx()* Math.cos(Math.toRadians(320)),  t.getDelay());	
 			loader.setVy();
 			loader.setVx();
 		}

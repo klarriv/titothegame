@@ -14,7 +14,7 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The gravity constant
 	 */
-	private final double GRAVITY = 0.4;
+	private final double GRAVITY = 0.35;
 	/**
 	 * The initial position in x on the screen of the object
 	 */
@@ -79,7 +79,7 @@ public abstract class Physics implements ObjectInterface {
 	public int projectileMotions(int weight, int position, double v, int delay){
 		
 		this.vyi = v;
-		this.vyi -= 0.5 * GRAVITY *(delay/10);
+		this.vyi -= GRAVITY *(delay/10);
 		position -= v*(delay/10) - (0.5 * GRAVITY*((delay/10) * (delay/10)));
 		//System.out.println(position);
 		return position;
@@ -87,11 +87,12 @@ public abstract class Physics implements ObjectInterface {
 	public Point frictionMotion(Point position, double vx, double vy, int delay){
 		this.vyi = vy;
 		this.vxi = vx;
-		this.vxi += 0.5 * ax * (delay/10);
-		this.vyi += 0.5 * ay* (delay/10);
+		this.vxi +=  ax * (delay/10);
+		this.vyi +=  ay * (delay/10);
 		position.x -= vx*(delay/10) - (0.5 * ax*((delay/10) * (delay/10)));
 		position.y += vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
 		System.out.println("vxi: " + vxi + " vyi: " + vyi);
+		System.out.println("vx:  " + vx +  " vy : " + vy);
 		return position;
 	}
 	
@@ -151,7 +152,7 @@ public abstract class Physics implements ObjectInterface {
 		this.ay = a * Math.cos(angle);
 		this.ax = a * Math.sin(angle);
 		
-		System.out.println("a: " + this.ax);
+		System.out.println("ax: " + this.ax + " ay: " + this.ay);
 		return a;
 	}
 	
