@@ -91,8 +91,8 @@ public abstract class Physics implements ObjectInterface {
 		this.vyi +=  ay * (delay/10);
 		position.x -= vx*(delay/10) - (0.5 * ax*((delay/10) * (delay/10)));
 		position.y += vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
-		System.out.println("vxi: " + vxi + " vyi: " + vyi);
-		System.out.println("vx:  " + vx +  " vy : " + vy);
+		//System.out.println("vxi: " + vxi + " vyi: " + vyi);
+		//System.out.println("vx:  " + vx +  " vy : " + vy);
 		return position;
 	}
 	
