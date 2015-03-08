@@ -24,10 +24,8 @@ public class PlaneTestPanel extends JPanel {
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
-	private int[] pattern2x = { 0, 1, 2, 3, 4, 2, 1, 0, 0, 1, 2, 3, 4, 5, 0, 5,
-			5, 1, 2, 3, 4, 0 };
-	private int[] pattern2y = { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0,
-			2, 2, 2, 2, 2, 1 };
+	private int[] pattern2x = { 0, 1, 2, 3, 4, 2, 1, 0, 0, 1, 2, 3, 4, 5, 0, 5, 5, 1, 2, 3, 4, 0 };
+	private int[] pattern2y = { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0, 2, 2, 2, 2, 2, 1 };
 	private int[] rollingx = { 4, 5, 0, 5, 5 };
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
 	
