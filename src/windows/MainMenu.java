@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -13,12 +14,12 @@ import javax.swing.*;
  * 
  * @author Keven-Matthew
  */
-public class MainMenu extends JPanel {
+public class MainMenu extends JPanel implements ActionListener{
 
 	/**
 	 * This holds the image for the specific buttons.
 	 */
-	private BufferedImage playButtonIcon, playButtonHighlightIcon, newGameButtonIcon, newGameHighlightButtonIcon;
+	private BufferedImage playButtonIcon, playButtonHighlightIcon, newGameButtonIcon, newGameHighlightButtonIcon, titleImage;
 
 	/**
 	 * Holds the background image for the main menu.
@@ -43,6 +44,10 @@ public class MainMenu extends JPanel {
 	/**
 	 * Creates a new main menu.
 	 */
+	
+	private Timer t = new Timer(10, this);
+	private int yTitle = 15;
+	
 	public MainMenu() {
 		setLayout(null);
 		try {
@@ -51,6 +56,7 @@ public class MainMenu extends JPanel {
 			playButtonHighlightIcon = ImageIO.read(new File("Resources/Menus/MainMenu/playHighlightButton.png"));
 			newGameButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameButton.png"));
 			newGameHighlightButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameHighlightButton.png"));
+			titleImage = ImageIO.read(new File("Resources/Menus/MainMenu/title.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -137,7 +143,7 @@ public class MainMenu extends JPanel {
 
 		add(playButton);
 		add(newGameButton);
-
+		t.start();
 	}
 
 	/**
@@ -146,12 +152,26 @@ public class MainMenu extends JPanel {
 	public void startMenuMusic() {
 
 	}
-
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
+		
 		g.drawImage(backgroundImage, 0, 0, null);
+		g.drawImage(titleImage, 81, yTitle, null);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		boolean direction = true;
+		if(yTitle>=15 && yTitle<75 && direction){
+			yTitle++;
+		}
+		else (yTitle>15 && yTitle<=75 && !direction){
+			yTitle--;
+		}
+		
+		repaint();
 	}
 
 }

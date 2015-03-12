@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -48,6 +47,7 @@ public class Tito extends Physics{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	/**
 	 * Loads the buffered image
 	 * @return
