@@ -9,7 +9,7 @@ public interface ObjectInterface {
 	public boolean isVisible = false;
 	public boolean isUsed = false;
 	public BufferedImage image = null;
-	public Point position = null;
+	public DoublePoint position = null;
 	public double vx = 0;
 	public double vy = 0;
 	
@@ -32,9 +32,9 @@ public interface ObjectInterface {
 	
 	public BufferedImage loadImage() throws IOException;//something like that
 	
-	public void setPosition(Point position);
+	public void setPosition(DoublePoint position);
 	
-	public Point getPosition();
+	public DoublePoint getPosition();
 	
 	public void setVx(double vx);
 	

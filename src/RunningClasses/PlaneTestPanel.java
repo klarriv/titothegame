@@ -22,7 +22,7 @@ public class PlaneTestPanel extends JPanel {
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Tito loader = new Tito(23, 10, -0.003, 0, t);
+	private Tito loader = new Tito(0, 0.0, 0, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
@@ -111,7 +111,7 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		loader.setAcceleration(Math.toRadians(320), loader.getWeight(), 0.6);
+		loader.setAcceleration(Math.toRadians(15), loader.getWeight(), 0.1);
 		
 		
 		t.start();
@@ -121,7 +121,7 @@ public class PlaneTestPanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		gUnit = getWidth()/24;
+		gUnit = getWidth()/5;
 		g.setColor(Color.gray);
 		g.fillRect(0, 630, 1280, 90);
 		int[] x = {0, 422,0};
@@ -129,12 +129,12 @@ public class PlaneTestPanel extends JPanel {
 		
 		g.fillPolygon(x, y, 3);
 		
-		g.drawImage(sprite, loader.getPosition().x * gUnit, loader.getPosition().y * gUnit, 100, 100, null);
-		System.out.println(loader.getPosition().x);
+		g.drawImage(sprite, (int)(loader.getPosition().x * gUnit), (int)(loader.getPosition().y * gUnit), 75, 75, null);
+		//System.out.println(loader.getPosition().x);
 		
-		int xxx = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
-		loader.setX(xxx);
-		
+		//double xxx = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
+		//loader.setX(xxx);
+		frictionMove();
 		/**if (loader.getPosition().x < 422 && loader.getPosition().y < 550)
 			frictionMove();
 		else {
@@ -153,7 +153,7 @@ public class PlaneTestPanel extends JPanel {
 	}
 	
 	public void xMove(){
-		int x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
+		double x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
 		if (x < 422){
 			loader.frictionMotion(loader.getPosition(), -loader.getVx() * Math.sin(Math.toRadians(320)),
 					-loader.getVx()* Math.cos(Math.toRadians(320)),  t.getDelay());	

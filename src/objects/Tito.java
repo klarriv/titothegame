@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -14,7 +13,7 @@ public class Tito extends Physics{
 	private boolean isVisible = true;
 	private boolean isUsed = true;
 	private BufferedImage image = null;
-	private Point position = new Point(600,550);
+	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
 	/**
@@ -34,13 +33,15 @@ public class Tito extends Physics{
 	 * @param vy
 	 * @param t
 	 */
-	public Tito(int x, int y, double vx, double vy, Timer t) {
+	public Tito(double x, double y, double vx, double vy, Timer t) {
 		super(x, y, vx, vy, t);
+		
 		this.position.x = x;
 		this.position.y = y;
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
+		
 	}
 
 	// bonjour charlo
@@ -50,6 +51,7 @@ public class Tito extends Physics{
 		// TODO Auto-generated method stub
 		
 	}
+	
 	/**
 	 * Loads the buffered image
 	 * @return
@@ -103,24 +105,24 @@ public class Tito extends Physics{
 	}
 
 	@Override
-	public void setPosition(Point position) {
+	public void setPosition(DoublePoint position) {
 		
 		this.position = position;
 		
 	}
 	
-	public void setX(int x){
+	public void setX(double x){
 		
 		this.position.x =x;
 	}
 	
-	public void setY(int y){
+	public void setY(double y){
 		
 		this.position.y = y;
 	}
 
 	@Override
-	public Point getPosition() {
+	public DoublePoint getPosition() {
 		
 		return this.position;
 	}
