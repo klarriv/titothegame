@@ -40,14 +40,14 @@ public class MainMenu extends JPanel implements ActionListener{
 	 * These are the variables for the "play" and "new game" buttons.
 	 */
 	private JButton playButton, newGameButton;
-
+	
+	private Timer t = new Timer(100, this);
+	private int yTitle = 20;
+	boolean direction = true;
+	
 	/**
 	 * Creates a new main menu.
 	 */
-	
-	private Timer t = new Timer(10, this);
-	private int yTitle = 15;
-	
 	public MainMenu() {
 		setLayout(null);
 		try {
@@ -163,12 +163,15 @@ public class MainMenu extends JPanel implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		boolean direction = true;
-		if(yTitle>=15 && yTitle<75 && direction){
+		
+		if(direction){
 			yTitle++;
 		}
-		else (yTitle>15 && yTitle<=75 && !direction){
+		else {
 			yTitle--;
+		}
+		if(yTitle == 20 || yTitle == 30){
+			direction =!direction;
 		}
 		
 		repaint();

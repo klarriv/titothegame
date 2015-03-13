@@ -1,7 +1,10 @@
 package windows;
 
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -29,6 +32,10 @@ public class MainFrame extends JFrame{
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
 	private static JPanel menus;
+	/**
+	 * The image variable that will be used to set the icon of the JFrame.
+	 */
+	private Image frameIcon = null;
 	
 	/**
 	 * This creates a new main JFrame
@@ -39,6 +46,14 @@ public class MainFrame extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Game: Tito Escapes the Zoo");
 		setVisible(true);
+		
+		try {
+			frameIcon = ImageIO.read(new File("Resources/frameIcon.png"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		setIconImage(frameIcon);
 		pack();
 		
 		menus = new JPanel(new CardLayout());
