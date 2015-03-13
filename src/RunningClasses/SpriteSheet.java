@@ -1,3 +1,4 @@
+package RunningClasses;
 import java.awt.image.BufferedImage;
 
 /** c'est un test pour l'animation, si on l'utilise on le changera de place sinon on le deletera*/

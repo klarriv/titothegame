@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 public class Tito extends Physics{
-	private int weight = 2;
+	private int weight = 9;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
 	private BufferedImage image = null;
@@ -43,6 +43,8 @@ public class Tito extends Physics{
 		this.t = t;
 	}
 
+	// bonjour charlo
+	
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub

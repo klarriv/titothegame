@@ -1,6 +1,4 @@
-
-
-
+package RunningClasses;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -15,12 +13,13 @@ import javax.swing.Timer;
 
 import objects.Tito;
 
-public class PlaneTestPanel extends JPanel {
+
+public class GravityTestPanel extends JPanel {
 	private int counter = 0;
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Tito loader = new Tito(0, 50, 0, 0, t);
+	private Tito loader = new Tito(0, 10, 0.003, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
@@ -32,7 +31,7 @@ public class PlaneTestPanel extends JPanel {
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
 	
 	
-	public PlaneTestPanel() {
+	public GravityTestPanel() {
 		this.setOpaque(true);
 		this.setBackground(Color.cyan);
 		try {
@@ -109,57 +108,61 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		loader.setAcceleration(Math.toRadians(320), loader.getWeight(), 1);
-		
 		
 		t.start();
-		
 
 	}
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		int gUnit = 1280/24;
+		
 		g.setColor(Color.gray);
 		g.fillRect(0, 630, 1280, 90);
-		int[] x = {0, 422,0};
-		int[] y = {110, 630, 630};
+		g.setColor(Color.green);
+		int[] xs = {600, 595, 645, 640};
+		int[] ys = {630, 650, 650, 630};
+		g.fillPolygon(xs, ys, 4);
+		g.setColor(Color.black);
+		g.drawLine(0, 630, 1280, 630);
+		g.drawImage(sprite, loader.getPosition().x * gUnit, loader.getPosition().y * gUnit, 100, 100, null);
 		
-		g.fillPolygon(x, y, 3);
+		//g.drawImage(sprite, loader.getPosition().x * gUnit, loader.getPosition().y * gUnit, 100, 100, null);
+		System.out.println(loader.getPosition().x * gUnit);
 		
-		g.drawImage(sprite, loader.getPosition().x, loader.getPosition().y, 100, 100, null);
+		int xxx = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
+		loader.setX(xxx);
 		
-		if (loader.getPosition().x < 422 && loader.getPosition().y < 550)
-			frictionMove();
-		else {
+		
+		
+		//int x = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
+		//int y = (loader.projectileMotions(loader.getWeight(), loader.getPosition().y, loader.getVy(), t.getDelay()));
+		/**if (loader.getVy() < 0 && y >= 10){
+			loader.setY(10);
+			loader.setVy((-1 * loader.getVy()) - 2);
 			//System.out.println(loader.getPosition().y);
-			loader.setY(550);//we have to find something better than that
-			xMove();
 		}
 		
-		
-	}
-	
-	public void frictionMove(){
-		loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay());	
-		loader.setVy();
-		loader.setVx();
-	}
-	
-	public void xMove(){
-		int x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
-		if (x < 422){
-			loader.frictionMotion(loader.getPosition(), -loader.getVx() * Math.sin(Math.toRadians(320)),
-					-loader.getVx()* Math.cos(Math.toRadians(320)),  t.getDelay());	
+		else if (y <= 10){
+			loader.setY(y);
 			loader.setVy();
-			loader.setVx();
 		}
-		
-		if (x < 1280)
+		System.out.println("xxxxxx:  " + loader.getVx());
+		if (x < 24)
 			loader.setX(x);
 		else 
 			loader.setVx(-1 * loader.getVx());
+		if (x < 0)
+			loader.setVx(-1 * loader.getVx());
 		
+			
 		
+		if (loader.getPosition().x >= 10 && loader.getPosition().x <= 10
+				&& loader.getPosition().y == 10)	{
+			this.setBackground(Color.red);
+			//System.exit(0);
+		}
+			
+		*/
 	}
-
 }

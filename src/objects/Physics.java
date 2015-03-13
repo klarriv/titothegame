@@ -1,8 +1,9 @@
 package objects;
-
 import java.awt.Point;
 
 import javax.swing.Timer;
+
+import RunningClasses.PlaneTestPanel;
 /**
  * This class provides a skeletal implementation of ObjectInterface 
  * to create an object which reacts following physics laws.
@@ -14,7 +15,7 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * The gravity constant
 	 */
-	private final double GRAVITY = 0.35;
+	private final double GRAVITY = 9.8;
 	/**
 	 * The initial position in x on the screen of the object
 	 */
@@ -79,19 +80,20 @@ public abstract class Physics implements ObjectInterface {
 	public int projectileMotions(int weight, int position, double v, int delay){
 		
 		this.vyi = v;
-		this.vyi -= GRAVITY *(delay/10);
-		position -= v*(delay/10) - (0.5 * GRAVITY*((delay/10) * (delay/10)));
+		this.vyi -= GRAVITY *(delay);
+		position -= v*(delay) - (0.5 * GRAVITY*((delay) * (delay)));
 		//System.out.println(position);
 		return position;
 	}
 	public Point frictionMotion(Point position, double vx, double vy, int delay){
 		this.vyi = vy;
 		this.vxi = vx;
-		this.vxi +=  ax * (delay/10);
-		this.vyi +=  ay * (delay/10);
-		position.x -= vx*(delay/10) - (0.5 * ax*((delay/10) * (delay/10)));
-		position.y += vy*(delay/10) - (0.5 * ay*((delay/10) * (delay/10)));
-		//System.out.println("vxi: " + vxi + " vyi: " + vyi);
+		this.vxi +=  ax * (delay);
+		this.vyi +=  ay * (delay);
+		position.x -= vx*(delay) - (0.5 * ax*((delay) * (delay)));
+		position.y += vy*(delay) - (0.5 * ay*((delay) * (delay)));
+		
+		//System.out.println("x: " + position.x + " y: " + position.y);
 		//System.out.println("vx:  " + vx +  " vy : " + vy);
 		return position;
 	}
@@ -104,7 +106,8 @@ public abstract class Physics implements ObjectInterface {
 	 * @return
 	 */
 	public int motion(int position, double v, int delay){
-		position += v * (delay/10);
+		position += v * (delay);
+		System.out.println("x: " + position + " v: " +   v * (delay));
 		return position;
 	}
 	
