@@ -6,11 +6,12 @@ public class AnimationTestFrame extends JFrame {
 	private PlaneTestPanel p = new PlaneTestPanel();
 	private GravityTestPanel g = new GravityTestPanel();
 	private TestAnimationPanel t = new TestAnimationPanel();
+	private PhysicsTestPanel pt = new PhysicsTestPanel();
 
 	public AnimationTestFrame(){
-		gUnit = g.getWidth()/24;
-		p.setVisible(true);
-		add(p);
+		//gUnit = g.getWidth()/24;
+		pt.setVisible(true);
+		add(pt);
 	}
 	public static void main(String[] args) {
 		AnimationTestFrame frame = new AnimationTestFrame();

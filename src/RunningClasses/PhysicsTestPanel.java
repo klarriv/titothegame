@@ -1,7 +1,5 @@
 package RunningClasses;
 
-
-
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -16,14 +14,14 @@ import javax.swing.Timer;
 
 import objects.Tito;
 
-public class PlaneTestPanel extends JPanel {
-	private int a = 10;
+public class PhysicsTestPanel extends JPanel{
+	private int a = 135;
 	public static int gUnit;
 	private int counter = 0;
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Tito loader = new Tito(0, 0.0, 0, 0, t);
+	private Tito loader = new Tito(0, 2.2, 2, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
@@ -35,7 +33,7 @@ public class PlaneTestPanel extends JPanel {
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
 	
 	
-	public PlaneTestPanel() {
+	public PhysicsTestPanel(){
 		this.setOpaque(true);
 		this.setBackground(Color.cyan);
 		try {
@@ -50,7 +48,7 @@ public class PlaneTestPanel extends JPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
-				loader.setVy(7);
+				loader.setVy(-5);
 				
 			}
 
@@ -114,67 +112,95 @@ public class PlaneTestPanel extends JPanel {
 		});
 		
 		
-		
 		t.start();
 		
 
+		
 	}
+	
+	private boolean b = true;
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		gUnit = getWidth()/5;
 		g.setColor(Color.gray);
 		g.fillRect(0, (int)(2.4*gUnit), 1280, 90);
-		int[] x = {0, (int) (580/Math.tan(Math.toRadians(a))),0};
-		int[] y = {50, 630, 630};
+		int[] x = {(int)(4 * gUnit), (int)(5 * gUnit), (int)(5 * gUnit)};
+		int[] y = {(int)(2.4 * gUnit), (int)((2.4 - Math.tan(Math.toRadians(45)))*gUnit), (int)(2.4 * gUnit)};
 		
 		g.fillPolygon(x, y, 3);
-		
 		g.drawImage(sprite, (int)(loader.getPosition().x * gUnit), (int)(loader.getPosition().y * gUnit), 75, 75, null);
-		//System.out.println(loader.getPosition().x);
 		
-		//double xxx = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
-		//loader.setX(xxx);
-		frictionMove();
-		if (loader.getVx() ==0)
-			setAcceleration(a++);
-		/**if (loader.getPosition().x < 422 && loader.getPosition().y < 550)
+		moving();
+	}
+	
+	public void moving(){
+		if ( loader.getPosition().x <0)
+			loader.setVx(-1*loader.getVx());
+		if (loader.getPosition().x < 4){
+			projectileMotion();
+			setAcceleration(0,0);
+			loader.setVy(0);
+			b = true;
+		}
+		//double x = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
+		else if (loader.getPosition().x >= 4){
+			setAcceleration(a, 0.5);
+			if (b){
+				loader.setVy(loader.getVx()*Math.cos(Math.toRadians(a)));
+				loader.setVx(loader.getVx()*Math.sin(Math.toRadians(a)));
+				//System.out.println(loader.getVx()*Math.cos(Math.toRadians(a)) + " " + loader.getVx()*Math.sin(Math.toRadians(a)));
+			}
+			b = false;
+			//frictionMove();
+		}
+		//else{
+			//System.out.println(x);
 			frictionMove();
-		else {
-			//System.out.println(loader.getPosition().y);
-			loader.setY(550);//we have to find something better than that
-			xMove();
-		}*/
+			
+		//}
 		
 		
 	}
 	
-	public void setAcceleration(int aa){
-		System.out.println( aa);
-		loader.setAcceleration(Math.toRadians(aa), loader.getWeight(), 0.5);
+	
+	public void setAcceleration(int aa, double u){
+		//System.out.println();
+		loader.setAcceleration(Math.toRadians(aa), loader.getWeight(), u);
 	}
 	
 	public void frictionMove(){
+		//System.out.println(loader.getVy());
 		loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay());	
 		loader.setVy();
 		loader.setVx();
 	}
 	
-	public void xMove(){
-		double x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
-		if (x < 422){
-			loader.frictionMotion(loader.getPosition(), -loader.getVx() * Math.sin(Math.toRadians(320)),
-					-loader.getVx()* Math.cos(Math.toRadians(320)),  t.getDelay());	
-			loader.setVy();
-			loader.setVx();
-		}
+	public void xMove(double x){
 		
-		if (x < 1280)
+		
+		if (x < 5 && x > 0)
 			loader.setX(x);
 		else 
 			loader.setVx(-1 * loader.getVx());
 		
 		
 	}
+	public void projectileMotion(){
+		double y = loader.projectileMotions(loader.getWeight(), loader.getPosition().y, loader.getVy(),t.getDelay());
+		if (loader.getVy() < 0 && y >= 2.2){
+			loader.setY(2.2);
+			loader.setVy((-1 * loader.getVy()) - 0.7);
+			//System.out.println(loader.getPosition().y);
+		}
+		
+		else if (y <= 2.2){
+			loader.setY(y);
+			loader.setVy();
+		}
+	}
 
 }
+
+
+
