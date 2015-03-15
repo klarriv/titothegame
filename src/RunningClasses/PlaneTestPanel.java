@@ -17,6 +17,7 @@ import javax.swing.Timer;
 import objects.Tito;
 
 public class PlaneTestPanel extends JPanel {
+	private int a = 10;
 	public static int gUnit;
 	private int counter = 0;
 	private int i = 0;
@@ -111,7 +112,7 @@ public class PlaneTestPanel extends JPanel {
 			}
 			
 		});
-		loader.setAcceleration(Math.toRadians(15), loader.getWeight(), 0.1);
+		
 		
 		
 		t.start();
@@ -124,8 +125,8 @@ public class PlaneTestPanel extends JPanel {
 		gUnit = getWidth()/5;
 		g.setColor(Color.gray);
 		g.fillRect(0, 630, 1280, 90);
-		int[] x = {0, 422,0};
-		int[] y = {110, 630, 630};
+		int[] x = {0, (int) (580/Math.tan(Math.toRadians(a))),0};
+		int[] y = {50, 630, 630};
 		
 		g.fillPolygon(x, y, 3);
 		
@@ -135,6 +136,8 @@ public class PlaneTestPanel extends JPanel {
 		//double xxx = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
 		//loader.setX(xxx);
 		frictionMove();
+		if (loader.getVx() < 1.0)
+			setAcceleration(a++);
 		/**if (loader.getPosition().x < 422 && loader.getPosition().y < 550)
 			frictionMove();
 		else {
@@ -144,6 +147,11 @@ public class PlaneTestPanel extends JPanel {
 		}*/
 		
 		
+	}
+	
+	public void setAcceleration(int aa){
+		System.out.println( aa);
+		loader.setAcceleration(Math.toRadians(aa), loader.getWeight(), 0.5);
 	}
 	
 	public void frictionMove(){
