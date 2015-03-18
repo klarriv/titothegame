@@ -1,10 +1,10 @@
 package windows;
 
+import RunningClasses.RunGame;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
-
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -156,9 +156,9 @@ public class MainMenu extends JPanel implements ActionListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println(getSize());
-		g.drawImage(backgroundImage, 0, 0, null);
-		g.drawImage(titleImage, 81, yTitle, null);
+		//System.out.println(getSize());
+		g.drawImage(backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH), 0, 0, null);
+		g.drawImage(titleImage.getScaledInstance(titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, Image.SCALE_SMOOTH), 81*getWidth()/1280, yTitle, null);
 	}
 
 	@Override

@@ -73,9 +73,6 @@ public class MainFrame extends JFrame{
 		CardLayout cardLayout = (CardLayout) menus.getLayout();
 		cardLayout.show(menus, MAINMENUPANEL);
 		
-		setVisible(true);
-		pack();
-		setLocationRelativeTo(null);
 	}
 
 	public static JPanel getMenus() {
@@ -116,6 +113,14 @@ public class MainFrame extends JFrame{
 
 	public OptionMenu getOptionMenu() {
 		return optionMenu;
+	}
+	
+	public int getHeight(){
+		return this.getContentPane().getHeight();
+	}
+	
+	public int getWidth(){
+		return this.getContentPane().getWidth();
 	}
 
 }

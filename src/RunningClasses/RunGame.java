@@ -12,15 +12,21 @@ import windows.*;
  */
 public class RunGame{
 	
-	LevelSelectMenu lvlSelectMenu = new LevelSelectMenu();
-	MainMenu mainMenu = new MainMenu();
+	private static MainFrame frame = new MainFrame();
 	
 	/**
 	 * 
 	 * @param args
 	 */
 	public static void main(String[] args){
-		MainFrame frame = new MainFrame();
 		
+		frame.setVisible(true);
+		frame.pack();
+		frame.setLocationRelativeTo(null);
 	}
+	
+	public static MainFrame getFrame() {
+		return frame;
+	}
+
 }
