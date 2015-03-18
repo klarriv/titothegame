@@ -27,7 +27,7 @@ public class MainFrame extends JFrame{
 	/**
 	 * The level select menu that will be used by the user.
 	 */
-	private LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
+	private static LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
 	/**
 	 * The main menu that will be used by the user.
 	 */
@@ -35,7 +35,7 @@ public class MainFrame extends JFrame{
 	/**
 	 * The option menu that will be used by the user.
 	 */
-	private OptionMenu optionMenu = new OptionMenu();
+	private static OptionMenu optionMenu = new OptionMenu();
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
@@ -92,7 +92,7 @@ public class MainFrame extends JFrame{
 	}
 
 	public void setLevelSelectMenu(LevelSelectMenu levelSelectMenu) {
-		this.levelSelectMenu = levelSelectMenu;
+		MainFrame.levelSelectMenu = levelSelectMenu;
 	}
 
 	public void setMainMenu(MainMenu mainMenu) {
@@ -106,4 +106,13 @@ public class MainFrame extends JFrame{
 	public static MainMenu getMainMenu() {
 		return mainMenu;
 	}
+	
+	public void setOptionMenu(OptionMenu optionMenu) {
+		MainFrame.optionMenu = optionMenu;
+	}
+
+	public OptionMenu getOptionMenu() {
+		return optionMenu;
+	}
+
 }
