@@ -53,7 +53,7 @@ public class MainFrame extends JFrame{
 		getContentPane().setPreferredSize(new Dimension(1280, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Game: Tito Escapes the Zoo");
-		setVisible(true);
+		setUndecorated(true);
 		
 		try {
 			frameIcon = ImageIO.read(new File("Resources/frameIcon.png"));
@@ -62,17 +62,20 @@ public class MainFrame extends JFrame{
 		}
 		
 		setIconImage(frameIcon);
-		pack();
 		
 		menus = new JPanel(new CardLayout());
 		menus.add(levelSelectMenu, LEVELSELECTPANEL);
 		menus.add(mainMenu, MAINMENUPANEL);
 		menus.add(optionMenu, OPTIONPANEL);
 		
-		add(menus, BorderLayout.CENTER);
+		getContentPane().add(menus, BorderLayout.CENTER);
 		
 		CardLayout cardLayout = (CardLayout) menus.getLayout();
 		cardLayout.show(menus, MAINMENUPANEL);
+		
+		setVisible(true);
+		pack();
+		setLocationRelativeTo(null);
 	}
 
 	public static JPanel getMenus() {

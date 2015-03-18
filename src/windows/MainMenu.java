@@ -156,7 +156,7 @@ public class MainMenu extends JPanel implements ActionListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+		System.out.println(getSize());
 		g.drawImage(backgroundImage, 0, 0, null);
 		g.drawImage(titleImage, 81, yTitle, null);
 	}
