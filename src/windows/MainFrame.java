@@ -21,6 +21,10 @@ public class MainFrame extends JFrame{
 	 */
 	private static final String MAINMENUPANEL = "MainMenuPanel";
 	/**
+	 * This is the identifier string for the option JPanel
+	 */
+	private static final String OPTIONPANEL = "OptionPanel";
+	/**
 	 * The level select menu that will be used by the user.
 	 */
 	private LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
@@ -28,6 +32,10 @@ public class MainFrame extends JFrame{
 	 * The main menu that will be used by the user.
 	 */
 	private static MainMenu mainMenu = new MainMenu();
+	/**
+	 * The option menu that will be used by the user.
+	 */
+	private OptionMenu optionMenu = new OptionMenu();
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
@@ -59,6 +67,7 @@ public class MainFrame extends JFrame{
 		menus = new JPanel(new CardLayout());
 		menus.add(levelSelectMenu, LEVELSELECTPANEL);
 		menus.add(mainMenu, MAINMENUPANEL);
+		menus.add(optionMenu, OPTIONPANEL);
 		
 		add(menus, BorderLayout.CENTER);
 		
