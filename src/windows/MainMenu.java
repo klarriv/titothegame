@@ -113,33 +113,8 @@ public class MainMenu extends JPanel implements ActionListener{
 
 		}
 		
-		playButton = new JButton(new ImageIcon(playButtonIcon));
-		playButton.setBorder(BorderFactory.createEmptyBorder());
-		playButton.setContentAreaFilled(false);
-		playButton.addMouseListener(new ButtonListener());
-		playButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
-			}
-
-		});
-		playButton.addComponentListener(new ComponentListener(){
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				changeButtonImage((JButton) e.getComponent(), playButtonIcon);
-			}
-
-			@Override
-			public void componentShown(ComponentEvent arg0) {
-				// TODO Auto-generated method stub
-		
-				
-			}
-
+		class ButtonResizeListener implements ComponentListener{
+			
 			@Override
 			public void componentHidden(ComponentEvent e) {
 				// TODO Auto-generated method stub
@@ -151,8 +126,32 @@ public class MainMenu extends JPanel implements ActionListener{
 				// TODO Auto-generated method stub
 				
 			}
-			
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+				changeButtonImage(playButton, playButtonIcon);
+				changeButtonImage(newGameButton, newGameButtonIcon);
+			}
+
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+			}
+		}
+		
+		playButton = new JButton(new ImageIcon(playButtonIcon));
+		playButton.setBorder(BorderFactory.createEmptyBorder());
+		playButton.setContentAreaFilled(false);
+		playButton.addMouseListener(new ButtonListener());
+		playButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+			}
 		});
+		playButton.addComponentListener(new ButtonResizeListener());
 
 		newGameButton = new JButton(new ImageIcon(newGameButtonIcon));
 		newGameButton.setBorder(BorderFactory.createEmptyBorder());
@@ -167,33 +166,7 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 
 		});
-		newGameButton.addComponentListener(new ComponentListener(){
-
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				changeButtonImage((JButton) e.getComponent(), newGameButtonIcon);
-				
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-		});
+		newGameButton.addComponentListener(new ButtonResizeListener());
 
 		add(playButton);
 		add(newGameButton);
@@ -252,5 +225,4 @@ public class MainMenu extends JPanel implements ActionListener{
 		
 		repaint();
 	}
-
 }
