@@ -114,7 +114,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		playButton = new JButton(new ImageIcon(playButtonIcon));
 		playButton.setBorder(BorderFactory.createEmptyBorder());
 		playButton.setContentAreaFilled(false);
-		playButton.setBounds(541, 398, 232, 69);
+		//playButton.setBounds(541, 398, 232, 69);
 		playButton.addMouseListener(new ButtonListener());
 		playButton.addActionListener(new ActionListener() {
 
@@ -156,13 +156,13 @@ public class MainMenu extends JPanel implements ActionListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		//System.out.println(getSize());
-		g.drawImage(backgroundImage.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH), 0, 0, null);
-		g.drawImage(titleImage.getScaledInstance(titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, Image.SCALE_SMOOTH), 81*getWidth()/1280, yTitle, null);
+		
+		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(titleImage, 81*getWidth()/1280, yTitle, titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, null);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
+	public void actionPerformed(ActionEvent arg0) {	
 		
 		if(direction){
 			yTitle++;

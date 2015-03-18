@@ -72,7 +72,6 @@ public class MainFrame extends JFrame{
 		
 		CardLayout cardLayout = (CardLayout) menus.getLayout();
 		cardLayout.show(menus, MAINMENUPANEL);
-		
 	}
 
 	public static JPanel getMenus() {
