@@ -2,8 +2,10 @@ package windows;
 
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -166,23 +168,11 @@ public class LevelSelectMenu extends JPanel {
 			lvlButtons[i].addMouseListener(new ButtonListener());
 			add(lvlButtons[i]);
 		}
-		lvlButtons[0].setBounds(261, 73, 294, 86);
-		lvlButtons[1].setBounds(261, 189, 294, 86);
-		lvlButtons[2].setBounds(261, 305, 294, 86);
-		lvlButtons[3].setBounds(261, 421, 294, 86);
-		lvlButtons[4].setBounds(261, 537, 294, 86);
-		
-		lvlButtons[5].setBounds(729, 73, 294, 86);
-		lvlButtons[6].setBounds(729, 189, 294, 86);
-		lvlButtons[7].setBounds(729, 305, 294, 86);
-		lvlButtons[8].setBounds(729, 421, 294, 86);
-		lvlButtons[9].setBounds(729, 537, 294, 86);
 		
 		backButton = new JButton(new ImageIcon(backButtonIcon));
 		backButton.setBorder(BorderFactory.createEmptyBorder());
 		backButton.setContentAreaFilled(false);
 		backButton.addMouseListener(new ButtonListener());
-		backButton.setBounds(0, 617, 260, 105);
 		backButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -195,10 +185,43 @@ public class LevelSelectMenu extends JPanel {
 		add(backButton);
 	}
 
+	public void changeButtonImage(JButton jbutton, Image img){
+        Dimension size = jbutton.getSize();
+        Insets insets = jbutton.getInsets();
+        size.width -= insets.left + insets.right;
+        size.height -= insets.top + insets.bottom;
+        if (size.width > size.height) {
+            size.width = -1;
+        } else {
+            size.height = -1;
+        }
+        Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
+        jbutton.setIcon(new ImageIcon(scaled));
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-
-		g.drawImage(backgroundImage, 0, 0, null);
+		
+		int x1 = 261*getWidth()/1280;
+		int x2 = 729*getWidth()/1280;
+		int width = 294*getWidth()/1280;
+		int height = 86*getHeight()/720;
+		
+		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+		
+		lvlButtons[0].setBounds(x1, 73*getHeight()/720, width, height);
+		lvlButtons[1].setBounds(x1, 189*getHeight()/720, width, height);
+		lvlButtons[2].setBounds(x1, 305*getHeight()/720, width, height);
+		lvlButtons[3].setBounds(x1, 421*getHeight()/720, width, height);
+		lvlButtons[4].setBounds(x1, 537*getHeight()/720, width, height);
+		
+		lvlButtons[5].setBounds(x2, 73*getHeight()/720, width, height);
+		lvlButtons[6].setBounds(x2, 189*getHeight()/720, width, height);
+		lvlButtons[7].setBounds(x2, 305*getHeight()/720, width, height);
+		lvlButtons[8].setBounds(x2, 421*getHeight()/720, width, height);
+		lvlButtons[9].setBounds(x2, 537*getHeight()/720, width, height);
+		
+		backButton.setBounds(0, 617*getHeight()/720, 260*getWidth()/1280, 105*getHeight()/720);
 	}
 }

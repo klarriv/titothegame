@@ -1,10 +1,12 @@
 package windows;
 
 import RunningClasses.RunGame;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
@@ -80,9 +82,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					playButton.setIcon(new ImageIcon(playButtonHighlightIcon));
+					changeButtonImage(playButton, playButtonHighlightIcon);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					newGameButton.setIcon(new ImageIcon(newGameHighlightButtonIcon));
+					changeButtonImage(newGameButton, newGameHighlightButtonIcon);
 				}
 			}
 
@@ -91,9 +93,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					playButton.setIcon(new ImageIcon(playButtonIcon));
+					changeButtonImage(playButton, playButtonIcon);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					newGameButton.setIcon(new ImageIcon(newGameButtonIcon));
+					changeButtonImage(newGameButton, newGameButtonIcon);
 				}
 			}
 
@@ -110,11 +112,10 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 
 		}
-
+		
 		playButton = new JButton(new ImageIcon(playButtonIcon));
 		playButton.setBorder(BorderFactory.createEmptyBorder());
 		playButton.setContentAreaFilled(false);
-		//playButton.setBounds(541, 398, 232, 69);
 		playButton.addMouseListener(new ButtonListener());
 		playButton.addActionListener(new ActionListener() {
 
@@ -125,11 +126,37 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 
 		});
+		playButton.addComponentListener(new ComponentListener(){
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+				changeButtonImage((JButton) e.getComponent(), playButtonIcon);
+			}
+
+			@Override
+			public void componentShown(ComponentEvent arg0) {
+				// TODO Auto-generated method stub
+		
+				
+			}
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 
 		newGameButton = new JButton(new ImageIcon(newGameButtonIcon));
 		newGameButton.setBorder(BorderFactory.createEmptyBorder());
 		newGameButton.setContentAreaFilled(false);
-		newGameButton.setBounds(541, 498, 232, 69);
 		newGameButton.addMouseListener(new ButtonListener());
 		newGameButton.addActionListener(new ActionListener() {
 
@@ -139,6 +166,33 @@ public class MainMenu extends JPanel implements ActionListener{
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
 
+		});
+		newGameButton.addComponentListener(new ComponentListener(){
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentResized(ComponentEvent e) {
+				changeButtonImage((JButton) e.getComponent(), newGameButtonIcon);
+				
+			}
+
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
 		});
 
 		add(playButton);
@@ -153,12 +207,34 @@ public class MainMenu extends JPanel implements ActionListener{
 
 	}
 	
+	/**
+	 * This method changes the size of the image for a specific button. 
+	 * @param jbutton
+	 * @param img
+	 */
+	public void changeButtonImage(JButton jbutton, Image img){
+        Dimension size = jbutton.getSize();
+        Insets insets = jbutton.getInsets();
+        size.width -= insets.left + insets.right;
+        size.height -= insets.top + insets.bottom;
+        if (size.width > size.height) {
+            size.width = -1;
+        } else {
+            size.height = -1;
+        }
+        Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
+        jbutton.setIcon(new ImageIcon(scaled));
+	}
+	
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
 		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
-		g.drawImage(titleImage, 81*getWidth()/1280, yTitle, titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, null);
+		g.drawImage(titleImage, 81*getWidth()/1280, yTitle*getHeight()/720, titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, null);
+		playButton.setBounds(541*getWidth()/1280, 398*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+		newGameButton.setBounds(541*getWidth()/1280, 498*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+		
 	}
 
 	@Override
