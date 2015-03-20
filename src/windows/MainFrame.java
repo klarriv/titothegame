@@ -55,7 +55,7 @@ public class MainFrame extends JFrame{
 		getContentPane().setPreferredSize(new Dimension(1280, 720));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Game: Tito Escapes the Zoo");
-		//setUndecorated(true);
+		setUndecorated(true);
 		
 		try {
 			frameIcon = ImageIO.read(new File("Resources/frameIcon.png"));

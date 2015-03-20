@@ -8,6 +8,8 @@ import java.awt.image.*;
 import java.io.*;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 
@@ -41,16 +43,18 @@ public class MainMenu extends JPanel implements ActionListener{
 	/**
 	 * These are the variables for the "play" and "new game" buttons.
 	 */
-	private JButton playButton, newGameButton;
+	private JButton playButton, newGameButton, exitButton, fullScreenButton;
 	
 	private Timer t = new Timer(100, this);
 	private int yTitle = 20;
 	boolean direction = true;
+	boolean isFullScreen = false;
 	
 	/**
 	 * Creates a new main menu.
 	 */
 	public MainMenu() {
+		
 		setLayout(null);
 		try {
 			backgroundImage = ImageIO.read(new File("Resources/Menus/MainMenu/mainmenu.png"));
@@ -168,8 +172,51 @@ public class MainMenu extends JPanel implements ActionListener{
 		});
 		newGameButton.addComponentListener(new ButtonResizeListener());
 
+		exitButton = new JButton();
+		exitButton.setBorder(BorderFactory.createEmptyBorder());
+		exitButton.setContentAreaFilled(false);
+		exitButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);				
+			}
+		});
+		
+		
+		
+		fullScreenButton = new JButton();
+		fullScreenButton.setBorder(BorderFactory.createEmptyBorder());
+		fullScreenButton.setContentAreaFilled(false);
+		fullScreenButton.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(!isFullScreen){
+					RunGame.getFrame().dispose();
+					RunGame.getFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
+					RunGame.getFrame().setVisible(true);
+					isFullScreen = true;
+				}
+					
+				else{
+					RunGame.getFrame().dispose();
+					RunGame.getFrame().setVisible(true);
+					RunGame.getFrame().setSize(new Dimension(1280,720));
+					RunGame.getFrame().setLocationRelativeTo(null);
+					isFullScreen = false;
+					
+					System.out.println(isFullScreen);
+				}
+			}
+		});
+		
 		add(playButton);
 		add(newGameButton);
+		add(exitButton);
+		add(fullScreenButton);
+		startMenuMusic();
 		t.start();
 	}
 
@@ -177,7 +224,15 @@ public class MainMenu extends JPanel implements ActionListener{
 	 * Starts the music in the main menu.
 	 */
 	public void startMenuMusic() {
-
+		try {
+			menuSong = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("Resources/Music/callToAdventure.wav").getAbsoluteFile());
+			menuSong.open(ais);
+			menuSong.loop(Clip.LOOP_CONTINUOUSLY);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	/**
@@ -207,7 +262,21 @@ public class MainMenu extends JPanel implements ActionListener{
 		g.drawImage(titleImage, 81*getWidth()/1280, yTitle*getHeight()/720, titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, null);
 		playButton.setBounds(541*getWidth()/1280, 398*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 		newGameButton.setBounds(541*getWidth()/1280, 498*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+		exitButton.setBounds(1256*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
+		fullScreenButton.setBounds(1235*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
 		
+		g.setColor(new Color(204, 213, 187));
+		// draws the exit button
+		g.drawLine(1270*getWidth()/1280, 10*getHeight()/720, 1256*getWidth()/1280, 24*getHeight()/720);
+		g.drawLine(1256*getWidth()/1280, 10*getHeight()/720, 1270*getWidth()/1280, 24*getHeight()/720);
+		
+		//draws the fullscreen button
+		g.fillRect(1235*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
+		
+		g.setColor(new Color(255, 0, 0, 128));
+		
+		//g.fillRect(1250, 10, 10, 20);
+	
 	}
 
 	@Override
