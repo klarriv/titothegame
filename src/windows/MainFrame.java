@@ -39,6 +39,10 @@ public class MainFrame extends JFrame{
 	 */
 	private static OptionMenu optionMenu = new OptionMenu();
 	/**
+	 * This is the array that contains the 10 level panels
+	 */
+	private static Level[] levels = new Level[10];
+	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
 	private static JPanel menus;
@@ -69,6 +73,11 @@ public class MainFrame extends JFrame{
 		menus.add(levelSelectMenu, LEVELSELECTPANEL);
 		menus.add(mainMenu, MAINMENUPANEL);
 		menus.add(optionMenu, OPTIONPANEL);
+		for (int i=0; i<levels.length; i++){
+			// this is a test
+			levels[i] = new Level(i);
+			menus.add(levels[i], ("LEVEL"+i));
+		}
 		
 		getContentPane().add(menus, BorderLayout.CENTER);
 		
@@ -122,5 +131,13 @@ public class MainFrame extends JFrame{
 	
 	public int getWidth(){
 		return this.getContentPane().getWidth();
+	}
+	
+	public static Level[] getLevels() {
+		return levels;
+	}
+
+	public static void setLevels(Level[] levels) {
+		MainFrame.levels = levels;
 	}
 }

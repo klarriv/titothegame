@@ -1,7 +1,11 @@
 package windows;
 
+import java.awt.BorderLayout;
 import java.awt.event.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.*;
+
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -12,7 +16,11 @@ import javax.swing.Timer;
  * @author Keven-Matthew
  */
 public class Level extends JPanel implements ActionListener {
-
+	
+	/**
+	 * This is a variable that holds the level number
+	 */
+	public int levelNumber;
 	/**
 	 * The timer used to repaint and used for the delay in the physics formulas
 	 */
@@ -25,11 +33,23 @@ public class Level extends JPanel implements ActionListener {
 	 * The song used in the levels
 	 */
 	private Clip levelSong;
-
+	/**
+	 * Contains the location of the level files
+	 */
+	private final String LEVELDIRECTORY = "Resources/Levels/";
+	
 	/**
 	 * This creates a new instance of level
 	 */
-	public Level() {
+	public Level(int levelNumber) {
+		this.levelNumber = levelNumber;
+		
+		try {
+			FileInputStream reader = new FileInputStream(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**

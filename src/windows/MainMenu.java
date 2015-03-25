@@ -207,7 +207,6 @@ public class MainMenu extends JPanel implements ActionListener{
 					RunGame.getFrame().setLocationRelativeTo(null);
 					isFullScreen = false;
 					
-					System.out.println(isFullScreen);
 				}
 			}
 		});

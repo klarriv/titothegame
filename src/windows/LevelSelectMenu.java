@@ -85,8 +85,37 @@ public class LevelSelectMenu extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
+				if ((JButton) e.getSource() == lvlButtons[0]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL0");
+				} else if ((JButton) e.getSource() == lvlButtons[1]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL1");
+				} else if ((JButton) e.getSource() == lvlButtons[2]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL2");
+				} else if ((JButton) e.getSource() == lvlButtons[3]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL3");
+				} else if ((JButton) e.getSource() == lvlButtons[4]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL4");
+				} else if ((JButton) e.getSource() == lvlButtons[5]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL5");
+				} else if ((JButton) e.getSource() == lvlButtons[6]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL6");
+				} else if ((JButton) e.getSource() == lvlButtons[7]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL7");
+				} else if ((JButton) e.getSource() == lvlButtons[8]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL8");
+				} else if ((JButton) e.getSource() == lvlButtons[9]) {
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "LEVEL9");
+				}
 			}
 
 			@Override
@@ -220,7 +249,7 @@ public class LevelSelectMenu extends JPanel {
 	}
 
 	public void changeButtonImage(JButton jbutton, Image img){
-        Dimension size = jbutton.getSize();
+        Dimension size = jbutton.getSize(); 
         Insets insets = jbutton.getInsets();
         size.width -= insets.left + insets.right;
         size.height -= insets.top + insets.bottom;
