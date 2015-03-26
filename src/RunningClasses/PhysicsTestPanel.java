@@ -12,15 +12,17 @@ import java.io.IOException;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import objects.Plane;
 import objects.Tito;
 
 public class PhysicsTestPanel extends JPanel{
-	private int a = 135;
+	private int a = 150;
 	public static int gUnit;
 	private int counter = 0;
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
+	private Plane plane = new Plane(Math.toRadians(165), 4, 2.4);
 	private Tito loader = new Tito(0, 2.2, 2, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
@@ -125,17 +127,37 @@ public class PhysicsTestPanel extends JPanel{
 		gUnit = getWidth()/5;
 		g.setColor(Color.gray);
 		g.fillRect(0, (int)(2.4*gUnit), 1280, 90);
-		int[] x = {(int)(4 * gUnit), (int)(5 * gUnit), (int)(5 * gUnit)};
-		int[] y = {(int)(2.4 * gUnit), (int)((2.4 - Math.tan(Math.toRadians(45)))*gUnit), (int)(2.4 * gUnit)};
+		double xx = plane.getDp().x;
+		double yy = plane.getDp().y;
+		g.drawLine((int)(gUnit*xx), (int)(gUnit*yy), (int)(gUnit*(xx+1)), (int)(gUnit*plane.getY(xx+1)));
 		
-		g.fillPolygon(x, y, 3);
+		int[] x = {(int)(xx * gUnit), (int)((xx+1) * gUnit), (int)((xx+1) * gUnit)};
+		int[] y = {(int)(yy * gUnit), (int)((yy - Math.tan((plane.getAngle())))*gUnit), (int)(yy * gUnit)};
+		
+		//g.fillPolygon(x, y, 3);
 		g.drawImage(sprite, (int)(loader.getPosition().x * gUnit), (int)(loader.getPosition().y * gUnit), 75, 75, null);
+		double r = 20.0/gUnit;
+		double d = plane.pointDistance(loader.getPosition());
+		//System.out.println(d);
+		//if (d < 2* r){
+		//moving();
 		
-		moving();
+		//}
+		//else{
+			xMove();
+			projectileMotion();
+			
+		//}
+			planeCollision();
+		//plane.angleOfContact(1,1);
 	}
-	
+	boolean v= true;
 	public void moving(){
-		if ( loader.getPosition().x <0)
+		frictionMove();
+		/**if (frictionMove()>= 4)
+			loader.setY(plane.getY(loader.getPosition().x) -0.2);
+		
+		/**if ( loader.getPosition().x <0)
 			loader.setVx(-1*loader.getVx());
 		if (loader.getPosition().x < 4){
 			projectileMotion();
@@ -144,45 +166,68 @@ public class PhysicsTestPanel extends JPanel{
 			b = true;
 		}
 		//double x = loader.motion( loader.getPosition().x, loader.getVx(), t.getDelay());
-		else if (loader.getPosition().x >= 4){
-			setAcceleration(a, 0.5);
+		else if (loader.getPosition().x >= 4){*/
+			setAcceleration(plane.getAngle(), 0.9);
 			if (b){
-				loader.setVy(loader.getVx()*Math.cos(Math.toRadians(a)));
-				loader.setVx(loader.getVx()*Math.sin(Math.toRadians(a)));
-				//System.out.println(loader.getVx()*Math.cos(Math.toRadians(a)) + " " + loader.getVx()*Math.sin(Math.toRadians(a)));
+				loader.setVy(-loader.getVx()*Math.sin(plane.getAngle()));
+				loader.setVx(-loader.getVx()*Math.cos(plane.getAngle()));
+				System.out.println();
 			}
+			//loader.setY(plane.getY(loader.getPosition().x) - 0.2);
 			b = false;
 			//frictionMove();
-		}
+		//}
 		//else{
-			//System.out.println(x);
-			frictionMove();
+		
+			System.out.println(loader.getVx() + " " + loader.getVy());
+			
+			
 			
 		//}
 		
 		
 	}
 	
-	
-	public void setAcceleration(int aa, double u){
-		//System.out.println();
-		loader.setAcceleration(Math.toRadians(aa), loader.getWeight(), u);
+	public void planeCollision(){
+		double r = 40.0/gUnit;
+		double d = plane.pointDistance(loader.getPosition());
+		double angle = plane.angleOfContact(loader.getVx(), loader.getVy());
+		
+		
+		
+		if (d <= 2* r){
+			//System.out.println("t");
+			if (loader.getVx() >=0)
+				loader.matrixMultiplication(angle * 2, loader.getVx(), loader.getVy());
+			else
+				loader.matrixMultiplication(angle * 2, loader.getVx(), loader.getVy());
+			loader.setVx();
+			loader.setVy();
+			
+		}
 	}
 	
-	public void frictionMove(){
+	
+	public void setAcceleration(double aa, double u){
+		//System.out.println();
+		loader.setAcceleration(aa, loader.getWeight(), u);
+	}
+	
+	public double frictionMove(){
 		//System.out.println(loader.getVy());
-		loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay());	
+		double px = loader.frictionMotion(loader.getPosition(), loader.getVx(), loader.getVy(),  t.getDelay()).x;	
 		loader.setVy();
 		loader.setVx();
+		return px;
 	}
 	
-	public void xMove(double x){
-		
+	public void xMove(){
+		double x = loader.motion( loader.getPosition().x, -loader.getVx(), t.getDelay());
 		
 		if (x < 5 && x > 0)
 			loader.setX(x);
 		else 
-			loader.setVx(-1 * loader.getVx());
+			loader.setVx((loader.getVy()*Math.sin(Math.toRadians(0)) - loader.getVx()*Math.cos(Math.toRadians(0))));
 		
 		
 	}
@@ -190,7 +235,7 @@ public class PhysicsTestPanel extends JPanel{
 		double y = loader.projectileMotions(loader.getWeight(), loader.getPosition().y, loader.getVy(),t.getDelay());
 		if (loader.getVy() < 0 && y >= 2.2){
 			loader.setY(2.2);
-			loader.setVy((-1 * loader.getVy()) - 0.7);
+			loader.setVy((loader.getVx()*Math.cos(Math.toRadians(90)) - loader.getVy()*Math.sin(Math.toRadians(90)))-1);
 			//System.out.println(loader.getPosition().y);
 		}
 		

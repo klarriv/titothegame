@@ -7,6 +7,7 @@ public class AnimationTestFrame extends JFrame {
 	private GravityTestPanel g = new GravityTestPanel();
 	private TestAnimationPanel t = new TestAnimationPanel();
 	private PhysicsTestPanel pt = new PhysicsTestPanel();
+	private VectorTestPanel v = new VectorTestPanel();
 
 	public AnimationTestFrame(){
 		//gUnit = g.getWidth()/24;

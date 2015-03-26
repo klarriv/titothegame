@@ -90,10 +90,10 @@ public abstract class Physics implements ObjectInterface {
 		double delay = ((double)delayS/1000);
 		this.vyi = vy;
 		this.vxi = vx;
-		this.vxi +=  ax * (delay);
+		this.vxi -=  ax * (delay);
 		this.vyi +=  ay * (delay);
-		position.x += vx*(delay) + (0.5 * ax*((delay) * (delay)));
-		position.y += vy*(delay) + (0.5 * ay*((delay) * (delay)));
+		position.x += vx*(delay) - (0.5 * ax*((delay) * (delay)));
+		position.y -= vy*(delay) + (0.5 * ay*((delay) * (delay)));
 		
 		//System.out.println( ay + "  "+ ay * (delay)+"  "+vy*(delay) + (0.5 * ay*((delay) * (delay))));
 		
@@ -151,17 +151,18 @@ public abstract class Physics implements ObjectInterface {
 	 */
 	public double setAcceleration( double angle, double weight, double u){
 		double force = (weight * GRAVITY);
-		double f = (force * Math.sin(angle)) - Math.abs(((force * Math.cos(angle)) * u));
+		double f = Math.abs((force * Math.sin(angle)) - Math.abs(((force * Math.cos(angle)) * u)));
 		//if ( f >= 0)
 			this.a = f/ weight;
 		//else
 		//	this.a = 0;
 		
-		this.ay = a * Math.sin(angle);
-		this.ax = a * Math.cos(angle);
+		this.ay = a * Math.sin(Math.PI - angle);
+		this.ax = a * Math.cos(Math.PI - angle);
 		
-		//System.out.println("ax: " + this.ax + " ay: " + this.ay);
-		//System.out.println("force: "+ force + " friction: " + f + " a "   + a);
+		
+		System.out.println("ax: " + this.ax + " ay: " + this.ay);
+		System.out.println("force: "+ force + " friction: " + f + " a "   + a);
 		return a;
 	}
 	
@@ -178,6 +179,36 @@ public abstract class Physics implements ObjectInterface {
 	/**Inverts the force*/
 	public void pulley(){
 		
+	}
+	
+	public void matrixMultiplication(double angle, double vx, double vy){
+		double[][] T = {{Math.cos(angle), -Math.sin(angle)},
+						{Math.sin(angle), Math.cos(angle)}};
+
+		double[][] T2 ={{Math.cos(angle), Math.sin(angle)},
+						{-Math.sin(angle),Math.cos(angle)}};
+		
+		if (vx >= 0){
+			this.vxi = T[0][0] * vx;
+			this.vxi += T[1][0] * vy;
+			
+			this.vyi = T[0][1] * vx;
+			this.vyi += T[1][1] * vy;
+			
+			//System.out.println(T[0][0]);
+		}
+		else{
+			this.vxi = T2[0][0] * vx;
+			this.vxi += T2[1][0] * vy;
+			
+			this.vyi = T2[0][1] * vx;
+			this.vyi += T2[1][1] * vy;
+			
+		}
+		this.vxi -=0.2;
+		this.vyi -=0.2;
+		
+		//System.out.println(this.vxi + "  " + this.vyi);
 	}
 
 }
