@@ -1,5 +1,6 @@
 package objects;
 import java.awt.Point;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Timer;
 
@@ -10,7 +11,7 @@ import RunningClasses.PlaneTestPanel;
  * @author CharlesPhilippe
  *
  */
-public abstract class Physics implements ObjectInterface {
+public abstract class Physics{
 	
 	/**
 	 * The gravity constant
@@ -43,11 +44,19 @@ public abstract class Physics implements ObjectInterface {
 	/**
 	 * 
 	 */
-	protected double ax = 0;
+	protected double ax;
 	/**
 	 * 
 	 */
-	protected double ay = 0;
+	protected double ay;
+	public int weight;
+	public boolean isVisible;
+	public boolean isUsed;
+	public BufferedImage image;
+	public DoublePoint position;
+	public double vx;
+	public double vy;
+	
 	
 	public Physics(){
 		

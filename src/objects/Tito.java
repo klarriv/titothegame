@@ -43,21 +43,12 @@ public class Tito extends Physics{
 		this.t = t;
 		
 	}
-
-	// bonjour charlo
-	
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	/**
 	 * Loads the buffered image
 	 * @return
 	 * @throws IOException
 	 */
-	@Override
 	public BufferedImage loadImage() throws IOException{
 		File file = new File(pathRelativeToThis);
 		URL url = file.toURI().toURL();
@@ -66,45 +57,38 @@ public class Tito extends Physics{
 	}
 
 	
-	@Override
 	public void setWeight(int weight) {
 		this.weight = weight;
 		
 	}
 
-	@Override
 	public int getWeight() {
 		
 		return this.weight;
 	}
 
-	@Override
 	public void setVisible(boolean visible) {
 		
 		this.isVisible = visible;
 		
 	}
 
-	@Override
 	public boolean getVisible() {
 		
 		return isVisible;
 	}
 	
-	@Override
 	public void setUsed(boolean used) {
 		
 		this.isUsed = used;
 		
 	}
 
-	@Override
 	public boolean getUsed() {
 		
 		return isUsed;
 	}
 
-	@Override
 	public void setPosition(DoublePoint position) {
 		
 		this.position = position;
@@ -121,13 +105,11 @@ public class Tito extends Physics{
 		this.position.y = y;
 	}
 
-	@Override
 	public DoublePoint getPosition() {
 		
 		return this.position;
 	}
 
-	@Override
 	public void setVx(double vx) {
 		
 		this.vx = vx;
@@ -137,13 +119,11 @@ public class Tito extends Physics{
 		this.vx = this.vxi;
 	}
 
-	@Override
 	public double getVx() {
 		
 		return this.vx;
 	}
 
-	@Override
 	public void setVy(double vy) {
 		
 		this.vy = vy;
@@ -154,7 +134,6 @@ public class Tito extends Physics{
 		this.vy = this.vyi;
 	}
 
-	@Override
 	public double getVy() {
 		
 		return this.vy;

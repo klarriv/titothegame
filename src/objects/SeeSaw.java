@@ -1,11 +1,11 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 public class SeeSaw extends Physics{
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	SeeSaw(BufferedImage texture){
+		this.image = texture;
 	}
 
 }

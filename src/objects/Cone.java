@@ -1,13 +1,10 @@
 package objects;
 
-public class Cone extends Physics {
-	public int weight = 3;
+import java.awt.image.BufferedImage;
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+public class Cone extends Physics {
+	Cone(BufferedImage texture){
+		this.image = texture;
 	}
-	
 
 }

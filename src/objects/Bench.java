@@ -1,11 +1,14 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 public class Bench extends Physics {
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
+	Bench(BufferedImage texture){
+		this.image = texture;
 		
 	}
+	
 
 }

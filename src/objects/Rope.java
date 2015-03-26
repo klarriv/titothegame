@@ -1,11 +1,10 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
 public class Rope extends Physics {
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	Rope(BufferedImage texture){
+		this.image = texture;
 	}
-
 }
