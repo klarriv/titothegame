@@ -92,6 +92,7 @@ public abstract class Physics{
 		//System.out.println(position);
 		return position;
 	}
+	
 	public DoublePoint frictionMotion(DoublePoint position, double vx, double vy, int delayS){
 		//System.out.println("vx:  " + vx +  " vy : " + vy);
 		double delay = ((double)delayS/1000);
@@ -212,8 +213,8 @@ public abstract class Physics{
 			this.vyi += T2[1][1] * vy;
 			
 		}
-		this.vxi -=0.2;
-		this.vyi -=0.2;
+		this.vxi -=0.5;
+		this.vyi -=0.5;
 		
 		//System.out.println(this.vxi + "  " + this.vyi);
 	}

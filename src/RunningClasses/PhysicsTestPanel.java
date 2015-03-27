@@ -22,7 +22,7 @@ public class PhysicsTestPanel extends JPanel{
 	private int i = 0;
 	private int j = 0;
 	private Timer t;
-	private Plane plane = new Plane(Math.toRadians(165), 4, 2.4);
+	private Plane plane = new Plane(4, 2.4, Math.toRadians(155), 1);
 	private Tito loader = new Tito(0, 2.2, 2, 0, t);
 	private BufferedImage spriteSheet;
 	private BufferedImage sprite;
@@ -81,7 +81,7 @@ public class PhysicsTestPanel extends JPanel{
 		});
 		
 		
-		t = new Timer(1000 / 24, new ActionListener(){
+		t = new Timer(1000 / 25, new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -226,6 +226,9 @@ public class PhysicsTestPanel extends JPanel{
 		
 		if (x < 5 && x > 0)
 			loader.setX(x);
+		
+		
+		
 		else 
 			loader.setVx((loader.getVy()*Math.sin(Math.toRadians(0)) - loader.getVx()*Math.cos(Math.toRadians(0))));
 		
