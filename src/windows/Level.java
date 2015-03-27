@@ -80,36 +80,38 @@ public class Level extends JPanel implements ActionListener {
 		
 		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
-		
+			System.out.println(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
 			int numberOfTree = reader.nextInt();
 			for(int i=0; i<numberOfTree; i++)
 				treeList.add(new Tree(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfBench =  reader.nextInt();
+			int numberOfBench = reader.nextInt();
 			for(int i=0; i<numberOfBench; i++)
 				benchList.add(new Bench(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfCone =  reader.nextInt();
+			int numberOfCone = reader.nextInt();
 			for(int i=0; i<numberOfCone; i++)
 				coneList.add(new Cone(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfPlane =  reader.nextInt();
+			int numberOfPlane = reader.nextInt();
 			for(int i=0; i<numberOfPlane; i++)
 				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfRope =  reader.nextInt();
+			int numberOfRope = reader.nextInt();
 			for(int i=0; i<numberOfRope; i++)
 				ropeList.add(new Rope(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfSeesaw =  reader.nextInt();
+			int numberOfSeesaw = reader.nextInt();
 			for(int i=0; i<numberOfSeesaw; i++)
 				seesawList.add(new SeeSaw(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfSpring =  reader.nextInt();
+			int numberOfSpring = reader.nextInt();
+			System.out.println("number of springs" + numberOfSpring);
 			for(int i=0; i<numberOfSpring; i++)
 				springList.add(new Spring(reader.nextInt(), reader.nextInt()));
 			
-			int numberOfTrashCan =  reader.nextInt();
+			int numberOfTrashCan = reader.nextInt();
+			System.out.println("no of trashcan" + numberOfTrashCan);
 			for(int i=0; i<numberOfTrashCan; i++)
 				trashCanList.add(new TrashCan(reader.nextInt(), reader.nextInt()));
 			

@@ -1,7 +1,10 @@
 package objects;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Plane extends Physics{
 	private DoublePoint dp = new DoublePoint(0,0);
@@ -13,6 +16,12 @@ public class Plane extends Physics{
 	private double c;
 	
 	public Plane(double x, double y, double angle){
+		try {
+			this.texture = ImageIO.read(new File("Resources/Objects/plane.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.angle = angle;
 		this.dp.x = x;
 		this.dp.y = y;
