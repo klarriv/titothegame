@@ -1,10 +1,6 @@
 package objects;
-import java.awt.Point;
 import java.awt.image.BufferedImage;
-
 import javax.swing.Timer;
-
-import RunningClasses.PlaneTestPanel;
 /**
  * This class provides a skeletal implementation of ObjectInterface 
  * to create an object which reacts following physics laws.
