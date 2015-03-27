@@ -12,7 +12,7 @@ public class Plane extends Physics{
 	private double b = 1;
 	private double c;
 	
-	public Plane(double angle, double x, double y){
+	public Plane(double x, double y, double angle){
 		this.angle = angle;
 		this.dp.x = x;
 		this.dp.y = y;

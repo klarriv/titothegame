@@ -74,7 +74,6 @@ public class MainFrame extends JFrame{
 		menus.add(mainMenu, MAINMENUPANEL);
 		menus.add(optionMenu, OPTIONPANEL);
 		for (int i=0; i<levels.length; i++){
-			// this is a test
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
 		}

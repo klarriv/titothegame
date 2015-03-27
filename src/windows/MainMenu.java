@@ -273,8 +273,6 @@ public class MainMenu extends JPanel implements ActionListener{
 		g.fillRect(1235*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
 		
 		g.setColor(new Color(255, 0, 0, 128));
-		
-		//g.fillRect(1250, 10, 10, 20);
 	
 	}
 

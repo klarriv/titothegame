@@ -52,10 +52,12 @@ public abstract class Physics{
 	public int weight;
 	public boolean isVisible;
 	public boolean isUsed;
-	public BufferedImage image;
+	public BufferedImage texture;
 	public DoublePoint position;
 	public double vx;
 	public double vy;
+	public int x;
+	public int y;
 	
 	
 	public Physics(){
