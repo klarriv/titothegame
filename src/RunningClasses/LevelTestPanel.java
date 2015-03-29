@@ -32,7 +32,7 @@ public class LevelTestPanel extends JPanel{
 	private int[] rollingx = { 4, 5, 0, 5, 5 };
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
 	
-	private Tito tito = new Tito(0, 2, 6, 4, t);
+	private Tito tito = new Tito(0, 2, 4, 4, t);
 	private Plane p1 = new Plane(2, 2.2, Math.toRadians(160), 1);
 	private Plane p2 = new Plane(4, 2.2, Math.toRadians(20), -1);
 	

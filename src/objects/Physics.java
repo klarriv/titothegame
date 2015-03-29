@@ -213,8 +213,16 @@ public abstract class Physics{
 			this.vyi += T2[1][1] * vy;
 			
 		}
-		this.vxi -=0.5;
-		this.vyi -=0.5;
+		
+		if (vxi > 0)
+			this.vxi -= 0.5;
+		else
+			this.vxi += 0.5;
+		
+		if (vyi> 0)
+			this.vyi -= 0.5;
+		else
+			this.vyi += 0.5;
 		
 		//System.out.println(this.vxi + "  " + this.vyi);
 	}
