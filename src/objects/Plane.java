@@ -6,24 +6,29 @@ import javax.imageio.ImageIO;
 
 public class Plane extends Physics{
 	private DoublePoint dp = new DoublePoint(0,0);
-	private int[] x;
-	private int[] y;
+	private double width =1;
+	private double[] x = new double[3];
+	private double[] y = new double[3];
+	
 	private double angle;
 	private double a;
 	private double b = 1;
 	private double c;
 	
-	public Plane(double x, double y, double angle){
+	public Plane(double x, double y, double angle, double width){
 		try {
 			this.texture = ImageIO.read(new File("Resources/Objects/plane.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.width = width;
 		this.angle = angle;
 		this.dp.x = x;
 		this.dp.y = y;
 		setFormula();
+		setX();
+		setY();
 	}
 	
 	public Plane(int[] x, int[] y){
@@ -96,21 +101,6 @@ public class Plane extends Physics{
 		this.dp = dp;
 	}
 
-	public int[] getX() {
-		return x;
-	}
-
-	public void setX(int[] x) {
-		this.x = x;
-	}
-
-	public int[] getY() {
-		return y;
-	}
-
-	public void setY(int[] y) {
-		this.y = y;
-	}
 
 	public double getAngle() {
 		return angle;
@@ -143,5 +133,39 @@ public class Plane extends Physics{
 	public void setC(double c) {
 		this.c = c;
 	}
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double[] getX() {
+		return x;
+	}
+
+	public void setX(double[] x) {
+		this.x = x;
+	}
+	public void setX(){
+		x[0] = dp.x;
+		x[1] = dp.x + width;
+		x[2] = dp.x + width;
+	}
+
+	public double[] getY() {
+		return y;
+	}
+
+	public void setY(double[] y) {
+		this.y = y;
+	}
+	public void setY(){
+		y[0] = dp.y;
+		y[1] = getY(dp.x + width);
+		y[2] = dp.y;
+	}
+
 
 }
