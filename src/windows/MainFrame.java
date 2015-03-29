@@ -23,10 +23,6 @@ public class MainFrame extends JFrame{
 	 */
 	private static final String MAINMENUPANEL = "MainMenuPanel";
 	/**
-	 * This is the identifier string for the option JPanel
-	 */
-	private static final String OPTIONPANEL = "OptionPanel";
-	/**
 	 * The level select menu that will be used by the user.
 	 */
 	private static LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
@@ -34,10 +30,6 @@ public class MainFrame extends JFrame{
 	 * The main menu that will be used by the user.
 	 */
 	private static MainMenu mainMenu = new MainMenu();
-	/**
-	 * The option menu that will be used by the user.
-	 */
-	private static OptionMenu optionMenu = new OptionMenu();
 	/**
 	 * This is the array that contains the 10 level panels
 	 */
@@ -72,7 +64,6 @@ public class MainFrame extends JFrame{
 		menus = new JPanel(new CardLayout());
 		menus.add(levelSelectMenu, LEVELSELECTPANEL);
 		menus.add(mainMenu, MAINMENUPANEL);
-		menus.add(optionMenu, OPTIONPANEL);
 		for (int i=0; i<levels.length; i++){
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
@@ -114,14 +105,6 @@ public class MainFrame extends JFrame{
 
 	public MainMenu getMainMenu() {
 		return mainMenu;
-	}
-	
-	public void setOptionMenu(OptionMenu optionMenu) {
-		MainFrame.optionMenu = optionMenu;
-	}
-
-	public OptionMenu getOptionMenu() {
-		return optionMenu;
 	}
 	
 	public int getHeight(){

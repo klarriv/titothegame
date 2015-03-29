@@ -71,6 +71,10 @@ public class Level extends JPanel implements ActionListener {
 	 * Contains the location of the level files
 	 */
 	private final String LEVELDIRECTORY = "Resources/Levels/";
+	/**
+	 * This contains the game unit to resize the textures when the window is resized.
+	 */
+	private double gUnit;
 	
 	/**
 	 * This creates a new instance of level
@@ -81,40 +85,46 @@ public class Level extends JPanel implements ActionListener {
 		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
 			System.out.println(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
-			int numberOfTree = reader.nextInt();
+			
+			double numberOfTree = reader.nextDouble();
+			System.out.println("Number of trees" + numberOfTree);
 			for(int i=0; i<numberOfTree; i++)
-				treeList.add(new Tree(reader.nextInt(), reader.nextInt()));
+				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfBench = reader.nextInt();
+			double numberOfBench = reader.nextDouble();
+			System.out.println("Number of Benches" + numberOfBench);
 			for(int i=0; i<numberOfBench; i++)
-				benchList.add(new Bench(reader.nextInt(), reader.nextInt()));
+				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfCone = reader.nextInt();
+			double numberOfCone = reader.nextDouble();
 			for(int i=0; i<numberOfCone; i++)
-				coneList.add(new Cone(reader.nextInt(), reader.nextInt()));
+				coneList.add(new Cone(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfPlane = reader.nextInt();
+			double numberOfPlane = reader.nextDouble();
 			for(int i=0; i<numberOfPlane; i++)
 				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfRope = reader.nextInt();
+			double numberOfRope = reader.nextDouble();
 			for(int i=0; i<numberOfRope; i++)
-				ropeList.add(new Rope(reader.nextInt(), reader.nextInt()));
+				ropeList.add(new Rope(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfSeesaw = reader.nextInt();
+			double numberOfSeesaw = reader.nextDouble();
 			for(int i=0; i<numberOfSeesaw; i++)
-				seesawList.add(new SeeSaw(reader.nextInt(), reader.nextInt()));
+				seesawList.add(new SeeSaw(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfSpring = reader.nextInt();
-			System.out.println("number of springs" + numberOfSpring);
+			double numberOfSpring = reader.nextDouble();
 			for(int i=0; i<numberOfSpring; i++)
-				springList.add(new Spring(reader.nextInt(), reader.nextInt()));
+				springList.add(new Spring(reader.nextDouble(), reader.nextDouble()));
 			
-			int numberOfTrashCan = reader.nextInt();
-			System.out.println("no of trashcan" + numberOfTrashCan);
+			double numberOfTrashCan = reader.nextDouble();
 			for(int i=0; i<numberOfTrashCan; i++)
-				trashCanList.add(new TrashCan(reader.nextInt(), reader.nextInt()));
+				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
 			
+			/*
+			while(reader.hasNextDouble()){
+				System.out.println(reader.nextDouble());
+			}
+			*/
 			
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -160,11 +170,32 @@ public class Level extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g){
 		super.paintComponent(g);
+		gUnit = getWidth()/5;
 		
 		for(int i=0; i<treeList.size(); i++){
-			g.drawImage(treeList.get(i).texture, treeList.get(i).x, treeList.get(i).y, null);
+			g.drawImage(treeList.get(i).texture, (int)(gUnit*treeList.get(i).position.x), (int)(gUnit*treeList.get(i).position.y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
-		
+		for(int i=0; i<benchList.size(); i++){
+			g.drawImage(benchList.get(i).texture, (int)(gUnit*benchList.get(i).position.x), (int)(gUnit*benchList.get(i).position.y), null);
+		}
+		for(int i=0; i<coneList.size(); i++){
+			g.drawImage(coneList.get(i).texture, (int)(gUnit*coneList.get(i).position.x), (int)(gUnit*coneList.get(i).position.y), null);
+		}
+		for(int i=0; i<planeList.size(); i++){
+			g.drawImage(planeList.get(i).texture, (int)planeList.get(i).getDp().x, (int)planeList.get(i).getDp().y, null);
+		}
+		for(int i=0; i<ropeList.size(); i++){
+			g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
+		}
+		for(int i=0; i<seesawList.size(); i++){
+			g.drawImage(seesawList.get(i).texture, (int)(gUnit*seesawList.get(i).position.x), (int)(gUnit*seesawList.get(i).position.y), null);
+		}
+		for(int i=0; i<springList.size(); i++){
+			g.drawImage(springList.get(i).texture, (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
+		}
+		for(int i=0; i<trashCanList.size(); i++){
+			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).position.x), (int)(gUnit*trashCanList.get(i).position.y), null);
+		}
 	}
 	
 }
