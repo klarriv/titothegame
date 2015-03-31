@@ -1,13 +1,16 @@
 package objects;
 import java.awt.image.BufferedImage;
+
 import javax.swing.Timer;
+
+import RunningClasses.ObjectInterface;
 /**
  * This class provides a skeletal implementation of ObjectInterface 
  * to create an object which reacts following physics laws.
  * @author CharlesPhilippe
  *
  */
-public abstract class Physics{
+public abstract class Physics implements ObjectInterface{
 	
 	/**
 	 * The gravity constant
@@ -165,7 +168,7 @@ public abstract class Physics{
 		//else
 		//	this.a = 0;
 		
-		this.ay = a * Math.sin(Math.PI - angle);
+		this.ay = -a * Math.sin(Math.PI - angle);
 		this.ax = a * Math.cos(Math.PI - angle);
 		
 		
@@ -214,17 +217,17 @@ public abstract class Physics{
 			
 		}
 		
-		if (vxi > 0)
-			this.vxi -= 0.5;
-		else
-			this.vxi += 0.5;
+		if (vxi > 0.3)
+			this.vxi -= 0.3;
+		else if (vxi < -0.3)
+			this.vxi += 0.3;
 		
-		if (vyi> 0)
-			this.vyi -= 0.5;
-		else
-			this.vyi += 0.5;
+		if (vyi > 0.3)
+			this.vyi -= 0.3;
+		else if (vyi < -0.3)
+			this.vyi += 0.3;
 		
-		//System.out.println(this.vxi + "  " + this.vyi);
+		System.out.println("vx: " + this.vxi + " vy: " + this.vyi);
 	}
 
 }

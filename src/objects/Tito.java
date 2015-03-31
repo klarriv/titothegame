@@ -4,8 +4,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
+
+import RunningClasses.ObjectInterface;
 
 public class Tito extends Physics{
 	private int weight = 9;
@@ -141,6 +144,20 @@ public class Tito extends Physics{
 	public int getDelay(){
 		return this.t.getDelay();
 	}
+
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isUsed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
 	
 
 }

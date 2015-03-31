@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import objects.DoublePoint;
+import objects.Physics;
 import objects.Plane;
 import objects.Tito;
+import objects.TrashCan;
 
 public class LevelTestPanel extends JPanel{
 	
@@ -32,9 +34,11 @@ public class LevelTestPanel extends JPanel{
 	private int[] rollingx = { 4, 5, 0, 5, 5 };
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
 	
-	private Tito tito = new Tito(0, 2, 4, 4, t);
+	private Tito tito = new Tito(0, 2, 3, 7, t);
+	private TrashCan trash = new TrashCan(3,0, 0, 0, t);
 	private Plane p1 = new Plane(2, 2.2, Math.toRadians(160), 1);
 	private Plane p2 = new Plane(4, 2.2, Math.toRadians(20), -1);
+	private Plane p3 = new Plane(2.5, 1, Math.toRadians(135), 0.9);
 	
 	
 	public LevelTestPanel(){
@@ -91,23 +95,44 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
 		
+		g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
+		
 		g.drawImage(sprite, (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
+		try{
+		g.drawImage(trash.loadImage(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
+		}
+		catch(Exception e){
+			
+		}
+		
+		setAcceleration(135);
+		if ( trash.getPosition().x > p3.getX()[0])
+			frictionMove();
+		else{
+			System.out.println(0);
+			projectileMotion(trash);
+		}
 		
 		if (tito.getVy() < 0.5 && tito.getPosition().y >= 2){
 		xMove();
 		}
 		else if (planeColliding(p1)){
 			planeCollision(p1);
-			projectileMotion();
+			projectileMotion(tito);
 			xMove();
 		}
 		else if (planeColliding(p2)){
 			planeCollision(p2);
-			projectileMotion();
+			projectileMotion(tito);
+			xMove();
+		}
+		else if (planeColliding(p3)){
+			planeCollision(p3);
+			projectileMotion(tito);
 			xMove();
 		}
 		else{
-			projectileMotion();
+			projectileMotion(tito);
 			xMove();
 		}
 		
@@ -163,18 +188,29 @@ public class LevelTestPanel extends JPanel{
 			tito.setVx(-1*tito.getVx());
 	}
 	
-	public void projectileMotion(){
-		double y = tito.projectileMotions(tito.getWeight(), tito.getPosition().y, tito.getVy(), t.getDelay());
-		if (tito.getVy() < 0 && y >= 2){
-			tito.setY(2);
-			tito.setVy(-1*tito.getVy() - 1);
+	public void projectileMotion(Physics ob1){
+		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
+		if (ob1.getVy() < 0 && y >= 2){
+			ob1.setY(2);
+			ob1.setVy(-1*ob1.getVy() - 1);
 			//System.out.println(loader.getPosition().y);
 		}
 		
 		else if (y <= 2){
-			tito.setY(y);
-			tito.setVy();
+			ob1.setY(y);
+			ob1.setVy();
 		}
+	}
+	
+	public void frictionMove(){
+		trash.frictionMotion(trash.getPosition(), trash.getVx(), trash.getVy(),  t.getDelay());	
+		trash.setVy();
+		trash.setVx();
+	}
+	
+	public void setAcceleration(int aa){
+		//System.out.println( aa);
+		trash.setAcceleration(Math.toRadians(aa), trash.getWeight(), 0.5);
 	}
 
 }
