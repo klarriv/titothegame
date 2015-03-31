@@ -3,12 +3,14 @@ package windows;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
@@ -23,6 +25,10 @@ import objects.Spring;
  */
 public class Level extends JPanel implements ActionListener {
 	
+	/**
+	 * This holds the background image
+	 */
+	private BufferedImage background;
 	/**
 	 * This is a variable that holds the level number
 	 */
@@ -83,6 +89,13 @@ public class Level extends JPanel implements ActionListener {
 		this.levelNumber = levelNumber;
 		
 		try {
+			background = ImageIO.read(new File("Resources/background.png"));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
 			System.out.println(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
 			
@@ -102,7 +115,7 @@ public class Level extends JPanel implements ActionListener {
 			
 			double numberOfPlane = reader.nextDouble();
 			for(int i=0; i<numberOfPlane; i++)
-				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), reader.nextDouble()));
+				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
 			
 			double numberOfRope = reader.nextDouble();
 			for(int i=0; i<numberOfRope; i++)
@@ -119,12 +132,6 @@ public class Level extends JPanel implements ActionListener {
 			double numberOfTrashCan = reader.nextDouble();
 			for(int i=0; i<numberOfTrashCan; i++)
 				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
-			
-			/*
-			while(reader.hasNextDouble()){
-				System.out.println(reader.nextDouble());
-			}
-			*/
 			
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -172,6 +179,8 @@ public class Level extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		gUnit = getWidth()/5;
 		
+		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+		
 		for(int i=0; i<treeList.size(); i++){
 			g.drawImage(treeList.get(i).texture, (int)(gUnit*treeList.get(i).position.x), (int)(gUnit*treeList.get(i).position.y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
@@ -182,7 +191,8 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(coneList.get(i).texture, (int)(gUnit*coneList.get(i).position.x), (int)(gUnit*coneList.get(i).position.y), null);
 		}
 		for(int i=0; i<planeList.size(); i++){
-			g.drawImage(planeList.get(i).texture, (int)planeList.get(i).getDp().x, (int)planeList.get(i).getDp().y, null);
+			g.drawLine((int)(gUnit*(planeList.get(i).getX()[0])), (int)(gUnit*(planeList.get(i).getY()[0])), (int)(gUnit*(planeList.get(i).getX()[1])), (int)(gUnit*planeList.get(i).getY()[1]));
+			//g.drawImage(planeList.get(i).texture, (int)planeList.get(i).getDp().x, (int)planeList.get(i).getDp().y, null);
 		}
 		for(int i=0; i<ropeList.size(); i++){
 			g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
@@ -194,7 +204,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(springList.get(i).texture, (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
 		}
 		for(int i=0; i<trashCanList.size(); i++){
-			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).position.x), (int)(gUnit*trashCanList.get(i).position.y), null);
+			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).position.x), (int)(gUnit*trashCanList.get(i).position.y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
 	}
 	
