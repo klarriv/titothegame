@@ -135,14 +135,14 @@ public class TrashCan extends Physics {
 
 	@Override
 	public void setY(double y) {
-		// TODO Auto-generated method stub
+		this.position.y = y;
 		
 	}
 
 
 	@Override
 	public void setX(double x) {
-		// TODO Auto-generated method stub
+		this.position.x = x;
 		
 	}
 	

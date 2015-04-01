@@ -1,15 +1,18 @@
 package objects;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Tree extends Physics{
+public class Tree {
 	
+	private BufferedImage texture;
+
 	public Tree(double x, double y){
 		
-		position = new DoublePoint(x, y);
+		DoublePoint position = new DoublePoint(x, y);
 		
 		try {
 			this.texture = ImageIO.read(new File("Resources/Objects/tree.png"));

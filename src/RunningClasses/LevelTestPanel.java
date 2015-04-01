@@ -106,11 +106,13 @@ public class LevelTestPanel extends JPanel{
 		}
 		
 		setAcceleration(135);
-		if ( trash.getPosition().x > p3.getX()[0])
+		if ( trash.getPosition().x >= p3.getX()[0])
 			frictionMove();
+		
 		else{
-			System.out.println(0);
+			//System.out.println(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trash);
+			basicMove(trash);
 		}
 		
 		if (tito.getVy() < 0.5 && tito.getPosition().y >= 2){
@@ -171,6 +173,11 @@ public class LevelTestPanel extends JPanel{
 		}
 		return false;
 			
+	}
+	
+	public void basicMove(Physics ob1){
+		double x = ob1.motion( ob1.getPosition().x, ob1.getVx(), t.getDelay());
+		ob1.setX(x);
 	}
 	
 	public void xMove(){

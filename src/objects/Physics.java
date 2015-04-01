@@ -172,8 +172,8 @@ public abstract class Physics implements ObjectInterface{
 		this.ax = a * Math.cos(Math.PI - angle);
 		
 		
-		System.out.println("ax: " + this.ax + " ay: " + this.ay);
-		System.out.println("force: "+ force + " friction: " + f + " a "   + a);
+		//System.out.println("ax: " + this.ax + " ay: " + this.ay);
+		//System.out.println("force: "+ force + " friction: " + f + " a "   + a);
 		return a;
 	}
 	
@@ -227,7 +227,7 @@ public abstract class Physics implements ObjectInterface{
 		else if (vyi < -0.3)
 			this.vyi += 0.3;
 		
-		System.out.println("vx: " + this.vxi + " vy: " + this.vyi);
+		//System.out.println("vx: " + this.vxi + " vy: " + this.vyi);
 	}
 
 }
