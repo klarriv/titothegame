@@ -21,6 +21,7 @@ import objects.Spring;
  */
 public class Level extends JPanel implements ActionListener {
 	
+	private Tito tito;
 	/**
 	 * This holds the background image
 	 */
@@ -94,6 +95,8 @@ public class Level extends JPanel implements ActionListener {
 		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
 			System.out.println(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
+			
+			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			
 			double numberOfTree = reader.nextDouble();
 			System.out.println("Number of trees" + numberOfTree);
@@ -201,6 +204,8 @@ public class Level extends JPanel implements ActionListener {
 		for(int i=0; i<trashCanList.size(); i++){
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
+		
+		g.drawImage(tito.getTexture(), (int)(gUnit*tito.x), (int)(gUnit*tito.y), null);
 	}
 	
 }
