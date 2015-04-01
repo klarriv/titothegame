@@ -29,7 +29,7 @@ public class LevelTestPanel extends JPanel{
 	private int[] pattern = { 0, 1, 2, 3, 4, 2, 1 };// tito walking algorithm
 	private int[] pattern2x = { 0, 1, 2, 3, 4, 2, 1, 0, 0, 1, 2, 3, 4, 5, 0, 5,
 			5, 1, 2, 3, 4, 0 };
-	private int[] pattern2y = { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0,
+	private int[] pattern2y = {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 2, 0,
 			2, 2, 2, 2, 2, 1 };
 	private int[] rollingx = { 4, 5, 0, 5, 5 };
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
@@ -93,7 +93,7 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
 		
-		g.drawImage(tito.getTexture(), (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
+		g.drawImage(sprite, (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
 		
 		g.drawImage(trash.getTexture(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
 		

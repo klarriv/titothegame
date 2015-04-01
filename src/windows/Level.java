@@ -7,10 +7,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
+
+import RunningClasses.SpriteSheet;
 import objects.*;
 import objects.Spring;
 
@@ -78,12 +81,31 @@ public class Level extends JPanel implements ActionListener {
 	 * This contains the game unit to resize the textures when the window is resized.
 	 */
 	private double gUnit;
+	/**
+	 * 
+	 */
+	private int[] rollingx = { 4, 5, 0, 5, 5 };
+	/**
+	 * 
+	 */
+	private int[] rollingy = { 1, 1, 2, 0, 2 };
+	
+	private BufferedImage spriteSheet = null;
+	private BufferedImage sprite;     
+	private int counter = 0;
+	private int i = 0;
+	private int j = 0;
+	
 	
 	/**
 	 * This creates a new instance of level
 	 */
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
+		
+		
+		
+		
 		
 		try {
 			background = ImageIO.read(new File("Resources/background.png"));
@@ -137,6 +159,41 @@ public class Level extends JPanel implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		spriteSheet = tito.getTexture();
+		t = new Timer(1000 / 25, new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SpriteSheet ss = new SpriteSheet(spriteSheet);
+				
+				if (i < rollingx.length) {
+
+					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
+					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
+					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+					if (counter % 2 == 0){
+					i++;
+					j++;
+					}
+				} else {
+					i = 0;
+					j = 0;
+					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
+					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
+					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+					i++;
+					j++;
+				}
+				
+				counter++;
+				repaint();
+				
+			}
+			
+		});
+		t.start();
 		
 	}
 
@@ -205,7 +262,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
 		
-		g.drawImage(tito.getTexture(), (int)(gUnit*tito.x), (int)(gUnit*tito.y), null);
+		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), 75, 75, null);
 	}
 	
 }
