@@ -1,5 +1,6 @@
 package windows;
 
+import java.awt.CardLayout;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
@@ -103,9 +104,17 @@ public class Level extends JPanel implements ActionListener {
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
 		
-		
-		
-		
+		JButton backButton = new JButton();
+		backButton.addActionListener(new ActionListener(){
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+				
+			}
+		});
+		add(backButton);
 		
 		try {
 			background = ImageIO.read(new File("Resources/background.png"));
@@ -262,7 +271,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
 		
-		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), 75, 75, null);
+		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
 	}
 	
 }
