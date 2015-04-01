@@ -1,8 +1,7 @@
-package RunningClasses;
+package objects;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import objects.DoublePoint;
 /**
  * 
  * @author CharlesPhilippe
@@ -10,11 +9,17 @@ import objects.DoublePoint;
  */
 public interface ObjectInterface {
 	/**
-	 * Loads and return the buffered image of the object
+	 * Loads the buffered image of the object
 	 * @return
 	 * @throws IOException
 	 */
-	public BufferedImage loadImage() throws IOException;
+	public void loadImage();
+	
+	/**
+	 * Returns the texture of the object
+	 * @return
+	 */
+	public BufferedImage getTexture();
 
 	/**
 	 * Returns the weight of the object

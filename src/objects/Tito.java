@@ -3,18 +3,15 @@ package objects;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
-
-import RunningClasses.ObjectInterface;
 
 public class Tito extends Physics{
 	private int weight = 9;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
-	private BufferedImage image = null;
+	private BufferedImage texture;
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
@@ -24,7 +21,7 @@ public class Tito extends Physics{
 	private String pathRelativeToThis = "Resources/TitoSpriteSheet.png";
 	
 	public Tito(){
-		
+		loadImage();
 	}
 	
 	/**
@@ -43,19 +40,21 @@ public class Tito extends Physics{
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
+		loadImage();
 		
 	}
 	
-	/**
-	 * Loads the buffered image
-	 * @return
-	 * @throws IOException
-	 */
-	public BufferedImage loadImage() throws IOException{
+	
+	public void loadImage(){
+		try{
 		File file = new File(pathRelativeToThis);
-		URL url = file.toURI().toURL();
-		BufferedImage img = ImageIO.read(url);
-		return img;
+		texture = ImageIO.read(file);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	
@@ -155,6 +154,12 @@ public class Tito extends Physics{
 	public boolean isUsed() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public BufferedImage getTexture() {
+		
+		return texture;
 	}
 
 	

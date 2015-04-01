@@ -44,11 +44,7 @@ public class LevelTestPanel extends JPanel{
 	public LevelTestPanel(){
 		this.setOpaque(true);
 		this.setBackground(Color.cyan);
-		try {
-			spriteSheet = tito.loadImage();
-		} catch (IOException ex) {
-
-		}
+		spriteSheet = tito.getTexture();
 		t = new Timer(1000 / 25, new ActionListener(){
 
 			@Override
@@ -97,13 +93,10 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
 		
-		g.drawImage(sprite, (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
-		try{
-		g.drawImage(trash.loadImage(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
-		}
-		catch(Exception e){
-			
-		}
+		g.drawImage(tito.getTexture(), (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
+		
+		g.drawImage(trash.getTexture(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
+		
 		
 		setAcceleration(135);
 		if ( trash.getPosition().x >= p3.getX()[0])

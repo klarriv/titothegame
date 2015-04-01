@@ -8,23 +8,17 @@ import javax.imageio.ImageIO;
 
 public class Bench extends Physics {
 	
+	private String pathRelativeToThis = "Resources/Objects/bench.png";
+	private BufferedImage texture;
+
 	public Bench(double x, double y){
 		
 		position = new DoublePoint(x, y);
 		
-		try {
-			this.texture = ImageIO.read(new File("Resources/Objects/bench.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadImage();
 	}
 
-	@Override
-	public BufferedImage loadImage() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public int getWeight() {
@@ -120,6 +114,25 @@ public class Bench extends Physics {
 	public void setVy(double vy) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void loadImage(){
+		try{
+		File file = new File(pathRelativeToThis);
+		texture = ImageIO.read(file);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public BufferedImage getTexture() {
+		// TODO Auto-generated method stub
+		return texture;
 	}
 	
 

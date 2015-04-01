@@ -182,7 +182,7 @@ public class Level extends JPanel implements ActionListener {
 		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
 		
 		for(int i=0; i<treeList.size(); i++){
-			g.drawImage(treeList.get(i).texture, (int)(gUnit*treeList.get(i).position.x), (int)(gUnit*treeList.get(i).position.y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
+			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
 		for(int i=0; i<benchList.size(); i++){
 			g.drawImage(benchList.get(i).texture, (int)(gUnit*benchList.get(i).position.x), (int)(gUnit*benchList.get(i).position.y), null);
@@ -198,7 +198,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
 		}
 		for(int i=0; i<seesawList.size(); i++){
-			g.drawImage(seesawList.get(i).texture, (int)(gUnit*seesawList.get(i).position.x), (int)(gUnit*seesawList.get(i).position.y), null);
+			g.drawImage(seesawList.get(i).getTexture(), (int)(gUnit*seesawList.get(i).position.x), (int)(gUnit*seesawList.get(i).position.y), null);
 		}
 		for(int i=0; i<springList.size(); i++){
 			g.drawImage(springList.get(i).texture, (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);

@@ -3,19 +3,17 @@ package objects;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+
 
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
-
-import RunningClasses.ObjectInterface;
 
 public class TrashCan extends Physics {
 	
 	private int weight = 10;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
-	private BufferedImage image = null;
+	private BufferedImage texture;
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
@@ -26,14 +24,13 @@ public class TrashCan extends Physics {
 	
 	public TrashCan(double x, double y){
 		
-		position = new DoublePoint(x, y);
+		this.position.x = x;
+		this.position.y = y;
+		this.vx = 0;
+		this.vy = 0;
 		
-		try {
-			this.texture = ImageIO.read(new File("Resources/Objects/trashCan.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadImage();
+		
 	}
 	
 	
@@ -53,15 +50,21 @@ public class TrashCan extends Physics {
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
+		loadImage();
 		
 	}
 	
 	
-	public BufferedImage loadImage() throws IOException{
+	public void loadImage(){
+		try{
 		File file = new File(pathRelativeToThis);
-		URL url = file.toURI().toURL();
-		BufferedImage img = ImageIO.read(url);
-		return img;
+		texture = ImageIO.read(file);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 
@@ -144,6 +147,13 @@ public class TrashCan extends Physics {
 	public void setX(double x) {
 		this.position.x = x;
 		
+	}
+
+
+	@Override
+	public BufferedImage getTexture() {
+		
+		return texture;
 	}
 	
 	

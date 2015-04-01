@@ -1,9 +1,7 @@
 package objects;
-import java.awt.image.BufferedImage;
+
 
 import javax.swing.Timer;
-
-import RunningClasses.ObjectInterface;
 /**
  * This class provides a skeletal implementation of ObjectInterface 
  * to create an object which reacts following physics laws.
@@ -51,7 +49,7 @@ public abstract class Physics implements ObjectInterface{
 	public int weight;
 	public boolean isVisible;
 	public boolean isUsed;
-	public BufferedImage texture;
+	
 	public DoublePoint position;
 	public double vx;
 	public double vy;

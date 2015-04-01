@@ -3,11 +3,11 @@ import javax.swing.JFrame;
 
 public class AnimationTestFrame extends JFrame {
 	public static int gUnit;
-	private PlaneTestPanel p = new PlaneTestPanel();
+/**	private PlaneTestPanel p = new PlaneTestPanel();
 	private GravityTestPanel g = new GravityTestPanel();
 	private TestAnimationPanel t = new TestAnimationPanel();
 	private PhysicsTestPanel pt = new PhysicsTestPanel();
-	private VectorTestPanel v = new VectorTestPanel();
+	private VectorTestPanel v = new VectorTestPanel();*/
 	private LevelTestPanel l = new LevelTestPanel();
 
 	public AnimationTestFrame(){

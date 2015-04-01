@@ -6,25 +6,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Spring extends Physics{
+public class Spring extends Physics {
 	
+	private String pathRelativeToThis = "Resources/Objects/Spring.png";
+	private BufferedImage texture;
+
 	public Spring(double x, double y){
 		
 		position = new DoublePoint(x, y);
 		
-		try {
-			this.texture = ImageIO.read(new File("Resources/Objects/spring.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		loadImage();
 	}
 
-	@Override
-	public BufferedImage loadImage() throws IOException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public int getWeight() {
@@ -121,5 +115,25 @@ public class Spring extends Physics{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void loadImage(){
+		try{
+		File file = new File(pathRelativeToThis);
+		texture = ImageIO.read(file);
+		}
+		catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public BufferedImage getTexture() {
+		// TODO Auto-generated method stub
+		return texture;
+	}
+	
 
 }
