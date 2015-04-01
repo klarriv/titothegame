@@ -1,20 +1,16 @@
 package windows;
 
-import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
-
 import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
-
 import objects.*;
 import objects.Spring;
 
@@ -185,26 +181,25 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
 		for(int i=0; i<benchList.size(); i++){
-			g.drawImage(benchList.get(i).texture, (int)(gUnit*benchList.get(i).position.x), (int)(gUnit*benchList.get(i).position.y), null);
+			g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).position.x), (int)(gUnit*benchList.get(i).position.y), null);
 		}
 		for(int i=0; i<coneList.size(); i++){
-			g.drawImage(coneList.get(i).texture, (int)(gUnit*coneList.get(i).position.x), (int)(gUnit*coneList.get(i).position.y), null);
+			g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).position.x), (int)(gUnit*coneList.get(i).position.y), null);
 		}
 		for(int i=0; i<planeList.size(); i++){
 			g.drawLine((int)(gUnit*(planeList.get(i).getX()[0])), (int)(gUnit*(planeList.get(i).getY()[0])), (int)(gUnit*(planeList.get(i).getX()[1])), (int)(gUnit*planeList.get(i).getY()[1]));
-			//g.drawImage(planeList.get(i).texture, (int)planeList.get(i).getDp().x, (int)planeList.get(i).getDp().y, null);
 		}
 		for(int i=0; i<ropeList.size(); i++){
-			g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
+			//g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
 		}
 		for(int i=0; i<seesawList.size(); i++){
-			g.drawImage(seesawList.get(i).getTexture(), (int)(gUnit*seesawList.get(i).position.x), (int)(gUnit*seesawList.get(i).position.y), null);
+			g.drawImage(seesawList.get(i).getTexture(), (int)(gUnit*seesawList.get(i).getPosition().x), (int)(gUnit*seesawList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<springList.size(); i++){
-			g.drawImage(springList.get(i).texture, (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
+			g.drawImage(springList.get(i).getTexture(), (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
 		}
 		for(int i=0; i<trashCanList.size(); i++){
-			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
+			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
 	}
 	
