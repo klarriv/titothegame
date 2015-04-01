@@ -13,8 +13,7 @@ public class SeeSaw {
 
 	public SeeSaw(double x, double y){
 		
-		 setPosition(new DoublePoint(x, y));
-		
+		setPosition(new DoublePoint(x, y));
 		loadImage();
 	}
 

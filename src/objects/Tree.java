@@ -14,9 +14,9 @@ public class Tree {
 
 	public Tree(double x, double y){
 		
-		 setPosition(new DoublePoint(x, y));
-		
+		setPosition(new DoublePoint(x, y));
 		loadImage();
+		
 	}
 
 	public void loadImage(){

@@ -28,7 +28,6 @@ public class TrashCan extends Physics {
 		this.position.y = y;
 		this.vx = 0;
 		this.vy = 0;
-		
 		loadImage();
 		
 	}

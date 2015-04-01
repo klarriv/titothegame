@@ -13,8 +13,8 @@ public class Cone extends Physics {
 	public Cone(double x, double y){
 		
 		position = new DoublePoint(x, y);
-		
 		loadImage();
+		
 	}
 
 	

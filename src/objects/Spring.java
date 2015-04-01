@@ -14,8 +14,8 @@ public class Spring extends Physics {
 	public Spring(double x, double y){
 		
 		position = new DoublePoint(x, y);
-		
 		loadImage();
+		
 	}
 
 	
