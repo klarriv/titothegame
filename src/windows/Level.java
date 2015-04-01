@@ -204,7 +204,7 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(springList.get(i).texture, (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
 		}
 		for(int i=0; i<trashCanList.size(); i++){
-			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).position.x), (int)(gUnit*trashCanList.get(i).position.y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
+			g.drawImage(trashCanList.get(i).texture, (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
 		}
 	}
 	
