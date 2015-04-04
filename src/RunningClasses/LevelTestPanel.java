@@ -191,6 +191,15 @@ public class LevelTestPanel extends JPanel{
 	public void projectileMotion(Physics ob1){
 		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 		if (ob1.getVy() < 0 && y >= 2){
+			if (ob1.getWeight() > 9){
+				ob1.setY(2);
+				System.out.println(ob1.getVy());
+				if (ob1.getVy() >= -2 )
+					ob1.setVy(0);
+				else
+					ob1.setVy(-1*ob1.getVy() - 2);
+				
+			}
 			ob1.setY(2);
 			ob1.setVy(-1*ob1.getVy() - 1);
 			//System.out.println(loader.getPosition().y);
