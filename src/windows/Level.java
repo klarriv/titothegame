@@ -1,9 +1,12 @@
 package windows;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,13 +26,20 @@ import objects.Spring;
  * passed with the .lvl file.
  * @author Keven-Matthew
  */
-public class Level extends JPanel implements ActionListener {
+public class Level extends JPanel implements ActionListener{
 	
+	/**
+	 * This holds the object that represents Tito in the game.
+	 */
 	private Tito tito;
 	/**
 	 * This holds the background image
 	 */
 	private BufferedImage background;
+	/**
+	 * This holds the title for the pause menu
+	 */
+	private BufferedImage pauseTitle;
 	/**
 	 * This is a variable that holds the level number
 	 */
@@ -96,6 +106,8 @@ public class Level extends JPanel implements ActionListener {
 	private int counter = 0;
 	private int i = 0;
 	private int j = 0;
+	private boolean isPaused = false;
+	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect;
 	
 	
 	/**
@@ -104,20 +116,75 @@ public class Level extends JPanel implements ActionListener {
 	public Level(int levelNumber) {
 		this.levelNumber = levelNumber;
 		
-		JButton backButton = new JButton();
-		backButton.addActionListener(new ActionListener(){
+		jbtBackToGame = new JButton("Back to Game");
+		jbtBackToLevelSelect = new JButton("Exit to level menu");
+		jbtExitGame = new JButton("Exit Game");
+		
+		jbtBackToGame.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				isPaused = false;
+				t.start();
+				repaint();
+				jbtBackToGame.setVisible(false);
+				jbtBackToLevelSelect.setVisible(false);
+				jbtExitGame.setVisible(false);
+			}
+			
+		});
+		jbtBackToLevelSelect.addActionListener(new ActionListener(){
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+			}
+		});
+		jbtExitGame.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+			
+		});
+		
+		add(jbtBackToGame);
+		add(jbtBackToLevelSelect);
+		add(jbtExitGame);
+		jbtBackToGame.setVisible(false);
+		jbtBackToLevelSelect.setVisible(false);
+		jbtExitGame.setVisible(false);
+		
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "openPauseMenu");
+		getActionMap().put("openPauseMenu", new AbstractAction(){
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(!isPaused){	
+					isPaused = true;
+					t.stop();
+					repaint();
+					jbtBackToGame.setVisible(true);
+					jbtBackToLevelSelect.setVisible(true);
+					jbtExitGame.setVisible(true);
+				}
+				else{
+					isPaused = false;
+					t.start();
+					repaint();
+					jbtBackToGame.setVisible(false);
+					jbtBackToLevelSelect.setVisible(false);
+					jbtExitGame.setVisible(false);
+				}
 				
 			}
 		});
-		add(backButton);
 		
 		try {
 			background = ImageIO.read(new File("Resources/background.png"));
+			pauseTitle = ImageIO.read(new File("Resources/Menus/PauseMenu/pauseTitle.png"));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -272,6 +339,13 @@ public class Level extends JPanel implements ActionListener {
 		}
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
+		
+		if(isPaused){
+			g.setColor(new Color(0, 0, 0, 128));
+			g.fillRect(0, 0, getWidth(), getHeight());
+			
+			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
+		}
 	}
 	
 }
