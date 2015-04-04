@@ -44,7 +44,7 @@ public class RopesTestPanel extends JPanel {
 		g.drawImage(trash1.getTexture(),(int)(gUnit* trash1.getPosition().x), (int)(gUnit* trash1.getPosition().y), 100, 100, null);
 		g.drawImage(trash2.getTexture(),(int)(gUnit* trash2.getPosition().x), (int)(gUnit* trash2.getPosition().y), 100, 100, null);
 		
-		g.drawLine((int)(gUnit*rope.getAnchor1().x), (int)(gUnit*rope.getAnchor1().y), (int)(gUnit*rope.getAnchor2().x), (int)(gUnit*rope.getAnchor2().y));
+		g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
 		
 		if (trash2.getPosition().y > 2.5){
 		trash2.setY(trash2.projectileMotions(trash2.getWeight(), trash2.getPosition().y, trash2.getVy(), t.getDelay()));
@@ -65,8 +65,8 @@ public class RopesTestPanel extends JPanel {
 			
 			if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
 				
-				t1x = x- (50/gUnit);
-				t1y = y- (50/gUnit);
+				t1x = x - (50/gUnit);
+				t1y = y - (50/gUnit);
 				rope.move(t1x, t1y);
 				trash1.setX(t1x);
 				trash1.setY(t1y);

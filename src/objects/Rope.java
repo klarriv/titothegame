@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 public class Rope {
 	private DoublePoint anchor1;
 	private DoublePoint anchor2;
+	private double length;
 	private double gUnit;
 	private Physics ob1;
 	private Physics ob2;
@@ -24,6 +25,8 @@ public class Rope {
 		
 		this.anchor1 = ob1.getPosition();
 		this.anchor2 = ob2.getPosition();
+		
+		setLength();
 	}
 	
 	/**
@@ -39,6 +42,8 @@ public class Rope {
 		anchor1.y = y1;
 		anchor2.x = x2;
 		anchor2.y = y2;
+		
+		setLength();
 
 	}
 	
@@ -53,14 +58,23 @@ public class Rope {
 		this.anchor2 = anchor2;
 	}
 	
+	public void setLength(){
+		
+		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
+		System.out.println(anchor1.x - anchor2.x);
+	}
+	
 	
 	public void move(double x, double y){
 		double dx = x - anchor1.x;
 		double dy = y - anchor1.y;
+		double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
 		
+		if (distance >= length){
 		anchor2.x += dx;
 		anchor2.y += dy;
-		System.out.println(" dx: " + dx + " dy: " + dy);
+		}
+		System.out.println(" d: " + distance + " l: " + length);
 	}
 	
 	
