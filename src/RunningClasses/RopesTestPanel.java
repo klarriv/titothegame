@@ -45,6 +45,11 @@ public class RopesTestPanel extends JPanel {
 		g.drawImage(trash2.getTexture(),(int)(gUnit* trash2.getPosition().x), (int)(gUnit* trash2.getPosition().y), 100, 100, null);
 		
 		g.drawLine((int)(gUnit*rope.getAnchor1().x), (int)(gUnit*rope.getAnchor1().y), (int)(gUnit*rope.getAnchor2().x), (int)(gUnit*rope.getAnchor2().y));
+		
+		if (trash2.getPosition().y > 2.5){
+		trash2.setY(trash2.projectileMotions(trash2.getWeight(), trash2.getPosition().y, trash2.getVy(), t.getDelay()));
+		trash2.setVy();
+		}
 	}
 	
 	class MouseDrag implements MouseMotionListener{
@@ -55,8 +60,7 @@ public class RopesTestPanel extends JPanel {
 			double y = (double)e.getY()/gUnit;
 			double t1x = trash1.getPosition().x;
 			double t1y = trash1.getPosition().y;
-			double t2x = trash2.getPosition().x;
-			double t2y = trash2.getPosition().y;
+			
 			
 			
 			if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
