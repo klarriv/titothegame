@@ -71,8 +71,8 @@ public class Rope {
 		double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
 		
 		if (distance >= length){
-		anchor2.x += dx;
-		anchor2.y += dy;
+			anchor2.x += dx;
+			anchor2.y += dy;
 		}
 		System.out.println(" d: " + distance + " l: " + length);
 	}

@@ -14,7 +14,7 @@ public class AnimationTestFrame extends JFrame {
 	public AnimationTestFrame(){
 		//gUnit = g.getWidth()/24;
 		//.setVisible(true);
-		add(r);
+		add(l);
 	}
 	public static void main(String[] args) {
 		AnimationTestFrame frame = new AnimationTestFrame();

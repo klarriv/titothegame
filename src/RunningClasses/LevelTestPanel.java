@@ -37,7 +37,7 @@ public class LevelTestPanel extends JPanel{
 	private Tito tito = new Tito(0, 2, 0, 0, t);
 	private TrashCan trash = new TrashCan(1, 0, 0, 0, t);
 	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(150), 0.5);
-	//private Plane p2 = new Plane(4, 2.2, Math.toRadians(91), 1);
+	private Plane p2 = new Plane(3.7, 1.6, Math.toRadians(120), 0.2);
 	//private Plane p3 = new Plane(2.5, 1, Math.toRadians(135), 0.9);
 	private int once = 0;
 	
@@ -89,7 +89,7 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit*(p1.getX()[0])), (int)(gUnit*(p1.getY()[0])), (int)(gUnit*(p1.getX()[1])), (int)(gUnit*p1.getY()[1]));
 		
-		//g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
+		g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
 		
 		//g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
 		
@@ -122,7 +122,7 @@ public class LevelTestPanel extends JPanel{
 			projectileMotion(tito);
 			xMove();
 		}
-		/**else if (planeColliding(p2)){
+		else if (planeColliding(p2)){
 			planeCollision(p2);
 			projectileMotion(tito);
 			xMove();
