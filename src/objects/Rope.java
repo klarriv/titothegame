@@ -14,6 +14,10 @@ public class Rope {
 	private Physics ob1;
 	private Physics ob2;
 	
+	public Rope(double x, double y){
+		
+	}
+	
 	/**
 	 * Constructs a new Rope attached to two Physics objects
 	 * @param ob1

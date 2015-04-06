@@ -184,8 +184,16 @@ public abstract class Physics implements ObjectInterface{
 						{-Math.sin(angle),Math.cos(angle)}};
 		
 		if (vx >= 0){
+			if (vxi > 0.3)
+				this.vxi -= 0.3;
+			
 			this.vxi = T[0][0] * vx;
 			this.vxi += T[1][0] * vy;
+			
+			if (vyi > 0.3)
+				this.vyi -= 0.3;
+			else if (vyi < -0.3)
+				this.vyi += 0.3;
 			
 			this.vyi = T[0][1] * vx;
 			this.vyi += T[1][1] * vy;
@@ -193,23 +201,23 @@ public abstract class Physics implements ObjectInterface{
 			//System.out.println(T[0][0]);
 		}
 		else{
+			if (vxi < -0.3)
+				this.vxi += 0.3;
+			
 			this.vxi = T2[0][0] * vx;
 			this.vxi += T2[1][0] * vy;
+			
+			if (vyi > 0.3)
+				this.vyi -= 0.3;
+			else if (vyi < -0.3)
+				this.vyi += 0.3;
 			
 			this.vyi = T2[0][1] * vx;
 			this.vyi += T2[1][1] * vy;
 			
 		}
 		
-		if (vxi > 0.3)
-			this.vxi -= 0.3;
-		else if (vxi < -0.3)
-			this.vxi += 0.3;
 		
-		if (vyi > 0.3)
-			this.vyi -= 0.3;
-		else if (vyi < -0.3)
-			this.vyi += 0.3;
 		
 		//System.out.println("vx: " + this.vxi + " vy: " + this.vyi);
 	}
