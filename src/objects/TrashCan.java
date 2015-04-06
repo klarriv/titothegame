@@ -10,7 +10,7 @@ import javax.swing.Timer;
 
 public class TrashCan extends Physics {
 	
-	private int weight = 10;
+	private int weight = 20;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
 	private BufferedImage texture;

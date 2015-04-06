@@ -1,5 +1,13 @@
 package RunningClasses;
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AnimationTestFrame extends JFrame {
 	public static int gUnit;
@@ -10,10 +18,10 @@ public class AnimationTestFrame extends JFrame {
 	private VectorTestPanel v = new VectorTestPanel();*/
 	private LevelTestPanel l = new LevelTestPanel();
 	private RopesTestPanel r = new RopesTestPanel();
-
+	
+	
 	public AnimationTestFrame(){
-		//gUnit = g.getWidth()/24;
-		//.setVisible(true);
+		
 		add(l);
 	}
 	public static void main(String[] args) {

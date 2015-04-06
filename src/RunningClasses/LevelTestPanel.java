@@ -1,5 +1,6 @@
 package RunningClasses;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -7,7 +8,10 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import objects.DoublePoint;
@@ -37,11 +41,44 @@ public class LevelTestPanel extends JPanel{
 	private Tito tito = new Tito(0, 2, 0, 0, t);
 	private TrashCan trash = new TrashCan(1, 0, 0, 0, t);
 	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(150), 0.5);
-	private Plane p2 = new Plane(3.7, 1.6, Math.toRadians(120), 0.2);
+	//private Plane p2 = new Plane(3.7, 1, Math.toRadians(120), 0.2);
 	//private Plane p3 = new Plane(2.5, 1, Math.toRadians(135), 0.9);
 	private int once = 0;
 	
+	
+	
+	private JLabel setWeight = new JLabel("set weight: ");
+	private JTextField weight = new JTextField(4);
+	private JButton set = new JButton("set");
+	private JPanel setter = new JPanel();
+
+	
+	
 	public LevelTestPanel(){
+		setLayout(new BorderLayout());
+		set.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				trash.setWeight(Integer.parseInt(weight.getText()));
+				tito.setVx(0);
+				tito.setVy(0);
+				tito.setX(0);
+				tito.setY(2);
+				trash.setVy(0);
+				trash.setVy(0);
+				trash.setX(1);
+				trash.setY(0);
+				once = 0;
+				repaint();
+			}
+			
+		});
+		setter.add(setWeight);
+		setter.add(weight);
+		setter.add(set);
+		add(setter, BorderLayout.NORTH);
+		
 		this.setOpaque(true);
 		this.setBackground(Color.cyan);
 		spriteSheet = tito.getTexture();
@@ -89,7 +126,7 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit*(p1.getX()[0])), (int)(gUnit*(p1.getY()[0])), (int)(gUnit*(p1.getX()[1])), (int)(gUnit*p1.getY()[1]));
 		
-		g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
+		//g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
 		
 		//g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
 		
@@ -98,8 +135,10 @@ public class LevelTestPanel extends JPanel{
 		g.drawImage(trash.getTexture(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
 		
 		if (trash.getPosition().y >= 2 && once == 0){
-			tito.setVx(Math.cos(Math.toRadians(135))*trash.getVy() * 1.4);
-			tito.setVy(Math.cos(Math.toRadians(135))*trash.getVy() * 1.4);
+			tito.setEnergyVelocity(trash.getVy(), trash.getWeight(), tito.getWeight());
+			tito.setVx();
+			tito.setVy();
+			System.out.println(trash.getWeight());
 			once++;
 		}
 		
@@ -122,7 +161,7 @@ public class LevelTestPanel extends JPanel{
 			projectileMotion(tito);
 			xMove();
 		}
-		else if (planeColliding(p2)){
+		/**else if (planeColliding(p2)){
 			planeCollision(p2);
 			projectileMotion(tito);
 			xMove();
@@ -199,7 +238,7 @@ public class LevelTestPanel extends JPanel{
 		if (ob1.getVy() < 0 && y >= 2){
 			if (ob1.getWeight() > 9){
 				ob1.setY(2);
-				System.out.println(ob1.getVy());
+				//System.out.println(ob1.getVy());
 				if (ob1.getVy() >= -2 )
 					ob1.setVy(0);
 				else

@@ -123,33 +123,19 @@ public abstract class Physics implements ObjectInterface{
 	}
 	
 	/**
-	 * Calculates and returns the force in x on/of an object using geometry
+	 * Sets the velocity of an Object after the launch from a see-saw using kinetic Energy
+	 * Given the velocity and the weight of the falling object (v, weight) and the mass of the accelerated object
+	 * @param v
 	 * @param weight
-	 * @param a
-	 * @return
+	 * @param mass
 	 */
-	public double forceX(int force, double a){
+	public void setEnergyVelocity(double v, double weight, double mass){
+		double ek = 0.5 * weight * v * v;
+		double velocity = Math.sqrt((2* ek) / mass);
 		
-		return (force * GRAVITY) * Math.cos(a);
-	}
-	/**
-	 * Calculates and returns the force in y on/of an object using Newton's second law
-	 * @param weight
-	 * @param a
-	 * @return
-	 */
-	public double forceY(int force, double a){
+		this.vxi = velocity * Math.cos(Math.toRadians(135)); //setting always 45 degrees
+		this.vyi = velocity * Math.cos(Math.toRadians(135));
 		
-		return (force * GRAVITY) * Math.sin(a);
-	}
-	/**
-	 * Calculates the friction force of an object with a constant u and a normal force n
-	 * @param n
-	 * @param u
-	 * @return
-	 */
-	public double friction(double n, double u){
-		return (n * u);
 	}
 	
 	/**
