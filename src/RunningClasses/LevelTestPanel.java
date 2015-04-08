@@ -40,7 +40,7 @@ public class LevelTestPanel extends JPanel{
 	
 	private Tito tito = new Tito(0, 2, 0, 0, t);
 	private TrashCan trash = new TrashCan(1, 0, 0, 0, t);
-	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(150), 0.5);
+	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(135), 0.5);
 	//private Plane p2 = new Plane(3.7, 1, Math.toRadians(120), 0.2);
 	//private Plane p3 = new Plane(2.5, 1, Math.toRadians(135), 0.9);
 	private int once = 0;

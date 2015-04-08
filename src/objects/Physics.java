@@ -135,7 +135,7 @@ public abstract class Physics implements ObjectInterface{
 		
 		this.vxi = velocity * Math.cos(Math.toRadians(135)); //setting always 45 degrees
 		this.vyi = velocity * Math.cos(Math.toRadians(135));
-		
+	
 	}
 	
 	/**
@@ -182,39 +182,41 @@ public abstract class Physics implements ObjectInterface{
 
 		double[][] T2 ={{Math.cos(angle), Math.sin(angle)},
 						{-Math.sin(angle),Math.cos(angle)}};
-		
+		System.out.println("vx: " + vx + " vy: "+ vy);
 		if (vx >= 0){
-			if (vxi > 0.3)
-				this.vxi -= 0.3;
-			
+			if (vx > 0.5)
+				vx -= 0.5;
+			if (vy > 0.5)
+				vy -= 0.5;
+			else if (vy < -0.5)
+				vy += 0.5;
+			System.out.println("vx1: " + vx + " vy1: "+ vy);
 			this.vxi = T[0][0] * vx;
 			this.vxi += T[1][0] * vy;
 			
-			if (vyi > 0.3)
-				this.vyi -= 0.3;
-			else if (vyi < -0.3)
-				this.vyi += 0.3;
+			
 			
 			this.vyi = T[0][1] * vx;
 			this.vyi += T[1][1] * vy;
-			
+			System.out.println("vx2: " + vxi + " vy2: "+ vyi);
 			//System.out.println(T[0][0]);
 		}
 		else{
-			if (vxi < -0.3)
-				this.vxi += 0.3;
-			
+			if (vx < -0.5)
+				vx += 0.5;
+			if (vy > 0.5)
+				vy -= 0.5;
+			else if (vy < -0.5)
+				vy += 0.5;
+			System.out.println("vx1: " + vx + " vy1: "+ vy);
 			this.vxi = T2[0][0] * vx;
 			this.vxi += T2[1][0] * vy;
 			
-			if (vyi > 0.3)
-				this.vyi -= 0.3;
-			else if (vyi < -0.3)
-				this.vyi += 0.3;
+			
 			
 			this.vyi = T2[0][1] * vx;
 			this.vyi += T2[1][1] * vy;
-			
+			System.out.println("vx2: " + vxi + " vy2: "+ vyi);
 		}
 		
 		
