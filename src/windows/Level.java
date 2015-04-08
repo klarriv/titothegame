@@ -354,5 +354,4 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
 	}
-	
 }
