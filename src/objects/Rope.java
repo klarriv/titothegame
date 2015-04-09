@@ -15,6 +15,7 @@ public class Rope {
 	private Physics ob1;
 	private Physics ob2;
 	private Pulley pulley;
+	private boolean maxed = false;
 	
 	public Rope(double x, double y){
 		
@@ -120,12 +121,19 @@ public class Rope {
 		double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
 		double distance2 = length - distance;
 		
-		if (distance <= length && distance >= 0.3){
+		if (distance <= length && distance >= 0.3)
+			maxed = false;
+		else 
+			maxed = true;
+		
+		if (!maxed)
 			anchor3.y = anchor2.y + distance2;
-		}
+		
 		
 	}
-	
+	public boolean isMaxed(){
+		return maxed;
+	}
 
 	public DoublePoint getAnchor1() {
 		return anchor1;

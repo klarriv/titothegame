@@ -36,6 +36,7 @@ public class RopesTestPanel extends JPanel {
 			
 		}
 		);
+		t.start();
 		
 	}
 	
@@ -50,11 +51,14 @@ public class RopesTestPanel extends JPanel {
 		int[] yPoints = {(int)(gUnit*rope.getAnchor1().y) + 50, (int)(gUnit*rope.getAnchor2().y) + 50, (int)(gUnit*rope.getAnchor3().y) + 50};
 		g.drawPolyline(xPoints, yPoints, 3);
 		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
+		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());
 		
-		if (trash2.getPosition().y > 2.5){
-		trash2.setY(trash2.projectileMotions(trash2.getWeight(), trash2.getPosition().y, trash2.getVy(), t.getDelay()));
-		trash2.setVy();
+		if (!rope.isMaxed()){
+			trash1.setY(y);
+			trash1.setVy();
+			rope.pulleyMove(trash1.getPosition().x, y);
 		}
+		
 	}
 	
 	class MouseDrag implements MouseMotionListener{
