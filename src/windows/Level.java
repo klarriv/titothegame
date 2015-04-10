@@ -358,19 +358,22 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
 		
+		
+		//Collision and movements
 		if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
 			tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
 			tito.setVx();
 			tito.setVy();
 			//(trashCanList.get(0).getWeight());
 			trashCanList.get(0).single++;
-			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
 		}
 		
 		if (trashCanList.get(0).getPosition().y < 2){
 			////(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trashCanList.get(0));
 			basicMove(trashCanList.get(0));
+			System.out.println(" vyy: " + trashCanList.get(0).getVy());
 		}
 		
 		boolean planeCollided = false;
@@ -380,10 +383,10 @@ public class Level extends JPanel implements ActionListener{
 			p = planeList.get(i);
 		}
 		
-		if (tito.getVy() > 0.5 && tito.getPosition().y <= 2.3){
+		if (tito.getVy() > 0.5 && tito.getPosition().y <= 2){
 			projectileMotion(tito);
 			xMove();
-			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+			//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
 		}
 		else if (planeCollided){
 			planeCollision(p);
@@ -405,7 +408,7 @@ public class Level extends JPanel implements ActionListener{
 	//Physics moving and colliding methods
 	
 	
-	public void planeCollision(Plane plane){
+		public void planeCollision(Plane plane){
 			
 			double angle = plane.angleOfContact(tito.getVx(), tito.getVy());
 			
@@ -456,26 +459,20 @@ public class Level extends JPanel implements ActionListener{
 			else
 				tito.setVx(-1*tito.getVx());
 		}
+		
 		//TODO work on this bouncy thing
+		//Faudrait ajouter le diametre ou le height pour faire les contacts avec le sol.... faudrait que ca soit genre une variable dans les objects
 		public void projectileMotion(Physics ob1){
 			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
-			if (ob1.getVy() < 0 && y >= 2.3){
-				if (ob1.getWeight() > 9){
-					ob1.setY(2);
-					////(ob1.getVy());
-					if (ob1.getVy() >= -2 )
-						ob1.setVy(0);
-					else
-						ob1.setVy(-1*ob1.getVy() - 2);
-					
-				}
+			if (ob1.getVy() < 0 && y >= 2.5){
 				
-				ob1.setY(2.3);
+				
+				ob1.setY(2.5);
 				ob1.setVy(-1*ob1.getVy() - 1);
 				////(loader.getPosition().y);
 			}
 			
-			else if (y <= 2.3){
+			else if (y <= 2.5){
 				ob1.setY(y);
 				ob1.setVy();
 			}

@@ -182,7 +182,7 @@ public abstract class Physics implements ObjectInterface{
 
 		double[][] T2 ={{Math.cos(angle), Math.sin(angle)},
 						{-Math.sin(angle),Math.cos(angle)}};
-		System.out.println("vx: " + vx + " vy: "+ vy);
+		//System.out.println("vx: " + vx + " vy: "+ vy);
 		if (vx >= 0){
 			if (vx > 0.5)
 				vx -= 0.5;
@@ -190,7 +190,7 @@ public abstract class Physics implements ObjectInterface{
 				vy -= 0.5;
 			else if (vy < -0.5)
 				vy += 0.5;
-			System.out.println("vx1: " + vx + " vy1: "+ vy);
+			//System.out.println("vx1: " + vx + " vy1: "+ vy);
 			this.vxi = T[0][0] * vx;
 			this.vxi += T[1][0] * vy;
 			
@@ -198,7 +198,7 @@ public abstract class Physics implements ObjectInterface{
 			
 			this.vyi = T[0][1] * vx;
 			this.vyi += T[1][1] * vy;
-			System.out.println("vx2: " + vxi + " vy2: "+ vyi);
+			//System.out.println("vx2: " + vxi + " vy2: "+ vyi);
 			//System.out.println(T[0][0]);
 		}
 		else{
@@ -208,7 +208,7 @@ public abstract class Physics implements ObjectInterface{
 				vy -= 0.5;
 			else if (vy < -0.5)
 				vy += 0.5;
-			System.out.println("vx1: " + vx + " vy1: "+ vy);
+			//System.out.println("vx1: " + vx + " vy1: "+ vy);
 			this.vxi = T2[0][0] * vx;
 			this.vxi += T2[1][0] * vy;
 			
@@ -216,7 +216,7 @@ public abstract class Physics implements ObjectInterface{
 			
 			this.vyi = T2[0][1] * vx;
 			this.vyi += T2[1][1] * vy;
-			System.out.println("vx2: " + vxi + " vy2: "+ vyi);
+			//System.out.println("vx2: " + vxi + " vy2: "+ vyi);
 		}
 		
 		
