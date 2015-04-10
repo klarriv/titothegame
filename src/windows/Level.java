@@ -201,17 +201,17 @@ public class Level extends JPanel implements ActionListener{
 		
 		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
-			System.out.println(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
+			////(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
 			
 			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			
 			double numberOfTree = reader.nextDouble();
-			System.out.println("Number of trees" + numberOfTree);
+			////("Number of trees" + numberOfTree);
 			for(int i=0; i<numberOfTree; i++)
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			
 			double numberOfBench = reader.nextDouble();
-			System.out.println("Number of Benches" + numberOfBench);
+		//	//("Number of Benches" + numberOfBench);
 			for(int i=0; i<numberOfBench; i++)
 				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			
@@ -349,7 +349,7 @@ public class Level extends JPanel implements ActionListener{
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
 
-		g.drawRect((int)(gUnit*trashCanList.get(0).r.get()), (int)(gUnit*trashCanList.get(0).r.getY()), (int)(gUnit*trashCanList.get(0).r.getWidth()), (int)(gUnit*trashCanList.get(0).r.getHeight()));
+		//TODO g.drawRect((int)(gUnit*trashCanList.get(0).r.get()), (int)(gUnit*trashCanList.get(0).r.getY()), (int)(gUnit*trashCanList.get(0).r.getWidth()), (int)(gUnit*trashCanList.get(0).r.getHeight()));
 		
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
@@ -358,18 +358,42 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
 		
-		if (trashCanList.get(0).getPosition().y < 2 && trashCanList.get(0).single == 0){
+		if (trashCanList.get(0).getPosition().y >= 2.3 && trashCanList.get(0).single == 0){
 			tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
 			tito.setVx();
 			tito.setVy();
-			System.out.println(trashCanList.get(0).getWeight());
+			//(trashCanList.get(0).getWeight());
 			trashCanList.get(0).single++;
+			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
 		}
 		
-		if (trashCanList.get(0).getPosition().y < 2){
-			//System.out.println(trash.getVx() + " " + trash.getVy());
+		if (trashCanList.get(0).getPosition().y < 2.3){
+			////(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trashCanList.get(0));
 			basicMove(trashCanList.get(0));
+		}
+		
+		boolean planeCollided = false;
+		Plane p = planeList.get(0);
+		for (int i = 0; i < planeList.size(); i++){
+			planeCollided = planeColliding(planeList.get(i));
+			p = planeList.get(i);
+		}
+		
+		if (tito.getVy() > 0.5 && tito.getPosition().y <= 2.3){
+			projectileMotion(tito);
+			xMove();
+			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+		}
+		else if (planeCollided){
+			planeCollision(p);
+			projectileMotion(tito);
+			xMove();
+			
+		}
+		else{
+			projectileMotion(tito);
+			xMove();
 		}
 		
 		
@@ -435,10 +459,10 @@ public class Level extends JPanel implements ActionListener{
 		
 		public void projectileMotion(Physics ob1){
 			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
-			if (ob1.getVy() < 0 && y >= 2){
+			if (ob1.getVy() < 0 && y >= 2.3){
 				if (ob1.getWeight() > 9){
 					ob1.setY(2);
-					//System.out.println(ob1.getVy());
+					////(ob1.getVy());
 					if (ob1.getVy() >= -2 )
 						ob1.setVy(0);
 					else
@@ -446,12 +470,12 @@ public class Level extends JPanel implements ActionListener{
 					
 				}
 				
-				ob1.setY(2);
+				ob1.setY(2.3);
 				ob1.setVy(-1*ob1.getVy() - 1);
-				//System.out.println(loader.getPosition().y);
+				////(loader.getPosition().y);
 			}
 			
-			else if (y <= 2){
+			else if (y <= 2.3){
 				ob1.setY(y);
 				ob1.setVy();
 			}
@@ -465,7 +489,7 @@ public class Level extends JPanel implements ActionListener{
 		}
 		
 		public void setAcceleration(int aa){
-			//System.out.println( aa);
+			////( aa);
 			trash.setAcceleration(Math.toRadians(aa), trash.getWeight(), 0.5);
 		}*/
 	
