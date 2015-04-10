@@ -19,6 +19,7 @@ public class TrashCan extends Physics {
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
+	public int single = 0;
 	public Rectangle r;
 	/**
 	 * Path of the sprite sheet

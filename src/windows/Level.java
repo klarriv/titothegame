@@ -357,7 +357,108 @@ public class Level extends JPanel implements ActionListener{
 			
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
+		
+		
+		
+		
+		
+		
+		
 	}
+	
+	//Physics moving and colliding methods
+	
+	
+	public void planeCollision(Plane plane){
+			
+			double angle = plane.angleOfContact(tito.getVx(), tito.getVy());
+			
+			
+				if (tito.getVx() >= 0)
+					tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
+				else
+					tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
+				
+				tito.setVx();
+				tito.setVy();
+				
+			
+		}
+		
+		public boolean planeColliding(Plane plane){
+			double r = 40.0/gUnit;
+			DoublePoint dp = new DoublePoint(tito.getPosition().x + r, tito.getPosition().y + r);
+			double d = plane.pointDistance(dp);
+			if (plane.getWidth() > 0){
+				if (d <=  r && (dp.x) <= plane.getX()[1] && dp.x >= plane.getX()[0] )
+					return true;
+			}
+			else if (plane.getWidth() < 0){
+				if (d <= r && dp.x > plane.getX()[1] && dp.x < plane.getX()[0] )
+					return true;
+			}
+			return false;
+				
+		}
+		
+		public void basicMove(Physics ob1){
+			double x = ob1.motion( ob1.getPosition().x, ob1.getVx(), t.getDelay());
+			ob1.setX(x);
+		}
+		
+		public void xMove(){
+			double x = tito.motion( tito.getPosition().x, -tito.getVx(), t.getDelay());
+			
+			if (x <=5 && x>= 0)
+				tito.setX(x);
+			else if (Math.abs(0-x) <= 0.1){
+				tito.setX(0);
+			}
+			else if (Math.abs(5 - x) <= 0.1 ){
+				tito.setX(5);
+			}
+			else
+				tito.setVx(-1*tito.getVx());
+		}
+		
+		public void projectileMotion(Physics ob1){
+			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
+			if (ob1.getVy() < 0 && y >= 2){
+				if (ob1.getWeight() > 9){
+					ob1.setY(2);
+					//System.out.println(ob1.getVy());
+					if (ob1.getVy() >= -2 )
+						ob1.setVy(0);
+					else
+						ob1.setVy(-1*ob1.getVy() - 2);
+					
+				}
+				
+				ob1.setY(2);
+				ob1.setVy(-1*ob1.getVy() - 1);
+				//System.out.println(loader.getPosition().y);
+			}
+			
+			else if (y <= 2){
+				ob1.setY(y);
+				ob1.setVy();
+			}
+		}
+		
+		//TODO 
+		/**public void frictionMove(){
+			trash.frictionMotion(trash.getPosition(), trash.getVx(), trash.getVy(),  t.getDelay());	
+			trash.setVy();
+			trash.setVx();
+		}
+		
+		public void setAcceleration(int aa){
+			//System.out.println( aa);
+			trash.setAcceleration(Math.toRadians(aa), trash.getWeight(), 0.5);
+		}*/
+	
+	
+	
 	
 	class DragListener implements MouseMotionListener{
 
