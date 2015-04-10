@@ -326,10 +326,10 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
 		for(int i=0; i<benchList.size(); i++){
-			g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).position.x), (int)(gUnit*benchList.get(i).position.y), null);
+			g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).getPosition().x), (int)(gUnit*benchList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<coneList.size(); i++){
-			g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).position.x), (int)(gUnit*coneList.get(i).position.y), null);
+			g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).getPosition().x), (int)(gUnit*coneList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<planeList.size(); i++){
 			g.drawLine((int)(gUnit*(planeList.get(i).getX()[0])), (int)(gUnit*(planeList.get(i).getY()[0])), (int)(gUnit*(planeList.get(i).getX()[1])), (int)(gUnit*planeList.get(i).getY()[1]));
@@ -341,7 +341,7 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(seesawList.get(i).getTexture(), (int)(gUnit*seesawList.get(i).getPosition().x), (int)(gUnit*seesawList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<springList.size(); i++){
-			g.drawImage(springList.get(i).getTexture(), (int)(gUnit*springList.get(i).position.x), (int)(gUnit*springList.get(i).position.y), null);
+			g.drawImage(springList.get(i).getTexture(), (int)(gUnit*springList.get(i).getPosition().x), (int)(gUnit*springList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<trashCanList.size(); i++){
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(0.4*gUnit), (int)(gUnit*0.5), null);
@@ -500,11 +500,12 @@ public class Level extends JPanel implements ActionListener{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			if(trashCanList.get(0).r.contains(arg0.getPoint())){
-				trashCanList.get(0).setX(arg0.getX());
-				trashCanList.get(0).setY(arg0.getY());
-				trashCanList.get(0).r.x = (arg0.getX());
-				trashCanList.get(0).r.y = (arg0.getY());
+			if(trashCanList.get(0).getR().contains(arg0.getPoint())){
+				System.out.println("BOb");
+				trashCanList.get(0).setX(arg0.getX()/gUnit);
+				trashCanList.get(0).setY(arg0.getY()/gUnit);
+				trashCanList.get(0).getPosition().x = arg0.getX()/gUnit;
+				trashCanList.get(0).getPosition().y = arg0.getY()/gUnit;
 			}
 			
 		}
