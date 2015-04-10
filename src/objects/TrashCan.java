@@ -20,7 +20,7 @@ public class TrashCan extends Physics {
 	private double vx = 7;
 	private double vy = 10;
 	public int single = 0;
-	public Rectangle r;
+	public DoubleRectangle r;
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -33,7 +33,7 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		r = new Rectangle((int)(position.x*RunGame.getgUnit()), (int)(position.y*RunGame.getgUnit()), (int)(0.4*RunGame.getgUnit()), (int)(0.5*RunGame.getgUnit()));
+		r = new DoubleRectangle(position.x, position.y, 0.4, 0.5);
 		System.out.println(RunGame.getgUnit());
 	}
 
