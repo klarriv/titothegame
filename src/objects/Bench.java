@@ -8,6 +8,8 @@ import objects.DoubleRectangle;
 
 public class Bench extends Physics {
 	
+	public static final double WIDTH = 0.4;
+	public static final double HEIGHT = 0.7;
 	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
 	private DoubleRectangle r;
@@ -17,7 +19,7 @@ public class Bench extends Physics {
 		
 		position = new DoublePoint(x, y);
 		loadImage();
-		setR(new DoubleRectangle(position, 0.7, 0.4));
+		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 
 	@Override

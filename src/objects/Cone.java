@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Cone extends Physics {
+	
+	public static final double WIDTH = 0.2;
+	public static final double HEIGHT = 0.2;
 	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
 	private DoublePoint position;
@@ -15,7 +18,7 @@ public class Cone extends Physics {
 	public Cone(double x, double y){
 		
 		position = new DoublePoint(x,y);
-		setR(new DoubleRectangle(position, 0.2, 0.2));
+		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 		loadImage();
 	}
 

@@ -12,7 +12,8 @@ import RunningClasses.RunGame;
 
 public class TrashCan extends Physics {
 	
-	
+	public static final double WIDTH = 0.4;
+	public static final double HEIGHT = 0.5;
 	private int weight = 20;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
@@ -33,7 +34,7 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		setR(new DoubleRectangle(position, 0.4, 0.5));
+		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 
 	/**
@@ -53,7 +54,7 @@ public class TrashCan extends Physics {
 		this.vy = vy;
 		this.t = t;
 		loadImage();
-		setR(new DoubleRectangle(position, 0.4, 0.5));
+		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 	
 	
