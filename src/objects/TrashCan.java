@@ -1,9 +1,9 @@
 package objects;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
@@ -17,6 +17,7 @@ public class TrashCan extends Physics {
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
+	private Rectangle r;
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -29,7 +30,7 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		
+		r = new Rectangle((int)(x*256), (int)(y*256), texture.getWidth(), texture.getHeight());
 	}
 	
 	

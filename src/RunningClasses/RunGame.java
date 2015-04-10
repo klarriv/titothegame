@@ -13,7 +13,7 @@ import windows.*;
 public class RunGame{
 	
 	private static MainFrame frame = new MainFrame();
-	
+	private static double gUnit;
 	/**
 	 * 
 	 * @param args
@@ -23,10 +23,19 @@ public class RunGame{
 		frame.setVisible(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+		gUnit = (frame.getWidth()/5);
 	}
 	
 	public static MainFrame getFrame() {
 		return frame;
+	}
+
+	public static double getgUnit() {
+		return gUnit;
+	}
+
+	public static void setgUnit(double gUnit) {
+		RunGame.gUnit = gUnit;
 	}
 
 }

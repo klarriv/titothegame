@@ -198,6 +198,7 @@ public class MainMenu extends JPanel implements ActionListener{
 					RunGame.getFrame().setExtendedState(Frame.MAXIMIZED_BOTH);
 					RunGame.getFrame().setVisible(true);
 					isFullScreen = true;
+					RunGame.setgUnit(RunGame.getFrame().getWidth()/5);
 				}
 					
 				else{
@@ -206,7 +207,7 @@ public class MainMenu extends JPanel implements ActionListener{
 					RunGame.getFrame().setSize(new Dimension(1280,720));
 					RunGame.getFrame().setLocationRelativeTo(null);
 					isFullScreen = false;
-					
+					RunGame.setgUnit(RunGame.getFrame().getWidth()/5);
 				}
 			}
 		});
