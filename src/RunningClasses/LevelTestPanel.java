@@ -137,12 +137,12 @@ public class LevelTestPanel extends JPanel{
 		
 		g.drawImage(trash.getTexture(), (int)(trash.getPosition().x * gUnit), (int)(trash.getPosition().y * gUnit), 75, 75, null);
 		
-		if (trash.getPosition().y >= 2 && once == 0){
+		if (trash.getPosition().y >= 2 && trash.single == 0){
 			tito.setEnergyVelocity(trash.getVy(), trash.getWeight(), tito.getWeight());
 			tito.setVx();
 			tito.setVy();
 			System.out.println(trash.getWeight());
-			once++;
+			trash.single++;
 		}
 		
 		//setAcceleration(135);

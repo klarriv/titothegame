@@ -358,7 +358,19 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
 		
+		if (trashCanList.get(0).getPosition().y < 2 && trashCanList.get(0).single == 0){
+			tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
+			tito.setVx();
+			tito.setVy();
+			System.out.println(trashCanList.get(0).getWeight());
+			trashCanList.get(0).single++;
+		}
 		
+		if (trashCanList.get(0).getPosition().y < 2){
+			//System.out.println(trash.getVx() + " " + trash.getVy());
+			projectileMotion(trashCanList.get(0));
+			basicMove(trashCanList.get(0));
+		}
 		
 		
 		
