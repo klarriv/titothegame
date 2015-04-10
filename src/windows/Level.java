@@ -201,17 +201,16 @@ public class Level extends JPanel implements ActionListener{
 		
 		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
-			////(LEVELDIRECTORY + "/level" + levelNumber + ".lvl");
 			
 			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			
 			double numberOfTree = reader.nextDouble();
-			////("Number of trees" + numberOfTree);
+
 			for(int i=0; i<numberOfTree; i++)
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			
 			double numberOfBench = reader.nextDouble();
-		//	//("Number of Benches" + numberOfBench);
+
 			for(int i=0; i<numberOfBench; i++)
 				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			
@@ -254,9 +253,6 @@ public class Level extends JPanel implements ActionListener{
 				SpriteSheet ss = new SpriteSheet(spriteSheet);
 				
 				if (i < rollingx.length) {
-
-					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
-					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
 					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
 					if (counter % 2 == 0){
 					i++;
@@ -265,8 +261,6 @@ public class Level extends JPanel implements ActionListener{
 				} else {
 					i = 0;
 					j = 0;
-					// sprite width: 300 height: 250 and 27 pixel from paws to bottom
-					//sprite = ss.grabSprite(pattern2x[i]*300, pattern2y[j]*250, 289, 250);
 					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
 					i++;
 					j++;
@@ -370,7 +364,7 @@ public class Level extends JPanel implements ActionListener{
 		}
 		
 		if (trashCanList.get(0).getPosition().y < 2){
-			////(trash.getVx() + " " + trash.getVy());
+			//(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trashCanList.get(0));
 			basicMove(trashCanList.get(0));
 			System.out.println(" vyy: " + trashCanList.get(0).getVy());
