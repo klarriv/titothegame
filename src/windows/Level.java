@@ -114,6 +114,7 @@ public class Level extends JPanel implements ActionListener{
 	 * This creates a new instance of level
 	 */
 	public Level(int levelNumber) {
+		addMouseMotionListener(new DragListener());
 		this.levelNumber = levelNumber;
 		
 		jbtBackToGame = new JButton("Back to Game");
@@ -346,12 +347,35 @@ public class Level extends JPanel implements ActionListener{
 		}
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
+
 		
+
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());
 			
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
+	}
+	
+	class DragListener implements MouseMotionListener{
+
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			if(trashCanList.get(0).r.contains(arg0.getPoint())){
+				trashCanList.get(0).setX(arg0.getX());
+				trashCanList.get(0).setY(arg0.getY());
+				trashCanList.get(0).r.x = (arg0.getX());
+				trashCanList.get(0).r.y = (arg0.getY());
+			}
+			
+		}
+
+		@Override
+		public void mouseMoved(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 }

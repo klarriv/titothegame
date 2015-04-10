@@ -23,7 +23,7 @@ public class RunGame{
 		frame.setVisible(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		gUnit = (frame.getWidth()/5);
+		gUnit = (1280/5);
 	}
 	
 	public static MainFrame getFrame() {
