@@ -358,7 +358,7 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
 		}
 		
-		if (trashCanList.get(0).getPosition().y >= 2.3 && trashCanList.get(0).single == 0){
+		if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
 			tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
 			tito.setVx();
 			tito.setVy();
@@ -367,7 +367,7 @@ public class Level extends JPanel implements ActionListener{
 			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
 		}
 		
-		if (trashCanList.get(0).getPosition().y < 2.3){
+		if (trashCanList.get(0).getPosition().y < 2){
 			////(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trashCanList.get(0));
 			basicMove(trashCanList.get(0));
@@ -456,7 +456,7 @@ public class Level extends JPanel implements ActionListener{
 			else
 				tito.setVx(-1*tito.getVx());
 		}
-		
+		//TODO work on this bouncy thing
 		public void projectileMotion(Physics ob1){
 			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 			if (ob1.getVy() < 0 && y >= 2.3){
