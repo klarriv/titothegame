@@ -4,11 +4,11 @@ import java.awt.Point;
 
 public class DoubleRectangle {
 	
+	private DoublePoint position;
 	private double x, y, width, height;
 	
-	public DoubleRectangle(double x, double y, double width, double height){
-		this.x = x;
-		this.y = y;
+	public DoubleRectangle(DoublePoint position, double width, double height){
+		this.position = position;
 		this.width = width;
 		this.height = height;
 	}

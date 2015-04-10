@@ -3,19 +3,20 @@ package objects;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
+import objects.DoubleRectangle;
 
 public class Bench extends Physics {
 	
 	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
+	private DoubleRectangle r;
 
 	public Bench(double x, double y){
 		
 		position = new DoublePoint(x, y);
-		
 		loadImage();
+		//r = new DoubleRectangle(x, y, );
 	}
 
 	

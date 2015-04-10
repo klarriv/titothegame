@@ -33,7 +33,7 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		r = new DoubleRectangle(position.x, position.y, 0.4, 0.5);
+		r = new DoubleRectangle(position, 0.4, 0.5);
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class TrashCan extends Physics {
 		this.vy = vy;
 		this.t = t;
 		loadImage();
-		r = new DoubleRectangle(position.x, position.y, 0.4, 0.5);
+		r = new DoubleRectangle(position, 0.4, 0.5);
 	}
 	
 	

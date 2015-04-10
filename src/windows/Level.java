@@ -349,7 +349,7 @@ public class Level extends JPanel implements ActionListener{
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
 
-		g.drawRect((int)(gUnit*trashCanList.get(0).r.getX()), (int)(gUnit*trashCanList.get(0).r.getY()), (int)(gUnit*trashCanList.get(0).r.getWidth()), (int)(gUnit*trashCanList.get(0).r.getHeight()));
+		g.drawRect((int)(gUnit*trashCanList.get(0).r.get()), (int)(gUnit*trashCanList.get(0).r.getY()), (int)(gUnit*trashCanList.get(0).r.getWidth()), (int)(gUnit*trashCanList.get(0).r.getHeight()));
 		
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
