@@ -22,7 +22,7 @@ public class AnimationTestFrame extends JFrame {
 	
 	public AnimationTestFrame(){
 		
-		add(r);
+		add(l);
 	}
 	public static void main(String[] args) {
 		AnimationTestFrame frame = new AnimationTestFrame();

@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import objects.DoublePoint;
+import objects.Maison;
 import objects.Physics;
 import objects.Plane;
 import objects.Tito;
@@ -40,7 +41,8 @@ public class LevelTestPanel extends JPanel{
 	
 	private Tito tito = new Tito(0, 2, 0, 0, t);
 	private TrashCan trash = new TrashCan(1, 0, 0, 0, t);
-	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(135), 0.5);
+	private Plane p1 = new Plane(2.9, 1.4, Math.toRadians(155), 0.7);
+	private Maison m = new Maison(2.9, 1.4, 1.0, 2.0);
 	//private Plane p2 = new Plane(3.7, 1, Math.toRadians(120), 0.2);
 	//private Plane p3 = new Plane(2.5, 1, Math.toRadians(135), 0.9);
 	private int once = 0;
@@ -129,6 +131,7 @@ public class LevelTestPanel extends JPanel{
 		//g.drawLine((int)(gUnit*(p2.getX()[0])), (int)(gUnit*(p2.getY()[0])), (int)(gUnit*(p2.getX()[1])), (int)(gUnit*p2.getY()[1]));
 		
 		//g.drawLine((int)(gUnit*(p3.getX()[0])), (int)(gUnit*(p3.getY()[0])), (int)(gUnit*(p3.getX()[1])), (int)(gUnit*p3.getY()[1]));
+		g.drawRect((int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y), (int)(gUnit*m.getWidth()), (int)(gUnit*m.getHeight()));
 		
 		g.drawImage(sprite, (int)(tito.getPosition().x * gUnit), (int)(tito.getPosition().y * gUnit), 75, 75, null);
 		
@@ -175,6 +178,9 @@ public class LevelTestPanel extends JPanel{
 			projectileMotion(tito);
 			xMove();
 		}
+		
+		if(m.colliding(tito.getPosition()))
+			tito.setVx(-1* tito.getVx());
 		
 		//System.out.println(" vx: " + tito.getVx() + " vy: " + tito.getVy());
 	
