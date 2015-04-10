@@ -12,15 +12,16 @@ import RunningClasses.RunGame;
 
 public class TrashCan extends Physics {
 	
+	
 	private int weight = 20;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
 	private BufferedImage texture;
-	private DoublePoint position = new DoublePoint(10,10);
+	private DoublePoint position;
 	private double vx = 7;
 	private double vy = 10;
 	public int single = 0;
-	public DoubleRectangle r;
+	private DoubleRectangle r;
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -28,12 +29,11 @@ public class TrashCan extends Physics {
 	
 	public TrashCan(double x, double y){
 		
-		this.position.x = x;
-		this.position.y = y;
+		position = new DoublePoint(x, y);
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		r = new DoubleRectangle(position, 0.4, 0.5);
+		setR(new DoubleRectangle(position, 0.4, 0.5));
 	}
 
 	/**
@@ -53,7 +53,7 @@ public class TrashCan extends Physics {
 		this.vy = vy;
 		this.t = t;
 		loadImage();
-		r = new DoubleRectangle(position, 0.4, 0.5);
+		setR(new DoubleRectangle(position, 0.4, 0.5));
 	}
 	
 	
@@ -151,11 +151,18 @@ public class TrashCan extends Physics {
 		
 	}
 
-
 	@Override
 	public BufferedImage getTexture() {
 		
 		return texture;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 	
 	

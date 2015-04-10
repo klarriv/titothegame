@@ -11,15 +11,14 @@ public class Bench extends Physics {
 	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
 	private DoubleRectangle r;
+	private DoublePoint position;
 
 	public Bench(double x, double y){
 		
 		position = new DoublePoint(x, y);
 		loadImage();
-		//r = new DoubleRectangle(x, y, );
+		setR(new DoubleRectangle(position, 0.7, 0.4));
 	}
-
-	
 
 	@Override
 	public int getWeight() {
@@ -134,6 +133,14 @@ public class Bench extends Physics {
 	public BufferedImage getTexture() {
 		// TODO Auto-generated method stub
 		return texture;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 	
 

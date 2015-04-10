@@ -10,10 +10,13 @@ public class Spring extends Physics {
 	
 	private String pathRelativeToThis = "Resources/Objects/Spring.png";
 	private BufferedImage texture;
+	private DoublePoint position;
+	private DoubleRectangle r;
 
 	public Spring(double x, double y){
 		
 		position = new DoublePoint(x, y);
+		r = new DoubleRectangle(position, 0.1, 0.2);
 		loadImage();
 		
 	}

@@ -5,7 +5,7 @@ import java.awt.Point;
 public class DoubleRectangle {
 	
 	private DoublePoint position;
-	private double x, y, width, height;
+	private double width, height;
 	
 	public DoubleRectangle(DoublePoint position, double width, double height){
 		this.position = position;
@@ -14,27 +14,19 @@ public class DoubleRectangle {
 	}
 	
 	public boolean contains(Point p){
-		if(p.getX()>x && p.getX()<x+width && p.getY()>y && p.getY()<y+height)
+		if(p.getX()>position.x && p.getX()<position.x+width && p.getY()>position.y && p.getY()<position.y+height)
 			return true;
 		else
 			return false;
 		
 	}
 
-	public double getX() {
-		return x;
+	public DoublePoint getPosition() {
+		return position;
 	}
 
-	public void setX(double x) {
-		this.x = x;
-	}
-
-	public double getY() {
-		return y;
-	}
-
-	public void setY(double y) {
-		this.y = y;
+	public void setPosition(DoublePoint position) {
+		this.position = position;
 	}
 
 	public double getWidth() {

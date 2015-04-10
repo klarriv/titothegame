@@ -9,17 +9,15 @@ import javax.imageio.ImageIO;
 public class Cone extends Physics {
 	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
+	private DoublePoint position;
+	private DoubleRectangle r;
 	
 	public Cone(double x, double y){
 		
-		position = new DoublePoint(x, y);
+		position = new DoublePoint(x,y);
+		setR(new DoubleRectangle(position, 0.2, 0.2));
 		loadImage();
-		
 	}
-
-	
-
-	
 
 	@Override
 	public int getWeight() {
@@ -134,6 +132,14 @@ public class Cone extends Physics {
 	public BufferedImage getTexture() {
 		// TODO Auto-generated method stub
 		return texture;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 	
 
