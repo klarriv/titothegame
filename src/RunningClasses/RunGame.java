@@ -12,8 +12,8 @@ import windows.*;
  */
 public class RunGame{
 	
+	private static double gUnit = 1280/5;
 	private static MainFrame frame = new MainFrame();
-	private static double gUnit;
 	/**
 	 * 
 	 * @param args
@@ -23,7 +23,6 @@ public class RunGame{
 		frame.setVisible(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
-		gUnit = (1280/5);
 	}
 	
 	public static MainFrame getFrame() {

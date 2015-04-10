@@ -17,6 +17,7 @@ import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
 
+import RunningClasses.RunGame;
 import RunningClasses.SpriteSheet;
 import objects.*;
 import objects.Spring;
@@ -348,8 +349,8 @@ public class Level extends JPanel implements ActionListener{
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
 
-		g.drawRect(trashCanList.get(0).r.x, trashCanList.get(0).r.y, trashCanList.get(0).r.width, trashCanList.get(0).r.height);
-
+		g.drawRect((int)(trashCanList.get(0).r.x/256*RunGame.getgUnit()), (int)(trashCanList.get(0).r.y/256*RunGame.getgUnit()), (int)(trashCanList.get(0).r.width/256*RunGame.getgUnit()), (int)(trashCanList.get(0).r.height/256*RunGame.getgUnit()));
+		System.out.println("BOB" + RunGame.getgUnit());
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());

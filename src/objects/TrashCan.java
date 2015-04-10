@@ -32,7 +32,8 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		loadImage();
-		r = new Rectangle((int)(position.x*1280/5), (int)(position.y*1280/5), (int)(0.4*1280/5), (int)(0.5*1280/720));
+		r = new Rectangle((int)(position.x*RunGame.getgUnit()), (int)(position.y*RunGame.getgUnit()), (int)(0.4*RunGame.getgUnit()), (int)(0.5*RunGame.getgUnit()));
+		System.out.println(RunGame.getgUnit());
 	}
 
 	/**
