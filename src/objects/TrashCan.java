@@ -23,6 +23,8 @@ public class TrashCan extends Physics {
 	private double vy = 10;
 	public int single = 0;
 	private DoubleRectangle r;
+	private double height = 0.5;
+	
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -164,6 +166,18 @@ public class TrashCan extends Physics {
 
 	public void setR(DoubleRectangle r) {
 		this.r = r;
+	}
+
+	@Override
+	public double getHeight() {
+		
+		return height;
+	}
+
+	@Override
+	public void setHeight(double height) {
+		this.height = height;
+		
 	}
 	
 	

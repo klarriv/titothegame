@@ -15,6 +15,7 @@ public class Tito extends Physics{
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
+	private double height = 0.25;
 	/**
 	 * Path of the sprite sheet
 	 */
@@ -160,6 +161,18 @@ public class Tito extends Physics{
 	public BufferedImage getTexture() {
 		
 		return texture;
+	}
+
+	@Override
+	public double getHeight() {
+		
+		return height;
+	}
+
+	@Override
+	public void setHeight(double height) {
+		this.height = height;
+		
 	}
 
 	

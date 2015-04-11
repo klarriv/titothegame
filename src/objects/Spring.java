@@ -137,6 +137,22 @@ public class Spring extends Physics {
 		// TODO Auto-generated method stub
 		return texture;
 	}
+
+
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+
+	@Override
+	public void setHeight(double height) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

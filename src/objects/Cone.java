@@ -144,6 +144,18 @@ public class Cone extends Physics {
 	public void setR(DoubleRectangle r) {
 		this.r = r;
 	}
+
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setHeight(double height) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

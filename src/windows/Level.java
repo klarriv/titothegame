@@ -81,6 +81,8 @@ public class Level extends JPanel implements ActionListener{
 	 * List of trashcans read from the level file.
 	 */
 	private ArrayList<TrashCan> trashCanList =  new ArrayList<TrashCan>();
+	//TODO set other Maisons
+	private Maison m;
 	/**
 	 * The song used in the levels
 	 */
@@ -251,7 +253,7 @@ public class Level extends JPanel implements ActionListener{
 			double numberOfPlane = reader.nextDouble();
 			for(int i=0; i<numberOfPlane; i++)
 				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
-			
+
 			double numberOfRope = reader.nextDouble();
 			for(int i=0; i<numberOfRope; i++)
 				ropeList.add(new Rope(reader.nextDouble(), reader.nextDouble()));
@@ -273,6 +275,7 @@ public class Level extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		m = new Maison(3.1, 1.6, 0.7, 2 );
 		
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
@@ -424,7 +427,8 @@ public class Level extends JPanel implements ActionListener{
 			xMove();
 		}
 		
-		
+		if(m.colliding(tito.getPosition()))
+			tito.setVx(-1*tito.getVx());
 		
 		
 		
@@ -489,15 +493,15 @@ public class Level extends JPanel implements ActionListener{
 		//Faudrait ajouter le diametre ou le height pour faire les contacts avec le sol.... faudrait que ca soit genre une variable dans les objects
 		public void projectileMotion(Physics ob1){
 			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
-			if (ob1.getVy() < 0 && y >= 2.5){
+			if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()){
 				
 				
-				ob1.setY(2.5);
+				ob1.setY(2.5- ob1.getHeight());
 				ob1.setVy(-1*ob1.getVy() - 1);
 				////(loader.getPosition().y);
 			}
 			
-			else if (y <= 2.5){
+			else if (y <= 2.5- ob1.getHeight()){
 				ob1.setY(y);
 				ob1.setVy();
 			}

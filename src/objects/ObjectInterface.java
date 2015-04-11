@@ -114,5 +114,15 @@ public interface ObjectInterface {
 	 * @param vy
 	 */
 	public void setVy(double vy);
+	/**
+	 * Returns the height of the object from the its Position to the bottom of its image
+	 * @return
+	 */
+	public double getHeight();
+	/**
+	 * Sets the height of the object
+	 * @param height
+	 */
+	public void setHeight(double height);
 
 }
