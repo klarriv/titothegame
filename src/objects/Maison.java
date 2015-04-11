@@ -31,7 +31,7 @@ public class Maison {
 		this.height = height;
 		
 		if (isVisible){
-			pathRelativeToThis = "Resources/Maison" + which +".png";
+			pathRelativeToThis = "Resources/Objects/Maison" + which +".png";
 			loadImage();
 		}
 		

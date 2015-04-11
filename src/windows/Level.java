@@ -275,7 +275,7 @@ public class Level extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		m = new Maison(3.1, 1.6, 0.7, 2 );
+		m = new Maison(3.1, 1.6, 0.7, 2, "1" );
 		
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
@@ -373,6 +373,8 @@ public class Level extends JPanel implements ActionListener{
 		for(int i=0; i<trashCanList.size(); i++){
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(TrashCan.WIDTH*gUnit), (int)(TrashCan.HEIGHT*gUnit), null);
 		}
+		
+		g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y)- 48, 185, 285, null);
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
 

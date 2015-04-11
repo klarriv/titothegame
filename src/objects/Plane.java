@@ -144,6 +144,7 @@ public class Plane {
 		x[0] = dp.x;
 		x[1] = dp.x + width;
 		x[2] = dp.x + width;
+		
 	}
 
 	public double[] getY() {
@@ -157,6 +158,7 @@ public class Plane {
 		y[0] = dp.y;
 		y[1] = getY(dp.x + width);
 		y[2] = dp.y;
+		
 	}
 
 
