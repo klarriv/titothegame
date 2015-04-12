@@ -115,10 +115,6 @@ public interface ObjectInterface {
 	 */
 	public double getHeight();
 	
-	/**
-	 * Sets the height of the object
-	 * @param height
-	 */
-	public void setHeight(double height);
+	
 
 }

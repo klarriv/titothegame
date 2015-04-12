@@ -97,11 +97,7 @@ public class Bench extends Physics {
 		this.r = r;
 	}
 
-	@Override
-	public void setHeight(double height) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	public void setX(double x) {

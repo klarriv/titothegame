@@ -17,7 +17,7 @@ public class Tito extends Physics{
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
-	private double height = 0.25;
+	private final double HEIGHT = 0.25;
 	
 	public Tito(){
 		texture = MainFrame.getTl().titoTexture;
@@ -150,14 +150,10 @@ public class Tito extends Physics{
 	@Override
 	public double getHeight() {
 		
-		return height;
+		return HEIGHT;
 	}
 
-	@Override
-	public void setHeight(double height) {
-		this.height = height;
-		
-	}
+	
 
 	
 	

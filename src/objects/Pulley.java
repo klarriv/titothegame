@@ -138,10 +138,6 @@ public class Pulley extends Physics{
 		return 0;
 	}
 
-	@Override
-	public void setHeight(double height) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

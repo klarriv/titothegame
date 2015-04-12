@@ -1,6 +1,8 @@
 package objects;
 
 import java.awt.Rectangle;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,7 +26,8 @@ public class TrashCan extends Physics {
 	private double vy = 10;
 	public int single = 0;
 	private DoubleRectangle r;
-	private double height = 0.5;
+	public boolean rotated = false;
+	
 	
 	public TrashCan(double x, double y){
 		
@@ -54,6 +57,17 @@ public class TrashCan extends Physics {
 		this.t = t;
 		texture = MainFrame.getTl().trashCanTexture;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
+	}
+	
+	public void rotate(double angle){
+		AffineTransform tx = new AffineTransform();
+		
+	    tx.rotate(angle - Math.PI, texture.getWidth() / 2, texture.getHeight() / 2);
+
+	    AffineTransformOp op = new AffineTransformOp(tx,
+	        AffineTransformOp.TYPE_BILINEAR);
+	   	texture = op.filter(texture, null);
+	   	rotated = true;
 	}
 	
 	public int getWeight() {
@@ -154,14 +168,10 @@ public class TrashCan extends Physics {
 	@Override
 	public double getHeight() {
 		
-		return height;
+		return HEIGHT;
 	}
 
-	@Override
-	public void setHeight(double height) {
-		this.height = height;
-		
-	}
+	
 	
 	
 

@@ -134,11 +134,7 @@ public class Spring extends Physics {
 
 
 
-	@Override
-	public void setHeight(double height) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 	
 
 }
