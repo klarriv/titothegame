@@ -106,7 +106,8 @@ public class Level extends JPanel implements ActionListener{
 		
 		// START OF PLAY/RESTART BUTTONS
 		jbtPlay = new JButton("Play");
-		
+		jbtPlay.setBorder(BorderFactory.createEmptyBorder());
+		jbtPlay.setContentAreaFilled(false);
 		jbtPlay.addActionListener(new ActionListener(){
 
 			@Override
@@ -116,6 +117,8 @@ public class Level extends JPanel implements ActionListener{
 			
 		});
 		jbtRestart = new JButton("Restart");
+		jbtRestart.setBorder(BorderFactory.createEmptyBorder());
+		jbtRestart.setContentAreaFilled(false);
 		jbtRestart.addActionListener(new ActionListener(){
 
 			@Override

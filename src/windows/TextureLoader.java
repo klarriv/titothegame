@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 public class TextureLoader {
 
 	private final String PATHFOROBJECTS = "Resources/Objects/";
-	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture, levelBackgroundTexture, levelPauseHeaderTexture;
+	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture;
+	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture;
 	
 	public TextureLoader() {
 		
@@ -27,6 +28,8 @@ public class TextureLoader {
 			
 			levelBackgroundTexture = ImageIO.read(new File("Resources/Background.png"));
 			levelPauseHeaderTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/pauseTitle.png"));
+			levelPlayTexture = ImageIO.read(new File("Resources/play.png"));
+			levelRestartTexture = ImageIO.read(new File("Resources/restart.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
