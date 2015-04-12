@@ -6,7 +6,6 @@ public class Plane {
 	private double width =1;
 	private double[] x = new double[3];
 	private double[] y = new double[3];
-	
 	private double angle;
 	private double a;
 	private double b = 1;

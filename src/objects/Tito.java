@@ -7,6 +7,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+import windows.MainFrame;
+
 public class Tito extends Physics{
 	private int weight = 9;
 	private boolean isVisible = true;
@@ -16,13 +18,9 @@ public class Tito extends Physics{
 	private double vx = 7;
 	private double vy = 10;
 	private double height = 0.25;
-	/**
-	 * Path of the sprite sheet
-	 */
-	private String pathRelativeToThis = "Resources/TitoSpriteSheet.png";
 	
 	public Tito(){
-		loadImage();
+		texture = MainFrame.getTl().titoTexture;
 	}
 	
 	/**
@@ -41,24 +39,10 @@ public class Tito extends Physics{
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
-		loadImage();
-		
-	}
-	
-	
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis);
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		texture = MainFrame.getTl().titoTexture;
 		
 	}
 
-	
 	public void setWeight(int weight) {
 		this.weight = weight;
 		

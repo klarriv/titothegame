@@ -49,12 +49,9 @@ public abstract class Physics implements ObjectInterface{
 	public int weight;
 	public boolean isVisible;
 	public boolean isUsed;
-	
 	public DoublePoint position;
 	public double vx;
 	public double vy;
-	public int x;
-	public int y;
 	
 	
 	public Physics(){

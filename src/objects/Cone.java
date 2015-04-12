@@ -6,134 +6,87 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import windows.MainFrame;
+
 public class Cone extends Physics {
 	
 	public static final double WIDTH = 0.2;
 	public static final double HEIGHT = 0.2;
-	private String pathRelativeToThis = "Resources/Objects/bench.png";
 	private BufferedImage texture;
 	private DoublePoint position;
 	private DoubleRectangle r;
+	private int weight = 5;
+	private boolean isVisible;
 	
 	public Cone(double x, double y){
 		
 		position = new DoublePoint(x,y);
+		texture = MainFrame.getTl().coneTexture;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
-		loadImage();
 	}
 
 	@Override
 	public int getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return weight;
 	}
 
 	@Override
 	public void setWeight(int weight) {
-		// TODO Auto-generated method stub
-		
+		this.weight = weight;
 	}
 
 	@Override
 	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return false;
+		return isVisible;
 	}
 
 	@Override
 	public void setVisible(boolean isVisible) {
-		// TODO Auto-generated method stub
-		
+		this.isVisible = isVisible;
 	}
 
 	@Override
 	public boolean isUsed() {
-		// TODO Auto-generated method stub
-		return false;
+		return isUsed;
 	}
 
 	@Override
 	public void setUsed(boolean isUsed) {
-		// TODO Auto-generated method stub
-		
+		this.isUsed = isUsed;
 	}
 
 	@Override
 	public DoublePoint getPosition() {
-		// TODO Auto-generated method stub
-		return null;
+		return position;
 	}
 
 	@Override
 	public void setPosition(DoublePoint position) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setX(double x) {
-		// TODO Auto-generated method stub
-		
+		this.position = position;
 	}
 
 	@Override
 	public double getVx() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vx;
 	}
-
-	@Override
-	public void setVx() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void setVx(double vx) {
-		// TODO Auto-generated method stub
-		
+		this.vx = vx;
 	}
 
 	@Override
 	public double getVy() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vy;
 	}
-
-	@Override
-	public void setVy() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void setVy(double vy) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis);
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		this.vy = vy;
 	}
 
 	@Override
 	public BufferedImage getTexture() {
-		// TODO Auto-generated method stub
 		return texture;
 	}
 
@@ -146,16 +99,38 @@ public class Cone extends Physics {
 	}
 
 	@Override
+	public void setHeight(double height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setX(double x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setVx() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setVy() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public double getHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public void setHeight(double height) {
+	public void setY(double y) {
 		// TODO Auto-generated method stub
 		
 	}
-	
-
 }

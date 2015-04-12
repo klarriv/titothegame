@@ -8,12 +8,6 @@ import java.io.IOException;
  *
  */
 public interface ObjectInterface {
-	/**
-	 * Loads the buffered image of the object
-	 * @return
-	 * @throws IOException
-	 */
-	public void loadImage();
 	
 	/**
 	 * Returns the texture of the object
@@ -114,11 +108,13 @@ public interface ObjectInterface {
 	 * @param vy
 	 */
 	public void setVy(double vy);
+	
 	/**
 	 * Returns the height of the object from the its Position to the bottom of its image
 	 * @return
 	 */
 	public double getHeight();
+	
 	/**
 	 * Sets the height of the object
 	 * @param height

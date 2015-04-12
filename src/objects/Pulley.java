@@ -6,18 +6,19 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import windows.MainFrame;
+
 public class Pulley extends Physics{
 	private DoublePoint position = new DoublePoint(1,1);
 	private boolean isVisible;
 	private BufferedImage texture;
-	private String pathRelativeToThis;
 	
 	public Pulley(DoublePoint position, boolean visible){
 		this.position = position;
 		this.isVisible = visible;
 		
 		if (isVisible)
-			loadImage();
+			texture = MainFrame.getTl().pulleyTexture;
 	}
 	
 	public Pulley(double x, double y, boolean visible){
@@ -26,20 +27,7 @@ public class Pulley extends Physics{
 		this.isVisible = visible;
 		
 		if (isVisible)
-			loadImage();
-	}
-
-	@Override
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis);
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			texture = MainFrame.getTl().pulleyTexture;
 	}
 
 	@Override

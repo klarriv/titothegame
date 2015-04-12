@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
+import windows.MainFrame;
 import RunningClasses.RunGame;
 
 public class TrashCan extends Physics {
@@ -25,17 +26,13 @@ public class TrashCan extends Physics {
 	private DoubleRectangle r;
 	private double height = 0.5;
 	
-	/**
-	 * Path of the sprite sheet
-	 */
-	private String pathRelativeToThis = "Resources/Objects/trashCan.png";
-	
 	public TrashCan(double x, double y){
 		
 		position = new DoublePoint(x, y);
 		this.vx = 0;
 		this.vy = 0;
-		loadImage();
+		//loadImage();
+		texture = MainFrame.getTl().trashCanTexture;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 
@@ -55,24 +52,10 @@ public class TrashCan extends Physics {
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
-		loadImage();
+		texture = MainFrame.getTl().trashCanTexture;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 	
-	
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis);
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
-
 	public int getWeight() {
 		return weight;
 	}

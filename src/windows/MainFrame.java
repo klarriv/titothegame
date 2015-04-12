@@ -42,6 +42,10 @@ public class MainFrame extends JFrame{
 	 * The image variable that will be used to set the icon of the JFrame.
 	 */
 	private Image frameIcon = null;
+	/**
+	 * Creates an instance of TextureLoader so the images can be loaded into the game.
+	 */
+	private static TextureLoader tl = new TextureLoader();
 	
 	/**
 	 * This creates a new main JFrame
@@ -73,6 +77,14 @@ public class MainFrame extends JFrame{
 		
 		CardLayout cardLayout = (CardLayout) menus.getLayout();
 		cardLayout.show(menus, MAINMENUPANEL);
+	}
+
+	public static TextureLoader getTl() {
+		return tl;
+	}
+
+	public static void setTl(TextureLoader tl) {
+		MainFrame.tl = tl;
 	}
 
 	public static JPanel getMenus() {

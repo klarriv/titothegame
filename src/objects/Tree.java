@@ -6,34 +6,21 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import windows.MainFrame;
+
 public class Tree {
 	
 	private BufferedImage texture;
-	private String pathRelativeToThis = "Resources/Objects/tree.png";
 	private DoublePoint position;
 
 	public Tree(double x, double y){
 		
 		setPosition(new DoublePoint(x, y));
-		loadImage();
+		texture = MainFrame.getTl().treeTexture;
 		
 	}
-
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis );
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
-
 
 	public BufferedImage getTexture() {
-		// TODO Auto-generated method stub
 		return texture;
 	}
 

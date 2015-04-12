@@ -1,23 +1,16 @@
 package windows;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
-import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
-
-import javax.imageio.ImageIO;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
-
-import RunningClasses.RunGame;
 import RunningClasses.SpriteSheet;
 import objects.*;
 import objects.Spring;
@@ -33,14 +26,6 @@ public class Level extends JPanel implements ActionListener{
 	 * This holds the object that represents Tito in the game.
 	 */
 	private Tito tito;
-	/**
-	 * This holds the background image
-	 */
-	private BufferedImage background;
-	/**
-	 * This holds the title for the pause menu
-	 */
-	private BufferedImage pauseTitle;
 	/**
 	 * This is a variable that holds the level number
 	 */
@@ -111,7 +96,6 @@ public class Level extends JPanel implements ActionListener{
 	private int j = 0;
 	private boolean isPaused = false;
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
-	
 	
 	/**
 	 * This creates a new instance of level
@@ -224,25 +208,15 @@ public class Level extends JPanel implements ActionListener{
 		// START OF LOADING IMAGES AND OBJECTS
 		// From the next line to the next comment is code for loading the images and the objects from the .lvl file.
 		try {
-			background = ImageIO.read(new File("Resources/background.png"));
-			pauseTitle = ImageIO.read(new File("Resources/Menus/PauseMenu/pauseTitle.png"));
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-		try {
 			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
 			
 			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			
 			double numberOfTree = reader.nextDouble();
-
 			for(int i=0; i<numberOfTree; i++)
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			
 			double numberOfBench = reader.nextDouble();
-
 			for(int i=0; i<numberOfBench; i++)
 				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			
@@ -347,7 +321,7 @@ public class Level extends JPanel implements ActionListener{
 		super.paintComponent(g);
 		gUnit = getWidth()/5;
 		
-		g.drawImage(background, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 		
 		for(int i=0; i<treeList.size(); i++){
 			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
@@ -374,20 +348,18 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(TrashCan.WIDTH*gUnit), (int)(TrashCan.HEIGHT*gUnit), null);
 		}
 		
-		g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y)- 48, 185, 285, null);
+		g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y)- 48, (int)(0.7*gUnit), (int)(1.1*gUnit), null);
 		
-		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*75/256), (int)(gUnit*75/256), null);
+		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*0.25), (int)(gUnit*0.25), null);
 
-		g.drawRect((int)(gUnit*trashCanList.get(0).getR().getPosition().x), (int)(gUnit*trashCanList.get(0).getR().getPosition().y), (int)(gUnit*trashCanList.get(0).getR().getWidth()), (int)(gUnit*trashCanList.get(0).getR().getHeight()));
+		jbtPlay.setBounds(10, 10, 55, 35);
+		jbtRestart.setBounds(70, 10, 55, 35);
 		
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
-			
-			g.drawImage(pauseTitle, 248*getWidth()/1280, 10*getHeight()/720, pauseTitle.getWidth()*getWidth()/1280, pauseTitle.getHeight()*getHeight()/720, null);
+			g.fillRect(0, 0, getWidth(), getHeight());
+			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248*getWidth()/1280, 10*getHeight()/720, MainFrame.getTl().levelPauseHeaderTexture.getWidth()*getWidth()/1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight()*getHeight()/720, null);
 		}
-		
-		jbtPlay.setBounds(10, 10, 55, 35);
-		jbtRestart.setBounds(70, 10, 55, 35);
 		
 		//Collision and movements
 		if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
@@ -396,14 +368,14 @@ public class Level extends JPanel implements ActionListener{
 			tito.setVy();
 			//(trashCanList.get(0).getWeight());
 			trashCanList.get(0).single++;
-			System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
+			//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
 		}
 		
 		if (trashCanList.get(0).getPosition().y < 2){
 			//(trash.getVx() + " " + trash.getVy());
 			projectileMotion(trashCanList.get(0));
 			basicMove(trashCanList.get(0));
-			System.out.println(" vyy: " + trashCanList.get(0).getVy());
+			//System.out.println(" vyy: " + trashCanList.get(0).getVy());
 		}
 		
 		boolean planeCollided = false;
@@ -431,8 +403,6 @@ public class Level extends JPanel implements ActionListener{
 		
 		if(m.colliding(tito.getPosition()))
 			tito.setVx(-1*tito.getVx());
-		
-		
 		
 	}
 	
@@ -528,21 +498,50 @@ public class Level extends JPanel implements ActionListener{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			if(trashCanList.get(0).getR().contains(arg0.getPoint())){
-				System.out.println("BOb");
-				trashCanList.get(0).setX(arg0.getX()/gUnit);
-				trashCanList.get(0).setY(arg0.getY()/gUnit);
-				trashCanList.get(0).getPosition().x = arg0.getX()/gUnit;
-				trashCanList.get(0).getPosition().y = arg0.getY()/gUnit;
+			DoublePoint p = new DoublePoint(arg0.getX()/gUnit, arg0.getY()/gUnit);
+			for(int i=0; i<benchList.size(); i++){
+				if(benchList.get(i).getR().contains(p)){
+					benchList.get(i).setX(arg0.getX()/gUnit-Bench.WIDTH/2);
+					benchList.get(i).setY(arg0.getY()/gUnit-Bench.HEIGHT/2);
+					benchList.get(i).getPosition().x = arg0.getX()/gUnit-Bench.WIDTH/2;
+					benchList.get(i).getPosition().y = arg0.getY()/gUnit-Bench.HEIGHT/2;
+				}			}
+			for(int i=0; i<coneList.size(); i++){
+				if(coneList.get(i).getR().contains(p)){
+					coneList.get(i).setX(arg0.getX()/gUnit-Cone.WIDTH/2);
+					coneList.get(i).setY(arg0.getY()/gUnit-Cone.HEIGHT/2);
+					coneList.get(i).getPosition().x = arg0.getX()/gUnit-Cone.WIDTH/2;
+					coneList.get(i).getPosition().y = arg0.getY()/gUnit-Cone.HEIGHT/2;
+				}
 			}
-			
+			for(int i=0; i<planeList.size(); i++){
+				// TODO make the planes move
+				/*
+				if(planeList.get(i).getR().contains(p)){
+					planeList.get(i).setX(arg0.getX()/gUnit-TrashCan.WIDTH/2);
+					planeList.get(i).setY(arg0.getY()/gUnit-TrashCan.HEIGHT/2);
+					planeList.get(i).getPosition().x = arg0.getX()/gUnit-TrashCan.WIDTH/2;
+					planeList.get(i).getPosition().y = arg0.getY()/gUnit-TrashCan.HEIGHT/2;
+				}
+					*/
+			}
+			for(int i=0; i<ropeList.size(); i++){
+				//TODO make the ropes move
+			}
+			for(int i=0; i<trashCanList.size(); i++){
+			if(trashCanList.get(i).getR().contains(p)){
+				trashCanList.get(i).setX(arg0.getX()/gUnit-TrashCan.WIDTH/2);
+				trashCanList.get(i).setY(arg0.getY()/gUnit-TrashCan.HEIGHT/2);
+				trashCanList.get(i).getPosition().x = arg0.getX()/gUnit-TrashCan.WIDTH/2;
+				trashCanList.get(i).getPosition().y = arg0.getY()/gUnit-TrashCan.HEIGHT/2;
+			}
 		}
+	}
 
 		@Override
 		public void mouseMoved(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			
 		}
-		
 	}
 }

@@ -13,8 +13,8 @@ public class DoubleRectangle {
 		this.height = height;
 	}
 	
-	public boolean contains(Point p){
-		if(p.getX()>position.x && p.getX()<position.x+width && p.getY()>position.y && p.getY()<position.y+height)
+	public boolean contains(DoublePoint p){
+		if(p.x>position.x && p.x<position.x+width && p.y>position.y && p.y<position.y+height)
 			return true;
 		else
 			return false;

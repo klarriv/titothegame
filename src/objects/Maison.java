@@ -15,6 +15,7 @@ public class Maison {
 	@SuppressWarnings("unused")
 	private String which ="1";
 	private String pathRelativeToThis;
+	
 	/**
 	 * Creates a Maison with a texture
 	 * @param x
@@ -49,7 +50,6 @@ public class Maison {
 		this.position.y = y;
 		this.width = width;
 		this.height = height;
-		
 		
 	}
 	public boolean colliding(DoublePoint p){
