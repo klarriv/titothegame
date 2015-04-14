@@ -11,14 +11,13 @@ public class Rope {
 	private DoublePoint anchor2;
 	private DoublePoint anchor3;
 	private double length;
-	private double gUnit;
 	private Physics ob1;
 	private Physics ob2;
 	private Pulley pulley;
 	private boolean maxed = false;
 	
 	public Rope(double x, double y){
-		
+		this.anchor2 = new DoublePoint(x, y);
 	}
 	
 	/**
@@ -116,23 +115,48 @@ public class Rope {
 	 * @param y
 	 */
 	public void pulleyMove(double x, double y){
-		double dx = x - anchor1.x;
-		double dy = y - anchor1.y;
-		double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
-		double distance2 = length - distance;
 		
-		if (distance <= length && distance >= 0.3)
-			maxed = false;
-		else 
-			maxed = true;
-		
-		if (!maxed)
-			anchor3.y = anchor2.y + distance2;
+		if (isUsed() == 2){
+			double dx = x - anchor1.x;
+			double dy = y - anchor1.y;
+			double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
+			double distance2 = length - distance;
+			
+			if (distance <= length && distance >= 0.3)
+				maxed = false;
+			else 
+				maxed = true;
+			
+			if (!maxed)
+				anchor3.y = anchor2.y + distance2;
+		}
 		
 		
 	}
 	public boolean isMaxed(){
 		return maxed;
+	}
+	/**
+	 * Returns -1 if it is not used,
+	 * 0 if it is attached to a pulley,
+	 * 1 if it is attached to a pulley and a TrashCan
+	 * and 2 if it is attached to a pulley and two TrashCans
+	 * @return
+	 */
+	public int isUsed(){
+		boolean a = ob1 == null;
+		boolean b = pulley == null;
+		boolean c = ob2 == null;
+		
+		if (a && !b && c)
+			return 0;
+		else if (!a && !b && c)
+			return 1;
+		else if (!a && !b && !c)
+			return 2;
+		else 
+			return -1;
+			
 	}
 
 	public DoublePoint getAnchor1() {
@@ -159,6 +183,45 @@ public class Rope {
 	public void setAnchor3(DoublePoint anchor3){
 		this.anchor3 = anchor3;
 		
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+
+	public Physics getOb1() {
+		return ob1;
+	}
+
+	public void setOb1(Physics ob1) {
+		this.ob1 = ob1;
+		this.anchor1 = ob1.getPosition();
+	}
+
+	public Physics getOb2() {
+		return ob2;
+	}
+
+	public void setOb2(Physics ob2) {
+		this.ob2 = ob2;
+		this.anchor3 = ob2.getPosition();
+	}
+
+	public Pulley getPulley() {
+		return pulley;
+	}
+
+	public void setPulley(Pulley pulley) {
+		this.pulley = pulley;
+		this.anchor2 = pulley.getPosition();
+	}
+
+	public void setMaxed(boolean maxed) {
+		this.maxed = maxed;
 	}
 	
 	
