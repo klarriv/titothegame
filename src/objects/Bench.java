@@ -21,6 +21,7 @@ public class Bench extends Physics {
 		
 		position = new DoublePoint(x, y);
 		texture = MainFrame.getTl().benchTexture;
+		isVisible = true;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 

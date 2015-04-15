@@ -22,6 +22,7 @@ public class Cone extends Physics {
 		
 		position = new DoublePoint(x,y);
 		texture = MainFrame.getTl().coneTexture;
+		isVisible = true;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 

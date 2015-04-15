@@ -24,7 +24,7 @@ public class Maison {
 	 * @param height
 	 * @param which
 	 */
-	public Maison(double x, double y, double width, double height, String which){
+	public Maison(double x, double y, double width, double height, int which){
 		isVisible = true;//since user uses this constructor... there is an image else use the other constructor
 		this.position.x = x;
 		this.position.y = y;

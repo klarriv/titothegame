@@ -66,8 +66,14 @@ public class Level extends JPanel implements ActionListener{
 	 * List of trashcans read from the level file.
 	 */
 	private ArrayList<TrashCan> trashCanList =  new ArrayList<TrashCan>();
-	//TODO set other Maisons
-	private Maison m;
+	/**
+	 * List of pulleys read from the level file
+	 */
+	private ArrayList<Pulley> pulleyList = new ArrayList<Pulley>();
+	/**
+	 * List of houses in the level read from the level file
+	 */
+	private ArrayList<Maison> maisonList = new ArrayList<Maison>();
 	/**
 	 * The song used in the levels
 	 */
@@ -96,6 +102,7 @@ public class Level extends JPanel implements ActionListener{
 	private int j = 0;
 	private boolean isPaused = false;
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
+	//private Maison m;
 	
 	/**
 	 * This creates a new instance of level
@@ -123,7 +130,9 @@ public class Level extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Reset the level and variables
+				t.stop();
+				loadObjects();
+				repaint();
 			}
 			
 		});
@@ -208,51 +217,10 @@ public class Level extends JPanel implements ActionListener{
 		});
 		// END OF PAUSE MENU ITEMS
 		
-		// START OF LOADING IMAGES AND OBJECTS
-		// From the next line to the next comment is code for loading the images and the objects from the .lvl file.
-		try {
-			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
-			
-			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
-			
-			double numberOfTree = reader.nextDouble();
-			for(int i=0; i<numberOfTree; i++)
-				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfBench = reader.nextDouble();
-			for(int i=0; i<numberOfBench; i++)
-				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfCone = reader.nextDouble();
-			for(int i=0; i<numberOfCone; i++)
-				coneList.add(new Cone(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfPlane = reader.nextDouble();
-			for(int i=0; i<numberOfPlane; i++)
-				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
-
-			double numberOfRope = reader.nextDouble();
-			for(int i=0; i<numberOfRope; i++)
-				ropeList.add(new Rope(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfSeesaw = reader.nextDouble();
-			for(int i=0; i<numberOfSeesaw; i++)
-				seesawList.add(new SeeSaw(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfSpring = reader.nextDouble();
-			for(int i=0; i<numberOfSpring; i++)
-				springList.add(new Spring(reader.nextDouble(), reader.nextDouble()));
-			
-			double numberOfTrashCan = reader.nextDouble();
-			for(int i=0; i<numberOfTrashCan; i++)
-				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
-			
-			reader.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		m = new Maison(3.1, 1.6, 0.7, 2, "1" );
+		// START OF LOADING STUFF
+		loadObjects();
+		
+		//m = new Maison(3.1, 1.6, 0.7, 2, 1 );
 		
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
@@ -284,6 +252,72 @@ public class Level extends JPanel implements ActionListener{
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
 		
+	}
+
+	protected void loadObjects() {
+		
+		treeList.clear();
+		benchList.clear();
+		coneList.clear();
+		planeList.clear();
+		ropeList.clear();
+		seesawList.clear();
+		springList.clear();
+		trashCanList.clear();
+		pulleyList.clear();
+		maisonList.clear();
+		
+		try {	
+			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
+
+			tito = new Tito(reader.nextDouble(), reader.nextDouble(),
+					reader.nextDouble(), reader.nextDouble(), t);
+
+			double numberOfTree = reader.nextDouble();
+			for (int i = 0; i < numberOfTree; i++)
+				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfBench = reader.nextDouble();
+			for (int i = 0; i < numberOfBench; i++)
+				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfCone = reader.nextDouble();
+			for (int i = 0; i < numberOfCone; i++)
+				coneList.add(new Cone(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfPlane = reader.nextDouble();
+			for (int i = 0; i < numberOfPlane; i++)
+				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
+
+			double numberOfRope = reader.nextDouble();
+			for (int i = 0; i < numberOfRope; i++)
+				ropeList.add(new Rope(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfSeesaw = reader.nextDouble();
+			for (int i = 0; i < numberOfSeesaw; i++)
+				seesawList.add(new SeeSaw(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfSpring = reader.nextDouble();
+			for (int i = 0; i < numberOfSpring; i++)
+				springList.add(new Spring(reader.nextDouble(), reader.nextDouble()));
+
+			double numberOfTrashCan = reader.nextDouble();
+			for (int i = 0; i < numberOfTrashCan; i++)
+				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
+			
+			double numberOfPulley = reader.nextDouble();
+			for (int i = 0; i<numberOfPulley; i++)
+				pulleyList.add(new Pulley(reader.nextDouble(), reader.nextDouble(), reader.nextBoolean()));
+			
+			double numberOfMaison = reader.nextDouble();
+			for (int i = 0; i<numberOfMaison; i++)
+				maisonList.add(new Maison(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextInt()));
+
+			reader.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -330,10 +364,12 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
 		for(int i=0; i<benchList.size(); i++){
-			g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).getPosition().x), (int)(gUnit*benchList.get(i).getPosition().y), (int)(Bench.WIDTH*gUnit), (int)(Bench.HEIGHT*gUnit), null);
+			if(benchList.get(i).isVisible())
+				g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).getPosition().x), (int)(gUnit*benchList.get(i).getPosition().y), (int)(Bench.WIDTH*gUnit), (int)(Bench.HEIGHT*gUnit), null);
 		}
 		for(int i=0; i<coneList.size(); i++){
-			g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).getPosition().x), (int)(gUnit*coneList.get(i).getPosition().y), (int)(Cone.WIDTH*gUnit), (int)(Cone.HEIGHT*gUnit),  null);
+			if(coneList.get(i).isVisible())
+				g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).getPosition().x), (int)(gUnit*coneList.get(i).getPosition().y), (int)(Cone.WIDTH*gUnit), (int)(Cone.HEIGHT*gUnit),  null);
 		}
 		for(int i=0; i<planeList.size(); i++){
 			g.drawLine((int)(gUnit*(planeList.get(i).getX()[0])), (int)(gUnit*(planeList.get(i).getY()[0])), (int)(gUnit*(planeList.get(i).getX()[1])), (int)(gUnit*planeList.get(i).getY()[1]));
@@ -348,10 +384,18 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(springList.get(i).getTexture(), (int)(gUnit*springList.get(i).getPosition().x), (int)(gUnit*springList.get(i).getPosition().y), null);
 		}
 		for(int i=0; i<trashCanList.size(); i++){
-			g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(TrashCan.WIDTH*gUnit), (int)(TrashCan.HEIGHT*gUnit), null);
+			if(trashCanList.get(i).isVisible())
+				g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(TrashCan.WIDTH*gUnit), (int)(TrashCan.HEIGHT*gUnit), null);
+		}
+		for (int i=0; i<pulleyList.size(); i++){
+			// TODO g.drawImage(img, x, y, observer)
+		}
+		for (int i=0; i<maisonList.size(); i++){
+			// TODO fix the height of the house so it is the same used to draw it. 
+			g.drawImage(maisonList.get(i).getTexture(), (int)(gUnit*maisonList.get(i).getPosition().x), (int)(gUnit*maisonList.get(i).getPosition().y), (int)(maisonList.get(i).getWidth()*gUnit), (int)(maisonList.get(i).getHeight()*gUnit), null);
 		}
 		
-		g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y)- 48, (int)(0.7*gUnit), (int)(1.1*gUnit), null);
+		//g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x), (int)(gUnit*m.getPosition().y)- 48, (int)(0.7*gUnit), (int)(1.1*gUnit), null);
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*0.25), (int)(gUnit*0.25), null);
 
@@ -403,9 +447,10 @@ public class Level extends JPanel implements ActionListener{
 			projectileMotion(tito);
 			xMove();
 		}
-		
-		if(m.colliding(tito.getPosition()))
-			tito.setVx(-1*tito.getVx());
+		for (int i=0; i<maisonList.size(); i++){
+			if(maisonList.get(i).colliding(tito.getPosition()))
+				tito.setVx(-1*tito.getVx());
+		}
 		
 	}
 	
@@ -500,17 +545,17 @@ public class Level extends JPanel implements ActionListener{
 	class DragListener implements MouseMotionListener{
 
 		@Override
-		public void mouseDragged(MouseEvent arg0) {
+		public void mouseDragged(MouseEvent arg0) throws IndexOutOfBoundsException{
 			DoublePoint p = new DoublePoint(arg0.getX()/gUnit, arg0.getY()/gUnit);
 			for(int i=0; i<benchList.size(); i++){
-				if(benchList.get(i).getR().contains(p)){
+				if(benchList.get(i).getR()!=null && benchList.get(i).getR().contains(p)){
 					benchList.get(i).setX(arg0.getX()/gUnit-Bench.WIDTH/2);
 					benchList.get(i).setY(arg0.getY()/gUnit-Bench.HEIGHT/2);
 					benchList.get(i).getPosition().x = arg0.getX()/gUnit-Bench.WIDTH/2;
 					benchList.get(i).getPosition().y = arg0.getY()/gUnit-Bench.HEIGHT/2;
 				}			}
 			for(int i=0; i<coneList.size(); i++){
-				if(coneList.get(i).getR().contains(p)){
+				if(coneList.get(i).getR()!=null && coneList.get(i).getR().contains(p)){
 					coneList.get(i).setX(arg0.getX()/gUnit-Cone.WIDTH/2);
 					coneList.get(i).setY(arg0.getY()/gUnit-Cone.HEIGHT/2);
 					coneList.get(i).getPosition().x = arg0.getX()/gUnit-Cone.WIDTH/2;
@@ -532,12 +577,39 @@ public class Level extends JPanel implements ActionListener{
 				//TODO make the ropes move
 			}
 			for(int i=0; i<trashCanList.size(); i++){
-			if(trashCanList.get(i).getR().contains(p)){
+			if(trashCanList.get(i).getR()!=null && trashCanList.get(i).getR().contains(p)){
+				// USED TO MOVE THE TRASHCAN AROUND
 				trashCanList.get(i).setX(arg0.getX()/gUnit-TrashCan.WIDTH/2);
 				trashCanList.get(i).setY(arg0.getY()/gUnit-TrashCan.HEIGHT/2);
 				trashCanList.get(i).getPosition().x = arg0.getX()/gUnit-TrashCan.WIDTH/2;
 				trashCanList.get(i).getPosition().y = arg0.getY()/gUnit-TrashCan.HEIGHT/2;
+				System.out.println("Tra" + i + " weight " + trashCanList.get(i).getWeight());
+				
+				// USED TO PUT OBJECTS IN THE TRASHCAN
+				for(int j = i+1; j<trashCanList.size(); j++){
+					if(trashCanList.get(j).getR()!=null && trashCanList.get(j).getR()!=null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR())){
+						trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
+						trashCanList.get(j).setVisible(false);
+						trashCanList.get(j).setR(null);
+					}
+				}
+				for(int j = 0; j<coneList.size(); j++){
+					if(coneList.get(j).getR()!=null && trashCanList.get(i).getR().contains(coneList.get(j).getR())){
+						trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + coneList.get(j).getWeight());
+						coneList.get(j).setVisible(false);
+						coneList.get(j).setR(null);
+					}
+				}
+				for(int j = 0; j<benchList.size(); j++){
+					if(benchList.get(j).getR()!=null && trashCanList.get(i).getR().contains(benchList.get(j).getR())){
+						trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + benchList.get(j).getWeight());
+						benchList.get(j).setVisible(false);
+						benchList.get(j).setR(null);
+					}
+				}
 			}
+			if(!t.isRunning())
+				repaint();
 		}
 	}
 

@@ -20,6 +20,15 @@ public class DoubleRectangle {
 			return false;
 		
 	}
+	
+	public boolean contains(DoubleRectangle r){
+		if (r.getPosition().x < position.x+width && r.getPosition().x+r.getWidth() > position.x && r.getPosition().y < position.y+height && r.getPosition().y+r.getHeight() > position.y){
+			return true;
+		}
+			
+		else
+			return false;
+	}
 
 	public DoublePoint getPosition() {
 		return position;
