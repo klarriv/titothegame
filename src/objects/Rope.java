@@ -50,6 +50,7 @@ public class Rope {
 		this.anchor2 = pulley.getPosition();
 		this.anchor3 = ob2.getPosition();
 		
+		
 		setLength3();
 	}
 	
@@ -85,6 +86,7 @@ public class Rope {
 	public void setLength3(){
 		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
 		length +=  Math.sqrt(Math.pow(anchor3.x - anchor2.x, 2) + Math.pow(anchor3.y - anchor2.y, 2));
+		System.out.println(length);
 	}
 	
 	public void setLength2(){
@@ -122,7 +124,7 @@ public class Rope {
 			double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
 			double distance2 = length - distance;
 			
-			if (distance <= length && distance >= 0.3)
+			if (distance <= length && distance >= 0)
 				maxed = false;
 			else 
 				maxed = true;
