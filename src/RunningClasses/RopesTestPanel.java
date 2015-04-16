@@ -59,7 +59,10 @@ public class RopesTestPanel extends JPanel {
 		
 	}
 	public void start(){
-		rope.setLength3();
+		if (rope.isUsed() == 2)
+			rope.setLength3();
+		else if (rope.isUsed() == 1)
+			rope.setLength2();
 		t.start();
 	}
 	
@@ -86,18 +89,22 @@ public class RopesTestPanel extends JPanel {
 			g.drawLine((int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor2().y), (int)(gUnit*rope.getAnchor2().x) + 50 , (int)(gUnit*rope.getAnchor2().y) + 75);
 			
 		}
-		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
-		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());
 		if(pulley.isVisible())
 			g.drawImage(pulley.getTexture(), (int)(gUnit*pulley.getPosition().x) + 15, (int)(gUnit*pulley.getPosition().y), null);
+		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
 		
-		if (!rope.isMaxed() && t.isRunning()){
-			trash1.setY(y);
-			trash1.setVy();
-			rope.pulleyMove(trash1.getPosition().x, y);
-		}
-		
+		if (rope.isUsed() == 2){
+			double y = rope.getOb1().projectileMotions(rope.getOb1().getWeight(), rope.getOb1().getPosition().y, rope.getOb1().getVy(), t.getDelay());
 			
+			
+			if (!rope.isMaxed() && t.isRunning() ){
+				rope.getOb1().setY(y);
+				rope.getOb1().setVy();
+				System.out.println(trash2 == rope.getOb2());
+				rope.pulleyMove(rope.getOb1().getPosition().x, y);
+			}
+		
+		}
 		rope.setTotalForce();
 		
 	}
@@ -126,44 +133,44 @@ public class RopesTestPanel extends JPanel {
 			
 			if (!t.isRunning()){
 			
-			if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
-				
-				t1x = x - (50/gUnit);
-				t1y = y - (50/gUnit);
-				//rope.pulleyMove(t1x, t1y);
-				trash1.setX(t1x);
-				trash1.setY(t1y);
-				
-				if (trash1.getPosition().distance(rope.getAnchor2()) <= 0.3 && rope.isUsed() < 1){
-					if (rope.isUsed() == 0){
-						rope.setOb1(trash1);
-						rope.setOb2(trash2);
+				if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
+					
+					t1x = x - (50/gUnit);
+					t1y = y - (50/gUnit);
+					//rope.pulleyMove(t1x, t1y);
+					trash1.setX(t1x);
+					trash1.setY(t1y);
+					
+					if (trash1.getPosition().distance(rope.getAnchor2()) <= 0.3){
+						if (rope.isUsed() == 0){
+							rope.setOb1(trash1);
+							
+						}
+						else if (rope.isUsed() == 1)
+							rope.setOb2(trash1);
 					}
-					else if (rope.isUsed() == 1)
-						rope.setOb2(trash1);
+					//System.out.println( x);
 				}
-				//System.out.println( x);
-			}
-			
-			else if (x >= rope.getAnchor2().x && x <= rope.getAnchor2().x +(20/gUnit) && y >= rope.getAnchor2().y && y <= rope.getAnchor2().y + (20/gUnit)
-					&& rope.isUsed() == -1){
-				rope.getAnchor2().x = x - (10/gUnit);
-				rope.getAnchor2().y = y - (10/gUnit);
-				if (rope.getAnchor2().distance(pulley.getPosition()) <= 0.3)
-					rope.setPulley(pulley);
-			}
-			
-			else if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y && y <= trash2.getPosition().y + (100/gUnit)){
-				trash2.getPosition().x = x - (50/gUnit);
-				trash2.getPosition().y = y - (50/gUnit);
-				if (rope.getAnchor2().distance(trash2.getPosition()) <= 0.3){
-					if (rope.isUsed() == 0){
-						rope.setOb1(trash1);
-						rope.setOb2(trash2);
+				
+				else if (x >= rope.getAnchor2().x && x <= rope.getAnchor2().x +(20/gUnit) && y >= rope.getAnchor2().y && y <= rope.getAnchor2().y + (20/gUnit)
+						&& rope.isUsed() == -1){
+					rope.getAnchor2().x = x - (10/gUnit);
+					rope.getAnchor2().y = y - (10/gUnit);
+					if (rope.getAnchor2().distance(pulley.getPosition()) <= 0.3)
+						rope.setPulley(pulley);
+				}
+				
+				else if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y && y <= trash2.getPosition().y + (100/gUnit)){
+					trash2.getPosition().x = x - (50/gUnit);
+					trash2.getPosition().y = y - (50/gUnit);
+					if (rope.getAnchor2().distance(trash2.getPosition()) <= 0.3){
+						if (rope.isUsed() == 0){
+							rope.setOb1(trash2);
+							
+						}
+						else if (rope.isUsed() == 1)
+							rope.setOb2(trash2);
 					}
-					else if (rope.isUsed() == 1)
-						rope.setOb2(trash1);
-				}
 					
 			}
 			rope.setXAnchored();

@@ -46,7 +46,8 @@ public class Rope {
 	public Rope(Physics ob1, Pulley pulley, Physics ob2){
 		this.ob1 = ob1;
 		this.pulley = pulley;
-		this.ob2 = ob2;
+		if (ob2 != ob1)
+			this.ob2 = ob2;
 		
 		this.anchor1 = ob1.getPosition();
 		this.anchor2 = pulley.getPosition();
@@ -238,8 +239,10 @@ public class Rope {
 	}
 
 	public void setOb2(Physics ob2) {
-		this.ob2 = ob2;
-		this.anchor3 = ob2.getPosition();
+		if (ob2 != ob1){
+			this.ob2 = ob2;
+			this.anchor3 = ob2.getPosition();
+		}
 	}
 
 	public Pulley getPulley() {
