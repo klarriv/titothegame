@@ -160,7 +160,8 @@ public class RopesTestPanel extends JPanel {
 						rope.setPulley(pulley);
 				}
 				
-				else if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y && y <= trash2.getPosition().y + (100/gUnit)){
+				else if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y &&
+							y <= trash2.getPosition().y + (100/gUnit)){
 					trash2.getPosition().x = x - (50/gUnit);
 					trash2.getPosition().y = y - (50/gUnit);
 					if (rope.getAnchor2().distance(trash2.getPosition()) <= 0.3){

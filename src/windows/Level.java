@@ -100,8 +100,8 @@ public class Level extends JPanel implements ActionListener{
 	private BufferedImage spriteSheet = null;
 	private BufferedImage sprite;     
 	private int counter = 0;
-	private int i = 0;
-	private int j = 0;
+	private int titoXSprite = 0;
+	private int titoYSprite = 0;
 	private boolean isPaused = false;
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
 	//private Maison m;
@@ -121,6 +121,12 @@ public class Level extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				for(int i = 0; i < ropeList.size(); i++){
+					if (ropeList.get(i).isUsed() == 2)
+						ropeList.get(i).setLength3();
+					else if (ropeList.get(i).isUsed() == 1)
+						ropeList.get(i).setLength2();
+				}
 				t.start();
 			}
 			
@@ -234,18 +240,18 @@ public class Level extends JPanel implements ActionListener{
 			public void actionPerformed(ActionEvent e) {
 				SpriteSheet ss = new SpriteSheet(spriteSheet);
 				
-				if (i < rollingx.length) {
-					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
+				if (titoXSprite < rollingx.length) {
+					sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
 					if (counter % 2 == 0){
-					i++;
-					j++;
+						titoXSprite++;
+						titoYSprite++;
 					}
 				} else {
-					i = 0;
-					j = 0;
-					sprite = ss.grabSprite(rollingx[i] * 300, rollingy[j] * 250, 289, 250);
-					i++;
-					j++;
+					titoXSprite = 0;
+					titoYSprite = 0;
+					sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
+					titoXSprite++;
+					titoYSprite++;
 				}
 				
 				counter++;
@@ -440,6 +446,7 @@ public class Level extends JPanel implements ActionListener{
 		}
 		
 		if(t.isRunning()){
+			//TODO create the see-saw....
 			//Collision and movements
 			if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
 				tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
@@ -447,14 +454,15 @@ public class Level extends JPanel implements ActionListener{
 				tito.setVy();
 				//(trashCanList.get(0).getWeight());
 				trashCanList.get(0).single++;
-				//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
+				////(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
 			}
-			
-			if (trashCanList.get(0).getPosition().y < 2){
-				//(trash.getVx() + " " + trash.getVy());
-				projectileMotion(trashCanList.get(0));
-				basicMove(trashCanList.get(0));
-				//System.out.println(" vyy: " + trashCanList.get(0).getVy());
+			for (int i = 0; i < trashCanList.size(); i++){
+				if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()){
+					//(trash.getVx() + " " + trash.getVy());
+					projectileMotion(trashCanList.get(i));
+					basicMove(trashCanList.get(i));
+					////(" vyy: " + trashCanList.get(0).getVy());
+				}
 			}
 			
 			boolean planeCollided = false;
@@ -467,7 +475,7 @@ public class Level extends JPanel implements ActionListener{
 			if (tito.getVy() > 0.5 && tito.getPosition().y <= 2){
 				projectileMotion(tito);
 				xMove();
-				//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+				////(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
 			}
 			else if (planeCollided){
 				planeCollision(p);
@@ -485,6 +493,8 @@ public class Level extends JPanel implements ActionListener{
 			}
 			//ropes
 			for(int i=0; i<ropeList.size(); i++){
+				ropeList.get(i).setXAnchored();
+				//System.out.println(ropeList.get(i).getOb1() == ropeList.get(i).getOb2());
 				if (ropeList.get(i).isUsed() == 2){
 					double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(),
 							ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
@@ -500,7 +510,10 @@ public class Level extends JPanel implements ActionListener{
 				}
 				ropeList.get(i).setTotalForce();
 			}
+			
+			
 		}
+		
 	}
 	
 	//Physics moving and colliding methods
@@ -626,8 +639,9 @@ public class Level extends JPanel implements ActionListener{
 				}
 					*/
 			}
-			//System.out.println(x + " " + ropeList.size());
+			////(x + " " + ropeList.size());
 			for(int i=0; i<ropeList.size(); i++){
+				ropeList.get(i).setXAnchored();
 				if (x >= ropeList.get(i).getAnchor2().x && x <= ropeList.get(i).getAnchor2().x +(20/gUnit) && y >= ropeList.get(i).getAnchor2().y
 						&& y <= ropeList.get(i).getAnchor2().y + (20/gUnit) && ropeList.get(i).isUsed() == -1){
 					ropeList.get(i).getAnchor2().x = x - (10/gUnit);
@@ -639,8 +653,10 @@ public class Level extends JPanel implements ActionListener{
 					}
 					
 				}
+				
+				////(i + " " + ropeList.get(i).isUsed());
 			}
-			//TODO when close to pulley w/ rope
+			
 			for(int i=0; i<trashCanList.size(); i++){
 			if(trashCanList.get(i).getR()!=null && trashCanList.get(i).getR().contains(p)){
 				// USED TO MOVE THE TRASHCAN AROUND
@@ -648,14 +664,16 @@ public class Level extends JPanel implements ActionListener{
 				trashCanList.get(i).setY(y-TrashCan.HEIGHT/2);
 				trashCanList.get(i).getPosition().x = x-TrashCan.WIDTH/2;
 				trashCanList.get(i).getPosition().y = y-TrashCan.HEIGHT/2;
-				//System.out.println("Tra" + i + " weight " + trashCanList.get(i).getWeight());
+				////("Tra" + i + " weight " + trashCanList.get(i).getWeight());
 				
 				// USED TO PUT OBJECTS IN THE TRASHCAN
 				for(int j = i+1; j<trashCanList.size(); j++){
-					if(trashCanList.get(j).getR()!=null && trashCanList.get(j).getR()!=null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR())){
+					if(trashCanList.get(j).getR()!=null && trashCanList.get(j).getR()!=null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR())
+							&& !trashCanList.get(j).isUsed()){
 						trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 						trashCanList.get(j).setVisible(false);
 						trashCanList.get(j).setR(null);
+						trashCanList.get(j).setUsed(true);
 					}
 				}
 				for(int j = 0; j<coneList.size(); j++){
@@ -671,6 +689,20 @@ public class Level extends JPanel implements ActionListener{
 						benchList.get(j).setVisible(false);
 						benchList.get(j).setR(null);
 					}
+				}
+				for(int j = 0; j < ropeList.size(); j++){
+					if (trashCanList.get(i).getPosition().distance(ropeList.get(j).getAnchor2()) <= 0.3){
+						if (ropeList.get(j).isUsed() == 0 && !trashCanList.get(i).isUsed()){
+							ropeList.get(j).setOb1(trashCanList.get(i));
+							trashCanList.get(i).setUsed(true);
+							
+						}
+						else if (ropeList.get(j).isUsed() == 1 && !trashCanList.get(i).isUsed()){
+							ropeList.get(j).setOb2(trashCanList.get(i));
+							trashCanList.get(i).setUsed(true);
+						}
+					}
+					
 				}
 			}
 			if(!t.isRunning())

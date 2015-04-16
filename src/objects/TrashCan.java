@@ -19,7 +19,7 @@ public class TrashCan extends Physics {
 	public static final double HEIGHT = 0.5;
 	private int weight = 10;
 	private boolean isVisible = true;
-	private boolean isUsed = true;
+	private boolean isUsed = false;
 	private BufferedImage texture;
 	private DoublePoint position;
 	private double vx = 7;
@@ -92,6 +92,7 @@ public class TrashCan extends Physics {
 
 
 	public boolean isUsed() {
+		
 		return isUsed;
 	}
 

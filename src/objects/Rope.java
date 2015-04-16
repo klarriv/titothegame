@@ -181,13 +181,18 @@ public class Rope {
 		if (isUsed() > 1  )
 			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
 		
-		if (force >= 300){
+		if (force >= 195){
+			if (ob1 != null)
+				ob1.setUsed(false);
+			if (ob2 != null)
+				ob2.setUsed(false);
 			ob1 = null;
 			ob2 = null;
 			broken = true;
 		}
 		else
 			broken = false;
+		
 			
 	}
 
@@ -262,6 +267,7 @@ public class Rope {
 		int u = isUsed();
 		if (u == 1)
 			this.anchor1.x = anchor2.x;
+		
 		if(u==2){
 			this.anchor1.x = anchor2.x;
 			this.anchor3.x = anchor2.x;
