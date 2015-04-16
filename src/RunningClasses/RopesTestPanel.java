@@ -25,6 +25,8 @@ public class RopesTestPanel extends JPanel {
 	private Pulley pulley = new Pulley(2,0.1, true);
 	private Rope rope = new Rope(2, 2);
 	private Button start = new Button("Start");
+	private Button add5_1 = new Button("+5 Trash1");
+	private Button add5_2 = new Button("+5 Trash2");
 	
 	
 	public RopesTestPanel(){
@@ -49,7 +51,11 @@ public class RopesTestPanel extends JPanel {
 			}
 			
 		});
+		add5_1.addActionListener(new AddWeight());
+		add5_2.addActionListener(new AddWeight());
 		add(start, BorderLayout.NORTH);
+		add(add5_1, BorderLayout.WEST);
+		add(add5_2, BorderLayout.EAST);
 		
 	}
 	public void start(){
@@ -76,6 +82,10 @@ public class RopesTestPanel extends JPanel {
 			int[] yPoints = {(int)(gUnit*rope.getAnchor1().y), (int)(gUnit*rope.getAnchor2().y), (int)(gUnit*rope.getAnchor3().y)};
 			g.drawPolyline(xPoints, yPoints, 3);
 		}
+		else if (rope.isUsed() == -2){
+			g.drawLine((int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor2().y), (int)(gUnit*rope.getAnchor2().x) + 50 , (int)(gUnit*rope.getAnchor2().y) + 75);
+			
+		}
 		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
 		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());
 		if(pulley.isVisible())
@@ -85,6 +95,22 @@ public class RopesTestPanel extends JPanel {
 			trash1.setY(y);
 			trash1.setVy();
 			rope.pulleyMove(trash1.getPosition().x, y);
+		}
+		
+			
+		rope.setTotalForce();
+		
+	}
+	class AddWeight implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("+5 Trash1"))
+				trash1.setWeight(trash1.getWeight() + 5);
+			if (e.getActionCommand().equals("+5 Trash2"))
+				trash2.setWeight(trash2.getWeight() + 5);
+			repaint();
+			
 		}
 		
 	}
@@ -119,7 +145,7 @@ public class RopesTestPanel extends JPanel {
 				//System.out.println( x);
 			}
 			
-			if (x >= rope.getAnchor2().x && x <= rope.getAnchor2().x +(20/gUnit) && y >= rope.getAnchor2().y && y <= rope.getAnchor2().y + (20/gUnit)
+			else if (x >= rope.getAnchor2().x && x <= rope.getAnchor2().x +(20/gUnit) && y >= rope.getAnchor2().y && y <= rope.getAnchor2().y + (20/gUnit)
 					&& rope.isUsed() == -1){
 				rope.getAnchor2().x = x - (10/gUnit);
 				rope.getAnchor2().y = y - (10/gUnit);
@@ -127,7 +153,7 @@ public class RopesTestPanel extends JPanel {
 					rope.setPulley(pulley);
 			}
 			
-			if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y && y <= trash2.getPosition().y + (100/gUnit)){
+			else if (x >= trash2.getPosition().x && x <= trash2.getPosition().x +(100/gUnit) && y >= trash2.getPosition().y && y <= trash2.getPosition().y + (100/gUnit)){
 				trash2.getPosition().x = x - (50/gUnit);
 				trash2.getPosition().y = y - (50/gUnit);
 				if (rope.getAnchor2().distance(trash2.getPosition()) <= 0.3){
@@ -140,6 +166,7 @@ public class RopesTestPanel extends JPanel {
 				}
 					
 			}
+			rope.setXAnchored();
 			repaint();
 			}
 			

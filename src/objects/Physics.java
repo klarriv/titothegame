@@ -135,6 +135,13 @@ public abstract class Physics implements ObjectInterface{
 	
 	}
 	
+	public double getForce(int mass){
+		if (this.ax != 0)
+			return this.ax * mass;
+		else
+			return GRAVITY * mass;
+	}
+	
 	/**
 	 * Calculates and returns the acceleration of an object using Newton's second law
 	 * @param weight
@@ -172,14 +179,19 @@ public abstract class Physics implements ObjectInterface{
 	public void pulley(){
 		
 	}
-	
+	/**
+	 * Reflecting an object bouncing on an inclined plane
+	 * @param angle
+	 * @param vx
+	 * @param vy
+	 */
 	public void matrixMultiplication(double angle, double vx, double vy){
 		double[][] T = {{Math.cos(angle), -Math.sin(angle)},
 						{Math.sin(angle), Math.cos(angle)}};
 
 		double[][] T2 ={{Math.cos(angle), Math.sin(angle)},
 						{-Math.sin(angle),Math.cos(angle)}};
-		//System.out.println("vx: " + vx + " vy: "+ vy);
+		
 		if (vx >= 0){
 			if (vx > 0.5)
 				vx -= 0.5;
@@ -187,16 +199,13 @@ public abstract class Physics implements ObjectInterface{
 				vy -= 0.5;
 			else if (vy < -0.5)
 				vy += 0.5;
-			//System.out.println("vx1: " + vx + " vy1: "+ vy);
+			
 			this.vxi = T[0][0] * vx;
 			this.vxi += T[1][0] * vy;
-			
-			
-			
+	
 			this.vyi = T[0][1] * vx;
 			this.vyi += T[1][1] * vy;
-			//System.out.println("vx2: " + vxi + " vy2: "+ vyi);
-			//System.out.println(T[0][0]);
+
 		}
 		else{
 			if (vx < -0.5)
@@ -205,20 +214,15 @@ public abstract class Physics implements ObjectInterface{
 				vy -= 0.5;
 			else if (vy < -0.5)
 				vy += 0.5;
-			//System.out.println("vx1: " + vx + " vy1: "+ vy);
+			
 			this.vxi = T2[0][0] * vx;
 			this.vxi += T2[1][0] * vy;
 			
-			
-			
 			this.vyi = T2[0][1] * vx;
 			this.vyi += T2[1][1] * vy;
-			//System.out.println("vx2: " + vxi + " vy2: "+ vyi);
+			
 		}
 		
-		
-		
-		//System.out.println("vx: " + this.vxi + " vy: " + this.vyi);
 	}
 
 }
