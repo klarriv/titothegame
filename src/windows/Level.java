@@ -112,7 +112,7 @@ public class Level extends JPanel implements ActionListener{
 		this.levelNumber = levelNumber;
 		
 		// START OF PLAY/RESTART BUTTONS
-		jbtPlay = new JButton("Play");
+		jbtPlay = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPlay.setBorder(BorderFactory.createEmptyBorder());
 		jbtPlay.setContentAreaFilled(false);
 		jbtPlay.addActionListener(new ActionListener(){
@@ -399,8 +399,8 @@ public class Level extends JPanel implements ActionListener{
 		
 		g.drawImage(sprite, (int)(gUnit*tito.getPosition().x), (int)(gUnit*tito.getPosition().y), (int)(gUnit*0.25), (int)(gUnit*0.25), null);
 
-		jbtPlay.setBounds(10, 10, 55, 35);
-		jbtRestart.setBounds(70, 10, 55, 35);
+		jbtPlay.setBounds(10, 10, 40, 40);
+		jbtRestart.setBounds(60, 10, 40, 40);
 		
 		if(isPaused){
 			g.setColor(new Color(0, 0, 0, 128));
@@ -408,50 +408,51 @@ public class Level extends JPanel implements ActionListener{
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248*getWidth()/1280, 10*getHeight()/720, MainFrame.getTl().levelPauseHeaderTexture.getWidth()*getWidth()/1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight()*getHeight()/720, null);
 		}
 		
-		//Collision and movements
-		if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
-			tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
-			tito.setVx();
-			tito.setVy();
-			//(trashCanList.get(0).getWeight());
-			trashCanList.get(0).single++;
-			//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
-		}
-		
-		if (trashCanList.get(0).getPosition().y < 2){
-			//(trash.getVx() + " " + trash.getVy());
-			projectileMotion(trashCanList.get(0));
-			basicMove(trashCanList.get(0));
-			//System.out.println(" vyy: " + trashCanList.get(0).getVy());
-		}
-		
-		boolean planeCollided = false;
-		Plane p = planeList.get(0);
-		for (int i = 0; i < planeList.size(); i++){
-			planeCollided = planeColliding(planeList.get(i));
-			p = planeList.get(i);
-		}
-		
-		if (tito.getVy() > 0.5 && tito.getPosition().y <= 2){
-			projectileMotion(tito);
-			xMove();
-			//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
-		}
-		else if (planeCollided){
-			planeCollision(p);
-			projectileMotion(tito);
-			xMove();
+		if(t.isRunning()){
+			//Collision and movements
+			if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0){
+				tito.setEnergyVelocity(trashCanList.get(0).getVy(), trashCanList.get(0).getWeight(), tito.getWeight());
+				tito.setVx();
+				tito.setVy();
+				//(trashCanList.get(0).getWeight());
+				trashCanList.get(0).single++;
+				//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: " + trashCanList.get(0).getVy());
+			}
 			
+			if (trashCanList.get(0).getPosition().y < 2){
+				//(trash.getVx() + " " + trash.getVy());
+				projectileMotion(trashCanList.get(0));
+				basicMove(trashCanList.get(0));
+				//System.out.println(" vyy: " + trashCanList.get(0).getVy());
+			}
+			
+			boolean planeCollided = false;
+			Plane p = planeList.get(0);
+			for (int i = 0; i < planeList.size(); i++){
+				planeCollided = planeColliding(planeList.get(i));
+				p = planeList.get(i);
+			}
+			
+			if (tito.getVy() > 0.5 && tito.getPosition().y <= 2){
+				projectileMotion(tito);
+				xMove();
+				//System.out.println(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+			}
+			else if (planeCollided){
+				planeCollision(p);
+				projectileMotion(tito);
+				xMove();
+				
+			}
+			else{
+				projectileMotion(tito);
+				xMove();
+			}
+			for (int i=0; i<maisonList.size(); i++){
+				if(maisonList.get(i).colliding(tito.getPosition()))
+					tito.setVx(-1*tito.getVx());
+			}
 		}
-		else{
-			projectileMotion(tito);
-			xMove();
-		}
-		for (int i=0; i<maisonList.size(); i++){
-			if(maisonList.get(i).colliding(tito.getPosition()))
-				tito.setVx(-1*tito.getVx());
-		}
-		
 	}
 	
 	//Physics moving and colliding methods

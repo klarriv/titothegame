@@ -43,8 +43,8 @@ public class MainMenu extends JPanel implements ActionListener{
 	/**
 	 * These are the variables for the "play" and "new game" buttons.
 	 */
-	private JButton playButton, newGameButton, exitButton, fullScreenButton;
-	
+	private static JButton playButton, newGameButton, exitButton, fullScreenButton;
+
 	private Timer t = new Timer(100, this);
 	private int yTitle = 20;
 	boolean direction = true;
@@ -56,17 +56,6 @@ public class MainMenu extends JPanel implements ActionListener{
 	public MainMenu() {
 		
 		setLayout(null);
-		try {
-			backgroundImage = ImageIO.read(new File("Resources/Menus/MainMenu/mainmenu.png"));
-			playButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/playButton.png"));
-			playButtonHighlightIcon = ImageIO.read(new File("Resources/Menus/MainMenu/playHighlightButton.png"));
-			newGameButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameButton.png"));
-			newGameHighlightButtonIcon = ImageIO.read(new File("Resources/Menus/MainMenu/newGameHighlightButton.png"));
-			titleImage = ImageIO.read(new File("Resources/Menus/MainMenu/title.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 
 		/**
 		 * This is the mouse listener to make the buttons change when the mouse hovers over them.
@@ -86,9 +75,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					changeButtonImage(playButton, playButtonHighlightIcon);
+					changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonHighlightTexture);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					changeButtonImage(newGameButton, newGameHighlightButtonIcon);
+					changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonHighlightTexture);
 				}
 			}
 
@@ -97,9 +86,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					changeButtonImage(playButton, playButtonIcon);
+					changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonTexture);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					changeButtonImage(newGameButton, newGameButtonIcon);
+					changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonTexture);
 				}
 			}
 
@@ -117,33 +106,7 @@ public class MainMenu extends JPanel implements ActionListener{
 
 		}
 		
-		class ButtonResizeListener implements ComponentListener{
-			
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				changeButtonImage(playButton, playButtonIcon);
-				changeButtonImage(newGameButton, newGameButtonIcon);
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-			}
-		}
-		
-		playButton = new JButton(new ImageIcon(playButtonIcon));
+		playButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuPlayButtonTexture));
 		playButton.setBorder(BorderFactory.createEmptyBorder());
 		playButton.setContentAreaFilled(false);
 		playButton.addMouseListener(new ButtonListener());
@@ -157,7 +120,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		});
 		playButton.addComponentListener(new ButtonResizeListener());
 
-		newGameButton = new JButton(new ImageIcon(newGameButtonIcon));
+		newGameButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuNewGameButtonTexture));
 		newGameButton.setBorder(BorderFactory.createEmptyBorder());
 		newGameButton.setContentAreaFilled(false);
 		newGameButton.addMouseListener(new ButtonListener());
@@ -258,8 +221,8 @@ public class MainMenu extends JPanel implements ActionListener{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
-		g.drawImage(titleImage, 81*getWidth()/1280, yTitle*getHeight()/720, titleImage.getWidth()*getWidth()/1280, titleImage.getHeight()*getHeight()/720, null);
+		g.drawImage(MainFrame.getTl().mainMenuBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(MainFrame.getTl().mainMenuTitleTexture, 81*getWidth()/1280, yTitle*getHeight()/720, MainFrame.getTl().mainMenuTitleTexture.getWidth()*getWidth()/1280, MainFrame.getTl().mainMenuTitleTexture.getHeight()*getHeight()/720, null);
 		playButton.setBounds(541*getWidth()/1280, 398*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 		newGameButton.setBounds(541*getWidth()/1280, 498*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 		exitButton.setBounds(1256*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
@@ -291,5 +254,13 @@ public class MainMenu extends JPanel implements ActionListener{
 		}
 		
 		repaint();
+	}
+	
+	public static JButton getPlayButton() {
+		return playButton;
+	}
+
+	public static JButton getNewGameButton() {
+		return newGameButton;
 	}
 }

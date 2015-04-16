@@ -15,6 +15,10 @@ import javax.swing.*;
  */
 public class MainFrame extends JFrame{
 	/**
+	 * Creates an instance of TextureLoader so the images can be loaded into the game.
+	 */
+	private static TextureLoader tl = new TextureLoader();
+	/**
 	 * This is the identifier string for the level select JPanel.
 	 */
 	private static final String LEVELSELECTPANEL = "LevelSelectPanel";
@@ -42,10 +46,6 @@ public class MainFrame extends JFrame{
 	 * The image variable that will be used to set the icon of the JFrame.
 	 */
 	private Image frameIcon = null;
-	/**
-	 * Creates an instance of TextureLoader so the images can be loaded into the game.
-	 */
-	private static TextureLoader tl = new TextureLoader();
 	
 	/**
 	 * This creates a new main JFrame
