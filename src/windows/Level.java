@@ -8,9 +8,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
+
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.Timer;
+
 import RunningClasses.SpriteSheet;
 import objects.*;
 import objects.Spring;
@@ -272,43 +274,43 @@ public class Level extends JPanel implements ActionListener{
 
 			tito = new Tito(reader.nextDouble(), reader.nextDouble(),
 					reader.nextDouble(), reader.nextDouble(), t);
-
+			//1
 			double numberOfTree = reader.nextDouble();
 			for (int i = 0; i < numberOfTree; i++)
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
-
+			//2
 			double numberOfBench = reader.nextDouble();
 			for (int i = 0; i < numberOfBench; i++)
 				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
-
+			//3
 			double numberOfCone = reader.nextDouble();
 			for (int i = 0; i < numberOfCone; i++)
 				coneList.add(new Cone(reader.nextDouble(), reader.nextDouble()));
-
+			//4
 			double numberOfPlane = reader.nextDouble();
 			for (int i = 0; i < numberOfPlane; i++)
 				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
-
+			//5
 			double numberOfRope = reader.nextDouble();
 			for (int i = 0; i < numberOfRope; i++)
 				ropeList.add(new Rope(reader.nextDouble(), reader.nextDouble()));
-
+			//6
 			double numberOfSeesaw = reader.nextDouble();
 			for (int i = 0; i < numberOfSeesaw; i++)
 				seesawList.add(new SeeSaw(reader.nextDouble(), reader.nextDouble()));
-
+			//7
 			double numberOfSpring = reader.nextDouble();
 			for (int i = 0; i < numberOfSpring; i++)
 				springList.add(new Spring(reader.nextDouble(), reader.nextDouble()));
-
+			//8
 			double numberOfTrashCan = reader.nextDouble();
 			for (int i = 0; i < numberOfTrashCan; i++)
 				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
-			
+			//9
 			double numberOfPulley = reader.nextDouble();
 			for (int i = 0; i<numberOfPulley; i++)
 				pulleyList.add(new Pulley(reader.nextDouble(), reader.nextDouble(), reader.nextBoolean()));
-			
+			//10
 			double numberOfMaison = reader.nextDouble();
 			for (int i = 0; i<numberOfMaison; i++)
 				maisonList.add(new Maison(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextInt()));
@@ -359,37 +361,66 @@ public class Level extends JPanel implements ActionListener{
 		gUnit = getWidth()/5;
 		
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
-		
+		//1 TREE
 		for(int i=0; i<treeList.size(); i++){
 			g.drawImage(treeList.get(i).getTexture(), (int)(gUnit*treeList.get(i).getPosition().x), (int)(gUnit*treeList.get(i).getPosition().y), (int)(2.9*gUnit), (int)(3.5*gUnit), null);
 		}
+		//2 BENCH 
 		for(int i=0; i<benchList.size(); i++){
 			if(benchList.get(i).isVisible())
 				g.drawImage(benchList.get(i).getTexture(), (int)(gUnit*benchList.get(i).getPosition().x), (int)(gUnit*benchList.get(i).getPosition().y), (int)(Bench.WIDTH*gUnit), (int)(Bench.HEIGHT*gUnit), null);
 		}
+		//3 CONE
 		for(int i=0; i<coneList.size(); i++){
 			if(coneList.get(i).isVisible())
 				g.drawImage(coneList.get(i).getTexture(), (int)(gUnit*coneList.get(i).getPosition().x), (int)(gUnit*coneList.get(i).getPosition().y), (int)(Cone.WIDTH*gUnit), (int)(Cone.HEIGHT*gUnit),  null);
 		}
+		//4 PLANE
 		for(int i=0; i<planeList.size(); i++){
 			g.drawLine((int)(gUnit*(planeList.get(i).getX()[0])), (int)(gUnit*(planeList.get(i).getY()[0])), (int)(gUnit*(planeList.get(i).getX()[1])), (int)(gUnit*planeList.get(i).getY()[1]));
 		}
+		//TODO image
+		//5 ROPE
 		for(int i=0; i<ropeList.size(); i++){
 			//g.drawImage(ropeList.get(i).texture, (int)(gUnit*ropeList.get(i).position.x), (int)(gUnit*ropeList.get(i).position.y), null);
+			if (ropeList.get(i).isUsed() == -1){
+				g.fillRect((int)(gUnit*ropeList.get(i).getAnchor2().x), (int)(gUnit*ropeList.get(i).getAnchor2().y), 20, 20);
+			}
+			else if (ropeList.get(i).isUsed() == 1){
+				int[] xPoints = {(int)(gUnit*ropeList.get(i).getAnchor1().x) + 50, (int)(gUnit*ropeList.get(i).getAnchor2().x) + 50};
+				int[] yPoints = {(int)(gUnit*ropeList.get(i).getAnchor1().y), (int)(gUnit*ropeList.get(i).getAnchor2().y)};
+				g.drawPolyline(xPoints, yPoints, 2);
+			}
+			else if (ropeList.get(i).isUsed() == 2){
+				int[] xPoints = {(int)(gUnit*ropeList.get(i).getAnchor1().x) + 50, (int)(gUnit*ropeList.get(i).getAnchor2().x) + 50, (int)(gUnit*ropeList.get(i).getAnchor3().x) + 50};
+				int[] yPoints = {(int)(gUnit*ropeList.get(i).getAnchor1().y), (int)(gUnit*ropeList.get(i).getAnchor2().y), (int)(gUnit*ropeList.get(i).getAnchor3().y)};
+				g.drawPolyline(xPoints, yPoints, 3);
+			}
+			else if (ropeList.get(i).isUsed() == -2){
+				g.drawLine((int)(gUnit*ropeList.get(i).getAnchor2().x) + 50, (int)(gUnit*ropeList.get(i).getAnchor2().y), (int)(gUnit*ropeList.get(i).getAnchor2().x) + 50 , (int)(gUnit*ropeList.get(i).getAnchor2().y) + 75);
+				
+			}
 		}
+		//6 SEESAW
 		for(int i=0; i<seesawList.size(); i++){
 			g.drawImage(seesawList.get(i).getTexture(), (int)(gUnit*seesawList.get(i).getPosition().x), (int)(gUnit*seesawList.get(i).getPosition().y), null);
 		}
+		//7 SPRING HAHAHAHAHAHAHA
 		for(int i=0; i<springList.size(); i++){
 			g.drawImage(springList.get(i).getTexture(), (int)(gUnit*springList.get(i).getPosition().x), (int)(gUnit*springList.get(i).getPosition().y), null);
 		}
+		//8 TRASHCAN
 		for(int i=0; i<trashCanList.size(); i++){
 			if(trashCanList.get(i).isVisible())
 				g.drawImage(trashCanList.get(i).getTexture(), (int)(gUnit*trashCanList.get(i).getPosition().x), (int)(gUnit*trashCanList.get(i).getPosition().y), (int)(TrashCan.WIDTH*gUnit), (int)(TrashCan.HEIGHT*gUnit), null);
 		}
+		//TODO integers
+		//9 PULLEY
 		for (int i=0; i<pulleyList.size(); i++){
-			// TODO g.drawImage(img, x, y, observer)
+			if(pulleyList.get(i).isVisible())
+				g.drawImage(pulleyList.get(i).getTexture(), (int)(gUnit*pulleyList.get(i).getPosition().x) + 15, (int)(gUnit*pulleyList.get(i).getPosition().y), null);
 		}
+		//10 MAISON
 		for (int i=0; i<maisonList.size(); i++){
 			// TODO fix the height of the house so it is the same used to draw it. 
 			g.drawImage(maisonList.get(i).getTexture(), (int)(gUnit*maisonList.get(i).getPosition().x), (int)(gUnit*maisonList.get(i).getPosition().y), (int)(maisonList.get(i).getWidth()*gUnit), (int)(maisonList.get(i).getHeight()*gUnit), null);
@@ -451,6 +482,23 @@ public class Level extends JPanel implements ActionListener{
 			for (int i=0; i<maisonList.size(); i++){
 				if(maisonList.get(i).colliding(tito.getPosition()))
 					tito.setVx(-1*tito.getVx());
+			}
+			//ropes
+			for(int i=0; i<ropeList.size(); i++){
+				if (ropeList.get(i).isUsed() == 2){
+					double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(),
+							ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
+					
+					
+					if (!ropeList.get(i).isMaxed() && t.isRunning() ){
+						ropeList.get(i).getOb1().setY(y);
+						ropeList.get(i).getOb1().setVy();
+						
+						ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
+					}
+				
+				}
+				ropeList.get(i).setTotalForce();
 			}
 		}
 	}
@@ -547,44 +595,60 @@ public class Level extends JPanel implements ActionListener{
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) throws IndexOutOfBoundsException{
-			DoublePoint p = new DoublePoint(arg0.getX()/gUnit, arg0.getY()/gUnit);
+			double x = (double)arg0.getX()/gUnit;
+			double y = (double)arg0.getY()/gUnit;
+			DoublePoint p = new DoublePoint(x, y);
+			
+			
 			for(int i=0; i<benchList.size(); i++){
 				if(benchList.get(i).getR()!=null && benchList.get(i).getR().contains(p)){
-					benchList.get(i).setX(arg0.getX()/gUnit-Bench.WIDTH/2);
-					benchList.get(i).setY(arg0.getY()/gUnit-Bench.HEIGHT/2);
-					benchList.get(i).getPosition().x = arg0.getX()/gUnit-Bench.WIDTH/2;
-					benchList.get(i).getPosition().y = arg0.getY()/gUnit-Bench.HEIGHT/2;
+					benchList.get(i).setX(x-Bench.WIDTH/2);
+					benchList.get(i).setY(y-Bench.HEIGHT/2);
+					benchList.get(i).getPosition().x = x-Bench.WIDTH/2;
+					benchList.get(i).getPosition().y = y-Bench.HEIGHT/2;
 				}			}
 			for(int i=0; i<coneList.size(); i++){
 				if(coneList.get(i).getR()!=null && coneList.get(i).getR().contains(p)){
-					coneList.get(i).setX(arg0.getX()/gUnit-Cone.WIDTH/2);
-					coneList.get(i).setY(arg0.getY()/gUnit-Cone.HEIGHT/2);
-					coneList.get(i).getPosition().x = arg0.getX()/gUnit-Cone.WIDTH/2;
-					coneList.get(i).getPosition().y = arg0.getY()/gUnit-Cone.HEIGHT/2;
+					coneList.get(i).setX(x-Cone.WIDTH/2);
+					coneList.get(i).setY(y-Cone.HEIGHT/2);
+					coneList.get(i).getPosition().x = x-Cone.WIDTH/2;
+					coneList.get(i).getPosition().y = y-Cone.HEIGHT/2;
 				}
 			}
 			for(int i=0; i<planeList.size(); i++){
 				// TODO make the planes move
 				/*
 				if(planeList.get(i).getR().contains(p)){
-					planeList.get(i).setX(arg0.getX()/gUnit-TrashCan.WIDTH/2);
-					planeList.get(i).setY(arg0.getY()/gUnit-TrashCan.HEIGHT/2);
-					planeList.get(i).getPosition().x = arg0.getX()/gUnit-TrashCan.WIDTH/2;
-					planeList.get(i).getPosition().y = arg0.getY()/gUnit-TrashCan.HEIGHT/2;
+					planeList.get(i).setX(x-TrashCan.WIDTH/2);
+					planeList.get(i).setY(y-TrashCan.HEIGHT/2);
+					planeList.get(i).getPosition().x = x-TrashCan.WIDTH/2;
+					planeList.get(i).getPosition().y = y-TrashCan.HEIGHT/2;
 				}
 					*/
 			}
+			//System.out.println(x + " " + ropeList.size());
 			for(int i=0; i<ropeList.size(); i++){
-				//TODO make the ropes move
+				if (x >= ropeList.get(i).getAnchor2().x && x <= ropeList.get(i).getAnchor2().x +(20/gUnit) && y >= ropeList.get(i).getAnchor2().y
+						&& y <= ropeList.get(i).getAnchor2().y + (20/gUnit) && ropeList.get(i).isUsed() == -1){
+					ropeList.get(i).getAnchor2().x = x - (10/gUnit);
+					ropeList.get(i).getAnchor2().y = y - (10/gUnit);
+					
+					for (int j = 0; j < pulleyList.size(); j++){
+						if (ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3)
+							ropeList.get(i).setPulley(pulleyList.get(j));
+					}
+					
+				}
 			}
+			//TODO when close to pulley w/ rope
 			for(int i=0; i<trashCanList.size(); i++){
 			if(trashCanList.get(i).getR()!=null && trashCanList.get(i).getR().contains(p)){
 				// USED TO MOVE THE TRASHCAN AROUND
-				trashCanList.get(i).setX(arg0.getX()/gUnit-TrashCan.WIDTH/2);
-				trashCanList.get(i).setY(arg0.getY()/gUnit-TrashCan.HEIGHT/2);
-				trashCanList.get(i).getPosition().x = arg0.getX()/gUnit-TrashCan.WIDTH/2;
-				trashCanList.get(i).getPosition().y = arg0.getY()/gUnit-TrashCan.HEIGHT/2;
-				System.out.println("Tra" + i + " weight " + trashCanList.get(i).getWeight());
+				trashCanList.get(i).setX(x-TrashCan.WIDTH/2);
+				trashCanList.get(i).setY(y-TrashCan.HEIGHT/2);
+				trashCanList.get(i).getPosition().x = x-TrashCan.WIDTH/2;
+				trashCanList.get(i).getPosition().y = y-TrashCan.HEIGHT/2;
+				//System.out.println("Tra" + i + " weight " + trashCanList.get(i).getWeight());
 				
 				// USED TO PUT OBJECTS IN THE TRASHCAN
 				for(int j = i+1; j<trashCanList.size(); j++){

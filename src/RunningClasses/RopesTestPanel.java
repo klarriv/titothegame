@@ -22,7 +22,7 @@ public class RopesTestPanel extends JPanel {
 	private Timer t;
 	private TrashCan trash1 = new TrashCan(1, 1.5);
 	private TrashCan trash2 = new TrashCan(2, 1.5);
-	private Pulley pulley = new Pulley(2,0.1, true);
+	private Pulley pulley = new Pulley(2, 0.1, true);
 	private Rope rope = new Rope(2, 2);
 	private Button start = new Button("Start");
 	private Button add5_1 = new Button("+5 Trash1");
