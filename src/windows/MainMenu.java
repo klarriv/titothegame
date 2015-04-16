@@ -75,9 +75,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonHighlightTexture);
+					MainFrame.getTl().changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonHighlightTexture);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonHighlightTexture);
+					MainFrame.getTl().changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonHighlightTexture);
 				}
 			}
 
@@ -86,9 +86,9 @@ public class MainMenu extends JPanel implements ActionListener{
 				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 				setCursor(cursor);
 				if ((JButton) e.getSource() == playButton) {
-					changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonTexture);
+					MainFrame.getTl().changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonTexture);
 				} else if ((JButton) e.getSource() == newGameButton) {
-					changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonTexture);
+					MainFrame.getTl().changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonTexture);
 				}
 			}
 
@@ -203,19 +203,7 @@ public class MainMenu extends JPanel implements ActionListener{
 	 * @param jbutton
 	 * @param img
 	 */
-	public void changeButtonImage(JButton jbutton, Image img){
-        Dimension size = jbutton.getSize();
-        Insets insets = jbutton.getInsets();
-        size.width -= insets.left + insets.right;
-        size.height -= insets.top + insets.bottom;
-        if (size.width > size.height) {
-            size.width = -1;
-        } else {
-            size.height = -1;
-        }
-        Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
-        jbutton.setIcon(new ImageIcon(scaled));
-	}
+	
 	
 	@Override
 	protected void paintComponent(Graphics g) {
