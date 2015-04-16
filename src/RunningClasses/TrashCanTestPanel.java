@@ -48,6 +48,7 @@ public class TrashCanTestPanel extends JPanel {
 		gUnit = getWidth()/5;
 		g.drawImage(trash1.getTexture(),(int)(gUnit* trash1.getPosition().x), (int)(gUnit* trash1.getPosition().y), 100, 100, null);
 		
+		
 		g.drawLine((int)(gUnit*(plane.getX()[0])), (int)(gUnit*(plane.getY()[0])), (int)(gUnit*(plane.getX()[1])), (int)(gUnit*plane.getY()[1]));
 		
 		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());

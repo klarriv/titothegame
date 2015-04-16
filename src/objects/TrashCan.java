@@ -17,7 +17,7 @@ public class TrashCan extends Physics {
 	
 	public static final double WIDTH = 0.4;
 	public static final double HEIGHT = 0.5;
-	private int weight = 20;
+	private int weight = 10;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
 	private BufferedImage texture;
@@ -27,6 +27,7 @@ public class TrashCan extends Physics {
 	public int single = 0;
 	private DoubleRectangle r;
 	public boolean rotated = false;
+	public static final double threshold = 300;
 	
 	
 	public TrashCan(double x, double y){
@@ -62,7 +63,7 @@ public class TrashCan extends Physics {
 	public void rotate(double angle){
 		AffineTransform tx = new AffineTransform();
 		
-	    tx.rotate(angle - Math.PI, texture.getWidth() / 2, texture.getHeight() / 2);
+	    tx.rotate(angle - Math.PI);
 
 	    AffineTransformOp op = new AffineTransformOp(tx,
 	        AffineTransformOp.TYPE_BILINEAR);

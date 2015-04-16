@@ -15,6 +15,8 @@ public class Rope {
 	private Physics ob2;
 	private Pulley pulley;
 	private boolean maxed = false;
+	private double force = 0;
+	private boolean broken = false;
 	
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
@@ -124,7 +126,7 @@ public class Rope {
 			double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
 			double distance2 = length - distance;
 			
-			if (distance <= length && distance >= 0)
+			if (distance <= length && distance2 >= 0)
 				maxed = false;
 			else 
 				maxed = true;
@@ -139,9 +141,10 @@ public class Rope {
 		return maxed;
 	}
 	/**
-	 * Returns -1 if it is not used,
+	 * Returns -2 if the rope broke,
+	 *  -1 if it is not used,
 	 * 0 if it is attached to a pulley,
-	 * 1 if it is attached to a pulley and a TrashCan
+	 * 1 if it is attached to a pulley and a TrashCan,
 	 * and 2 if it is attached to a pulley and two TrashCans
 	 * @return
 	 */
@@ -150,14 +153,40 @@ public class Rope {
 		boolean b = pulley == null;
 		boolean c = ob2 == null;
 		
-		if (a && !b && c)
+		if (broken)
+			return -2;
+		
+		else if (a && !b && c)
 			return 0;
+		
 		else if (!a && !b && c)
 			return 1;
+		
 		else if (!a && !b && !c)
 			return 2;
+		
 		else 
 			return -1;
+			
+	}
+	/**
+	 * Sets the total force applied on the rope
+	 */
+	public void setTotalForce(){
+		
+		if (isUsed() > 0 )
+			force = ob1.getForce(ob1.getWeight());
+		
+		if (isUsed() > 1  )
+			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
+		
+		if (force >= 300){
+			ob1 = null;
+			ob2 = null;
+			broken = true;
+		}
+		else
+			broken = false;
 			
 	}
 
@@ -224,6 +253,24 @@ public class Rope {
 
 	public void setMaxed(boolean maxed) {
 		this.maxed = maxed;
+	}
+	
+	public void setXAnchored(){
+		int u = isUsed();
+		if (u == 1)
+			this.anchor1.x = anchor2.x;
+		if(u==2){
+			this.anchor1.x = anchor2.x;
+			this.anchor3.x = anchor2.x;
+		}
+	}
+
+	public boolean isBroken() {
+		return broken;
+	}
+
+	public void setBroken(boolean broken) {
+		this.broken = broken;
 	}
 	
 	
