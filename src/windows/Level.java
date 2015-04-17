@@ -822,6 +822,7 @@ public class Level extends JPanel implements ActionListener {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + benchList.get(j).getWeight());
 								benchList.get(j).setVisible(false);
 								benchList.get(j).setR(null);
+								
 							}
 						}
 						for (int j = 0; j < ropeList.size(); j++) {
