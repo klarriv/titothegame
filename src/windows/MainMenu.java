@@ -190,8 +190,8 @@ public class MainMenu extends JPanel implements ActionListener{
 		try {
 			menuSong = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("Resources/Music/callToAdventure.wav").getAbsoluteFile());
-			//menuSong.open(ais);
-			//menuSong.loop(Clip.LOOP_CONTINUOUSLY);
+			menuSong.open(ais);
+			menuSong.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

@@ -577,10 +577,11 @@ public class Level extends JPanel implements ActionListener{
 			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 			if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()){
 				
-				
-				ob1.setY(2.5- ob1.getHeight());
-				ob1.setVy(-1*ob1.getVy() - 1);
-				////(loader.getPosition().y);
+				if (ob1.getVy() < 0){
+					ob1.setY(2.5 - ob1.getHeight());
+					ob1.setVy(-1*ob1.getVy() - 1.5);
+					////(loader.getPosition().y);
+				}
 			}
 			
 			else if (y <= 2.5- ob1.getHeight()){

@@ -181,7 +181,7 @@ public class Rope {
 		if (isUsed() > 1  )
 			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
 		
-		if (force >= 195){
+		if (force >= 300){
 			if (ob1 != null)
 				ob1.setUsed(false);
 			if (ob2 != null)
