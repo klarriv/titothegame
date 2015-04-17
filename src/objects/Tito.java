@@ -18,6 +18,7 @@ public class Tito extends Physics{
 	private double vx = 7;
 	private double vy = 10;
 	private final double HEIGHT = 0.25;
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
 	public Tito(){
 		texture = MainFrame.getTl().titoTexture;
@@ -36,6 +37,7 @@ public class Tito extends Physics{
 		
 		this.position.x = x;
 		this.position.y = y;
+		setDefaultPosition(position);
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
@@ -153,7 +155,25 @@ public class Tito extends Physics{
 		return HEIGHT;
 	}
 
-	
+	@Override
+	public void resetPosition(){
+		this.position.x = this.defaultPosition.x;
+		this.position.y = this.defaultPosition.y;
+	}
+
+	@Override
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition.x =this.position.x;
+		this.defaultPosition.y = this.position.y;
+		
+	}
+
+	@Override
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return defaultPosition;
+	}
+
 
 	
 	

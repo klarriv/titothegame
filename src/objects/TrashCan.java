@@ -27,12 +27,14 @@ public class TrashCan extends Physics {
 	public int single = 0;
 	private DoubleRectangle r;
 	public boolean rotated = false;
+	private DoublePoint defaultPosition  = new DoublePoint(1, 1);
 	public static final double threshold = 300;
 	
 	
 	public TrashCan(double x, double y){
 		
 		position = new DoublePoint(x, y);
+		setDefaultPosition(position);
 		this.vx = 0;
 		this.vy = 0;
 		//loadImage();
@@ -53,6 +55,7 @@ public class TrashCan extends Physics {
 		
 		this.position.x = x;
 		this.position.y = y;
+		setDefaultPosition(position);
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
@@ -172,6 +175,26 @@ public class TrashCan extends Physics {
 		
 		return HEIGHT;
 	}
+
+	@Override
+	public void resetPosition(){
+		this.position.x = this.defaultPosition.x;
+		this.position.y = this.defaultPosition.y;
+	}
+
+	@Override
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition.x =this.position.x;
+		this.defaultPosition.y = this.position.y;
+		
+	}
+
+	@Override
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return defaultPosition;
+	}
+
 
 	
 	

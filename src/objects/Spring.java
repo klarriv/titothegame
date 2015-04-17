@@ -132,6 +132,24 @@ public class Spring extends Physics {
 		return 0;
 	}
 
+	@Override
+	public void resetPosition() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setDefaultPosition(DoublePoint position) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 	

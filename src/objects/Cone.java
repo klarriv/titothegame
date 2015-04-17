@@ -18,10 +18,13 @@ public class Cone extends Physics {
 	private int weight = 5;
 	private boolean isVisible;
 	private boolean isUsed = false;
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
 	public Cone(double x, double y){
 		
 		position = new DoublePoint(x,y);
+		setDefaultPosition(position);
+		
 		texture = MainFrame.getTl().coneTexture;
 		isVisible = true;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
@@ -128,6 +131,20 @@ public class Cone extends Physics {
 	@Override
 	public double getHeight() {
 		return HEIGHT;
+	}
+
+	public DoublePoint getDefaultPosition() {
+		return defaultPosition;
+	}
+
+	public void setDefaultPosition(DoublePoint defaultPosition) {
+		this.defaultPosition.x = defaultPosition.x;
+		this.defaultPosition.y = defaultPosition.y;
+	}
+	
+	public void resetPosition(){
+		this.position.x = this.defaultPosition.x;
+		this.position.y = this.defaultPosition.y;
 	}
 
 }

@@ -21,12 +21,13 @@ public class Rope {
 	private double force = 0;
 	private boolean broken = false;
 	private DoubleRectangle r;
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
 	
 	
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
-		
+		setDefaultPosition(anchor2);
 		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 	}
 	
@@ -313,6 +314,23 @@ public class Rope {
 	public void setY(double y){
 		if (isUsed() == -1)
 			anchor2.y = y;
+	}
+	
+
+	public void resetPosition(){
+		this.anchor2.x = this.defaultPosition.x;
+		this.anchor2.y = this.defaultPosition.y;
+	}
+
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition.x =this.anchor2.x;
+		this.defaultPosition.y = this.anchor2.y;
+		
+	}
+
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return defaultPosition;
 	}
 	
 	

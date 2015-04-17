@@ -115,6 +115,19 @@ public interface ObjectInterface {
 	 */
 	public double getHeight();
 	
+	/**
+	 * Resets to the default position
+	 */
+	public void resetPosition();
 	
-
+	/**
+	 * Sets the default position
+	 * @param position
+	 */
+	public void setDefaultPosition(DoublePoint position);
+	/**
+	 * Gets the default position
+	 * @return
+	 */
+	public DoublePoint getDefaultPosition();
 }

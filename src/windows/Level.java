@@ -649,18 +649,29 @@ public class Level extends JPanel implements ActionListener {
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			isClicked = false;
+		
 			for (int i = 0; i < benchList.size(); i++) {
 				benchList.get(i).isMoving = false;
+				if (!benchList.get(i).isUsed())
+					benchList.get(i).resetPosition();
 			}
 			for (int i = 0; i < coneList.size(); i++) {
 				coneList.get(i).isMoving = false;
+				if (!coneList.get(i).isUsed())
+					coneList.get(i).resetPosition();
 			}
 			for (int i = 0; i < trashCanList.size(); i++) {
 				trashCanList.get(i).isMoving = false;
+				if (!trashCanList.get(i).isUsed())
+					trashCanList.get(i).resetPosition();
+				
 			}
 			for (int i = 0; i < ropeList.size(); i++) {
 				ropeList.get(i).isMoving = false;
+				if (ropeList.get(i).isUsed() == -1)
+					ropeList.get(i).resetPosition();
 			}
+			repaint();
 		}
 
 		@Override
@@ -680,6 +691,7 @@ public class Level extends JPanel implements ActionListener {
 							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + benchList.get(i).getWeight());
 							benchList.get(i).setVisible(false);
 							benchList.get(i).setR(null);
+							benchList.get(i).setUsed(true);
 						}
 					}
 				}
@@ -693,6 +705,7 @@ public class Level extends JPanel implements ActionListener {
 							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + coneList.get(i).getWeight());
 							coneList.get(i).setVisible(false);
 							coneList.get(i).setR(null);
+							coneList.get(i).setUsed(true);
 						}
 					}
 				}

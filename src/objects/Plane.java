@@ -180,6 +180,8 @@ public class Plane {
 	public void setUsed(boolean isUsed) {
 		this.isUsed = isUsed;
 	}
+	
+	
 
 
 }

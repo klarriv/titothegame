@@ -13,9 +13,11 @@ public class Pulley extends Physics{
 	private boolean isVisible;
 	private BufferedImage texture;
 	private boolean isUsed = false;
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
 	public Pulley(DoublePoint position, boolean visible){
 		this.position = position;
+		setDefaultPosition(position);
 		this.isVisible = visible;
 		
 		if (isVisible)
@@ -25,6 +27,7 @@ public class Pulley extends Physics{
 	public Pulley(double x, double y, boolean visible){
 		this.position.x = x;
 		this.position.y = y;
+		setDefaultPosition(position);
 		this.isVisible = visible;
 		
 		if (isVisible)
@@ -138,6 +141,26 @@ public class Pulley extends Physics{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public void resetPosition(){
+		this.position.x = this.defaultPosition.x;
+		this.position.y = this.defaultPosition.y;
+	}
+
+	@Override
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition.x =this.position.x;
+		this.defaultPosition.y = this.position.y;
+		
+	}
+
+	@Override
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return defaultPosition;
+	}
+
 
 	
 

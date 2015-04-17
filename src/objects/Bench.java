@@ -17,10 +17,12 @@ public class Bench extends Physics {
 	private DoubleRectangle r;
 	private DoublePoint position;
 	private boolean isUsed = false;
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
 	public Bench(double x, double y){
 		
 		position = new DoublePoint(x, y);
+		setDefaultPosition(position);
 		texture = MainFrame.getTl().benchTexture;
 		isVisible = true;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
@@ -129,6 +131,25 @@ public class Bench extends Physics {
 	public double getHeight() {
 		
 		return HEIGHT;
+	}
+	
+	@Override
+	public void resetPosition(){
+		this.position.x = this.defaultPosition.x;
+		this.position.y = this.defaultPosition.y;
+	}
+
+	@Override
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition.x =this.position.x;
+		this.defaultPosition.y = this.position.y;
+		
+	}
+
+	@Override
+	public DoublePoint getDefaultPosition() {
+		// TODO Auto-generated method stub
+		return defaultPosition;
 	}
 
 	

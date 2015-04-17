@@ -21,6 +21,7 @@ public class AnimationTestFrame extends JFrame {
 	private TrashCanTestPanel t = new TrashCanTestPanel();
 	
 	
+	
 	public AnimationTestFrame(){
 		
 		add(r);
@@ -31,6 +32,6 @@ public class AnimationTestFrame extends JFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 
-	}
+	} 
 
 }
