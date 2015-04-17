@@ -83,7 +83,13 @@ public class Plane {
 	}
 	
 	
-	
+	public void setIncline(double y){
+		if (this.y[2] - y >= width){
+			this.y[2] = y;
+			setAngle(this.x[0] - this.x[2] , this.y[1] - this.y[2]);
+		}
+		
+	}
 	
 	public DoublePoint getDp() {
 		return dp;
@@ -100,6 +106,12 @@ public class Plane {
 
 	public void setAngle(double angle) {
 		this.angle = angle;
+		setFormula();
+	}
+	
+	public void setAngle(double dx, double dy){
+		this.angle = Math.PI - Math.atan(dy/dx);
+		setFormula();
 	}
 
 	public double getA() {

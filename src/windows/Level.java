@@ -262,6 +262,7 @@ public class Level extends JPanel implements ActionListener {
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
+		
 
 	}
 
@@ -507,6 +508,8 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		}
+		//TODO weight thing
+	//System.out.println(trashCanList.get(0).getWeight() + " " + trashCanList.get(1).getWeight());
 
 	}
 
