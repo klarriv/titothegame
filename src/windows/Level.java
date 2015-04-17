@@ -742,7 +742,7 @@ public class Level extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			if(isClicked && isPaused){	
+			if(isClicked && !t.isRunning()){	
 				double x = (double) arg0.getX() / gUnit;
 				double y = (double) arg0.getY() / gUnit;
 				DoublePoint p = new DoublePoint(x, y);
