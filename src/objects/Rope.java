@@ -306,6 +306,16 @@ public class Rope {
 		this.r = r;
 	}
 	
+	public void setX(double x){
+		if (isUsed() == -1)
+			anchor2.x = x;
+		
+	}
+	public void setY(double y){
+		if (isUsed() == -1)
+			anchor2.y = y;
+	}
+	
 	
 }
 
