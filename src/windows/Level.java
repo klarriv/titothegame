@@ -105,8 +105,7 @@ public class Level extends JPanel implements ActionListener {
 	private int titoXSprite = 0;
 	private int titoYSprite = 0;
 	private boolean isPaused = false;
-	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay,
-			jbtRestart;
+	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
 
 	// private Maison m;
 
@@ -186,10 +185,8 @@ public class Level extends JPanel implements ActionListener {
 				t.start();
 				repaint();
 				// TODO need to reset the level
-				CardLayout cardLayout = (CardLayout) MainFrame.getMenus()
-						.getLayout();
-				cardLayout.show(MainFrame.getMenus(),
-						MainFrame.getLevelselectpanel());
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
 		});
 		jbtExitGame.addActionListener(new ActionListener() {
@@ -208,8 +205,7 @@ public class Level extends JPanel implements ActionListener {
 		jbtBackToLevelSelect.setVisible(false);
 		jbtExitGame.setVisible(false);
 
-		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-				KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "openPauseMenu");
+		getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "openPauseMenu");
 		getActionMap().put("openPauseMenu", new AbstractAction() {
 
 			@Override
@@ -237,8 +233,6 @@ public class Level extends JPanel implements ActionListener {
 		// START OF LOADING STUFF
 		loadObjects();
 
-		// m = new Maison(3.1, 1.6, 0.7, 2, 1 );
-
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
 
@@ -250,8 +244,7 @@ public class Level extends JPanel implements ActionListener {
 				SpriteSheet ss = new SpriteSheet(spriteSheet);
 
 				if (titoXSprite < rollingx.length) {
-					sprite = ss.grabSprite(rollingx[titoXSprite] * 300,
-							rollingy[titoYSprite] * 250, 289, 250);
+					sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
 					if (counter % 2 == 0) {
 						titoXSprite++;
 						titoYSprite++;
@@ -259,8 +252,7 @@ public class Level extends JPanel implements ActionListener {
 				} else {
 					titoXSprite = 0;
 					titoYSprite = 0;
-					sprite = ss.grabSprite(rollingx[titoXSprite] * 300,
-							rollingy[titoYSprite] * 250, 289, 250);
+					sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
 					titoXSprite++;
 					titoYSprite++;
 				}
@@ -287,20 +279,17 @@ public class Level extends JPanel implements ActionListener {
 		maisonList.clear();
 
 		try {
-			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level"
-					+ levelNumber + ".lvl"));
+			Scanner reader = new Scanner(new File(LEVELDIRECTORY + "/level" + levelNumber + ".lvl"));
 
-			tito = new Tito(reader.nextDouble(), reader.nextDouble(),
-					reader.nextDouble(), reader.nextDouble(), t);
+			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			// 1
 			double numberOfTree = reader.nextDouble();
-			for (int i = 0; i < numberOfTree; i++)
+			for (int i = 0; i < numberOfTree; i++) 
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			// 2
 			double numberOfBench = reader.nextDouble();
-			for (int i = 0; i < numberOfBench; i++)
-				benchList.add(new Bench(reader.nextDouble(), reader
-						.nextDouble()));
+			for (int i = 0; i < numberOfBench; i++) 
+				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			// 3
 			double numberOfCone = reader.nextDouble();
 			for (int i = 0; i < numberOfCone; i++)
@@ -308,9 +297,7 @@ public class Level extends JPanel implements ActionListener {
 			// 4
 			double numberOfPlane = reader.nextDouble();
 			for (int i = 0; i < numberOfPlane; i++)
-				planeList.add(new Plane(reader.nextDouble(), reader
-						.nextDouble(), Math.toRadians(reader.nextDouble()),
-						reader.nextDouble()));
+				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
 			// 5
 			double numberOfRope = reader.nextDouble();
 			for (int i = 0; i < numberOfRope; i++)
@@ -318,29 +305,23 @@ public class Level extends JPanel implements ActionListener {
 			// 6
 			double numberOfSeesaw = reader.nextDouble();
 			for (int i = 0; i < numberOfSeesaw; i++)
-				seesawList.add(new SeeSaw(reader.nextDouble(), reader
-						.nextDouble()));
+				seesawList.add(new SeeSaw(reader.nextDouble(), reader.nextDouble()));
 			// 7
 			double numberOfSpring = reader.nextDouble();
 			for (int i = 0; i < numberOfSpring; i++)
-				springList.add(new Spring(reader.nextDouble(), reader
-						.nextDouble()));
+				springList.add(new Spring(reader.nextDouble(), reader.nextDouble()));
 			// 8
 			double numberOfTrashCan = reader.nextDouble();
 			for (int i = 0; i < numberOfTrashCan; i++)
-				trashCanList.add(new TrashCan(reader.nextDouble(), reader
-						.nextDouble()));
+				trashCanList.add(new TrashCan(reader.nextDouble(), reader.nextDouble()));
 			// 9
 			double numberOfPulley = reader.nextDouble();
 			for (int i = 0; i < numberOfPulley; i++)
-				pulleyList.add(new Pulley(reader.nextDouble(), reader
-						.nextDouble(), reader.nextBoolean()));
+				pulleyList.add(new Pulley(reader.nextDouble(), reader.nextDouble(), reader.nextBoolean()));
 			// 10
 			double numberOfMaison = reader.nextDouble();
 			for (int i = 0; i < numberOfMaison; i++)
-				maisonList.add(new Maison(reader.nextDouble(), reader
-						.nextDouble(), reader.nextDouble(),
-						reader.nextDouble(), reader.nextInt()));
+				maisonList.add(new Maison(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextInt()));
 
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -387,39 +368,24 @@ public class Level extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		gUnit = getWidth() / 5;
 
-		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(),
-				getHeight(), null);
+		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 		// 1 TREE
 		for (int i = 0; i < treeList.size(); i++) {
-			g.drawImage(treeList.get(i).getTexture(), (int) (gUnit * treeList
-					.get(i).getPosition().x), (int) (gUnit * treeList.get(i)
-					.getPosition().y), (int) (2.9 * gUnit),
-					(int) (3.5 * gUnit), null);
+			g.drawImage(treeList.get(i).getTexture(), (int) (gUnit * treeList.get(i).getPosition().x), (int) (gUnit * treeList.get(i).getPosition().y), (int) (2.9 * gUnit), (int) (3.5 * gUnit), null);
 		}
 		// 2 BENCH
 		for (int i = 0; i < benchList.size(); i++) {
 			if (benchList.get(i).isVisible())
-				g.drawImage(benchList.get(i).getTexture(),
-						(int) (gUnit * benchList.get(i).getPosition().x),
-						(int) (gUnit * benchList.get(i).getPosition().y),
-						(int) (Bench.WIDTH * gUnit),
-						(int) (Bench.HEIGHT * gUnit), null);
+				g.drawImage(benchList.get(i).getTexture(), (int) (gUnit * benchList.get(i).getPosition().x), (int) (gUnit * benchList.get(i).getPosition().y), (int) (Bench.WIDTH * gUnit), (int) (Bench.HEIGHT * gUnit), null);
 		}
 		// 3 CONE
 		for (int i = 0; i < coneList.size(); i++) {
 			if (coneList.get(i).isVisible())
-				g.drawImage(coneList.get(i).getTexture(),
-						(int) (gUnit * coneList.get(i).getPosition().x),
-						(int) (gUnit * coneList.get(i).getPosition().y),
-						(int) (Cone.WIDTH * gUnit),
-						(int) (Cone.HEIGHT * gUnit), null);
+				g.drawImage(coneList.get(i).getTexture(), (int) (gUnit * coneList.get(i).getPosition().x), (int) (gUnit * coneList.get(i).getPosition().y), (int) (Cone.WIDTH * gUnit), (int) (Cone.HEIGHT * gUnit), null);
 		}
 		// 4 PLANE
 		for (int i = 0; i < planeList.size(); i++) {
-			g.drawLine((int) (gUnit * (planeList.get(i).getX()[0])),
-					(int) (gUnit * (planeList.get(i).getY()[0])),
-					(int) (gUnit * (planeList.get(i).getX()[1])),
-					(int) (gUnit * planeList.get(i).getY()[1]));
+			g.drawLine((int) (gUnit * (planeList.get(i).getX()[0])), (int) (gUnit * (planeList.get(i).getY()[0])), (int) (gUnit * (planeList.get(i).getX()[1])), (int) (gUnit * planeList.get(i).getY()[1]));
 		}
 		// TODO image
 		// 5 ROPE
@@ -427,36 +393,21 @@ public class Level extends JPanel implements ActionListener {
 			if (ropeList.get(i).isUsed() == -1) {
 				g.fillRect((int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * Rope.WIDTH), (int) (gUnit * Rope.HEIGHT));
 			} else if (ropeList.get(i).isUsed() == 1) {
-				int[] xPoints = {
-						(int) (gUnit * ropeList.get(i).getAnchor1().x) + 50,
-						(int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
-				int[] yPoints = {
-						(int) (gUnit * ropeList.get(i).getAnchor1().y),
-						(int) (gUnit * ropeList.get(i).getAnchor2().y) };
+				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
+				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y) };
 				g.drawPolyline(xPoints, yPoints, 2);
 			} else if (ropeList.get(i).isUsed() == 2) {
-				int[] xPoints = {
-						(int) (gUnit * ropeList.get(i).getAnchor1().x) + 50,
-						(int) (gUnit * ropeList.get(i).getAnchor2().x) + 50,
-						(int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
-				int[] yPoints = {
-						(int) (gUnit * ropeList.get(i).getAnchor1().y),
-						(int) (gUnit * ropeList.get(i).getAnchor2().y),
-						(int) (gUnit * ropeList.get(i).getAnchor3().y) };
+				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
+				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor3().y) };
 				g.drawPolyline(xPoints, yPoints, 3);
 			} else if (ropeList.get(i).isUsed() == -2) {
-				g.drawLine((int) (gUnit * ropeList.get(i).getAnchor2().x) + 50,
-						(int) (gUnit * ropeList.get(i).getAnchor2().y),
-						(int) (gUnit * ropeList.get(i).getAnchor2().x) + 50,
-						(int) (gUnit * ropeList.get(i).getAnchor2().y) + 75);
+				g.drawLine((int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().y) + 75);
 
 			}
 		}
 		// 6 SEESAW
 		for (int i = 0; i < seesawList.size(); i++) {
-			g.drawImage(seesawList.get(i).getTexture(),
-					(int) (gUnit * seesawList.get(i).getPosition().x),
-					(int) (gUnit * seesawList.get(i).getPosition().y), null);
+			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), null);
 		}
 		// 7 SPRING HAHAHAHAHAHAHA
 		for (int i = 0; i < springList.size(); i++) {
@@ -464,57 +415,38 @@ public class Level extends JPanel implements ActionListener {
 		}
 		// 8 TRASHCAN
 		for (int i = 0; i < trashCanList.size(); i++) {
-			if (trashCanList.get(i).isVisible())
+			if (trashCanList.get(i).isVisible()){
 				g.drawImage(trashCanList.get(i).getTexture(), (int) (gUnit * trashCanList.get(i).getPosition().x), (int) (gUnit * trashCanList.get(i).getPosition().y), (int) (TrashCan.WIDTH * gUnit), (int) (TrashCan.HEIGHT * gUnit), null);
+				g.drawRect((int) (gUnit*trashCanList.get(i).getR().getPosition().x), (int) (gUnit * trashCanList.get(i).getR().getPosition().y), (int) (gUnit * trashCanList.get(i).getR().getWidth()), (int) (gUnit * trashCanList.get(i).getR().getHeight()));
+			}
 		}
 		// TODO integers
 		// 9 PULLEY
 		for (int i = 0; i < pulleyList.size(); i++) {
 			if (pulleyList.get(i).isVisible())
-				g.drawImage(pulleyList.get(i).getTexture(),
-						(int) (gUnit * pulleyList.get(i).getPosition().x) + 15,
-						(int) (gUnit * pulleyList.get(i).getPosition().y), null);
+				g.drawImage(pulleyList.get(i).getTexture(), (int) (gUnit * pulleyList.get(i).getPosition().x) + 15, (int) (gUnit * pulleyList.get(i).getPosition().y), null);
 		}
 		// 10 MAISON
 		for (int i = 0; i < maisonList.size(); i++) {
-			// TODO fix the height of the house so it is the same used to draw
-			// it.
-			g.drawImage(maisonList.get(i).getTexture(),
-					(int) (gUnit * maisonList.get(i).getPosition().x),
-					(int) (gUnit * maisonList.get(i).getPosition().y),
-					(int) (maisonList.get(i).getWidth() * gUnit),
-					(int) (maisonList.get(i).getHeight() * gUnit), null);
+			g.drawImage(maisonList.get(i).getTexture(), (int) (gUnit * maisonList.get(i).getPosition().x), (int) (gUnit * maisonList.get(i).getPosition().y), (int) (maisonList.get(i).getWidth() * gUnit), (int) (maisonList.get(i).getHeight() * gUnit), null);
 		}
 
-		// g.drawImage(m.getTexture(), (int)(gUnit*m.getPosition().x),
-		// (int)(gUnit*m.getPosition().y)- 48, (int)(0.7*gUnit),
-		// (int)(1.1*gUnit), null);
-
-		g.drawImage(sprite, (int) (gUnit * tito.getPosition().x),
-				(int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25),
-				(int) (gUnit * 0.25), null);
+		g.drawImage(sprite, (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
 
 		jbtPlay.setBounds(10, 10, 40, 40);
 		jbtRestart.setBounds(60, 10, 40, 40);
-
+		
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());
-			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture,
-					248 * getWidth() / 1280, 10 * getHeight() / 720,
-					MainFrame.getTl().levelPauseHeaderTexture.getWidth()
-							* getWidth() / 1280,
-					MainFrame.getTl().levelPauseHeaderTexture.getHeight()
-							* getHeight() / 720, null);
+			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
 
 		if (t.isRunning()) {
 			// TODO create the see-saw....
 			// Collision and movements
-			if (trashCanList.get(0).getPosition().y >= 2
-					&& trashCanList.get(0).single == 0) {
-				tito.setEnergyVelocity(trashCanList.get(0).getVy(),
-						trashCanList.get(0).getWeight(), tito.getWeight());
+			if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0) {
+				tito.setEnergyVelocity(trashCanList.get(0).getVy(),	trashCanList.get(0).getWeight(), tito.getWeight());
 				tito.setVx();
 				tito.setVy();
 				// (trashCanList.get(0).getWeight());
@@ -523,8 +455,7 @@ public class Level extends JPanel implements ActionListener {
 				// + trashCanList.get(0).getVy());
 			}
 			for (int i = 0; i < trashCanList.size(); i++) {
-				if (trashCanList.get(i).getPosition().y < 2
-						&& !trashCanList.get(i).isUsed()) {
+				if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
 					// (trash.getVx() + " " + trash.getVy());
 					projectileMotion(trashCanList.get(i));
 					basicMove(trashCanList.get(i));
@@ -562,21 +493,13 @@ public class Level extends JPanel implements ActionListener {
 				// System.out.println(ropeList.get(i).getOb1() ==
 				// ropeList.get(i).getOb2());
 				if (ropeList.get(i).isUsed() == 2) {
-					double y = ropeList
-							.get(i)
-							.getOb1()
-							.projectileMotions(
-									ropeList.get(i).getOb1().getWeight(),
-									ropeList.get(i).getOb1().getPosition().y,
-									ropeList.get(i).getOb1().getVy(),
-									t.getDelay());
+					double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
 
 					if (!ropeList.get(i).isMaxed() && t.isRunning()) {
 						ropeList.get(i).getOb1().setY(y);
 						ropeList.get(i).getOb1().setVy();
 
-						ropeList.get(i).pulleyMove(
-								ropeList.get(i).getOb1().getPosition().x, y);
+						ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
 					}
 
 				}
@@ -605,8 +528,7 @@ public class Level extends JPanel implements ActionListener {
 
 	public boolean planeColliding(Plane plane) {
 		double r = 40.0 / gUnit;
-		DoublePoint dp = new DoublePoint(tito.getPosition().x + r,
-				tito.getPosition().y + r);
+		DoublePoint dp = new DoublePoint(tito.getPosition().x + r, tito.getPosition().y + r);
 		double d = plane.pointDistance(dp);
 		if (plane.getWidth() > 0) {
 			if (d <= r && (dp.x) <= plane.getX()[1] && dp.x >= plane.getX()[0])
@@ -625,8 +547,7 @@ public class Level extends JPanel implements ActionListener {
 	}
 
 	public void xMove() {
-		double x = tito.motion(tito.getPosition().x, -tito.getVx(),
-				t.getDelay());
+		double x = tito.motion(tito.getPosition().x, -tito.getVx(), t.getDelay());
 
 		if (x <= 5 && x >= 0)
 			tito.setX(x);
@@ -642,8 +563,7 @@ public class Level extends JPanel implements ActionListener {
 	// Faudrait ajouter le diametre ou le height pour faire les contacts avec le
 	// sol.... faudrait que ca soit genre une variable dans les objects
 	public void projectileMotion(Physics ob1) {
-		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y,
-				ob1.getVy(), t.getDelay());
+		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
 
 			ob1.setY(2.5 - ob1.getHeight());
@@ -752,11 +672,25 @@ public class Level extends JPanel implements ActionListener {
 						benchList.get(i).setX(x - Bench.WIDTH / 2);
 						benchList.get(i).setY(y - Bench.HEIGHT / 2);
 					}
+					for(int j = 0; j<trashCanList.size(); j++){
+						if (trashCanList.get(j).getR() != null && benchList.get(i).getR() != null && trashCanList.get(j).getR().contains(benchList.get(i).getR())) {
+							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + benchList.get(i).getWeight());
+							benchList.get(i).setVisible(false);
+							benchList.get(i).setR(null);
+						}
+					}
 				}
 				for (int i = 0; i < coneList.size(); i++) {
 					if (coneList.get(i).getR() != null && coneList.get(i).isMoving) {
 						coneList.get(i).setX(x - Cone.WIDTH / 2);
 						coneList.get(i).setY(y - Cone.HEIGHT / 2);
+					}
+					for(int j = 0; j<trashCanList.size(); j++){
+						if (trashCanList.get(j).getR() != null && coneList.get(i).getR() != null && trashCanList.get(j).getR().contains(coneList.get(i).getR())) {
+							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + coneList.get(i).getWeight());
+							coneList.get(i).setVisible(false);
+							coneList.get(i).setR(null);
+						}
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
@@ -799,21 +733,7 @@ public class Level extends JPanel implements ActionListener {
 								trashCanList.get(j).setUsed(true);
 							}
 						}
-						for (int j = 0; j < coneList.size(); j++) {
-							if (coneList.get(j).getR().contains(trashCanList.get(i).getR())) {
-								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + coneList.get(j).getWeight());
-								coneList.get(j).setVisible(false);
-								coneList.get(j).setR(null);
-							}
-						}
-						for (int j = 0; j < benchList.size(); j++) {
-							if (benchList.get(j).getR() != null && trashCanList.get(i).getR().contains(benchList.get(j).getR())) {
-								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + benchList.get(j).getWeight());
-								benchList.get(j).setVisible(false);
-								benchList.get(j).setR(null);
-								
-							}
-						}
+						
 						for (int j = 0; j < ropeList.size(); j++) {
 							if (trashCanList.get(i).getPosition().distance(ropeList.get(j).getAnchor2()) <= 0.3) {
 								if (ropeList.get(j).isUsed() == 0 && !trashCanList.get(i).isUsed()) {
