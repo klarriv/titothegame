@@ -729,7 +729,7 @@ public class Level extends JPanel implements ActionListener {
 	
 						// USED TO PUT OBJECTS IN THE TRASHCAN
 						for (int j = i + 1; j < trashCanList.size(); j++) {
-							if (trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && !trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed()) {
+							if (trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 								trashCanList.get(j).setVisible(false);
 								trashCanList.get(j).setR(null);
