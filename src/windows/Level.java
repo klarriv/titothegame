@@ -647,7 +647,7 @@ public class Level extends JPanel implements ActionListener {
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
 
 			ob1.setY(2.5 - ob1.getHeight());
-			ob1.setVy(-1 * ob1.getVy() - 1);
+			ob1.setVy(-1 * ob1.getVy() - 1.5);
 			// //(loader.getPosition().y);
 		}
 
