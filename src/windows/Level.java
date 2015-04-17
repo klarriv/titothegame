@@ -742,7 +742,7 @@ public class Level extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			if(isClicked){	
+			if(isClicked && isPaused){	
 				double x = (double) arg0.getX() / gUnit;
 				double y = (double) arg0.getY() / gUnit;
 				DoublePoint p = new DoublePoint(x, y);
@@ -773,8 +773,8 @@ public class Level extends JPanel implements ActionListener {
 				for (int i = 0; i < ropeList.size(); i++) {
 					ropeList.get(i).setXAnchored();
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
-						ropeList.get(i).getAnchor2().x = x - Rope.WIDTH / 2;
-						ropeList.get(i).getAnchor2().y = y - Rope.HEIGHT / 2;
+						ropeList.get(i).setX(x- Rope.WIDTH /2);
+						ropeList.get(i).setY(y - Rope.HEIGHT / 2);
 	
 						for (int j = 0; j < pulleyList.size(); j++) {
 							if (ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3)
@@ -800,7 +800,7 @@ public class Level extends JPanel implements ActionListener {
 							}
 						}
 						for (int j = 0; j < coneList.size(); j++) {
-							if (coneList.get(j).getR() != null && trashCanList.get(i).getR().contains(coneList.get(j).getR())) {
+							if (coneList.get(j).getR().contains(trashCanList.get(i).getR())) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + coneList.get(j).getWeight());
 								coneList.get(j).setVisible(false);
 								coneList.get(j).setR(null);
