@@ -573,22 +573,22 @@ public class Level extends JPanel implements ActionListener{
 		
 		//TODO work on this bouncy thing
 		//Faudrait ajouter le diametre ou le height pour faire les contacts avec le sol.... faudrait que ca soit genre une variable dans les objects
-		public void projectileMotion(Physics ob1){
-			double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
-			if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()){
-				
-				if (ob1.getVy() < 0){
-					ob1.setY(2.5 - ob1.getHeight());
-					ob1.setVy(-1*ob1.getVy() - 1.5);
-					////(loader.getPosition().y);
-				}
-			}
-			
-			else if (y <= 2.5- ob1.getHeight()){
-				ob1.setY(y);
-				ob1.setVy();
-			}
+	public void projectileMotion(Physics ob1) {
+		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y,
+				ob1.getVy(), t.getDelay());
+		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
+
+			ob1.setY(2.5 - ob1.getHeight());
+			ob1.setVy(-1 * ob1.getVy() - 1);
+			// //(loader.getPosition().y);
 		}
+
+		else if (y <= 2.5 - ob1.getHeight()) {
+			ob1.setY(y);
+			ob1.setVy();
+		}
+	
+	}
 		
 		//TODO 
 		/**public void frictionMove(){

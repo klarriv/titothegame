@@ -7,6 +7,9 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Rope {
+	public final static double WIDTH = 0.15;
+	public final static double HEIGHT = 0.15;
+	public boolean isMoving;
 	private DoublePoint anchor1;
 	private DoublePoint anchor2;
 	private DoublePoint anchor3;
@@ -17,9 +20,15 @@ public class Rope {
 	private boolean maxed = false;
 	private double force = 0;
 	private boolean broken = false;
+	private DoubleRectangle r;
+	
+	
 	
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
+		System.out.println(x);
+		System.out.println(y);
+		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 	}
 	
 	/**
@@ -33,6 +42,8 @@ public class Rope {
 		
 		this.anchor1 = ob1.getPosition();
 		this.anchor2 = pulley.getPosition();
+		
+		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 		
 		setLength2();
 	}
@@ -53,6 +64,7 @@ public class Rope {
 		this.anchor2 = pulley.getPosition();
 		this.anchor3 = ob2.getPosition();
 		
+		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 		
 		setLength3();
 	}
@@ -71,6 +83,8 @@ public class Rope {
 		anchor2.x = x2;
 		anchor2.y = y2;
 		
+		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
+		
 		setLength2();
 
 	}
@@ -84,6 +98,8 @@ public class Rope {
 		
 		this.anchor1 = anchor1;
 		this.anchor2 = anchor2;
+		
+		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 	}
 	
 	public void setLength3(){
@@ -280,6 +296,14 @@ public class Rope {
 
 	public void setBroken(boolean broken) {
 		this.broken = broken;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 	
 	

@@ -52,6 +52,7 @@ public abstract class Physics implements ObjectInterface{
 	public DoublePoint position;
 	public double vx;
 	public double vy;
+	public boolean isMoving;
 	
 	
 	public Physics(){
