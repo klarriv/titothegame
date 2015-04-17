@@ -26,8 +26,7 @@ public class Rope {
 	
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
-		System.out.println(x);
-		System.out.println(y);
+		
 		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 	}
 	
@@ -105,13 +104,13 @@ public class Rope {
 	public void setLength3(){
 		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
 		length +=  Math.sqrt(Math.pow(anchor3.x - anchor2.x, 2) + Math.pow(anchor3.y - anchor2.y, 2));
-		System.out.println(length);
+		
 	}
 	
 	public void setLength2(){
 		
 		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
-		//System.out.println(anchor1.x - anchor2.x);
+	
 	}
 	
 	/**
@@ -128,7 +127,7 @@ public class Rope {
 			anchor2.x += dx;
 			anchor2.y += dy;
 		}
-		//System.out.println(" d: " + distance + " l: " + length);
+		
 	}
 	/**
 	 * 
@@ -229,7 +228,7 @@ public class Rope {
 	}
 
 	public DoublePoint getAnchor3() {
-		// TODO Auto-generated method stub
+		
 		return anchor3;
 	}
 	
