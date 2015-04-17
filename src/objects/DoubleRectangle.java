@@ -7,6 +7,12 @@ public class DoubleRectangle {
 	private DoublePoint position;
 	private double width, height;
 	
+	public DoubleRectangle(double x, double y, double width, double height){
+		this.position = new DoublePoint(x, y);
+		this.width = width;
+		this.height = height;
+	}
+	
 	public DoubleRectangle(DoublePoint position, double width, double height){
 		this.position = position;
 		this.width = width;
