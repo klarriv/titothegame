@@ -751,16 +751,12 @@ public class Level extends JPanel implements ActionListener {
 					if (benchList.get(i).getR() != null	&& benchList.get(i).isMoving) {
 						benchList.get(i).setX(x - Bench.WIDTH / 2);
 						benchList.get(i).setY(y - Bench.HEIGHT / 2);
-						benchList.get(i).getPosition().x = x - Bench.WIDTH / 2;
-						benchList.get(i).getPosition().y = y - Bench.HEIGHT / 2;
 					}
 				}
 				for (int i = 0; i < coneList.size(); i++) {
 					if (coneList.get(i).getR() != null && coneList.get(i).isMoving) {
 						coneList.get(i).setX(x - Cone.WIDTH / 2);
 						coneList.get(i).setY(y - Cone.HEIGHT / 2);
-						coneList.get(i).getPosition().x = x - Cone.WIDTH / 2;
-						coneList.get(i).getPosition().y = y - Cone.HEIGHT / 2;
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
@@ -776,12 +772,9 @@ public class Level extends JPanel implements ActionListener {
 				// //(x + " " + ropeList.size());
 				for (int i = 0; i < ropeList.size(); i++) {
 					ropeList.get(i).setXAnchored();
-					//if (x >= ropeList.get(i).getAnchor2().x && x <= ropeList.get(i).getAnchor2().x + (20 / gUnit) && y >= ropeList.get(i).getAnchor2().y && y <= ropeList.get(i).getAnchor2().y + (20 / gUnit) && ropeList.get(i).isUsed() == -1) {
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
 						ropeList.get(i).getAnchor2().x = x - Rope.WIDTH / 2;
 						ropeList.get(i).getAnchor2().y = y - Rope.HEIGHT / 2;
-						ropeList.get(i).getR().getPosition().x = Rope.WIDTH / 2;
-						ropeList.get(i).getR().getPosition().y = Rope.HEIGHT / 2;
 	
 						for (int j = 0; j < pulleyList.size(); j++) {
 							if (ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3)
@@ -789,8 +782,6 @@ public class Level extends JPanel implements ActionListener {
 						}
 	
 					}
-	
-					// //(i + " " + ropeList.get(i).isUsed());
 				}
 	
 				for (int i = 0; i < trashCanList.size(); i++) {
@@ -798,12 +789,10 @@ public class Level extends JPanel implements ActionListener {
 						// USED TO MOVE THE TRASHCAN AROUND
 						trashCanList.get(i).setX(x - TrashCan.WIDTH / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHT / 2);
-						trashCanList.get(i).getPosition().x = x - TrashCan.WIDTH / 2;
-						trashCanList.get(i).getPosition().y = y - TrashCan.HEIGHT / 2;
 	
 						// USED TO PUT OBJECTS IN THE TRASHCAN
 						for (int j = i + 1; j < trashCanList.size(); j++) {
-							if (trashCanList.get(j).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && !trashCanList.get(j).isUsed()) {
+							if (trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && !trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed()) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 								trashCanList.get(j).setVisible(false);
 								trashCanList.get(j).setR(null);
