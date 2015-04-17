@@ -12,6 +12,7 @@ public class Pulley extends Physics{
 	private DoublePoint position = new DoublePoint(1,1);
 	private boolean isVisible;
 	private BufferedImage texture;
+	private boolean isUsed = false;
 	
 	public Pulley(DoublePoint position, boolean visible){
 		this.position = position;
@@ -62,13 +63,13 @@ public class Pulley extends Physics{
 
 	@Override
 	public boolean isUsed() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return isUsed;
 	}
 
 	@Override
 	public void setUsed(boolean isUsed) {
-		// TODO Auto-generated method stub
+		this.isUsed = isUsed;
 		
 	}
 

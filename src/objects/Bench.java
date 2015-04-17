@@ -16,6 +16,7 @@ public class Bench extends Physics {
 	private BufferedImage texture;
 	private DoubleRectangle r;
 	private DoublePoint position;
+	private boolean isUsed = false;
 	
 	public Bench(double x, double y){
 		
@@ -102,7 +103,13 @@ public class Bench extends Physics {
 
 	@Override
 	public void setX(double x) {
-		// TODO Auto-generated method stub
+		this.position.x = x;
+		
+	}
+	
+	@Override
+	public void setY(double y) {
+		this.position.y = y;
 		
 	}
 
@@ -120,13 +127,9 @@ public class Bench extends Physics {
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return HEIGHT;
 	}
 
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 }

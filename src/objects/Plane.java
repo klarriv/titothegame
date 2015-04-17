@@ -10,6 +10,7 @@ public class Plane {
 	private double a;
 	private double b = 1;
 	private double c;
+	private boolean isUsed = false;
 	
 	public Plane(double x, double y, double angle, double width){
 		
@@ -158,6 +159,14 @@ public class Plane {
 		y[1] = getY(dp.x + width);
 		y[2] = dp.y;
 		
+	}
+
+	public boolean isUsed() {
+		return isUsed;
+	}
+
+	public void setUsed(boolean isUsed) {
+		this.isUsed = isUsed;
 	}
 
 

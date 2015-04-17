@@ -17,6 +17,7 @@ public class Cone extends Physics {
 	private DoubleRectangle r;
 	private int weight = 5;
 	private boolean isVisible;
+	private boolean isUsed = false;
 	
 	public Cone(double x, double y){
 		
@@ -102,7 +103,13 @@ public class Cone extends Physics {
 
 	@Override
 	public void setX(double x) {
-		// TODO Auto-generated method stub
+		this.position.x =x;
+		
+	}
+
+	@Override
+	public void setY(double y) {
+		this.position.y = y;
 		
 	}
 
@@ -120,13 +127,7 @@ public class Cone extends Physics {
 
 	@Override
 	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return HEIGHT;
 	}
 
-	@Override
-	public void setY(double y) {
-		// TODO Auto-generated method stub
-		
-	}
 }
