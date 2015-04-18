@@ -20,7 +20,7 @@ public class TrashCanTestPanel extends JPanel {
 	private double gUnit;
 	private Timer t;
 	private TrashCan trash1 = new TrashCan(1, 1.5);
-	private Plane plane = new Plane(1,1, Math.toRadians(-155), 1);
+	private Plane plane = new Plane(1,1, Math.toRadians(155), 1);
 	///private TrashCan trash2 = new TrashCan(2, 1.5);
 //	private Pulley pulley = new Pulley(2,1, false);
 	//private Rope rope = new Rope(trash1, pulley, trash2);
