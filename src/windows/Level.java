@@ -856,16 +856,21 @@ public class Level extends JPanel implements ActionListener {
 						 * Stupidly complicated for nothing ffs
 						 */
 						
-						for(int j = 0; j < ropeList.size() || j == 0; j++)
-							if (j != 0){//c'est tellement vidange, what you gonna do?
+						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
+							if (ropeList.size() != 0){//c'est tellement vidange, what you gonna do?
 								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1())
 										|| trashCanList.get(i).equals(ropeList.get(j).getOb2())){
 										trashCanList.get(i).setUsed(true);
 										ropeList.get(j).setXAnchored();
 								}
+								else//Ouuuaaaassshhh T_T c'est triste comme c'est laid
+									for (int jj = 0; jj < planeList.size(); jj++){
+										planeContact(trashCanList.get(i), planeList.get(jj));
+										if(trashCanList.get(i).isUsed())
+											break;
+									}
 							}
 							else
-							
 								for (int jj = 0; jj < planeList.size(); jj++){
 									planeContact(trashCanList.get(i), planeList.get(jj));
 									if(trashCanList.get(i).isUsed())
