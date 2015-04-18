@@ -150,6 +150,12 @@ public class Spring extends Physics {
 		return null;
 	}
 
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 
 	

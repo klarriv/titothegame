@@ -196,6 +196,12 @@ public class TrashCan extends Physics {
 		
 		return HEIGHT;
 	}
+	
+	@Override
+	public double getWidth() {
+		
+		return WIDTH;
+	}
 
 	@Override
 	public void resetPosition(){
@@ -215,6 +221,8 @@ public class TrashCan extends Physics {
 		// TODO Auto-generated method stub
 		return defaultPosition;
 	}
+
+	
 
 
 	

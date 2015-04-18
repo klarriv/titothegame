@@ -147,4 +147,10 @@ public class Cone extends Physics {
 		this.position.y = this.defaultPosition.y;
 	}
 
+	@Override
+	public double getWidth() {
+		
+		return WIDTH;
+	}
+
 }

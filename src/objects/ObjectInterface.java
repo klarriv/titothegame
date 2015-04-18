@@ -110,10 +110,16 @@ public interface ObjectInterface {
 	public void setVy(double vy);
 	
 	/**
-	 * Returns the height of the object from the its Position to the bottom of its image
+	 * Returns the height of the object from its Position to the bottom of its image
 	 * @return
 	 */
 	public double getHeight();
+	
+	/**
+	 * Returns the width of the object
+	 * @return
+	 */
+	public double getWidth();
 	
 	/**
 	 * Resets to the default position

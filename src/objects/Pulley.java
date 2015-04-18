@@ -161,6 +161,12 @@ public class Pulley extends Physics{
 		return defaultPosition;
 	}
 
+	@Override
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 
 	
 

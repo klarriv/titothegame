@@ -152,5 +152,11 @@ public class Bench extends Physics {
 		return defaultPosition;
 	}
 
+	@Override
+	public double getWidth() {
+		
+		return WIDTH;
+	}
+
 	
 }

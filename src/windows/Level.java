@@ -465,6 +465,7 @@ public class Level extends JPanel implements ActionListener {
 				// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: "
 				// + trashCanList.get(0).getVy());
 			}
+			
 			//Makes the trashcans fall
 			for (int i = 0; i < trashCanList.size(); i++) {
 				if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
@@ -474,8 +475,14 @@ public class Level extends JPanel implements ActionListener {
 					// //(" vyy: " + trashCanList.get(0).getVy());
 				}
 				else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
-					frictionMove(trashCanList.get(i));
-					
+					if (isOnPlane(trashCanList.get(i), planeList.get(0)))
+						frictionMove(trashCanList.get(i));
+					else{
+						trashCanList.get(i).setUsed(false);
+						trashCanList.get(i).setPlaneVariable(-1);
+						projectileMotion(trashCanList.get(i));
+						basicMove(trashCanList.get(i));
+					}
 				}
 			}
 			//Makes tito bounce on planes
@@ -528,7 +535,6 @@ public class Level extends JPanel implements ActionListener {
 
 		}
 		
-
 	}
 
 	
@@ -626,16 +632,10 @@ public class Level extends JPanel implements ActionListener {
 	 */
 	public void planeContact(TrashCan ob1, Plane p){
 		double x = ob1.getPosition().x;
-		double y = ob1.getPosition().y;
-		double tx = p.getX()[0];
-		double txf = p.getX()[1];
 		double ty = p.getY(x);
 		
-		double height = ob1.HEIGHT;
-		double width = ob1.WIDTH;
-		
-		System.out.println(y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1);
-		if (y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1){
+		double height = ob1.getHeight();
+		if (isOnPlane(ob1, p)){
 			ob1.setUsed(true);
 			ob1.setY(ty - height);
 			ob1.setPlaneVariable(p.getPlaneVariable());
@@ -647,7 +647,26 @@ public class Level extends JPanel implements ActionListener {
 			ob1.setAcceleration(0, 0, 0);
 			
 		}
-		System.out.println(((y < ty )&&( x > tx) && (x < (txf-width)) && (p.pointDistance(ob1.getPosition()) < 1 ) )+ "\n");
+	}
+	/**
+	 * Determines whether an object is on the plane or not
+	 * @param ob1
+	 * @param p
+	 * @return
+	 */
+	public boolean isOnPlane(Physics ob1, Plane p){
+		double x = ob1.getPosition().x;
+		double y = ob1.getPosition().y;
+		double tx = p.getX()[0];
+		double txf = p.getX()[1];
+		double ty = p.getY(x);
+		
+		
+		double width = ob1.getWidth();
+		if (y < ty && x > (tx - width) && x < (txf) && p.pointDistance(ob1.getPosition()) < 1)
+			return true;
+		else
+			return false;
 	}
 
 	// TODO
@@ -833,11 +852,25 @@ public class Level extends JPanel implements ActionListener {
 						// USED TO MOVE THE TRASHCAN AROUND
 						trashCanList.get(i).setX(x - TrashCan.WIDTH / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHT / 2);
-						for (int j = 0; j < planeList.size(); j++){
-							planeContact(trashCanList.get(i), planeList.get(j));
-							if(trashCanList.get(i).isUsed())
-								break;
-						}
+						/*
+						 * Stupidly complicated for nothing ffs
+						 */
+						
+						for(int j = 0; j < ropeList.size() || j == 0; j++)
+							if (j != 0){//c'est tellement vidange, what you gonna do?
+								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1())
+										|| trashCanList.get(i).equals(ropeList.get(j).getOb2())){
+										trashCanList.get(i).setUsed(true);
+										ropeList.get(j).setXAnchored();
+								}
+							}
+							else
+							
+								for (int jj = 0; jj < planeList.size(); jj++){
+									planeContact(trashCanList.get(i), planeList.get(jj));
+									if(trashCanList.get(i).isUsed())
+										break;
+								}
 						
 						
 						

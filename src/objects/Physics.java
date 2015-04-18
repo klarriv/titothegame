@@ -137,7 +137,7 @@ public abstract class Physics implements ObjectInterface{
 	}
 	
 	public double getForce(int mass){
-		if (this.ax != 0)
+		if (this.ax != 0 && this.ax > 0 || this.ax < 0)
 			return this.ax * mass;
 		else
 			return GRAVITY * mass;

@@ -191,10 +191,12 @@ public class Rope {
 	 */
 	public void setTotalForce(){
 		
-		if (isUsed() > 0 )
+		if (isUsed() == 1 )
 			force = ob1.getForce(ob1.getWeight());
+
 		
-		if (isUsed() > 1  )
+		
+		if (isUsed() == 2  )
 			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
 		
 		if (force >= 300){
@@ -209,7 +211,6 @@ public class Rope {
 		else
 			broken = false;
 		
-			
 	}
 
 	public DoublePoint getAnchor1() {

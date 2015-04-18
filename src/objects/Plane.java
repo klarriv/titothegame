@@ -161,7 +161,7 @@ public class Plane {
 		x[0] = dp.x;
 		x[1] = dp.x + width;
 		x[2] = dp.x + width;
-		System.out.println("x0: " + x[0] + " x1: " + x[1] + " x2: " + x[2]);
+		
 	}
 
 	public double[] getY() {
@@ -176,7 +176,6 @@ public class Plane {
 		y[1] = getY(dp.x + width);
 		y[2] = dp.y;
 		
-		System.out.println("y0: " + y[0] + " y1: " + y[1] + " y2: " + y[2]);
 		
 	}
 
