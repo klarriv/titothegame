@@ -390,6 +390,7 @@ public class Level extends JPanel implements ActionListener {
 		}
 		// TODO image
 		// 5 ROPE
+		g.setColor(Color.yellow);
 		for (int i = 0; i < ropeList.size(); i++) {
 			if (ropeList.get(i).isUsed() == -1) {
 				g.fillRect((int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * Rope.WIDTH), (int) (gUnit * Rope.HEIGHT));
@@ -406,6 +407,7 @@ public class Level extends JPanel implements ActionListener {
 
 			}
 		}
+		g.setColor(Color.black);
 		// 6 SEESAW
 		for (int i = 0; i < seesawList.size(); i++) {
 			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), null);
@@ -721,7 +723,7 @@ public class Level extends JPanel implements ActionListener {
 				}
 				// //(x + " " + ropeList.size());
 				for (int i = 0; i < ropeList.size(); i++) {
-					ropeList.get(i).setXAnchored();
+					
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
 						ropeList.get(i).setX(x- Rope.WIDTH /2);
 						ropeList.get(i).setY(y - Rope.HEIGHT / 2);
@@ -732,6 +734,7 @@ public class Level extends JPanel implements ActionListener {
 						}
 	
 					}
+					ropeList.get(i).setXAnchored();
 				}
 	
 				for (int i = 0; i < trashCanList.size(); i++) {
@@ -767,6 +770,7 @@ public class Level extends JPanel implements ActionListener {
 					if (!t.isRunning())
 						repaint();
 				}
+				
 			}
 		}
 	}

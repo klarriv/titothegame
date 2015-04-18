@@ -31,9 +31,9 @@ public class TextureLoader {
 			coneTexture = ImageIO.read(new File(PATHFOROBJECTS+"cone.png"));
 			planeTexture = ImageIO.read(new File(PATHFOROBJECTS+"plane.png"));
 			ropeTexture = ImageIO.read(new File(PATHFOROBJECTS+"rope.png"));
-			seesawTexture = ImageIO.read(new File(PATHFOROBJECTS+"seesaw.png"));
+			seesawTexture = ImageIO.read(new File(PATHFOROBJECTS+"seeSawSprite.png"));
 			springTexture = ImageIO.read(new File(PATHFOROBJECTS+"spring.png"));
-			trashCanTexture = ImageIO.read(new File(PATHFOROBJECTS+"trashCan.png"));
+			trashCanTexture = ImageIO.read(new File(PATHFOROBJECTS+"trashCanSprite.png"));
 			pulleyTexture = ImageIO.read(new File(PATHFOROBJECTS+"pulley.png"));
 			
 			// loads level buttons

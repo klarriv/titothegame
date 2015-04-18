@@ -12,6 +12,7 @@ import javax.swing.Timer;
 
 import windows.MainFrame;
 import RunningClasses.RunGame;
+import RunningClasses.SpriteSheet;
 
 public class TrashCan extends Physics {
 	
@@ -20,7 +21,9 @@ public class TrashCan extends Physics {
 	private int weight = 10;
 	private boolean isVisible = true;
 	private boolean isUsed = false;
+	private int planeVariable = -1;
 	private BufferedImage texture;
+	private BufferedImage spriteSheet;
 	private DoublePoint position;
 	private double vx = 7;
 	private double vy = 10;
@@ -38,7 +41,7 @@ public class TrashCan extends Physics {
 		this.vx = 0;
 		this.vy = 0;
 		//loadImage();
-		texture = MainFrame.getTl().trashCanTexture;
+		spriteSheet = MainFrame.getTl().trashCanTexture;
 		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
 	}
 
@@ -158,8 +161,26 @@ public class TrashCan extends Physics {
 
 	@Override
 	public BufferedImage getTexture() {
+		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		
+		if (!isUsed)
+			texture = ss.grabSprite(0, 0, 530, 600);
+		else if(planeVariable == 0 || planeVariable == 1){
+			texture = ss.grabSprite(planeVariable * 530, 600, 530, 600);
+			
+		}
+		else
+			texture = ss.grabSprite(0, 0, 530, 600);
 		
 		return texture;
+	}
+	
+	public void setPlaneVariable(int planeVariable){
+		this.planeVariable = planeVariable;
+	}
+	
+	public int getPlaneVariable(){
+		return this.planeVariable;
 	}
 
 	public DoubleRectangle getR() {

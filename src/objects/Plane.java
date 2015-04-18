@@ -11,11 +11,16 @@ public class Plane {
 	private double b = 1;
 	private double c;
 	private boolean isUsed = false;
-	
+	private int planeVariable;
 	public Plane(double x, double y, double angle, double width){
 		
 		this.width = width;
 		this.angle = angle;
+		if (this.angle >= Math.PI/2 && this.angle <= 3*Math.PI/2)
+			setPlaneVariable(0);
+		else
+			setPlaneVariable(1);
+		
 		this.dp.x = x;
 		this.dp.y = y;
 		setFormula();
@@ -179,6 +184,14 @@ public class Plane {
 
 	public void setUsed(boolean isUsed) {
 		this.isUsed = isUsed;
+	}
+
+	public int getPlaneVariable() {
+		return planeVariable;
+	}
+
+	public void setPlaneVariable(int planeVariable) {
+		this.planeVariable = planeVariable;
 	}
 	
 	

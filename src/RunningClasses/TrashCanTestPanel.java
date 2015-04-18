@@ -20,7 +20,7 @@ public class TrashCanTestPanel extends JPanel {
 	private double gUnit;
 	private Timer t;
 	private TrashCan trash1 = new TrashCan(1, 1.5);
-	private Plane plane = new Plane(1,1, Math.toRadians(165), 1);
+	private Plane plane = new Plane(1,1, Math.toRadians(-155), 1);
 	///private TrashCan trash2 = new TrashCan(2, 1.5);
 //	private Pulley pulley = new Pulley(2,1, false);
 	//private Rope rope = new Rope(trash1, pulley, trash2);
@@ -53,7 +53,7 @@ public class TrashCanTestPanel extends JPanel {
 		
 		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());
 		double x = trash1.getPosition().x;
-		System.out.println(plane.pointDistance(trash1.getPosition()));
+		//System.out.println(plane.pointDistance(trash1.getPosition()));
 		planeContact(trash1, plane);
 		
 		/**if (!rope.isMaxed()){
@@ -75,9 +75,13 @@ public class TrashCanTestPanel extends JPanel {
 		double width = ob1.WIDTH;
 				
 		if (y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1){
+			ob1.setUsed(true);
 			ob1.setY(ty - height);
-			if (!ob1.rotated)
-				ob1.rotate(p.getAngle());
+			ob1.setPlaneVariable(p.getPlaneVariable());
+		}
+		else{
+			ob1.setUsed(false);
+			ob1.setPlaneVariable(-1);
 		}
 	}
 	
