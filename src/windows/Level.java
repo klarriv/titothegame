@@ -633,7 +633,8 @@ public class Level extends JPanel implements ActionListener {
 		
 		double height = ob1.HEIGHT;
 		double width = ob1.WIDTH;
-				
+		
+		System.out.println(y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1);
 		if (y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1){
 			ob1.setUsed(true);
 			ob1.setY(ty - height);
@@ -644,7 +645,9 @@ public class Level extends JPanel implements ActionListener {
 			ob1.setUsed(false);
 			ob1.setPlaneVariable(-1);
 			ob1.setAcceleration(0, 0, 0);
+			
 		}
+		System.out.println(((y < ty )&&( x > tx) && (x < (txf-width)) && (p.pointDistance(ob1.getPosition()) < 1 ) )+ "\n");
 	}
 
 	// TODO
@@ -830,8 +833,13 @@ public class Level extends JPanel implements ActionListener {
 						// USED TO MOVE THE TRASHCAN AROUND
 						trashCanList.get(i).setX(x - TrashCan.WIDTH / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHT / 2);
+						for (int j = 0; j < planeList.size(); j++){
+							planeContact(trashCanList.get(i), planeList.get(j));
+							if(trashCanList.get(i).isUsed())
+								break;
+						}
 						
-						planeContact(trashCanList.get(i), planeList.get(0));
+						
 						
 						// USED TO PUT OBJECTS IN THE TRASHCAN
 						for (int j = i + 1; j < trashCanList.size(); j++) {

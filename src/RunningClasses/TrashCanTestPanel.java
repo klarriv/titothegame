@@ -1,5 +1,7 @@
 package RunningClasses;
 
+import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import objects.Physics;
 import objects.Plane;
 import objects.Pulley;
 import objects.Rope;
@@ -20,13 +23,13 @@ public class TrashCanTestPanel extends JPanel {
 	private double gUnit;
 	private Timer t;
 	private TrashCan trash1 = new TrashCan(1, 1.5);
-	private Plane plane = new Plane(1,1, Math.toRadians(155), 1);
-	///private TrashCan trash2 = new TrashCan(2, 1.5);
-//	private Pulley pulley = new Pulley(2,1, false);
-	//private Rope rope = new Rope(trash1, pulley, trash2);
+	private Plane plane = new Plane(2,1, Math.toRadians(-155), 1);
+	private Button start = new Button("Start");
+	
 	
 	
 	public TrashCanTestPanel(){
+		setLayout(new BorderLayout());
 		addMouseMotionListener( new MouseDrag());
 		t = new Timer(1000/24, new ActionListener(){
 
@@ -38,7 +41,14 @@ public class TrashCanTestPanel extends JPanel {
 			
 		}
 		);
-		//t.start();
+		
+		start.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				t.start();
+			}
+		});
+		add(start, BorderLayout.NORTH);
 		
 	}
 	
@@ -55,7 +65,9 @@ public class TrashCanTestPanel extends JPanel {
 		double x = trash1.getPosition().x;
 		//System.out.println(plane.pointDistance(trash1.getPosition()));
 		planeContact(trash1, plane);
-		
+		/*if (trash1.isUsed() && trash1.getPlaneVariable() > -1 && t.isRunning()){
+			frictionMove(trash1);
+		}
 		/**if (!rope.isMaxed()){
 			trash1.setY(y);
 			trash1.setVy();
@@ -73,17 +85,44 @@ public class TrashCanTestPanel extends JPanel {
 		
 		double height = ob1.HEIGHT;
 		double width = ob1.WIDTH;
-				
+		//System.out.println((y > ty )+ " " + (x < tx ) + " " +( x > (txf-width)));
 		if (y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1){
+			
 			ob1.setUsed(true);
 			ob1.setY(ty - height);
 			ob1.setPlaneVariable(p.getPlaneVariable());
+			setAcceleration(ob1, p);
 		}
 		else{
 			ob1.setUsed(false);
 			ob1.setPlaneVariable(-1);
+			ob1.setAcceleration(0,0,0);
 		}
 	}
+	
+	public void setAcceleration(Physics ob1, Plane p){
+		   
+		  ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5); 
+	  }
+	
+	public void frictionMove(Physics ob1){
+		 ob1.frictionMotion(ob1.getPosition(),ob1.getVx(), ob1.getVy(), t.getDelay());
+		 ob1.setVy();
+		 ob1.setVx();
+		 
+		 }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	class MouseDrag implements MouseMotionListener{
 
