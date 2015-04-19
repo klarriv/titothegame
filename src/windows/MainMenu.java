@@ -31,11 +31,6 @@ public class MainMenu extends JPanel implements ActionListener{
 	private Image backgroundImage = null;
 
 	/**
-	 * Determines if the music should be playing or not.
-	 */
-	private JCheckBox jCheckMusic;
-
-	/**
 	 * The song used in the main menu.
 	 */
 	private Clip menuSong;
@@ -43,7 +38,7 @@ public class MainMenu extends JPanel implements ActionListener{
 	/**
 	 * These are the variables for the "play" and "new game" buttons.
 	 */
-	private static JButton playButton, newGameButton, exitButton, fullScreenButton;
+	private static JButton playButton, newGameButton, exitButton, fullScreenButton, musicButton;
 
 	private Timer t = new Timer(100, this);
 	private int yTitle = 20;
@@ -175,10 +170,31 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 		});
 		
+		musicButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuMusicButtonTexture));
+		musicButton.setBorder(BorderFactory.createEmptyBorder());
+		musicButton.setContentAreaFilled(false);
+		musicButton.addMouseListener(new ButtonListener());
+		musicButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(menuSong.isActive()){
+					MainFrame.getTl().changeButtonImage(musicButton, MainFrame.getTl().mainMenuMusicButtonTexture2);
+					menuSong.close();
+				}
+				else{
+					MainFrame.getTl().changeButtonImage(musicButton, MainFrame.getTl().mainMenuMusicButtonTexture);
+					startMenuMusic();
+				}
+			}
+		});
+		musicButton.addComponentListener(new ButtonResizeListener());
+		
 		add(playButton);
 		add(newGameButton);
 		add(exitButton);
 		add(fullScreenButton);
+		add(musicButton);
 		startMenuMusic();
 		t.start();
 	}
@@ -190,8 +206,8 @@ public class MainMenu extends JPanel implements ActionListener{
 		try {
 			menuSong = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File("Resources/Music/callToAdventure.wav").getAbsoluteFile());
-			//menuSong.open(ais);
-			//menuSong.loop(Clip.LOOP_CONTINUOUSLY);
+			menuSong.open(ais);
+			menuSong.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -215,6 +231,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		newGameButton.setBounds(541*getWidth()/1280, 498*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 		exitButton.setBounds(1256*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
 		fullScreenButton.setBounds(1235*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
+		musicButton.setBounds(10*getWidth()/1280, 10*getHeight()/720, 25*getWidth()/1280, 25*getHeight()/720);
 		
 		g.setColor(new Color(204, 213, 187));
 		// draws the exit button
@@ -250,5 +267,9 @@ public class MainMenu extends JPanel implements ActionListener{
 
 	public static JButton getNewGameButton() {
 		return newGameButton;
+	}
+	
+	public static JButton getMusicButton(){
+		return musicButton;
 	}
 }

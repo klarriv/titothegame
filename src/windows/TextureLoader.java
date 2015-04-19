@@ -16,7 +16,7 @@ public class TextureLoader {
 	private final String PATHFOROBJECTS = "Resources/Objects/";
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture;
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture;
-	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture;
+	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2;
 	public BufferedImage levelSelectBackgroundTexture;
 	
 	public TextureLoader() {
@@ -49,6 +49,8 @@ public class TextureLoader {
 			mainMenuNewGameButtonTexture = ImageIO.read(new File("Resources/Menus/MainMenu/newGameButton.png"));
 			mainMenuNewGameButtonHighlightTexture = ImageIO.read(new File("Resources/Menus/MainMenu/newGameHighlightButton.png"));
 			mainMenuTitleTexture = ImageIO.read(new File("Resources/Menus/MainMenu/title.png"));
+			mainMenuMusicButtonTexture = ImageIO.read(new File("Resources/Menus/MainMenu/musicButton.png"));
+			mainMenuMusicButtonTexture2 = ImageIO.read(new File("Resources/Menus/MainMenu/musicButton2.png"));
 			
 			//loads level select texture
 			levelSelectBackgroundTexture = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/levelSelectionMenu.png"));

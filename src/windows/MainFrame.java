@@ -27,6 +27,10 @@ public class MainFrame extends JFrame{
 	 */
 	private static final String MAINMENUPANEL = "MainMenuPanel";
 	/**
+	 * This is the identifier string for credits JPanel
+	 */
+	private static final String CREDITSPANEL = "CreditsPanel";
+	/**
 	 * The level select menu that will be used by the user.
 	 */
 	private static LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
@@ -38,6 +42,10 @@ public class MainFrame extends JFrame{
 	 * This is the array that contains the 10 level panels
 	 */
 	private static Level[] levels = new Level[10];
+	/**
+	 * This is the credits window
+	 */
+	private static Credits credits = new Credits();
 	/**
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
@@ -72,6 +80,7 @@ public class MainFrame extends JFrame{
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
 		}
+		menus.add(credits, CREDITSPANEL);
 		
 		getContentPane().add(menus, BorderLayout.CENTER);
 		

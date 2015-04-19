@@ -108,8 +108,6 @@ public class Level extends JPanel implements ActionListener {
 	private boolean isPaused = false;
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
 
-	// private Maison m;
-
 	/**
 	 * This creates a new instance of level
 	 */
@@ -259,13 +257,99 @@ public class Level extends JPanel implements ActionListener {
 					titoXSprite++;
 					titoYSprite++;
 				}
+				if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0) {
+					tito.setEnergyVelocity(trashCanList.get(0).getVy(),	trashCanList.get(0).getWeight(), tito.getWeight());
+					tito.setVx();
+					tito.setVy();
+					// (trashCanList.get(0).getWeight());
+					trashCanList.get(0).single++;
+					// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: "
+					// + trashCanList.get(0).getVy());
+				}
+				
+				//Makes the trashcans fall
+				for (int i = 0; i < trashCanList.size(); i++) {
+					if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
+						// (trash.getVx() + " " + trash.getVy());
+						projectileMotion(trashCanList.get(i));
+						basicMove(trashCanList.get(i));
+						// //(" vyy: " + trashCanList.get(0).getVy());
+					}
+					else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
+						if (isOnPlane(trashCanList.get(i), planeList.get(0)))
+							frictionMove(trashCanList.get(i));
+						else{
+							trashCanList.get(i).setUsed(false);
+							trashCanList.get(i).setPlaneVariable(-1);
+							projectileMotion(trashCanList.get(i));
+							basicMove(trashCanList.get(i));
+						}
+					}
+				}
+				//Makes tito bounce on planes
+				boolean planeCollided = false;
+				for (int i = 0; i < planeList.size(); i++) {
+					Plane p = planeList.get(i);
+					planeCollided = planeColliding(planeList.get(i));
+					p = planeList.get(i);
+					//Tito's projectile motion
+					if (tito.getVy() > 0.5 && tito.getPosition().y <= 2) {
+						projectileMotion(tito);
+						xMove();
+						// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+					} 
+					//if Tito's hit a plane
+					else if (planeCollided) {
+						planeCollision(p);
+						projectileMotion(tito);
+						xMove();
 
+					}
+					else {
+						projectileMotion(tito);
+						xMove();
+					}
+				}
+				
+				//hitting the walls of a Maison
+				for (int i = 0; i < maisonList.size(); i++) {
+					if (maisonList.get(i).colliding(tito.getPosition()))
+						tito.setVx(-1 * tito.getVx());
+				}
+				// ropes
+				for (int i = 0; i < ropeList.size(); i++) {
+					ropeList.get(i).setXAnchored();
+					
+					//projectile motion of a trashcan attached to a pulley and another trashcan
+					if (ropeList.get(i).isUsed() == 2) {
+						double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
+
+						if (!ropeList.get(i).isMaxed() && t.isRunning()) {
+							ropeList.get(i).getOb1().setY(y);
+							ropeList.get(i).getOb1().setVy();
+
+							ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
+						}
+
+					}
+					ropeList.get(i).setTotalForce();
+				}
+				
+				// checks if tito touches the right boundary to change level!
+				if(tito.getPosition().x >= 5 && levelNumber != 9){
+						t.stop();
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
+				}
+				else{
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
+				}
 				counter++;
 				repaint();
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
-		
 
 	}
 	/**
@@ -419,13 +503,13 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), null);
 		}
 		// 7 SPRING HAHAHAHAHAHAHA
-		for (int i = 0; i < springList.size(); i++) {
+		/*for (int i = 0; i < springList.size(); i++) {
 			g.drawImage(springList.get(i).getTexture(), (int) (gUnit * springList.get(i).getPosition().x), (int) (gUnit * springList.get(i).getPosition().y), null);
-		}
+		}*/
 		// 8 TRASHCAN
 		for (int i = 0; i < trashCanList.size(); i++) {
 			if (trashCanList.get(i).isVisible()){
-				g.drawImage(trashCanList.get(i).getTexture(), (int) (gUnit * trashCanList.get(i).getPosition().x), (int) (gUnit * trashCanList.get(i).getPosition().y), (int) (TrashCan.WIDTH * gUnit), (int) (TrashCan.HEIGHT * gUnit), null);
+				g.drawImage(trashCanList.get(i).getTexture(), (int) (gUnit * trashCanList.get(i).getPosition().x), (int) (gUnit * trashCanList.get(i).getPosition().y), (int) (trashCanList.get(i).getWidth() * gUnit), (int) (trashCanList.get(i).getHeight() * gUnit), null);
 				g.drawRect((int) (gUnit*trashCanList.get(i).getR().getPosition().x), (int) (gUnit * trashCanList.get(i).getR().getPosition().y), (int) (gUnit * trashCanList.get(i).getR().getWidth()), (int) (gUnit * trashCanList.get(i).getR().getHeight()));
 			}
 		}
@@ -450,99 +534,9 @@ public class Level extends JPanel implements ActionListener {
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
-
-		if (t.isRunning()) {
-			// TODO create the see-saw....
-			// Collision and movements
-			//TODO
-			//Kind of see saw...
-			if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0) {
-				tito.setEnergyVelocity(trashCanList.get(0).getVy(),	trashCanList.get(0).getWeight(), tito.getWeight());
-				tito.setVx();
-				tito.setVy();
-				// (trashCanList.get(0).getWeight());
-				trashCanList.get(0).single++;
-				// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: "
-				// + trashCanList.get(0).getVy());
-			}
-			
-			//Makes the trashcans fall
-			for (int i = 0; i < trashCanList.size(); i++) {
-				if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
-					// (trash.getVx() + " " + trash.getVy());
-					projectileMotion(trashCanList.get(i));
-					basicMove(trashCanList.get(i));
-					// //(" vyy: " + trashCanList.get(0).getVy());
-				}
-				else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
-					if (isOnPlane(trashCanList.get(i), planeList.get(0)))
-						frictionMove(trashCanList.get(i));
-					else{
-						trashCanList.get(i).setUsed(false);
-						trashCanList.get(i).setPlaneVariable(-1);
-						projectileMotion(trashCanList.get(i));
-						basicMove(trashCanList.get(i));
-					}
-				}
-			}
-			//Makes tito bounce on planes
-			boolean planeCollided = false;
-			Plane p = planeList.get(0);
-			for (int i = 0; i < planeList.size(); i++) {
-				planeCollided = planeColliding(planeList.get(i));
-				p = planeList.get(i);
-			}
-			//Tito's projectile motion
-			if (tito.getVy() > 0.5 && tito.getPosition().y <= 2) {
-				projectileMotion(tito);
-				xMove();
-				// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
-			} 
-			//if Tito's hit a plane
-			else if (planeCollided) {
-				planeCollision(p);
-				projectileMotion(tito);
-				xMove();
-
-			}
-			else {
-				projectileMotion(tito);
-				xMove();
-			}
-			//hitting the walls of a Maison
-			for (int i = 0; i < maisonList.size(); i++) {
-				if (maisonList.get(i).colliding(tito.getPosition()))
-					tito.setVx(-1 * tito.getVx());
-			}
-			// ropes
-			for (int i = 0; i < ropeList.size(); i++) {
-				ropeList.get(i).setXAnchored();
-				
-				//projectile motion of a trashcan attached to a pulley and another trashcan
-				if (ropeList.get(i).isUsed() == 2) {
-					double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
-
-					if (!ropeList.get(i).isMaxed() && t.isRunning()) {
-						ropeList.get(i).getOb1().setY(y);
-						ropeList.get(i).getOb1().setVy();
-
-						ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
-					}
-
-				}
-				ropeList.get(i).setTotalForce();
-			}
-
-		}
 		
 	}
 
-	
-	
-	
-	
-	
-	
 	// Physics moving and colliding methods
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
@@ -645,7 +639,6 @@ public class Level extends JPanel implements ActionListener {
 			ob1.setUsed(false);
 			ob1.setPlaneVariable(-1);
 			ob1.setAcceleration(0, 0, 0);
-			
 		}
 	}
 	/**
@@ -690,16 +683,9 @@ public class Level extends JPanel implements ActionListener {
 		  ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5); 
 	  }
 	 
-
-	
-	
-	
-	
-	
-	
 	/**
 	 * Moving the objects with the mouse
-	 * @author Keven-Matthew
+	 * @author Keven-Matthew & Charles-Philipe
 	 *
 	 */
 	class DragListener implements MouseListener, MouseMotionListener {
@@ -850,20 +836,19 @@ public class Level extends JPanel implements ActionListener {
 				for (int i = 0; i < trashCanList.size(); i++) {
 					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
 						// USED TO MOVE THE TRASHCAN AROUND
-						trashCanList.get(i).setX(x - TrashCan.WIDTH / 2);
-						trashCanList.get(i).setY(y - TrashCan.HEIGHT / 2);
+						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
+						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
 						/*
 						 * Stupidly complicated for nothing ffs
 						 */
 						
 						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
-							if (ropeList.size() != 0){//c'est tellement vidange, what you gonna do?
-								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1())
-										|| trashCanList.get(i).equals(ropeList.get(j).getOb2())){
+							if (ropeList.size() != 0){
+								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
 										trashCanList.get(i).setUsed(true);
 										ropeList.get(j).setXAnchored();
 								}
-								else//Ouuuaaaassshhh T_T c'est triste comme c'est laid
+								else
 									for (int jj = 0; jj < planeList.size(); jj++){
 										planeContact(trashCanList.get(i), planeList.get(jj));
 										if(trashCanList.get(i).isUsed())
@@ -876,9 +861,7 @@ public class Level extends JPanel implements ActionListener {
 									if(trashCanList.get(i).isUsed())
 										break;
 								}
-						
-						
-						
+				
 						// USED TO PUT OBJECTS IN THE TRASHCAN
 						for (int j = i + 1; j < trashCanList.size(); j++) {
 							if (trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
@@ -900,7 +883,6 @@ public class Level extends JPanel implements ActionListener {
 									trashCanList.get(i).setUsed(true);
 								}
 							}
-	
 						}
 					}
 					if (!t.isRunning())

@@ -16,8 +16,10 @@ import RunningClasses.SpriteSheet;
 
 public class TrashCan extends Physics {
 	
-	public static final double WIDTH = 0.4;
-	public static final double HEIGHT = 0.5;
+	public static final double WIDTHFLAT = 0.30;
+	public static final double HEIGHTFLAT = 0.40;
+	public static final double WIDTHATANGLE = 0.4;
+	public static final double HEIGHTATANGLE = 0.5;
 	private int weight = 10;
 	private boolean isVisible = true;
 	private boolean isUsed = false;
@@ -32,6 +34,8 @@ public class TrashCan extends Physics {
 	public boolean rotated = false;
 	private DoublePoint defaultPosition  = new DoublePoint(1, 1);
 	public static final double threshold = 300;
+	private double width;
+	private double height;
 	
 	
 	public TrashCan(double x, double y){
@@ -40,9 +44,10 @@ public class TrashCan extends Physics {
 		setDefaultPosition(position);
 		this.vx = 0;
 		this.vy = 0;
-		//loadImage();
+		this.width = WIDTHFLAT;
+		this.height = HEIGHTFLAT;
 		spriteSheet = MainFrame.getTl().trashCanTexture;
-		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
+		setR(new DoubleRectangle(position, width, height));
 	}
 
 	/**
@@ -61,9 +66,11 @@ public class TrashCan extends Physics {
 		setDefaultPosition(position);
 		this.vx = vx;
 		this.vy = vy;
+		this.width = WIDTHFLAT;
+		this.height = HEIGHTFLAT;
 		this.t = t;
 		texture = MainFrame.getTl().trashCanTexture;
-		setR(new DoubleRectangle(position, WIDTH, HEIGHT));
+		setR(new DoubleRectangle(position, width, height));
 	}
 	
 	public void rotate(double angle){
@@ -71,8 +78,7 @@ public class TrashCan extends Physics {
 		
 	    tx.rotate(angle - Math.PI);
 
-	    AffineTransformOp op = new AffineTransformOp(tx,
-	        AffineTransformOp.TYPE_BILINEAR);
+	    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 	   	texture = op.filter(texture, null);
 	   	rotated = true;
 	}
@@ -163,14 +169,28 @@ public class TrashCan extends Physics {
 	public BufferedImage getTexture() {
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		
-		if (!isUsed)
-			texture = ss.grabSprite(0, 0, 530, 600);
+		if (!isUsed){
+			this.width = WIDTHFLAT;
+			this.height = HEIGHTFLAT;
+			this.r.setWidth(WIDTHFLAT);
+			this.r.setHeight(HEIGHTFLAT);
+			texture = ss.grabSprite(0, 0, 389, 489);
+		}
 		else if(planeVariable == 0 || planeVariable == 1){
+			this.width = WIDTHATANGLE;
+			this.height = HEIGHTATANGLE;
+			this.r.setWidth(WIDTHATANGLE);
+			this.r.setHeight(HEIGHTATANGLE);
 			texture = ss.grabSprite(planeVariable * 530, 600, 530, 600);
 			
 		}
-		else
+		else{
+			this.width = WIDTHFLAT;
+			this.height = HEIGHTFLAT;
+			this.r.setWidth(WIDTHFLAT);
+			this.r.setHeight(HEIGHTFLAT);
 			texture = ss.grabSprite(0, 0, 530, 600);
+		}
 		
 		return texture;
 	}
@@ -194,13 +214,13 @@ public class TrashCan extends Physics {
 	@Override
 	public double getHeight() {
 		
-		return HEIGHT;
+		return this.height;
 	}
 	
 	@Override
 	public double getWidth() {
 		
-		return WIDTH;
+		return this.width;
 	}
 
 	@Override
@@ -220,6 +240,14 @@ public class TrashCan extends Physics {
 	public DoublePoint getDefaultPosition() {
 		// TODO Auto-generated method stub
 		return defaultPosition;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
 	}
 
 	
