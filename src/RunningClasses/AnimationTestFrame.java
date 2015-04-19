@@ -17,7 +17,7 @@ public class AnimationTestFrame extends JFrame {
 	private PhysicsTestPanel pt = new PhysicsTestPanel();
 	private VectorTestPanel v = new VectorTestPanel();
 	private LevelTestPanel l = new LevelTestPanel();*/
-	private RopesTestPanel r = new RopesTestPanel();
+	//private RopesTestPanel r = new RopesTestPanel();
 	private TrashCanTestPanel t = new TrashCanTestPanel();
 	
 	
