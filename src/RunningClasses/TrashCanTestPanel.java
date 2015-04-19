@@ -15,6 +15,7 @@ import objects.Physics;
 import objects.Plane;
 import objects.Pulley;
 import objects.Rope;
+import objects.SeeSaw;
 import objects.TrashCan;
 import RunningClasses.RopesTestPanel.MouseDrag;
 
@@ -25,6 +26,7 @@ public class TrashCanTestPanel extends JPanel {
 	private TrashCan trash1 = new TrashCan(1, 1.5);
 	private Plane plane = new Plane(2,1, Math.toRadians(-155), 1);
 	private Button start = new Button("Start");
+	private SeeSaw seesaw = new SeeSaw(0.5, 2);
 	
 	
 	
@@ -46,6 +48,7 @@ public class TrashCanTestPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				t.start();
+				seesaw.setUsed(2);
 			}
 		});
 		add(start, BorderLayout.NORTH);
@@ -57,7 +60,7 @@ public class TrashCanTestPanel extends JPanel {
 		super.paintComponent(g);
 		gUnit = getWidth()/5;
 		g.drawImage(trash1.getTexture(),(int)(gUnit* trash1.getPosition().x), (int)(gUnit* trash1.getPosition().y), (int)(gUnit * trash1.getWidth()), (int)(gUnit * trash1.getHeight()), null);
-		
+		g.drawImage(seesaw.getTexture(),(int)(gUnit * seesaw.getPosition().x), (int)(gUnit * seesaw.getPosition().y), (int)(gUnit * 1.1),(int)(gUnit * 0.33), null);
 		
 		g.drawLine((int)(gUnit*(plane.getX()[0])), (int)(gUnit*(plane.getY()[0])), (int)(gUnit*(plane.getX()[1])), (int)(gUnit*plane.getY()[1]));
 		
@@ -65,6 +68,11 @@ public class TrashCanTestPanel extends JPanel {
 		double x = trash1.getPosition().x;
 		//System.out.println(plane.pointDistance(trash1.getPosition()));
 		planeContact(trash1, plane);
+		if (seesaw.getContact(trash1)){
+			trash1.setPlaneVariable(1);
+			trash1.setUsed(true);
+			}
+		
 		/*if (trash1.isUsed() && trash1.getPlaneVariable() > -1 && t.isRunning()){
 			frictionMove(trash1);
 		}

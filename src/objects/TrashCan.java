@@ -169,7 +169,7 @@ public class TrashCan extends Physics {
 	public BufferedImage getTexture() {
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		
-		if (!isUsed){
+		if (planeVariable == -1){
 			this.width = WIDTHFLAT;
 			this.height = HEIGHTFLAT;
 			this.r.setWidth(WIDTHFLAT);
@@ -189,7 +189,7 @@ public class TrashCan extends Physics {
 			this.height = HEIGHTFLAT;
 			this.r.setWidth(WIDTHFLAT);
 			this.r.setHeight(HEIGHTFLAT);
-			texture = ss.grabSprite(0, 0, 530, 600);
+			texture = ss.grabSprite(0, 0, 389, 489);
 		}
 		
 		return texture;

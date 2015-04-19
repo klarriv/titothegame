@@ -257,18 +257,26 @@ public class Level extends JPanel implements ActionListener {
 					titoXSprite++;
 					titoYSprite++;
 				}
-				if (trashCanList.get(0).getPosition().y >= 2 && trashCanList.get(0).single == 0) {
-					tito.setEnergyVelocity(trashCanList.get(0).getVy(),	trashCanList.get(0).getWeight(), tito.getWeight());
-					tito.setVx();
-					tito.setVy();
-					// (trashCanList.get(0).getWeight());
-					trashCanList.get(0).single++;
-					// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() + " vyy: "
-					// + trashCanList.get(0).getVy());
-				}
+				
+				
+				
 				
 				//Makes the trashcans fall
 				for (int i = 0; i < trashCanList.size(); i++) {
+					if (seesawList.size() != 0)
+					if ( trashCanList.get(i).single == 0 && seesawList.get(0).getContact(trashCanList.get(i))) {
+						System.out.println(trashCanList.get(0).getVy());
+						trashCanList.get(i).setPlaneVariable(1);
+						tito.setEnergyVelocity(trashCanList.get(i).getVy(),	trashCanList.get(i).getWeight(), tito.getWeight());
+						tito.setVx();
+						tito.setVy();
+						
+						trashCanList.get(i).single++;
+						
+						
+					}
+					
+					
 					if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
 						// (trash.getVx() + " " + trash.getVy());
 						projectileMotion(trashCanList.get(i));
@@ -500,7 +508,7 @@ public class Level extends JPanel implements ActionListener {
 		g.setColor(Color.black);
 		// 6 SEESAW
 		for (int i = 0; i < seesawList.size(); i++) {
-			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), null);
+			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), (int)(gUnit * 1.1),(int)(gUnit * 0.33), null);
 		}
 		// 7 SPRING HAHAHAHAHAHAHA
 		/*for (int i = 0; i < springList.size(); i++) {
@@ -685,7 +693,7 @@ public class Level extends JPanel implements ActionListener {
 	 
 	/**
 	 * Moving the objects with the mouse
-	 * @author Keven-Matthew & Charles-Philipe
+	 * @author Keven-Matthew & Charles-Philippe
 	 *
 	 */
 	class DragListener implements MouseListener, MouseMotionListener {
