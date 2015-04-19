@@ -56,7 +56,7 @@ public class TrashCanTestPanel extends JPanel {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		gUnit = getWidth()/5;
-		g.drawImage(trash1.getTexture(),(int)(gUnit* trash1.getPosition().x), (int)(gUnit* trash1.getPosition().y), 100, 100, null);
+		g.drawImage(trash1.getTexture(),(int)(gUnit* trash1.getPosition().x), (int)(gUnit* trash1.getPosition().y), (int)(gUnit * trash1.getWidth()), (int)(gUnit * trash1.getHeight()), null);
 		
 		
 		g.drawLine((int)(gUnit*(plane.getX()[0])), (int)(gUnit*(plane.getY()[0])), (int)(gUnit*(plane.getX()[1])), (int)(gUnit*plane.getY()[1]));
@@ -83,8 +83,8 @@ public class TrashCanTestPanel extends JPanel {
 		double txf = p.getX()[1];
 		double ty = p.getY(x);
 		
-		double height = ob1.HEIGHT;
-		double width = ob1.WIDTH;
+		double height = ob1.getHeight();
+		double width = ob1.getWidth();
 		//System.out.println((y > ty )+ " " + (x < tx ) + " " +( x > (txf-width)));
 		if (y < ty && x > tx && x < (txf-width) && p.pointDistance(ob1.getPosition()) < 1){
 			
