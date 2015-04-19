@@ -265,11 +265,12 @@ public class Level extends JPanel implements ActionListener {
 				for (int i = 0; i < trashCanList.size(); i++) {
 					if (seesawList.size() != 0)
 					if ( trashCanList.get(i).single == 0 && seesawList.get(0).getContact(trashCanList.get(i))) {
-						System.out.println(trashCanList.get(0).getVy());
 						trashCanList.get(i).setPlaneVariable(1);
-						tito.setEnergyVelocity(trashCanList.get(i).getVy(),	trashCanList.get(i).getWeight(), tito.getWeight());
-						tito.setVx();
-						tito.setVy();
+						if (seesawList.get(0).objectOn(tito)){
+							tito.setEnergyVelocity(trashCanList.get(i).getVy(),	trashCanList.get(i).getWeight(), tito.getWeight());
+							tito.setVx();
+							tito.setVy();
+						}
 						
 						trashCanList.get(i).single++;
 						
@@ -344,7 +345,7 @@ public class Level extends JPanel implements ActionListener {
 				}
 				
 				// checks if tito touches the right boundary to change level!
-				if(tito.getPosition().x >= 5 && levelNumber != 9){
+				if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 						t.stop();
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));

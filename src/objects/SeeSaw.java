@@ -56,6 +56,20 @@ public class SeeSaw {
 		else
 			return false;
 	}
+	
+	public boolean objectOn(Physics ob1){
+		double x = ob1.getPosition().x;
+		double y = ob1.getPosition().y;
+		double width = ob1.getWidth();
+		double height = ob1.getHeight();
+		double middleX = this.position.x + (WIDTH/2);
+		
+		if ((x + width/2) >= this.position.x && (x + width) <= middleX && (y + height) >= this.position.y)
+			return true;
+		
+		else
+			return false;
+	}
 
 	public DoublePoint getPosition() {
 		return position;

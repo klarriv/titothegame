@@ -176,8 +176,8 @@ public class Tito extends Physics{
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return HEIGHT;
 	}
 
 
