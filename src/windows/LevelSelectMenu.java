@@ -15,6 +15,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -50,7 +51,8 @@ public class LevelSelectMenu extends JPanel {
 	/**
 	 * These are the level buttons.
 	 */
-	private JButton[] lvlButtons = new JButton[10];
+	private static JButton[] lvlButtons = new JButton[10];
+
 
 	/**
 	 * This is the back button in the lower left corner.
@@ -85,96 +87,100 @@ public class LevelSelectMenu extends JPanel {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				if ((JButton) e.getSource() == lvlButtons[0]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL0");
-				} else if ((JButton) e.getSource() == lvlButtons[1]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL1");
-				} else if ((JButton) e.getSource() == lvlButtons[2]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL2");
-				} else if ((JButton) e.getSource() == lvlButtons[3]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL3");
-				} else if ((JButton) e.getSource() == lvlButtons[4]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL4");
-				} else if ((JButton) e.getSource() == lvlButtons[5]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL5");
-				} else if ((JButton) e.getSource() == lvlButtons[6]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL6");
-				} else if ((JButton) e.getSource() == lvlButtons[7]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL7");
-				} else if ((JButton) e.getSource() == lvlButtons[8]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL8");
-				} else if ((JButton) e.getSource() == lvlButtons[9]) {
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "LEVEL9");
+				if(((JButton) e.getSource()).isEnabled()){
+					if ((JButton) e.getSource() == lvlButtons[0]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL0");
+					} else if ((JButton) e.getSource() == lvlButtons[1]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL1");
+					} else if ((JButton) e.getSource() == lvlButtons[2]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL2");
+					} else if ((JButton) e.getSource() == lvlButtons[3]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL3");
+					} else if ((JButton) e.getSource() == lvlButtons[4]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL4");
+					} else if ((JButton) e.getSource() == lvlButtons[5]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL5");
+					} else if ((JButton) e.getSource() == lvlButtons[6]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL6");
+					} else if ((JButton) e.getSource() == lvlButtons[7]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL7");
+					} else if ((JButton) e.getSource() == lvlButtons[8]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL8");
+					} else if ((JButton) e.getSource() == lvlButtons[9]) {
+						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+						cardLayout.show(MainFrame.getMenus(), "LEVEL9");
+					}
 				}
 			}
 
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-				setCursor(cursor);
-				if ((JButton) e.getSource() == lvlButtons[0]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlGlowIcons[0]);
-				} else if ((JButton) e.getSource() == lvlButtons[1]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlGlowIcons[1]);
-				} else if ((JButton) e.getSource() == lvlButtons[2]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlGlowIcons[2]);
-				} else if ((JButton) e.getSource() == lvlButtons[3]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlGlowIcons[3]);
-				} else if ((JButton) e.getSource() == lvlButtons[4]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlGlowIcons[4]);
-				} else if ((JButton) e.getSource() == lvlButtons[5]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlGlowIcons[5]);
-				} else if ((JButton) e.getSource() == lvlButtons[6]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlGlowIcons[6]);
-				} else if ((JButton) e.getSource() == lvlButtons[7]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlGlowIcons[7]);
-				} else if ((JButton) e.getSource() == lvlButtons[8]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlGlowIcons[8]);
-				} else if ((JButton) e.getSource() == lvlButtons[9]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlGlowIcons[9]);
-				} else if ((JButton) e.getSource() == backButton) {
-					MainFrame.getTl().changeButtonImage(backButton, backButtonGlowIcon);
+				if(((JButton) e.getSource()).isEnabled()){
+					Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
+					setCursor(cursor);
+					if ((JButton) e.getSource() == lvlButtons[0]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlGlowIcons[0]);
+					} else if ((JButton) e.getSource() == lvlButtons[1]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlGlowIcons[1]);
+					} else if ((JButton) e.getSource() == lvlButtons[2]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlGlowIcons[2]);
+					} else if ((JButton) e.getSource() == lvlButtons[3]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlGlowIcons[3]);
+					} else if ((JButton) e.getSource() == lvlButtons[4]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlGlowIcons[4]);
+					} else if ((JButton) e.getSource() == lvlButtons[5]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlGlowIcons[5]);
+					} else if ((JButton) e.getSource() == lvlButtons[6]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlGlowIcons[6]);
+					} else if ((JButton) e.getSource() == lvlButtons[7]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlGlowIcons[7]);
+					} else if ((JButton) e.getSource() == lvlButtons[8]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlGlowIcons[8]);
+					} else if ((JButton) e.getSource() == lvlButtons[9]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlGlowIcons[9]);
+					} else if ((JButton) e.getSource() == backButton) {
+						MainFrame.getTl().changeButtonImage(backButton, backButtonGlowIcon);
+					}
 				}
-				
-				
 			}
 
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-				setCursor(cursor);
-				if ((JButton) e.getSource() == lvlButtons[0]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlIcons[0]);
-				} else if ((JButton) e.getSource() == lvlButtons[1]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlIcons[1]);
-				} else if ((JButton) e.getSource() == lvlButtons[2]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlIcons[2]);
-				} else if ((JButton) e.getSource() == lvlButtons[3]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlIcons[3]);
-				} else if ((JButton) e.getSource() == lvlButtons[4]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlIcons[4]);
-				} else if ((JButton) e.getSource() == lvlButtons[5]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlIcons[5]);
-				} else if ((JButton) e.getSource() == lvlButtons[6]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlIcons[6]);
-				} else if ((JButton) e.getSource() == lvlButtons[7]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlIcons[7]);
-				} else if ((JButton) e.getSource() == lvlButtons[8]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlIcons[8]);
-				} else if ((JButton) e.getSource() == lvlButtons[9]) {
-					MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlIcons[9]);
-				} else if ((JButton) e.getSource() == backButton) {
-					MainFrame.getTl().changeButtonImage(backButton, backButtonIcon);
+				if(((JButton) e.getSource()).isEnabled()){
+					Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
+					setCursor(cursor);
+					if ((JButton) e.getSource() == lvlButtons[0]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlIcons[0]);
+					} else if ((JButton) e.getSource() == lvlButtons[1]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlIcons[1]);
+					} else if ((JButton) e.getSource() == lvlButtons[2]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlIcons[2]);
+					} else if ((JButton) e.getSource() == lvlButtons[3]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlIcons[3]);
+					} else if ((JButton) e.getSource() == lvlButtons[4]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlIcons[4]);
+					} else if ((JButton) e.getSource() == lvlButtons[5]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlIcons[5]);
+					} else if ((JButton) e.getSource() == lvlButtons[6]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlIcons[6]);
+					} else if ((JButton) e.getSource() == lvlButtons[7]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlIcons[7]);
+					} else if ((JButton) e.getSource() == lvlButtons[8]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlIcons[8]);
+					} else if ((JButton) e.getSource() == lvlButtons[9]) {
+						MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlIcons[9]);
+					} else if ((JButton) e.getSource() == backButton) {
+						MainFrame.getTl().changeButtonImage(backButton, backButtonIcon);
+					}
 				}
 			}
 
@@ -230,6 +236,9 @@ public class LevelSelectMenu extends JPanel {
 			lvlButtons[i].addMouseListener(new ButtonListener());
 			lvlButtons[i].addComponentListener(new ButtonResizeListener());
 			add(lvlButtons[i]);
+			if(i>MainFrame.getLevelReached()){
+				lvlButtons[i].setEnabled(false);
+			}
 		}
 		
 		backButton = new JButton(new ImageIcon(backButtonIcon));
@@ -272,5 +281,9 @@ public class LevelSelectMenu extends JPanel {
 		lvlButtons[9].setBounds(x2, 537*getHeight()/720, width, height);
 		
 		backButton.setBounds(0, 617*getHeight()/720, 260*getWidth()/1280, 105*getHeight()/720);
+	}
+	
+	public static JButton[] getLvlButtons() {
+		return lvlButtons;
 	}
 }

@@ -123,6 +123,8 @@ public class MainMenu extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO actually delete the old save file and create a new one
+				JOptionPane.showConfirmDialog(null,"Creating a new game will create a new save file. Previous progress will be lost. Do you want to continue?", "Warning!", JOptionPane.YES_NO_OPTION);
 				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
@@ -137,7 +139,19 @@ public class MainMenu extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);				
+				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
+					if (MainFrame.getLevels()[i].hasBeenCompleted()){
+						try {
+							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
+							writer.print(i+1);
+							writer.close();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+				System.exit(0);		
 			}
 		});
 		

@@ -7,6 +7,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 import javax.sound.sampled.Clip;
@@ -106,6 +107,7 @@ public class Level extends JPanel implements ActionListener {
 	private int titoXSprite = 0;
 	private int titoYSprite = 0;
 	private boolean isPaused = false;
+	private boolean hasBeenCompleted = false;
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
 
 	/**
@@ -194,6 +196,18 @@ public class Level extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
+					if (MainFrame.getLevels()[i].hasBeenCompleted()){
+						try {
+							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
+							writer.print(i+1);
+							writer.close();
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 				System.exit(0);
 			}
 
@@ -347,10 +361,14 @@ public class Level extends JPanel implements ActionListener {
 				// checks if tito touches the right boundary to change level!
 				if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 						t.stop();
+						hasBeenCompleted = true;
+						LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 				}
 				else{
+					hasBeenCompleted = true;
+					LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
 					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 					cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
 				}
@@ -688,10 +706,16 @@ public class Level extends JPanel implements ActionListener {
 	   * @param p
 	   */
 	  public void setAcceleration(Physics ob1, Plane p){
-	   
 		  ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5); 
 	  }
 	 
+	public boolean hasBeenCompleted() {
+		return hasBeenCompleted;
+	}
+	public void setHasBeenCompleted(boolean hasBeenCompleted) {
+		this.hasBeenCompleted = hasBeenCompleted;
+	}
+
 	/**
 	 * Moving the objects with the mouse
 	 * @author Keven-Matthew & Charles-Philippe

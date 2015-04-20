@@ -5,6 +5,7 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -31,17 +32,17 @@ public class MainFrame extends JFrame{
 	 */
 	private static final String CREDITSPANEL = "CreditsPanel";
 	/**
+	 * This is the array that contains the 10 level panels
+	 */
+	private static Level[] levels = new Level[10];
+	/**
 	 * The level select menu that will be used by the user.
 	 */
-	private static LevelSelectMenu levelSelectMenu = new LevelSelectMenu();
+	private static LevelSelectMenu levelSelectMenu;
 	/**
 	 * The main menu that will be used by the user.
 	 */
 	private static MainMenu mainMenu = new MainMenu();
-	/**
-	 * This is the array that contains the 10 level panels
-	 */
-	private static Level[] levels = new Level[10];
 	/**
 	 * This is the credits window
 	 */
@@ -54,6 +55,10 @@ public class MainFrame extends JFrame{
 	 * The image variable that will be used to set the icon of the JFrame.
 	 */
 	private Image frameIcon = null;
+	/**
+	 * Holds the number of the level reached contained in the .sav file
+	 */
+	private static int levelReached;
 	
 	/**
 	 * This creates a new main JFrame
@@ -67,6 +72,15 @@ public class MainFrame extends JFrame{
 		
 		try {
 			frameIcon = ImageIO.read(new File("Resources/frameIcon.png"));
+			File gameSave =  new File("Resources/gameSave.sav");
+			if(!gameSave.exists()){
+				levelReached = 0;
+			}
+			else{
+				Scanner reader = new Scanner(gameSave);
+				levelReached = reader.nextInt();
+				reader.close();
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -74,11 +88,15 @@ public class MainFrame extends JFrame{
 		setIconImage(frameIcon);
 		
 		menus = new JPanel(new CardLayout());
-		menus.add(levelSelectMenu, LEVELSELECTPANEL);
-		menus.add(mainMenu, MAINMENUPANEL);
+		
 		for (int i=0; i<levels.length; i++){
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
+			if(i<=MainFrame.getLevelReached())
+				MainFrame.getLevels()[i].setHasBeenCompleted(true);
+			levelSelectMenu = new LevelSelectMenu();
+			menus.add(levelSelectMenu, LEVELSELECTPANEL);
+			menus.add(mainMenu, MAINMENUPANEL);
 		}
 		menus.add(credits, CREDITSPANEL);
 		
@@ -143,4 +161,9 @@ public class MainFrame extends JFrame{
 	public static void setLevels(Level[] levels) {
 		MainFrame.levels = levels;
 	}
+
+	public static int getLevelReached() {
+		return levelReached;
+	}
+
 }
