@@ -277,6 +277,8 @@ public class MainMenu extends JPanel implements ActionListener{
 		
 		g.setColor(new Color(255, 0, 0, 128));
 	
+		g.drawImage(MainFrame.getTl().titoGif.getImage(), 0, 0, this);
+		
 	}
 
 	@Override

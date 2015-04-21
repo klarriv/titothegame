@@ -20,10 +20,13 @@ public class TextureLoader {
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
+	public ImageIcon titoGif;
 	
 	public TextureLoader() {
 		
 		try {
+			titoGif = new ImageIcon("Resources/TitoAnimationTest.gif");
+			
 			// loads Tito
 			titoTexture = ImageIO.read(new File("Resources/TitoSpriteSheet.png"));
 			
