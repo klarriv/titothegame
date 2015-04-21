@@ -17,7 +17,8 @@ public class TextureLoader {
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture;
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture;
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2;
-	public BufferedImage levelSelectBackgroundTexture;
+	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
+	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
 	
 	public TextureLoader() {
 		
@@ -54,6 +55,15 @@ public class TextureLoader {
 			
 			//loads level select texture
 			levelSelectBackgroundTexture = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/levelSelectionMenu.png"));
+			levelSelectBackButtonTexture = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/backButton.png"));
+			levelSelectBackButtonGlowTexture = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/backButtonGlow.png"));
+			levelSelectLevelTexture = new BufferedImage[10];
+			levelSelectLevelGlowTexture = new BufferedImage[10];
+			
+			for(int i=0; i<10; i++){
+				levelSelectLevelTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + ".png"));
+				levelSelectLevelGlowTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + "Glow.png"));
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -71,8 +81,10 @@ public class TextureLoader {
         } else {
             size.height = -1;
         }
-        Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
-        jbutton.setIcon(new ImageIcon(scaled));
+        if(size.width != 0 && size.getHeight() != 0){
+        	Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
+        	jbutton.setIcon(new ImageIcon(scaled));
+        }
 	}
 }
 

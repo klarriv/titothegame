@@ -114,13 +114,15 @@ public class Level extends JPanel implements ActionListener {
 	 * This creates a new instance of level
 	 */
 	public Level(int levelNumber) {
+		setLayout(null);
+		
 		DragListener bob = new DragListener();
 		addMouseMotionListener(bob);
 		addMouseListener(bob);
-
+		
 		this.levelNumber = levelNumber;
 
-		// START OF PLAY/RESTART BUTTONS
+		// START OF PLAY/PAUSE/RESTART BUTTONS
 		jbtPlay = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPlay.setBorder(BorderFactory.createEmptyBorder());
 		jbtPlay.setContentAreaFilled(false);
@@ -138,6 +140,8 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		//jbtPlay.addComponentListener(new ButtonResizeListener());
+		
 		jbtRestart = new JButton("Restart");
 		jbtRestart.setBorder(BorderFactory.createEmptyBorder());
 		jbtRestart.setContentAreaFilled(false);
@@ -484,6 +488,9 @@ public class Level extends JPanel implements ActionListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		gUnit = getWidth() / 5;
+		
+		jbtPlay.setBounds(10, 10, 40, 40);
+		jbtRestart.setBounds(60, 10, 40, 40);
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 		// 1 TREE
@@ -552,9 +559,6 @@ public class Level extends JPanel implements ActionListener {
 		}
 		//TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		g.drawImage(sprite, (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
-
-		jbtPlay.setBounds(10, 10, 40, 40);
-		jbtRestart.setBounds(60, 10, 40, 40);
 		
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
@@ -715,6 +719,23 @@ public class Level extends JPanel implements ActionListener {
 	public void setHasBeenCompleted(boolean hasBeenCompleted) {
 		this.hasBeenCompleted = hasBeenCompleted;
 	}
+	/**
+	public static JButton getJbtExitGame() {
+		return jbtExitGame;
+	}
+	public static JButton getJbtBackToGame() {
+		return jbtBackToGame;
+	}
+	public static JButton getJbtBackToLevelSelect() {
+		return jbtBackToLevelSelect;
+	}
+	public static JButton getJbtPlay() {
+		return jbtPlay;
+	}
+	public static JButton getJbtRestart() {
+		return jbtRestart;
+	}
+
 
 	/**
 	 * Moving the objects with the mouse

@@ -29,54 +29,20 @@ import javax.swing.*;
 public class LevelSelectMenu extends JPanel {
 	
 	/**
-	 * Holds the background image for the level select menu.
-	 */
-	private Image backgroundImage = null;
-
-	/**
-	 * These hold the images for the back button.
-	 */
-	private BufferedImage backButtonIcon, backButtonGlowIcon;
-
-	/**
-	 * This holds the ten buttons icons for the levels.
-	 */
-	private BufferedImage[] lvlIcons = new BufferedImage[10];
-
-	/**
-	 * This holds the ten images for when the mouse is over a level icon.
-	 */
-	private BufferedImage[] lvlGlowIcons = new BufferedImage[10];
-	
-	/**
 	 * These are the level buttons.
 	 */
 	private static JButton[] lvlButtons = new JButton[10];
 
-
 	/**
 	 * This is the back button in the lower left corner.
 	 */
-	private JButton backButton;
+	private static JButton backButton;
 	
 	/**
 	 * This creates a new level select menu
 	 */
 	public LevelSelectMenu(){
 		setLayout(null);
-		try {
-			backgroundImage = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/levelSelectionMenu.png"));
-			
-			for(int i=0; i<10; i++){
-				lvlIcons[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + ".png"));
-				lvlGlowIcons[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + "Glow.png"));
-				backButtonIcon = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/backButton.png"));
-				backButtonGlowIcon = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/backButtonGlow.png"));
-			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		/**
 		 * This is the mouse listener to make the buttons change when the mouse hovers over them.
@@ -128,27 +94,27 @@ public class LevelSelectMenu extends JPanel {
 					Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
 					setCursor(cursor);
 					if ((JButton) e.getSource() == lvlButtons[0]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlGlowIcons[0]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[0], MainFrame.getTl().levelSelectLevelGlowTexture[0]);
 					} else if ((JButton) e.getSource() == lvlButtons[1]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlGlowIcons[1]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[1], MainFrame.getTl().levelSelectLevelGlowTexture[1]);
 					} else if ((JButton) e.getSource() == lvlButtons[2]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlGlowIcons[2]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[2], MainFrame.getTl().levelSelectLevelGlowTexture[2]);
 					} else if ((JButton) e.getSource() == lvlButtons[3]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlGlowIcons[3]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[3], MainFrame.getTl().levelSelectLevelGlowTexture[3]);
 					} else if ((JButton) e.getSource() == lvlButtons[4]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlGlowIcons[4]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[4], MainFrame.getTl().levelSelectLevelGlowTexture[4]);
 					} else if ((JButton) e.getSource() == lvlButtons[5]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlGlowIcons[5]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[5], MainFrame.getTl().levelSelectLevelGlowTexture[5]);
 					} else if ((JButton) e.getSource() == lvlButtons[6]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlGlowIcons[6]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[6], MainFrame.getTl().levelSelectLevelGlowTexture[6]);
 					} else if ((JButton) e.getSource() == lvlButtons[7]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlGlowIcons[7]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[7], MainFrame.getTl().levelSelectLevelGlowTexture[7]);
 					} else if ((JButton) e.getSource() == lvlButtons[8]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlGlowIcons[8]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[8], MainFrame.getTl().levelSelectLevelGlowTexture[8]);
 					} else if ((JButton) e.getSource() == lvlButtons[9]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlGlowIcons[9]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[9], MainFrame.getTl().levelSelectLevelGlowTexture[9]);
 					} else if ((JButton) e.getSource() == backButton) {
-						MainFrame.getTl().changeButtonImage(backButton, backButtonGlowIcon);
+						MainFrame.getTl().changeButtonImage(backButton, MainFrame.getTl().levelSelectBackButtonGlowTexture);
 					}
 				}
 			}
@@ -159,27 +125,27 @@ public class LevelSelectMenu extends JPanel {
 					Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
 					setCursor(cursor);
 					if ((JButton) e.getSource() == lvlButtons[0]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[0], lvlIcons[0]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[0], MainFrame.getTl().levelSelectLevelTexture[0]);
 					} else if ((JButton) e.getSource() == lvlButtons[1]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[1], lvlIcons[1]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[1], MainFrame.getTl().levelSelectLevelTexture[1]);
 					} else if ((JButton) e.getSource() == lvlButtons[2]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[2], lvlIcons[2]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[2], MainFrame.getTl().levelSelectLevelTexture[2]);
 					} else if ((JButton) e.getSource() == lvlButtons[3]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[3], lvlIcons[3]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[3], MainFrame.getTl().levelSelectLevelTexture[3]);
 					} else if ((JButton) e.getSource() == lvlButtons[4]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[4], lvlIcons[4]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[4], MainFrame.getTl().levelSelectLevelTexture[4]);
 					} else if ((JButton) e.getSource() == lvlButtons[5]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[5], lvlIcons[5]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[5], MainFrame.getTl().levelSelectLevelTexture[5]);
 					} else if ((JButton) e.getSource() == lvlButtons[6]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[6], lvlIcons[6]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[6], MainFrame.getTl().levelSelectLevelTexture[6]);
 					} else if ((JButton) e.getSource() == lvlButtons[7]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[7], lvlIcons[7]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[7], MainFrame.getTl().levelSelectLevelTexture[7]);
 					} else if ((JButton) e.getSource() == lvlButtons[8]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[8], lvlIcons[8]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[8], MainFrame.getTl().levelSelectLevelTexture[8]);
 					} else if ((JButton) e.getSource() == lvlButtons[9]) {
-						MainFrame.getTl().changeButtonImage(lvlButtons[9], lvlIcons[9]);
+						MainFrame.getTl().changeButtonImage(lvlButtons[9], MainFrame.getTl().levelSelectLevelTexture[9]);
 					} else if ((JButton) e.getSource() == backButton) {
-						MainFrame.getTl().changeButtonImage(backButton, backButtonIcon);
+						MainFrame.getTl().changeButtonImage(backButton, MainFrame.getTl().levelSelectBackButtonTexture);
 					}
 				}
 			}
@@ -198,39 +164,8 @@ public class LevelSelectMenu extends JPanel {
 
 		}
 		
-		class ButtonResizeListener implements ComponentListener{
-			
-			@Override
-			public void componentHidden(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void componentResized(ComponentEvent e) {
-				for(int i=0; i<lvlButtons.length; i++){
-					MainFrame.getTl().changeButtonImage(lvlButtons[i], lvlIcons[i]);
-				}
-				MainFrame.getTl().changeButtonImage(backButton, backButtonIcon);
-				repaint();
-			}
-
-			@Override
-			public void componentShown(ComponentEvent e) {
-				// TODO Auto-generated method stub
-			}
-		}
-		
-		
-		
 		for(int i = 0; i<10; i++){
-			lvlButtons[i] = new JButton(new ImageIcon(lvlIcons[i]));
+			lvlButtons[i] = new JButton(new ImageIcon(MainFrame.getTl().levelSelectLevelTexture[i]));
 			lvlButtons[i].setBorder(BorderFactory.createEmptyBorder());
 			lvlButtons[i].setContentAreaFilled(false);
 			lvlButtons[i].addMouseListener(new ButtonListener());
@@ -241,7 +176,7 @@ public class LevelSelectMenu extends JPanel {
 			}
 		}
 		
-		backButton = new JButton(new ImageIcon(backButtonIcon));
+		backButton = new JButton(new ImageIcon(MainFrame.getTl().levelSelectBackButtonTexture));
 		backButton.setBorder(BorderFactory.createEmptyBorder());
 		backButton.setContentAreaFilled(false);
 		backButton.addMouseListener(new ButtonListener());
@@ -266,7 +201,7 @@ public class LevelSelectMenu extends JPanel {
 		int width = 294*getWidth()/1280;
 		int height = 86*getHeight()/720;
 		
-		g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), null);
+		g.drawImage(MainFrame.getTl().levelSelectBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 		
 		lvlButtons[0].setBounds(x1, 73*getHeight()/720, width, height);
 		lvlButtons[1].setBounds(x1, 189*getHeight()/720, width, height);
@@ -285,5 +220,9 @@ public class LevelSelectMenu extends JPanel {
 	
 	public static JButton[] getLvlButtons() {
 		return lvlButtons;
+	}
+	
+	public static JButton getBackButton() {
+		return backButton;
 	}
 }

@@ -28,12 +28,20 @@ public class ButtonResizeListener implements ComponentListener{
 
 	@Override
 	public void componentResized(ComponentEvent e) {
+		//MAIN MENU BUTTONS
 		MainFrame.getTl().changeButtonImage(MainMenu.getPlayButton(), MainFrame.getTl().mainMenuPlayButtonTexture);
 		MainFrame.getTl().changeButtonImage(MainMenu.getNewGameButton(), MainFrame.getTl().mainMenuNewGameButtonTexture);
 		MainFrame.getTl().changeButtonImage(MainMenu.getMusicButton(), MainFrame.getTl().mainMenuMusicButtonTexture);
 		
-		// TODO change the size of the levelSelectMenu buttons
-		//MainFrame.getTl().changeButtonImage(jbutton, img);
+		// LEVEL SELECT BUTTONS
+		for(int i=0; i<LevelSelectMenu.getLvlButtons().length; i++){
+			if(LevelSelectMenu.getLvlButtons()[i].getSize().width != 0 && LevelSelectMenu.getLvlButtons()[i].getSize().height != 0)
+				MainFrame.getTl().changeButtonImage(LevelSelectMenu.getLvlButtons()[i], MainFrame.getTl().levelSelectLevelTexture[i]);
+		}
+		MainFrame.getTl().changeButtonImage(LevelSelectMenu.getBackButton(), MainFrame.getTl().levelSelectBackButtonTexture);
+		
+		// LEVEL BUTTONS
+		//MainFrame.getTl().changeButtonImage(Level.getJbtPlay(), MainFrame.getTl().levelPlayTexture);
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package objects;
 
-
 public class Plane {
 	private DoublePoint dp = new DoublePoint(0,0);
 	private double width =1;
