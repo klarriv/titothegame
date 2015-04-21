@@ -41,7 +41,15 @@ public class ButtonResizeListener implements ComponentListener{
 		MainFrame.getTl().changeButtonImage(LevelSelectMenu.getBackButton(), MainFrame.getTl().levelSelectBackButtonTexture);
 		
 		// LEVEL BUTTONS
-		//MainFrame.getTl().changeButtonImage(Level.getJbtPlay(), MainFrame.getTl().levelPlayTexture);
+		for(int i=0; i<MainFrame.getLevels().length; i++){
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtPlay(), MainFrame.getTl().levelPlayTexture);
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtRestart(), MainFrame.getTl().levelRestartTexture);
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtPause(), MainFrame.getTl().levelPauseTexture);
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtBackToGame(), MainFrame.getTl().pauseMenuBackToGameTexture);
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtBackToLevelSelect(), MainFrame.getTl().pauseMenuLevelSelectionTexture);
+			MainFrame.getTl().changeButtonImage(MainFrame.getLevels()[i].getJbtExitGame(), MainFrame.getTl().pauseMenuExitGameTexture);
+		}
+
 	}
 
 	@Override

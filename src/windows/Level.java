@@ -108,7 +108,7 @@ public class Level extends JPanel implements ActionListener {
 	private int titoYSprite = 0;
 	private boolean isPaused = false;
 	private boolean hasBeenCompleted = false;
-	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart;
+	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart, jbtPause;
 
 	/**
 	 * This creates a new instance of level
@@ -140,9 +140,22 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
-		//jbtPlay.addComponentListener(new ButtonResizeListener());
+		jbtPlay.addComponentListener(new ButtonResizeListener());
 		
-		jbtRestart = new JButton("Restart");
+		jbtPause = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
+		jbtPause.setBorder(BorderFactory.createEmptyBorder());
+		jbtPause.setContentAreaFilled(false);
+		jbtPause.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				pauseGameAction();
+			}
+
+		});
+		jbtPause.addComponentListener(new ButtonResizeListener());
+		
+		jbtRestart = new JButton(new ImageIcon(MainFrame.getTl().levelRestartTexture));
 		jbtRestart.setBorder(BorderFactory.createEmptyBorder());
 		jbtRestart.setContentAreaFilled(false);
 		jbtRestart.addActionListener(new ActionListener() {
@@ -155,17 +168,17 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
-
+		
 		add(jbtPlay);
+		add(jbtPause);
 		add(jbtRestart);
 		// END OF PLAY/RESTART BUTTONS
 
 		// START OF PAUSE MENU ITEMS
 		// This block to the next comment is for the pause menu
-		jbtBackToGame = new JButton("Back to Game");
-		jbtBackToLevelSelect = new JButton("Exit to level menu");
-		jbtExitGame = new JButton("Exit Game");
-
+		jbtBackToGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuBackToGameTexture));
+		jbtBackToGame.setBorder(BorderFactory.createEmptyBorder());
+		jbtBackToGame.setContentAreaFilled(false);
 		jbtBackToGame.addActionListener(new ActionListener() {
 
 			@Override
@@ -179,7 +192,11 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		jbtBackToGame.addComponentListener(new ButtonResizeListener());
 		
+		jbtBackToLevelSelect = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuLevelSelectionTexture));
+		jbtBackToLevelSelect.setBorder(BorderFactory.createEmptyBorder());
+		jbtBackToLevelSelect.setContentAreaFilled(false);
 		jbtBackToLevelSelect.addActionListener(new ActionListener() {
 
 			@Override
@@ -195,7 +212,11 @@ public class Level extends JPanel implements ActionListener {
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
 		});
+		jbtBackToLevelSelect.addComponentListener(new ButtonResizeListener());
 		
+		jbtExitGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuExitGameTexture));
+		jbtExitGame.setBorder(BorderFactory.createEmptyBorder());
+		jbtExitGame.setContentAreaFilled(false);
 		jbtExitGame.addActionListener(new ActionListener() {
 
 			@Override
@@ -216,6 +237,7 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		jbtExitGame.addComponentListener(new ButtonResizeListener());
 
 		add(jbtBackToGame);
 		add(jbtBackToLevelSelect);
@@ -229,22 +251,7 @@ public class Level extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (!isPaused) {
-					isPaused = true;
-					t.stop();
-					repaint();
-					jbtBackToGame.setVisible(true);
-					jbtBackToLevelSelect.setVisible(true);
-					jbtExitGame.setVisible(true);
-				} else {
-					isPaused = false;
-					t.start();
-					repaint();
-					jbtBackToGame.setVisible(false);
-					jbtBackToLevelSelect.setVisible(false);
-					jbtExitGame.setVisible(false);
-				}
-
+				pauseGameAction();
 			}
 		});
 		// END OF PAUSE MENU ITEMS
@@ -383,6 +390,30 @@ public class Level extends JPanel implements ActionListener {
 		// END OF TIMER FOR MAKING TITO MOVE
 
 	}
+	
+	protected void pauseGameAction(){
+		if (!isPaused) {
+			isPaused = true;
+			t.stop();
+			repaint();
+			jbtBackToGame.setVisible(true);
+			jbtBackToLevelSelect.setVisible(true);
+			jbtExitGame.setVisible(true);
+			jbtPause.setVisible(false);
+			jbtPlay.setVisible(false);
+			jbtRestart.setVisible(false);
+		} else {
+			isPaused = false;
+			repaint();
+			jbtBackToGame.setVisible(false);
+			jbtBackToLevelSelect.setVisible(false);
+			jbtExitGame.setVisible(false);
+			jbtPause.setVisible(true);
+			jbtPlay.setVisible(true);
+			jbtRestart.setVisible(true);
+		}
+	}
+	
 	/**
 	 * Loads all of the objects in the Level
 	 */
@@ -489,8 +520,13 @@ public class Level extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		gUnit = getWidth() / 5;
 		
-		jbtPlay.setBounds(10, 10, 40, 40);
-		jbtRestart.setBounds(60, 10, 40, 40);
+		jbtPlay.setBounds(10, 10, 30, 30);
+		jbtPause.setBounds(50, 10, 30, 30);
+		jbtRestart.setBounds(90, 10, 30, 30);
+		
+		jbtBackToGame.setBounds(541*getWidth()/1280, 200*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+		jbtBackToLevelSelect.setBounds(541*getWidth()/1280, 300*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+		jbtExitGame.setBounds(541*getWidth()/1280, 400*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 		// 1 TREE
@@ -719,21 +755,24 @@ public class Level extends JPanel implements ActionListener {
 	public void setHasBeenCompleted(boolean hasBeenCompleted) {
 		this.hasBeenCompleted = hasBeenCompleted;
 	}
-	/**
-	public static JButton getJbtExitGame() {
+	
+	public JButton getJbtExitGame() {
 		return jbtExitGame;
 	}
-	public static JButton getJbtBackToGame() {
+	public JButton getJbtBackToGame() {
 		return jbtBackToGame;
 	}
-	public static JButton getJbtBackToLevelSelect() {
+	public JButton getJbtBackToLevelSelect() {
 		return jbtBackToLevelSelect;
 	}
-	public static JButton getJbtPlay() {
+	public JButton getJbtPlay() {
 		return jbtPlay;
 	}
-	public static JButton getJbtRestart() {
+	public JButton getJbtRestart() {
 		return jbtRestart;
+	}
+	public JButton getJbtPause() {
+		return jbtPause;
 	}
 
 
@@ -871,7 +910,6 @@ public class Level extends JPanel implements ActionListener {
 					 * planeList.get(i).getPosition().y = y-TrashCan.HEIGHT/2; }
 					 */
 				}
-				// //(x + " " + ropeList.size());
 				for (int i = 0; i < ropeList.size(); i++) {
 					
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
@@ -889,13 +927,11 @@ public class Level extends JPanel implements ActionListener {
 	
 				for (int i = 0; i < trashCanList.size(); i++) {
 					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
-						// USED TO MOVE THE TRASHCAN AROUND
 						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
 						/*
 						 * Stupidly complicated for nothing ffs
 						 */
-						
 						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
 							if (ropeList.size() != 0){
 								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
@@ -915,17 +951,14 @@ public class Level extends JPanel implements ActionListener {
 									if(trashCanList.get(i).isUsed())
 										break;
 								}
-				
-						// USED TO PUT OBJECTS IN THE TRASHCAN
-						for (int j = i + 1; j < trashCanList.size(); j++) {
-							if (trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
+						for (int j = 0; j < trashCanList.size(); j++) {
+							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 								trashCanList.get(j).setVisible(false);
 								trashCanList.get(j).setR(null);
 								trashCanList.get(j).setUsed(true);
 							}
 						}
-						
 						for (int j = 0; j < ropeList.size(); j++) {
 							if (trashCanList.get(i).getPosition().distance(ropeList.get(j).getAnchor2()) <= 0.3) {
 								if (ropeList.get(j).isUsed() == 0 && !trashCanList.get(i).isUsed()) {

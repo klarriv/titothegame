@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.*;
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
@@ -124,10 +126,28 @@ public class MainMenu extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO actually delete the old save file and create a new one
-				JOptionPane.showConfirmDialog(null,"Creating a new game will create a new save file. Previous progress will be lost. Do you want to continue?", "Warning!", JOptionPane.YES_NO_OPTION);
+				//JOptionPane.showConfirmDialog(null,"Creating a new game will create a new save file. Previous progress will be lost. Do you want to continue?", "Warning!", JOptionPane.YES_NO_OPTION);
+				JOptionPane.showConfirmDialog(null, getPanel(), "WARNING!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
+
+			private JPanel getPanel() {
+		        JPanel panel = new JPanel();
+		        JLabel label = new JLabel("Starting a new game will erase any previous save file. Are you sure you want to continue?");
+		        ImageIcon image = null;
+		        try {
+		            image = new ImageIcon(ImageIO.read(new File("Resources/titoStepOne.png")));
+		        } catch(IOException ioe) {
+		            ioe.printStackTrace();
+		        } 
+
+		        label.setIcon(image);
+		        panel.add(label);
+		        
+		        return panel;
+		    }
+
 
 		});
 		newGameButton.addComponentListener(new ButtonResizeListener());

@@ -15,10 +15,11 @@ public class TextureLoader {
 
 	private final String PATHFOROBJECTS = "Resources/Objects/";
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture;
-	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture;
+	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture, levelPauseTexture;
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2;
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
+	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
 	
 	public TextureLoader() {
 		
@@ -42,8 +43,9 @@ public class TextureLoader {
 			levelPauseHeaderTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/pauseTitle.png"));
 			levelPlayTexture = ImageIO.read(new File("Resources/play.png"));
 			levelRestartTexture = ImageIO.read(new File("Resources/restart.png"));
+			levelPauseTexture = ImageIO.read(new File("Resources/pause.png"));
 			
-			// laods mainmenu textures
+			// loads mainmenu textures
 			mainMenuBackgroundTexture = ImageIO.read(new File("Resources/Menus/MainMenu/mainmenu.png"));
 			mainMenuPlayButtonTexture = ImageIO.read(new File("Resources/Menus/MainMenu/playButton.png"));
 			mainMenuPlayButtonHighlightTexture = ImageIO.read(new File("Resources/Menus/MainMenu/playHighlightButton.png"));
@@ -64,6 +66,11 @@ public class TextureLoader {
 				levelSelectLevelTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + ".png"));
 				levelSelectLevelGlowTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + "Glow.png"));
 			}
+			
+			// loads the buttons for the pause menu
+			pauseMenuBackToGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/backToGameButton.png"));
+			pauseMenuExitGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/exitGameButton.png"));
+			pauseMenuLevelSelectionTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/levelSelectionButton.png"));
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
