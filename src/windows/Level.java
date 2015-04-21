@@ -545,7 +545,7 @@ public class Level extends JPanel implements ActionListener {
 		}
 		// 4 PLANE
 		for (int i = 0; i < planeList.size(); i++) {
-			g.drawLine((int) (gUnit * (planeList.get(i).getX()[0])), (int) (gUnit * (planeList.get(i).getY()[0])), (int) (gUnit * (planeList.get(i).getX()[1])), (int) (gUnit * planeList.get(i).getY()[1]));
+			g.drawLine((int) (gUnit * (planeList.get(i).getAnchor1().x)), (int) (gUnit * (planeList.get(i).getAnchor1().y)), (int) (gUnit * (planeList.get(i).getAnchor2().x)), (int) (gUnit * planeList.get(i).getAnchor2().y));
 		}
 		// TODO image
 		// 5 ROPE
@@ -633,10 +633,10 @@ public class Level extends JPanel implements ActionListener {
 		DoublePoint dp = new DoublePoint(tito.getPosition().x + r, tito.getPosition().y + r);
 		double d = plane.pointDistance(dp);
 		if (plane.getWidth() > 0) {
-			if (d <= r && (dp.x) <= plane.getX()[1] && dp.x >= plane.getX()[0])
+			if (d <= r && (dp.x) <= plane.getAnchor2().x && dp.x >= plane.getAnchor1().x)
 				return true;
 		} else if (plane.getWidth() < 0) {
-			if (d <= r && dp.x > plane.getX()[1] && dp.x < plane.getX()[0])
+			if (d <= r && dp.x > plane.getAnchor2().x && dp.x < plane.getAnchor1().x)
 				return true;
 		}
 		return false;
@@ -717,8 +717,8 @@ public class Level extends JPanel implements ActionListener {
 	public boolean isOnPlane(Physics ob1, Plane p){
 		double x = ob1.getPosition().x;
 		double y = ob1.getPosition().y;
-		double tx = p.getX()[0];
-		double txf = p.getX()[1];
+		double tx = p.getAnchor1().x;
+		double txf = p.getAnchor2().x;
 		double ty = p.getY(x);
 		
 		
