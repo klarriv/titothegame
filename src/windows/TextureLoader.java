@@ -1,6 +1,9 @@
 package windows;
 
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
@@ -20,12 +23,17 @@ public class TextureLoader {
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
-	public ImageIcon titoGif;
+	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
 	
 	public TextureLoader() {
 		
 		try {
-			titoGif = new ImageIcon("Resources/TitoAnimationTest.gif");
+			
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Resources/BlackCarrot.ttf")));
+			
+			titoWalkingAnimation = new ImageIcon("Resources/titoWalking.gif");
+			JOptionPaneBG = new ImageIcon("Resources/brickBG.png");
 			
 			// loads Tito
 			titoTexture = ImageIO.read(new File("Resources/TitoSpriteSheet.png"));
@@ -76,6 +84,9 @@ public class TextureLoader {
 			pauseMenuLevelSelectionTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/levelSelectionButton.png"));
 			
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

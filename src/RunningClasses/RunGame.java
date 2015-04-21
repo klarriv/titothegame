@@ -23,6 +23,7 @@ public class RunGame{
 		frame.setVisible(true);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
+		
 	}
 	
 	public static MainFrame getFrame() {

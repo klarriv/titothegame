@@ -184,11 +184,13 @@ public class Level extends JPanel implements ActionListener {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				isPaused = false;
-				t.start();
 				repaint();
 				jbtBackToGame.setVisible(false);
 				jbtBackToLevelSelect.setVisible(false);
 				jbtExitGame.setVisible(false);
+				jbtPause.setVisible(true);
+				jbtPlay.setVisible(true);
+				jbtRestart.setVisible(true);
 			}
 
 		});
@@ -201,13 +203,15 @@ public class Level extends JPanel implements ActionListener {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
+				t.stop();
 				isPaused = false;
 				jbtBackToGame.setVisible(false);
 				jbtBackToLevelSelect.setVisible(false);
 				jbtExitGame.setVisible(false);
-				t.start();
+				jbtPause.setVisible(true);
+				jbtPlay.setVisible(true);
+				jbtRestart.setVisible(true);
 				repaint();
-				// TODO need to reset the level
 				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
