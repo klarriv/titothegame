@@ -171,6 +171,7 @@ public class Plane {
 	public void setY(double[] y) {
 		this.y = y;
 	}
+	
 	public void setY(){
 		y[0] = dp.y;
 		y[1] = getY(dp.x + width);

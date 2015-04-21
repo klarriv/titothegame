@@ -133,9 +133,6 @@ public abstract class Physics implements ObjectInterface{
 		
 		this.vxi = velocity * Math.cos(Math.toRadians(135)); //setting always 45 degrees
 		this.vyi = velocity * Math.cos(Math.toRadians(135));
-		
-		System.out.println(ek + " "+ velocity + " ");
-		
 	
 	}
 	

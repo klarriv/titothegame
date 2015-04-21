@@ -65,7 +65,7 @@ public class TrashCanTestPanel extends JPanel {
 		g.drawLine((int)(gUnit*(plane.getX()[0])), (int)(gUnit*(plane.getY()[0])), (int)(gUnit*(plane.getX()[1])), (int)(gUnit*plane.getY()[1]));
 		
 		double y = trash1.projectileMotions(trash1.getWeight(), trash1.getPosition().y, trash1.getVy(), t.getDelay());
-		double x = trash1.getPosition().x;
+		double x = trash1.getPosition().x;	
 		//System.out.println(plane.pointDistance(trash1.getPosition()));
 		planeContact(trash1, plane);
 		if (seesaw.getContact(trash1)){
