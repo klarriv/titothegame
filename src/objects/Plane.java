@@ -1,18 +1,62 @@
 package objects;
-
+/**
+ * 
+ * @author CharlesPhilippe
+ *
+ */
 public class Plane {
-	private DoublePoint dp = new DoublePoint(0,0);
-	private double width =1;
-	private double[] x = new double[3];
-	private double[] y = new double[3];
-	private double angle;
-	private double a;
-	private double b = 1;
-	private double c;
+	/**
+	 * The position of the plane
+	 */
+	private DoublePoint position;
+	/**
+	 * The width/ the side adjacent to the angle
+	 */
+	private double width = 1;
+	/**
+	 * 
+	 */
+	private DoublePoint anchor1;
+	/**
+	 * 
+	 */
+	private DoublePoint anchor2;
+	/**
+	 * 
+	 */
 	private boolean isUsed = false;
+	/**
+	 * 
+	 */
+	private boolean isVisible = false;
+	/**
+	 * 
+	 */
+	private double angle;
+	/**
+	 * The slope of the plane
+	 */
+	private double m;
+	/**
+	 * 
+	 */
+	private double b = 1;
+	/**
+	 * 
+	 */
+	private double c;
+	/**
+	 * Constant that determines easily the where the plane is facing
+	 */
 	private int planeVariable;
+	/**
+	 * Constructs a new plane at a specified position width a specified angle and width
+	 * @param x
+	 * @param y
+	 * @param angle
+	 * @param width
+	 */
 	public Plane(double x, double y, double angle, double width){
-		
 		this.width = width;
 		this.angle = angle;
 		if (this.angle >= Math.PI/2 && this.angle <= 3*Math.PI/2)
@@ -20,34 +64,36 @@ public class Plane {
 		else
 			setPlaneVariable(1);
 		
-		this.dp.x = x;
-		this.dp.y = y;
+		this.position = new DoublePoint(x, y);
 		setFormula();
-		setX();
-		setY();
-	}
-	
-	public Plane(int[] x, int[] y){
+		setAnchors();
 		
 	}
 	
-	public Plane(double a, double b, double c, DoublePoint dp){
-		
-	}
 	/**
-	 * Sets the slope in the form ax + by + c = 0
+	 * Sets the anchors
+	 */
+	public void setAnchors(){
+		this.anchor1 = this.position;
+		this.anchor2 = new DoublePoint(position.x + width, getY(this.position.x + width));
+	}
+	
+	/**
+	 * Returns the position in y of the specified x value
+	 * @param x
+	 * @return
+	 */
+	public double getY(double x){
+		return m*x + c;
+	}
+	
+	/**
+	 * Sets the slope in the form mX + bY + c = 0
 	 */
 	public void setFormula(){
-		this.a = Math.tan(angle);
+		this.m = Math.tan(angle);
 		
-		c = (b*dp.y)-(a*dp.x);
-		/**System.out.println(a + "x" + " + " + b+ "y" + " + " + c +" = 0");
-		System.out.println(dp.x + " " + dp.y);
-		DoublePoint p = new DoublePoint(4, 1);
-		System.out.println("d: " + pointDistance(p) );*/
-		
-		angleOfContact(5, 5);
-		
+		c = (b*position.y)-(m*position.x);
 	}
 	
 	/**
@@ -56,146 +102,110 @@ public class Plane {
 	 * @return
 	 */
 	public double pointDistance(DoublePoint point){
-		//System.out.println(point.x + " " + point.y);
-		//System.out.println("c: " + c);
-		return Math.abs(-a * point.x + b * point.y - c)/ Math.sqrt((a * a) + (b * b));
+		
+		return Math.abs(-m * point.x + b * point.y - c)/ Math.sqrt((m * m) + (b * b));
 		
 	}
 	
+	/**
+	 * Returns the angle of contact of a vector hitting the plane
+	 * @param vx
+	 * @param vy
+	 * @return
+	 */
 	public double angleOfContact(double vx, double vy){
 		double t;
 		double o = Math.PI -angle;
-		//System.out.println(Math.toDegrees(t));
+		
 		if (vx < 0){
 			t = Math.atan(vx/vy);
-			//System.out.println("a " + t);
+			
 			t += (Math.PI/2);
-			//System.out.println("b " + t);
+			
 			t -= o;
-			//System.out.println("c " + t);
+			
 		}
 		else{
 			t = Math.atan(vy/vx);
 			t +=  o;
 		}
-		//System.out.println(Math.toDegrees(t));
+		
 		return t;
 	}
-	
-	public double getY(double x){
-		return a*x + c;
-	}
-	
-	
-	public void setIncline(double y){
-		if (this.y[2] - y >= width){
-			this.y[2] = y;
-			setAngle(this.x[0] - this.x[2] , this.y[1] - this.y[2]);
-		}
-		
-	}
-	
-	public DoublePoint getDp() {
-		return dp;
-	}
 
-	public void setDp(DoublePoint dp) {
-		this.dp = dp;
+	public DoublePoint getPosition() {
+		return position;
 	}
-
-
-	public double getAngle() {
-		return angle;
-	}
-
-	public void setAngle(double angle) {
-		this.angle = angle;
-		setFormula();
-	}
-	
-	public void setAngle(double dx, double dy){
-		this.angle = Math.PI - Math.atan(dy/dx);
-		setFormula();
-	}
-
-	public double getA() {
-		return a;
-	}
-
-	public void setA(double a) {
-		this.a = a;
-	}
-
-	public double getB() {
-		return b;
-	}
-
-	public void setB(double b) {
-		this.b = b;
-	}
-
-	public double getC() {
-		return c;
-	}
-
-	public void setC(double c) {
-		this.c = c;
+	public void setPosition(DoublePoint position) {
+		this.position = position;
 	}
 	public double getWidth() {
 		return width;
 	}
-
 	public void setWidth(double width) {
 		this.width = width;
 	}
-
-	public double[] getX() {
-		return x;
+	public DoublePoint getAnchor1() {
+		return anchor1;
 	}
-
-	public void setX(double[] x) {
-		this.x = x;
+	public void setAnchor1(DoublePoint anchor1) {
+		this.anchor1 = anchor1;
+		setAngle();
 	}
-	public void setX(){
-		x[0] = dp.x;
-		x[1] = dp.x + width;
-		x[2] = dp.x + width;
-		
+	public DoublePoint getAnchor2() {
+		return anchor2;
 	}
-
-	public double[] getY() {
-		return y;
+	public void setAnchor2(DoublePoint anchor2) {
+		this.anchor2 = anchor2;
+		setAngle();
 	}
-
-	public void setY(double[] y) {
-		this.y = y;
-	}
-	
-	public void setY(){
-		y[0] = dp.y;
-		y[1] = getY(dp.x + width);
-		y[2] = dp.y;
-		
-		
-	}
-
 	public boolean isUsed() {
 		return isUsed;
 	}
-
 	public void setUsed(boolean isUsed) {
 		this.isUsed = isUsed;
 	}
-
+	public boolean isVisible() {
+		return isVisible;
+	}
+	public void setVisible(boolean isVisible) {
+		this.isVisible = isVisible;
+	}
+	public double getAngle() {
+		return angle;
+	}
+	public void setAngle(double angle) {
+		this.angle = angle;
+	}
+	public void setAngle(){
+		double dx = Math.abs(anchor1.x - anchor2.x);
+		double dy = Math.abs(anchor1.y - anchor2.y);
+		this.angle = Math.PI - Math.atan(dy/dx);
+		setFormula();
+	}
+	public double getM() {
+		return m;
+	}
+	public void setM(double m) {
+		this.m = m;
+	}
+	public double getB() {
+		return b;
+	}
+	public void setB(double b) {
+		this.b = b;
+	}
+	public double getC() {
+		return c;
+	}
+	public void setC(double c) {
+		this.c = c;
+	}
 	public int getPlaneVariable() {
 		return planeVariable;
 	}
-
 	public void setPlaneVariable(int planeVariable) {
 		this.planeVariable = planeVariable;
 	}
-	
-	
-
-
+ 
 }
