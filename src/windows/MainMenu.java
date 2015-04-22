@@ -14,6 +14,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
 
 /**
  * This class creates a new main menu so the game can be started.
@@ -128,13 +129,21 @@ public class MainMenu extends JPanel implements ActionListener{
 				UIManager.put("OptionPane.background", Color.BLACK);
 				UIManager.put("OptionPane.messagebackground", Color.BLACK);
 				UIManager.put("Panel.background", Color.BLACK);
-				UIManager.put("OptionPane.messageForeground", new Color(204, 213, 187));
-				UIManager.put("OptionPane.font", new Font("BlackCarrot", Font.BOLD, 30)); 
-				CustomJOptionPane pane = new CustomJOptionPane();
-				
-				//JOptionPane.showConfirmDialog(null, new JOptionPanePanel(), "WARNING!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-				//CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				//cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+				int reply = JOptionPane.showConfirmDialog(null, new JOptionPanePanel(), "WARNING!", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+				if(reply == JOptionPane.YES_OPTION){
+					writeToSaveFile(0);
+					MainFrame.setLevelReached(0);
+					for(int i=1; i<MainFrame.getLevels().length; i++){
+						MainFrame.getLevels()[i].setHasBeenCompleted(false);
+					}
+					for(int i=1; i<LevelSelectMenu.getLvlButtons().length; i++){
+						LevelSelectMenu.getLvlButtons()[i].setEnabled(false);
+					}
+					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+					cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+				}else if(reply == JOptionPane.NO_OPTION){
+					
+				}	
 			}
 			
 		});
@@ -149,14 +158,7 @@ public class MainMenu extends JPanel implements ActionListener{
 			public void actionPerformed(ActionEvent arg0) {
 				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
 					if (MainFrame.getLevels()[i].hasBeenCompleted()){
-						try {
-							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
-							writer.print(i+1);
-							writer.close();
-						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+						writeToSaveFile(i+1);
 					}
 				}
 				System.exit(0);		
@@ -217,7 +219,6 @@ public class MainMenu extends JPanel implements ActionListener{
 		add(exitButton);
 		add(fullScreenButton);
 		add(musicButton);
-		startMenuMusic();
 		t.start();
 	}
 
@@ -236,11 +237,17 @@ public class MainMenu extends JPanel implements ActionListener{
 		}
 	}
 	
-	/**
-	 * This method changes the size of the image for a specific button. 
-	 * @param jbutton
-	 * @param img
-	 */
+	private void writeToSaveFile(int i){
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(new File("Resources/gameSave.sav"));
+			writer.print(i);
+			writer.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	@Override

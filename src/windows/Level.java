@@ -377,7 +377,7 @@ public class Level extends JPanel implements ActionListener {
 				if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 						t.stop();
 						hasBeenCompleted = true;
-						LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
+						LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 				}

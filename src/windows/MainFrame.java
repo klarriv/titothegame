@@ -166,4 +166,10 @@ public class MainFrame extends JFrame{
 		return levelReached;
 	}
 
+	public static void setLevelReached(int levelReached) {
+		MainFrame.levelReached = levelReached;
+	}
+	
+	
+
 }

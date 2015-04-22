@@ -32,7 +32,7 @@ public class TextureLoader {
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Resources/BlackCarrot.ttf")));
 			
-			titoWalkingAnimation = new ImageIcon("Resources/titoWalking.gif");
+			titoWalkingAnimation = new ImageIcon("Resources/titoWalking.png");
 			JOptionPaneBG = new ImageIcon("Resources/brickBG.png");
 			
 			// loads Tito
