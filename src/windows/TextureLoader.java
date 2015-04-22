@@ -16,8 +16,8 @@ import javax.swing.JButton;
 
 public class TextureLoader {
 
-	private final String PATHFOROBJECTS = "Resources/Objects/";
-	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture;
+	private final String PATHFOFOBJECTS = "Resources/Objects/";
+	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture, enemyTexture;
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture, levelPauseTexture;
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2;
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
@@ -39,15 +39,16 @@ public class TextureLoader {
 			titoTexture = ImageIO.read(new File("Resources/TitoSpriteSheet.png"));
 			
 			// loads objects texture
-			treeTexture = ImageIO.read(new File(PATHFOROBJECTS+"tree.png"));
-			benchTexture = ImageIO.read(new File(PATHFOROBJECTS+"bench.png"));
-			coneTexture = ImageIO.read(new File(PATHFOROBJECTS+"cone.png"));
-			planeTexture = ImageIO.read(new File(PATHFOROBJECTS+"plane.png"));
-			ropeTexture = ImageIO.read(new File(PATHFOROBJECTS+"rope.png"));
-			seesawTexture = ImageIO.read(new File(PATHFOROBJECTS+"seeSawSprite.png"));
-			springTexture = ImageIO.read(new File(PATHFOROBJECTS+"spring.png"));
-			trashCanTexture = ImageIO.read(new File(PATHFOROBJECTS+"trashCanSprite.png"));
-			pulleyTexture = ImageIO.read(new File(PATHFOROBJECTS+"pulley.png"));
+			treeTexture = ImageIO.read(new File(PATHFOFOBJECTS+"tree.png"));
+			benchTexture = ImageIO.read(new File(PATHFOFOBJECTS+"bench.png"));
+			coneTexture = ImageIO.read(new File(PATHFOFOBJECTS+"cone.png"));
+			planeTexture = ImageIO.read(new File(PATHFOFOBJECTS+"plane.png"));
+			ropeTexture = ImageIO.read(new File(PATHFOFOBJECTS+"rope.png"));
+			seesawTexture = ImageIO.read(new File(PATHFOFOBJECTS+"seeSawSprite.png"));
+			springTexture = ImageIO.read(new File(PATHFOFOBJECTS+"spring.png"));
+			trashCanTexture = ImageIO.read(new File(PATHFOFOBJECTS+"trashCanSprite.png"));
+			pulleyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"pulley.png"));
+			enemyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"enemy.png"));
 			
 			// loads level buttons
 			levelBackgroundTexture = ImageIO.read(new File("Resources/Background.png"));

@@ -30,14 +30,27 @@ public class RunGame{
 			
 			JSplash splash = new JSplash(imgURL, true, true, false, "V1.0", null, Color.BLACK, Color.BLACK);
 			
+			/**
 			splash.splashOn();
 			splash.setProgress(20, "Loading Files");
 			frame = new MainFrame();
-			Thread.sleep(3500);
+			splash.setProgress(30, "Loading Files");
+			Thread.sleep(1000);
 			splash.setProgress(40, "Creating Levels");
-			Thread.sleep(3000);
+			Thread.sleep(1000);
+			splash.setProgress(50, "Creating Levels");
+			Thread.sleep(1000);
+			splash.setProgress(60, "Finalising Levels");
+			Thread.sleep(1000);
+			splash.setProgress(70, "Finalising Levels");
+			Thread.sleep(1000);
+			splash.setProgress(80, "Waking up Tito");
+			Thread.sleep(1000);
+			splash.setProgress(90, "Waking up Tito");
+			Thread.sleep(1000);
 			splash.setProgress(100, "Done");
-			splash.splashOff();
+			splash.splashOff();*/
+			frame = new MainFrame(); // To remove when we put the splash screen back
 			frame.setVisible(true);
 			frame.pack();
 			frame.setLocationRelativeTo(null);

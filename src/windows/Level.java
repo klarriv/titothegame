@@ -80,6 +80,10 @@ public class Level extends JPanel implements ActionListener {
 	 */
 	private ArrayList<Maison> maisonList = new ArrayList<Maison>();
 	/**
+	 * List of enemies in the level read from the level file
+	 */
+	private ArrayList<Enemy> enemyList = new ArrayList<Enemy>();
+	/**
 	 * The song used in the levels
 	 */
 	private Clip levelSong;
@@ -265,13 +269,13 @@ public class Level extends JPanel implements ActionListener {
 
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
-
+		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
 		// START OF TIMER FOR MAKING TITO MOVE
 		t = new Timer(1000 / 25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SpriteSheet ss = new SpriteSheet(spriteSheet);
 
 				if (titoXSprite < rollingx.length) {
 					sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
@@ -382,7 +386,7 @@ public class Level extends JPanel implements ActionListener {
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 				}
-				else if(levelNumber == 9){
+				else if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
 					loadObjects();
 					hasBeenCompleted = true;
 					LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
@@ -394,7 +398,6 @@ public class Level extends JPanel implements ActionListener {
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
-
 	}
 	
 	protected void pauseGameAction(){
@@ -480,6 +483,10 @@ public class Level extends JPanel implements ActionListener {
 			double numberOfMaison = reader.nextDouble();
 			for (int i = 0; i < numberOfMaison; i++)
 				maisonList.add(new Maison(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextInt()));
+			// 11
+			double numberOfEnemy = reader.nextDouble();
+			for (int i = 0; i < numberOfEnemy; i++)
+				enemyList.add(new Enemy(reader.nextDouble(), reader.nextDouble()));
 
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -586,7 +593,6 @@ public class Level extends JPanel implements ActionListener {
 		for (int i = 0; i < trashCanList.size(); i++) {
 			if (trashCanList.get(i).isVisible()){
 				g.drawImage(trashCanList.get(i).getTexture(), (int) (gUnit * trashCanList.get(i).getPosition().x), (int) (gUnit * trashCanList.get(i).getPosition().y), (int) (trashCanList.get(i).getWidth() * gUnit), (int) (trashCanList.get(i).getHeight() * gUnit), null);
-				g.drawRect((int) (gUnit*trashCanList.get(i).getR().getPosition().x), (int) (gUnit * trashCanList.get(i).getR().getPosition().y), (int) (gUnit * trashCanList.get(i).getR().getWidth()), (int) (gUnit * trashCanList.get(i).getR().getHeight()));
 			}
 		}
 		// TODO integers
@@ -598,6 +604,10 @@ public class Level extends JPanel implements ActionListener {
 		// 10 MAISON
 		for (int i = 0; i < maisonList.size(); i++) {
 			g.drawImage(maisonList.get(i).getTexture(), (int) (gUnit * maisonList.get(i).getPosition().x), (int) (gUnit * maisonList.get(i).getPosition().y), (int) (maisonList.get(i).getWidth() * gUnit), (int) (maisonList.get(i).getHeight() * gUnit), null);
+		}
+		// 11 ENEMY
+		for (int i = 0; i < enemyList.size(); i++) {
+			g.drawImage(enemyList.get(i).getTexture(), (int) (gUnit * enemyList.get(i).getPosition().x), (int) (gUnit * enemyList.get(i).getPosition().y), (int) (Enemy.WIDTH * gUnit), (int) (Enemy.HEIGHT * gUnit), null);
 		}
 		//TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		g.drawImage(sprite, (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
@@ -958,7 +968,7 @@ public class Level extends JPanel implements ActionListener {
 										break;
 								}
 						for (int j = 0; j < trashCanList.size(); j++) {
-							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
+							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && !trashCanList.get(i).isUsed() && !trashCanList.get(j).isUsed() && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 								trashCanList.get(j).setVisible(false);
 								trashCanList.get(j).setR(null);
