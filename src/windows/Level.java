@@ -376,12 +376,14 @@ public class Level extends JPanel implements ActionListener {
 				// checks if tito touches the right boundary to change level!
 				if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 						t.stop();
+						loadObjects();
 						hasBeenCompleted = true;
 						LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 				}
-				else{
+				else if(levelNumber == 9){
+					loadObjects();
 					hasBeenCompleted = true;
 					LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
 					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
