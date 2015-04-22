@@ -16,6 +16,10 @@ public class Plane {
 	/**
 	 * 
 	 */
+	private double length;
+	/**
+	 * 
+	 */
 	private DoublePoint anchor1;
 	/**
 	 * 
@@ -67,7 +71,7 @@ public class Plane {
 		this.position = new DoublePoint(x, y);
 		setFormula();
 		setAnchors();
-		
+		setLength();
 	}
 	
 	/**
@@ -145,12 +149,17 @@ public class Plane {
 	public void setWidth(double width) {
 		this.width = width;
 	}
+	public void setWidth(){
+		this.width = Math.abs(length * Math.cos(angle));
+		System.out.println(width);
+	}
 	public DoublePoint getAnchor1() {
 		return anchor1;
 	}
 	public void setAnchor1(DoublePoint anchor1) {
 		this.anchor1 = anchor1;
 		setAngle();
+		setWidth();
 	}
 	public DoublePoint getAnchor2() {
 		return anchor2;
@@ -158,6 +167,11 @@ public class Plane {
 	public void setAnchor2(DoublePoint anchor2) {
 		this.anchor2 = anchor2;
 		setAngle();
+		setWidth();
+	}
+	public void setAnchor2(){
+		this.anchor2.x = this.anchor1.x + width;
+		//this.anchor2.y = getY(this.anchor1.x + width);
 	}
 	public boolean isUsed() {
 		return isUsed;
@@ -182,6 +196,8 @@ public class Plane {
 		double dy = Math.abs(anchor1.y - anchor2.y);
 		this.angle = Math.PI - Math.atan(dy/dx);
 		setFormula();
+		setWidth();
+		setAnchor2();
 	}
 	public double getM() {
 		return m;
@@ -206,6 +222,17 @@ public class Plane {
 	}
 	public void setPlaneVariable(int planeVariable) {
 		this.planeVariable = planeVariable;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+	public void setLength(){
+		this.length = Math.abs(this.width/Math.cos(angle));
 	}
  
 }

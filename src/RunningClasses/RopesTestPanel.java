@@ -12,6 +12,8 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import objects.DoublePoint;
+import objects.Plane;
 import objects.Pulley;
 import objects.Rope;
 import objects.TrashCan;
@@ -22,6 +24,7 @@ public class RopesTestPanel extends JPanel {
 	private Timer t;
 	private TrashCan trash1 = new TrashCan(1, 1.5);
 	private TrashCan trash2 = new TrashCan(2, 1.5);
+	private Plane plane = new Plane(1.5, 2, Math.toRadians(175), 1);
 	private Pulley pulley = new Pulley(2, 0.1, true);
 	private Rope rope = new Rope(2, 2);
 	private Button start = new Button("Start");
@@ -51,6 +54,8 @@ public class RopesTestPanel extends JPanel {
 			}
 			
 		});
+		rope.setOb1(trash1);
+		rope.setAnchor2(plane.getAnchor1());
 		add5_1.addActionListener(new AddWeight());
 		add5_2.addActionListener(new AddWeight());
 		add(start, BorderLayout.NORTH);
@@ -92,6 +97,8 @@ public class RopesTestPanel extends JPanel {
 		if(pulley.isVisible())
 			g.drawImage(pulley.getTexture(), (int)(gUnit*pulley.getPosition().x) + 15, (int)(gUnit*pulley.getPosition().y), null);
 		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
+		
+		g.drawLine((int)(gUnit * plane.getAnchor1().x), (int)(gUnit * plane.getAnchor1().y), (int)(gUnit * plane.getAnchor2().x), (int)(gUnit * plane.getAnchor2().y));
 		
 		if (rope.isUsed() == 2){
 			double y = rope.getOb1().projectileMotions(rope.getOb1().getWeight(), rope.getOb1().getPosition().y, rope.getOb1().getVy(), t.getDelay());
@@ -171,9 +178,19 @@ public class RopesTestPanel extends JPanel {
 						}
 						else if (rope.isUsed() == 1)
 							rope.setOb2(trash2);
-					}
+					}	
+				}
+				else if (x >= plane.getAnchor1().x && x <= plane.getAnchor2().x && plane.pointDistance(new DoublePoint(x, y)) <= (50/gUnit)){
 					
-			}
+					plane.getAnchor1().x = x - plane.getWidth()/2;
+					plane.getAnchor1().y = y;
+					plane.setAnchor2();
+					plane.getAnchor2().y = plane.getY(plane.getAnchor2().x);
+					if (rope.getAnchor2().distance(plane.getPosition()) <= 0.3){
+						rope.setPlane(plane);
+					}
+				}
+				
 			rope.setXAnchored();
 			repaint();
 			}

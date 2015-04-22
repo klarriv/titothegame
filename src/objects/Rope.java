@@ -16,6 +16,7 @@ public class Rope {
 	private double length;
 	private Physics ob1;
 	private Physics ob2;
+	private Plane plane;
 	private Pulley pulley;
 	private boolean maxed = false;
 	private double force = 0;
@@ -32,7 +33,7 @@ public class Rope {
 	}
 	
 	/**
-	 * Constructs a new Rope attached to two Physics objects
+	 * Constructs a new Rope attached to a Physics object and a pulley
 	 * @param ob1
 	 * @param pulley
 	 */
@@ -49,7 +50,7 @@ public class Rope {
 	}
 	
 	/**
-	 * Constructs a new Rope attached to a pulley and an object
+	 * Constructs a new Rope attached to a pulley and an two physics object
 	 * @param ob1
 	 * @param pulley
 	 * @param ob2
@@ -137,7 +138,7 @@ public class Rope {
 	 */
 	public void pulleyMove(double x, double y){
 		
-		if (isUsed() == 2){
+		if ((anchor1 != null) && anchor2 != null){
 			double dx = x - anchor1.x;
 			double dy = y - anchor1.y;
 			double distance = Math.sqrt(Math.pow((anchor1.x + dx) - anchor2.x, 2.0) + Math.pow((anchor1.y + dy) - anchor2.y, 2.0));
@@ -158,7 +159,7 @@ public class Rope {
 		return maxed;
 	}
 	/**
-	 * Returns -2 if the rope broke,
+	 * Returns -2 if the rope is broken,
 	 *  -1 if it is not used,
 	 * 0 if it is attached to a pulley,
 	 * 1 if it is attached to a pulley and a TrashCan,
@@ -169,23 +170,25 @@ public class Rope {
 		boolean a = ob1 == null;
 		boolean b = pulley == null;
 		boolean c = ob2 == null;
+		boolean d = plane == null;
 		
 		if (broken)
 			return -2;
 		
-		else if (a && !b && c)
+		else if (a && !b && c && d)
 			return 0;
 		
-		else if (!a && !b && c)
+		else if ((!a || !d) && !b && c)
 			return 1;
 		
-		else if (!a && !b && !c)
+		else if (!a && !b && (!c || !d))
 			return 2;
 		
 		else 
 			return -1;
 			
 	}
+	
 	/**
 	 * Sets the total force applied on the rope
 	 */
@@ -194,7 +197,6 @@ public class Rope {
 		if (isUsed() == 1 )
 			force = ob1.getForce(ob1.getWeight());
 
-		
 		
 		if (isUsed() == 2  )
 			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
@@ -266,6 +268,18 @@ public class Rope {
 			this.anchor3 = ob2.getPosition();
 		}
 	}
+	
+	public Plane getPlane() {
+		return plane;
+	}
+
+	public void setPlane(Plane plane) {
+		this.plane = plane;
+		if (isUsed() == 0)
+			this.anchor1 = plane.getAnchor1();
+		else if(isUsed() == 1)
+			this.anchor3 = plane.getAnchor1();
+	}
 
 	public Pulley getPulley() {
 		return pulley;
@@ -333,6 +347,8 @@ public class Rope {
 		// TODO Auto-generated method stub
 		return defaultPosition;
 	}
+
+	
 	
 	
 }
