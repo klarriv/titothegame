@@ -3,12 +3,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.net.URL;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import com.thehowtotutorial.splashscreen.JSplash;
+import jSplashScreen.JSplash;
 
 import windows.*;
 
@@ -28,14 +26,16 @@ public class RunGame{
 	public static void main(String[] args){
 		
 		try{
-			URL imgURL = new File("Resources/Menus/SplashScreen/frameIcon.png").toURI().toURL();
+			URL imgURL = new File("Resources/Menus/SplashScreen/SplashTito.gif").toURI().toURL();
 			
 			JSplash splash = new JSplash(imgURL, true, true, false, "V1.0", null, Color.BLACK, Color.BLACK);
 			
 			splash.splashOn();
 			splash.setProgress(20, "Loading Files");
 			frame = new MainFrame();
+			Thread.sleep(3500);
 			splash.setProgress(40, "Creating Levels");
+			Thread.sleep(3000);
 			splash.setProgress(100, "Done");
 			splash.splashOff();
 			frame.setVisible(true);
@@ -46,20 +46,6 @@ public class RunGame{
 		}catch(Exception e){
 			
 		}
-		
-		//JFrame splash = new JFrame();
-		//splash.add(new JLabel(new ImageIcon("Resources/Menus/SplashScreen/SplashTito.gif")));
-		
-		
-		
-		
-		
-		/*
-		splash.setUndecorated(true);
-		splash.setVisible(true);
-		splash.pack();
-		splash.setLocationRelativeTo(null);
-		*/
 	}
 	
 	public static MainFrame getFrame() {
