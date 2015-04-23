@@ -17,15 +17,16 @@ public class AnimationTestFrame extends JFrame {
 	private PhysicsTestPanel pt = new PhysicsTestPanel();
 	private VectorTestPanel v = new VectorTestPanel();
 	private LevelTestPanel l = new LevelTestPanel();*/
-	private RopesTestPanel r = new RopesTestPanel();
+	//private RopesTestPanel r = new RopesTestPanel();
 	//private TrashCanTestPanel t = new TrashCanTestPanel();
 	//private PlaneTestPanel2 p = new PlaneTestPanel2();
+	private PlaneIncliningTestPanel pit = new PlaneIncliningTestPanel();
 	
 	
 	
 	public AnimationTestFrame(){
 		
-		add(r);
+		add(pit);
 	}
 	public static void main(String[] args) {
 		AnimationTestFrame frame = new AnimationTestFrame();

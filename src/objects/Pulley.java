@@ -136,11 +136,7 @@ public class Pulley extends Physics{
 		
 	}
 
-	@Override
-	public double getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 	
 	@Override
 	public void resetPosition(){
@@ -160,10 +156,15 @@ public class Pulley extends Physics{
 		// TODO Auto-generated method stub
 		return defaultPosition;
 	}
+	@Override
+	public double getHeight() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 	@Override
 	public double getWidth() {
-		// TODO Auto-generated method stub
+		
 		return 0;
 	}
 

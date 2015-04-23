@@ -178,11 +178,15 @@ public class Rope {
 		else if (a && !b && c && d)
 			return 0;
 		
-		else if ((!a || !d) && !b && c)
+		else if (!a && !b && c && d)
 			return 1;
 		
-		else if (!a && !b && (!c || !d))
+		else if (!a && !b && !c && d)
 			return 2;
+		else if (a && !d && !b && c)
+			return 3;
+		else if (!a && !d && !b && c)
+			return 4;
 		
 		else 
 			return -1;
@@ -275,9 +279,9 @@ public class Rope {
 
 	public void setPlane(Plane plane) {
 		this.plane = plane;
-		if (isUsed() == 0)
+		/**if (isUsed() == 0)
 			this.anchor1 = plane.getAnchor1();
-		else if(isUsed() == 1)
+		else if(isUsed() == 1)*/
 			this.anchor3 = plane.getAnchor1();
 	}
 
@@ -296,12 +300,18 @@ public class Rope {
 	
 	public void setXAnchored(){
 		int u = isUsed();
-		if (u == 1)
+		if (u == 1 || u == 3)
 			this.anchor1.x = anchor2.x;
 		
-		if(u==2){
+		if(u==2 || u == 4){
 			this.anchor1.x = anchor2.x;
 			this.anchor3.x = anchor2.x;
+		}
+		
+		if (u == 3 || u == 4){
+			//this.plane.getAnchor1().x += (50/gUnit);
+			pulley.getWidth();
+			this.plane.setAnchor2();
 		}
 	}
 
