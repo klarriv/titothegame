@@ -126,14 +126,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		helpButton.setBorder(BorderFactory.createEmptyBorder());
 		helpButton.setContentAreaFilled(false);
 		helpButton.addMouseListener(new ButtonListener());
-		helpButton.addActionListener(new ActionListener(){
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-			}
-			
-		});
+		helpButton.addComponentListener(new ButtonResizeListener());
 		
 		musicButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuMusicButtonTexture));
 		musicButton.setBorder(BorderFactory.createEmptyBorder());

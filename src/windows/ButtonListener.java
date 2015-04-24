@@ -23,32 +23,30 @@ public class ButtonListener implements MouseListener{
 		}
 		else if(((JButton) e.getComponent()).getParent().equals(MainFrame.getLevelSelectMenu())){
 			if((source).isEnabled()){
-				if (source == LevelSelectMenu.getLvlButtons()[0]) {
+				if (source == LevelSelectMenu.getLvlButtons()[0]) 
 					cardLayout.show(MainFrame.getMenus(), "LEVEL0");
-				} else if (source == LevelSelectMenu.getLvlButtons()[1]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[1])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL1");
-				} else if (source == LevelSelectMenu.getLvlButtons()[2]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[2])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL2");
-				} else if (source == LevelSelectMenu.getLvlButtons()[3]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[3])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL3");
-				} else if (source == LevelSelectMenu.getLvlButtons()[4]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[4])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL4");
-				} else if (source == LevelSelectMenu.getLvlButtons()[5]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[5])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL5");
-				} else if (source == LevelSelectMenu.getLvlButtons()[6]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[6])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL6");
-				} else if (source == LevelSelectMenu.getLvlButtons()[7]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[7])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL7");
-				} else if (source == LevelSelectMenu.getLvlButtons()[8]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[8])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL8");
-				} else if (source == LevelSelectMenu.getLvlButtons()[9]) {
+				else if (source == LevelSelectMenu.getLvlButtons()[9])
 					cardLayout.show(MainFrame.getMenus(), "LEVEL9");
-				} else if (source == LevelSelectMenu.getBackButton()){
+				else if (source == LevelSelectMenu.getBackButton())
 					cardLayout.show(MainFrame.getMenus(), MainFrame.getMainmenupanel());
-				}
 			}
 		}
-		
 	}
 
 	@Override
