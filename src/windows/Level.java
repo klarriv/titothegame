@@ -857,6 +857,11 @@ public class Level extends JPanel implements ActionListener {
 					ropeList.get(i).isMoving = true;
 				}
 			}
+			for (int i = 0; i < planeList.size(); i++){
+				if(planeList.get(i).pointDistance(p) <= 0.3){
+					planeList.get(i).setMoving(true);
+				}
+			}
 		}
 
 		@Override
@@ -883,16 +888,22 @@ public class Level extends JPanel implements ActionListener {
 				if (ropeList.get(i).isUsed() == -1)
 					ropeList.get(i).resetPosition();
 			}
+			for (int i = 0; i < planeList.size(); i++){
+				planeList.get(i).setMoving(false);
+				if(!planeList.get(i).isUsed()){
+					planeList.get(i).resetPosition();
+				}
+			}
 			repaint();
 		}
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
 			if(isClicked && !t.isRunning()){	
+	
 				double x = (double) arg0.getX() / gUnit;
 				double y = (double) arg0.getY() / gUnit;
-				DoublePoint p = new DoublePoint(x, y);
-	
+				
 				for (int i = 0; i < benchList.size(); i++) {
 					if (benchList.get(i).getR() != null	&& benchList.get(i).isMoving) {
 						benchList.get(i).setX(x - Bench.WIDTH / 2);
@@ -922,8 +933,7 @@ public class Level extends JPanel implements ActionListener {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					// TODO Theoriquement c'est suppose marcher
-					if(planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(p) <= 0.3 ){
+					if(planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
