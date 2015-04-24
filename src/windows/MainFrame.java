@@ -148,11 +148,11 @@ public class MainFrame extends JFrame{
 		MainFrame.mainMenu = mainMenu;
 	}
 
-	public LevelSelectMenu getLevelSelectMenu() {
+	public static LevelSelectMenu getLevelSelectMenu() {
 		return levelSelectMenu;
 	}
 
-	public MainMenu getMainMenu() {
+	public static MainMenu getMainMenu() {
 		return mainMenu;
 	}
 	

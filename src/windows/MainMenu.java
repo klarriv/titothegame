@@ -38,67 +38,10 @@ public class MainMenu extends JPanel implements ActionListener{
 		
 		setLayout(null);
 
-		/**
-		 * This is the mouse listener to make the buttons change when the mouse hovers over them.
-		 * @author Keven-Matthew
-		 *
-		 */
-		class ButtonListener implements MouseListener {
-
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
-				setCursor(cursor);
-				if ((JButton) e.getSource() == playButton) {
-					MainFrame.getTl().changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonHighlightTexture);
-				} else if ((JButton) e.getSource() == newGameButton) {
-					MainFrame.getTl().changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonHighlightTexture);
-				}
-			}
-
-			@Override
-			public void mouseExited(MouseEvent e) {
-				Cursor cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
-				setCursor(cursor);
-				if ((JButton) e.getSource() == playButton) {
-					MainFrame.getTl().changeButtonImage(playButton, MainFrame.getTl().mainMenuPlayButtonTexture);
-				} else if ((JButton) e.getSource() == newGameButton) {
-					MainFrame.getTl().changeButtonImage(newGameButton, MainFrame.getTl().mainMenuNewGameButtonTexture);
-				}
-			}
-
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-		}
-		
 		playButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuPlayButtonTexture));
 		playButton.setBorder(BorderFactory.createEmptyBorder());
 		playButton.setContentAreaFilled(false);
 		playButton.addMouseListener(new ButtonListener());
-		playButton.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
-			}
-		});
 		playButton.addComponentListener(new ButtonResizeListener());
 
 		newGameButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuNewGameButtonTexture));
@@ -135,6 +78,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		exitButton = new JButton();
 		exitButton.setBorder(BorderFactory.createEmptyBorder());
 		exitButton.setContentAreaFilled(false);
+		exitButton.addMouseListener(new ButtonListener());
 		exitButton.addActionListener(new ActionListener(){
 
 			@Override
@@ -153,6 +97,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		fullScreenButton = new JButton();
 		fullScreenButton.setBorder(BorderFactory.createEmptyBorder());
 		fullScreenButton.setContentAreaFilled(false);
+		fullScreenButton.addMouseListener(new ButtonListener());
 		fullScreenButton.addActionListener(new ActionListener(){
 			
 			@Override
@@ -177,17 +122,15 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 		});
 		
-		helpButton = new JButton("?");
+		helpButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuHelpMenuButtonTexture));
 		helpButton.setBorder(BorderFactory.createEmptyBorder());
-		helpButton.setFont(MainFrame.getTl().fntPlayGame.deriveFont(Font.PLAIN, 22f));
-		helpButton.setForeground(new Color(204, 213, 187));
 		helpButton.setContentAreaFilled(false);
+		helpButton.addMouseListener(new ButtonListener());
 		helpButton.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				cardLayout.show(MainFrame.getMenus(), MainFrame.getHelpmenupanel());
+				
 			}
 			
 		});
@@ -300,5 +243,9 @@ public class MainMenu extends JPanel implements ActionListener{
 	
 	public static JButton getMusicButton(){
 		return musicButton;
+	}
+	
+	public static JButton getHelpButton(){
+		return helpButton;
 	}
 }
