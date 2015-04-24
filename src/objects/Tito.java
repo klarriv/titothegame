@@ -19,8 +19,10 @@ public class Tito extends Physics{
 	private double vy = 10;
 	private final double HEIGHT = 0.25;
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	private DoubleRectangle r;
 	
 	public Tito(){
+		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
 		texture = MainFrame.getTl().titoTexture;
 	}
 	
@@ -41,6 +43,7 @@ public class Tito extends Physics{
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
+		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
 		texture = MainFrame.getTl().titoTexture;
 		
 	}
@@ -178,6 +181,14 @@ public class Tito extends Physics{
 	public double getWidth() {
 		
 		return HEIGHT;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 
 

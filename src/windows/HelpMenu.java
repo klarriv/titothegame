@@ -2,11 +2,8 @@ package windows;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,23 +15,33 @@ public class HelpMenu extends JPanel{
 	public HelpMenu(){
 		setLayout(new BorderLayout());
 		
-		JButton next = new JButton("Next");
-		next.addActionListener(new ActionListener(){
+		JButton jbtNext = new JButton("Next");
+		jbtNext.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				CardLayout cardLayout = (CardLayout) helpCL.getLayout();
+				cardLayout.next(helpCL);
 			}
 			
 		});
-		JButton previous = new JButton("Previous");
-		previous.addActionListener(new ActionListener(){
+		JButton jbtPrevious = new JButton("Previous");
+		jbtPrevious.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
-				
+				CardLayout cardLayout = (CardLayout) helpCL.getLayout();
+				cardLayout.previous(helpCL);
+			}
+			
+		});
+		JButton jbtBackToMenu = new JButton("Back to Main Menu");
+		jbtBackToMenu.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), MainFrame.getMainmenupanel());
 			}
 			
 		});
@@ -48,8 +55,9 @@ public class HelpMenu extends JPanel{
 		}
 		add(helpCL, BorderLayout.CENTER);
 		JPanel south = new JPanel();
-		south.add(previous);
-		south.add(next);
+		south.add(jbtBackToMenu);
+		south.add(jbtPrevious);
+		south.add(jbtNext);
 		add(south, BorderLayout.SOUTH);
 	}
 }

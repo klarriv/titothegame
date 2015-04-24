@@ -17,6 +17,32 @@ public class HelpPage extends JPanel{
 		super.paintComponent(g);
 		
 		g.drawImage(MainFrame.getTl().JOptionPaneBG.getImage(), 0, 0, getWidth(), getHeight(), null);
-		g.drawString("pageNumber", 50, 50);
+		// TODO add the actual images in the help menu
+		/**
+		switch (pageNumber) {
+		case 0:  g.drawImage(img, x, y, width, height, observer);
+				 break;
+        case 1:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 2:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 3:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 4:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 5:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 6:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 7:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 8:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        case 9:  g.drawImage(img, x, y, width, height, observer);
+                 break;
+        default: g.drawImage(img, x, y, width, height, observer);
+                 break;
+		}*/
+		g.drawString(pageNumber+"", 50, 50);
 	}
 }
