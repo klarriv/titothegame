@@ -50,7 +50,7 @@ public class TextureLoader {
 			springTexture = ImageIO.read(new File(PATHFOFOBJECTS+"spring.png"));
 			trashCanTexture = ImageIO.read(new File(PATHFOFOBJECTS+"trashCanSprite.png"));
 			pulleyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"pulley.png"));
-			enemyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"enemy.png"));
+			enemyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"jasonGerard.png"));
 			
 			// loads level buttons
 			levelBackgroundTexture = ImageIO.read(new File("Resources/Background.png"));
