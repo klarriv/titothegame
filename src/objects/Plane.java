@@ -274,7 +274,7 @@ public class Plane {
 	 * @param position
 	 */
 	public void setDefaultPosition(DoublePoint position) {
-		this.defaultPosition .x =this.anchor1.x;
+		this.defaultPosition.x =this.anchor1.x;
 		this.defaultPosition.y = this.anchor1.y;
 		
 	}
