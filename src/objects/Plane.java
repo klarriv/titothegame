@@ -265,6 +265,8 @@ public class Plane {
 	public void resetPosition(){
 		this.anchor1.x = this.defaultPosition.x;
 		this.anchor1.y = this.defaultPosition.y;
+		this.setAnchor2X();
+		this.setAnchor2Y();
 	}
 	/**
 	 * 
