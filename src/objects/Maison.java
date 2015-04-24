@@ -15,6 +15,8 @@ public class Maison {
 	@SuppressWarnings("unused")
 	private String which ="1";
 	private String pathRelativeToThis;
+	private Plane plane1 = null;
+	private Plane plane2 = null;
 	
 	/**
 	 * Creates a Maison with a texture
@@ -121,5 +123,44 @@ public class Maison {
 		}
 		
 	}
+	public void addPlane1(Plane plane){
+		this.plane1 = plane;
+		
+	}
+	public void addPlane2(Plane plane){
+		this.plane2 = plane;
+	}
+	/**
+	 * Not suggested
+	 * @param plane
+	 */
+	@Deprecated
+	public void addPlane(Plane plane){
+		if (this.plane1 == null){
+			this.plane1 = plane;
+			this.plane1.setAnchor1(this.position);
+			this.plane1.setAnchor2X();
+			this.plane1.setAnchor2Y();
+		}
+		else if (this.plane2 == null && this.plane1 !=null){
+			this.plane2 = plane;
+			this.plane2.setAnchor1(this.plane1.getAnchor2());
+			this.plane2.setAnchor2X();
+			this.plane2.setAnchor2Y();
+		}
+	}
+	/**
+	 * 
+	 * @param plane
+	 */
+	 public void addPlanes(Plane plane){
+		 if (this.plane1 == null)
+				this.plane1 = plane;
+		 
+		 else if (this.plane2 == null && this.plane1 !=null)
+				this.plane2 = plane;
+		 
+		 plane.setUsed(true);
+	 }
 
 }

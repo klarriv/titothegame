@@ -312,6 +312,8 @@ public class Rope {
 			//this.plane.getAnchor1().x += (50/gUnit);
 			pulley.getWidth();
 			this.plane.setAnchor2X();
+			this.plane.getAnchor2().y =2.5;
+			this.plane.setAnchor1Y();
 		}
 	}
 

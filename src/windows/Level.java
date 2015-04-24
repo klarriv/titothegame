@@ -458,7 +458,7 @@ public class Level extends JPanel implements ActionListener {
 			// 4
 			double numberOfPlane = reader.nextDouble();
 			for (int i = 0; i < numberOfPlane; i++)
-				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble()));
+				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble(),  reader.nextInt()));
 			// 5
 			double numberOfRope = reader.nextDouble();
 			for (int i = 0; i < numberOfRope; i++)
@@ -487,7 +487,10 @@ public class Level extends JPanel implements ActionListener {
 			double numberOfEnemy = reader.nextDouble();
 			for (int i = 0; i < numberOfEnemy; i++)
 				enemyList.add(new Enemy(reader.nextDouble(), reader.nextDouble()));
-
+			//setting the planes to the maison
+			for (int i = 0; i < numberOfPlane; i++)
+				if (planeList.get(i).getMaisonNumber() > -1 && planeList.get(i).getMaisonNumber() < maisonList.size())
+					maisonList.get(planeList.get(i).getMaisonNumber()).addPlanes(planeList.get(i));
 			reader.close();
 		} catch (FileNotFoundException e) {
 			// 
@@ -743,7 +746,7 @@ public class Level extends JPanel implements ActionListener {
 		double txf = p.getAnchor2().x;
 		double ty = p.getY(x);
 		
-		
+		System.out.println(p.getAnchor1().x + " " + p.getPosition().x + " " +  p.getAnchor1().y + " " + p.getPosition().y);
 		double width = ob1.getWidth();
 		if (y < ty && x > (tx - width) && x < (txf) && p.pointDistance(ob1.getPosition()) < 1)
 			return true;
@@ -933,7 +936,7 @@ public class Level extends JPanel implements ActionListener {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					if(planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
+					if(!planeList.get(i).isUsed() && planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
@@ -944,6 +947,7 @@ public class Level extends JPanel implements ActionListener {
 					
 					for ( int j = 0; j < ropeList.size(); j++){
 						if (ropeList.get(j).isUsed() == 1 && ropeList.get(j).getAnchor2().distance(planeList.get(i).getAnchor1()) <= 0.3){
+							planeList.get(i).setUsed(true);
 							ropeList.get(j).setPlane(planeList.get(i));
 							ropeList.get(j).setXAnchored();
 							ropeList.get(j).setLength3();

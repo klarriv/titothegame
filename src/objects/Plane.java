@@ -61,7 +61,10 @@ public class Plane {
 	 * 
 	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
-	
+	/**
+	 * 
+	 */
+	private int maisonNumber = -1;
 	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
@@ -70,7 +73,8 @@ public class Plane {
 	 * @param angle
 	 * @param width
 	 */
-	public Plane(double x, double y, double angle, double width){
+	public Plane(double x, double y, double angle, double width, int maisonNumber){
+		this.setMaisonNumber(maisonNumber);
 		this.width = width;
 		this.angle = angle;
 		if (this.angle >= Math.PI/2 && this.angle <= 3*Math.PI/2)
@@ -171,6 +175,13 @@ public class Plane {
 		this.anchor1 = anchor1;
 		setAngle();
 		setWidth();
+	}
+	public void setAnchor1Y(){
+		double dy = Math.sqrt((length * length) - (width * width));
+		if (planeVariable == 1)
+			this.anchor1.y = this.anchor2.y - dy;
+		else 
+			this.anchor1.y = this.anchor2.y + dy;
 	}
 	public DoublePoint getAnchor2() {
 		return anchor2;
@@ -285,6 +296,14 @@ public class Plane {
 	public DoublePoint getDefaultPosition() {
 		
 		return defaultPosition;
+	}
+
+	public int getMaisonNumber() {
+		return maisonNumber;
+	}
+
+	public void setMaisonNumber(int maisonNumber) {
+		this.maisonNumber = maisonNumber;
 	}
 
  
