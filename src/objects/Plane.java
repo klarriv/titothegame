@@ -326,10 +326,10 @@ public class Plane {
 	}
 	
 	
-	public void rotateImage(double angle){
+	public void rotateImage(){
 		AffineTransform tx = new AffineTransform();
 		
-	    tx.rotate(angle - Math.PI);
+	    tx.rotate(angle - Math.PI, texture.getWidth()/2, texture.getHeight()/2);
 
 	    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 	   	texture = op.filter(texture, null);
