@@ -380,7 +380,7 @@ public class Level extends JPanel implements ActionListener {
 				// checks if there is a collision with the enemies
 				// TODO quoi faire quand tito se fait pogner?
 				for(int i=0; i<enemyList.size(); i++){
-					if(tito.getR().contains(enemyList.get(i).getR())){
+					if(tito!= null && tito.getR().contains(enemyList.get(i).getR())){
 						System.out.println("You dead bitch");
 						tito = null;
 						t.stop();

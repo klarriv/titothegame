@@ -2,8 +2,11 @@ package windows;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -11,6 +14,7 @@ public class HelpMenu extends JPanel{
 	
 	private static JPanel helpCL;
 	private static HelpPage[] helpPages;
+	private final Font HELPMENUFONT = MainFrame.getTl().fntPlayGame.deriveFont(Font.PLAIN, 18f);
 	
 	public HelpMenu(){
 		setLayout(new BorderLayout());
@@ -25,6 +29,10 @@ public class HelpMenu extends JPanel{
 			}
 			
 		});
+		jbtNext.setFont(HELPMENUFONT);
+		jbtNext.setBorder(BorderFactory.createRaisedBevelBorder());
+		jbtNext.setContentAreaFilled(false);
+		
 		JButton jbtPrevious = new JButton("Previous");
 		jbtPrevious.addActionListener(new ActionListener(){
 
@@ -35,6 +43,10 @@ public class HelpMenu extends JPanel{
 			}
 			
 		});
+		jbtPrevious.setFont(HELPMENUFONT);
+		jbtPrevious.setBorder(BorderFactory.createRaisedBevelBorder());
+		jbtPrevious.setContentAreaFilled(false);
+		
 		JButton jbtBackToMenu = new JButton("Back to Main Menu");
 		jbtBackToMenu.addActionListener(new ActionListener(){
 
@@ -45,6 +57,9 @@ public class HelpMenu extends JPanel{
 			}
 			
 		});
+		jbtBackToMenu.setFont(HELPMENUFONT);
+		jbtBackToMenu.setBorder(BorderFactory.createRaisedBevelBorder());
+		jbtBackToMenu.setContentAreaFilled(false);
 		
 		helpPages = new HelpPage[10];
 		helpCL = new JPanel(new CardLayout());
