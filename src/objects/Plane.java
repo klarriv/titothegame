@@ -79,6 +79,7 @@ public class Plane {
 			setPlaneVariable(1);
 		
 		this.position = new DoublePoint(x, y);
+		setDefaultPosition(position);
 		setFormula();
 		setAnchors();
 		setLength();
