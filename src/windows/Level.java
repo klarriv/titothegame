@@ -567,12 +567,18 @@ public class Level extends JPanel implements ActionListener {
 		for (int i = 0; i < ropeList.size(); i++) {
 			if (ropeList.get(i).isUsed() == -1) {
 				g.fillRect((int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * Rope.WIDTH), (int) (gUnit * Rope.HEIGHT));
-			} else if (ropeList.get(i).isUsed() == 1) {
+			} else if (ropeList.get(i).isUsed() == 1 || ropeList.get(i).isUsed() == 3) {
 				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
 				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y) };
 				g.drawPolyline(xPoints, yPoints, 2);
-			} else if (ropeList.get(i).isUsed() == 2) {
+			} else if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4) {
 				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
+				//TODO check if this works
+				if (ropeList.get(i).isUsed() == 4){
+					ropeList.get(i).getPlane().getPosition().x += (50/gUnit);
+					ropeList.get(i).getPlane().setAnchor2X();
+					xPoints[2] = (int)(gUnit * ropeList.get(i).getAnchor3().x);
+				}
 				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor3().y) };
 				g.drawPolyline(xPoints, yPoints, 3);
 			} else if (ropeList.get(i).isUsed() == -2) {
