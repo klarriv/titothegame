@@ -1,20 +1,13 @@
 package windows;
 
 import RunningClasses.RunGame;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.*;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import javax.imageio.ImageIO;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
-import javax.swing.plaf.FontUIResource;
 
 /**
  * This class creates a new main menu so the game can be started.
@@ -22,16 +15,6 @@ import javax.swing.plaf.FontUIResource;
  * @author Keven-Matthew
  */
 public class MainMenu extends JPanel implements ActionListener{
-
-	/**
-	 * This holds the image for the specific buttons.
-	 */
-	private BufferedImage playButtonIcon, playButtonHighlightIcon, newGameButtonIcon, newGameHighlightButtonIcon, titleImage;
-
-	/**
-	 * Holds the background image for the main menu.
-	 */
-	private Image backgroundImage = null;
 
 	/**
 	 * The song used in the main menu.

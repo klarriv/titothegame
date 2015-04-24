@@ -1,7 +1,5 @@
 package objects;
 
-import java.awt.Point;
-
 public class DoubleRectangle {
 	
 	private DoublePoint position;
