@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import objects.DoublePoint;
 import objects.Plane;
 import objects.Pulley;
 import objects.Rope;
@@ -68,7 +69,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 			int[] xPoints = {(int)(gUnit*rope.getAnchor1().x) + 50, (int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor3().x) + 50};
 			if (rope.isUsed() == 4){
 				plane.getPosition().x += (50/gUnit);
-				plane.setAnchor2();
+				plane.setAnchor2X();
 				xPoints[2] = (int)(gUnit * rope.getAnchor3().x);
 			}
 			
@@ -95,8 +96,12 @@ public class PlaneIncliningTestPanel extends JPanel{
 		public void mouseDragged(MouseEvent e) {
 			double x = (double)e.getX()/gUnit;
 			double y = (double)e.getY()/gUnit;
+			DoublePoint dp = new DoublePoint(x, y);
 			double t1x = trash.getPosition().x;
 			double t1y = trash.getPosition().y;
+			double px = plane.getPosition().x;
+			double p2x = plane.getAnchor2().x;
+			
 		
 			
 				if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
@@ -109,6 +114,14 @@ public class PlaneIncliningTestPanel extends JPanel{
 					
 					rope.pulleyMove(rope.getOb1().getPosition().x, y);
 					plane.setAngle();
+				}
+				else if( x >= px && x <= p2x && plane.pointDistance(dp) <= 0.3 ){
+					x = x - plane.getWidth()/2;
+					//y = plane.getY(x);
+					plane.getAnchor1().x = x;
+					plane.getAnchor1().y = y;
+					plane.setAnchor2X();
+					plane.setAnchor2Y();
 				}
 				repaint();
 		}

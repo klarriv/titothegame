@@ -169,9 +169,16 @@ public class Plane {
 		setAngle();
 		setWidth();
 	}
-	public void setAnchor2(){
+	public void setAnchor2X(){
 		this.anchor2.x = this.anchor1.x + width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
+	}
+	public void setAnchor2Y(){
+		double dy = Math.sqrt((length * length) - (width * width));
+		if (planeVariable == 1)
+			this.anchor2.y = this.anchor1.y + dy;
+		else 
+			this.anchor2.y = this.anchor1.y - dy;
 	}
 	public boolean isUsed() {
 		return isUsed;
@@ -197,7 +204,7 @@ public class Plane {
 		this.angle = Math.PI - Math.atan(dy/dx);
 		setFormula();
 		setWidth();
-		setAnchor2();
+		setAnchor2X();
 	}
 	public double getM() {
 		return m;

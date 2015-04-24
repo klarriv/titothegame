@@ -236,7 +236,7 @@ public class Level extends JPanel implements ActionListener {
 							writer.print(i+1);
 							writer.close();
 						} catch (FileNotFoundException e) {
-							// TODO Auto-generated catch block
+							// 
 							e.printStackTrace();
 						}
 					}
@@ -490,7 +490,7 @@ public class Level extends JPanel implements ActionListener {
 
 			reader.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			// 
 			e.printStackTrace();
 		}
 	}
@@ -524,7 +524,7 @@ public class Level extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		// 
 
 	}
 
@@ -745,7 +745,7 @@ public class Level extends JPanel implements ActionListener {
 			return false;
 	}
 
-	// TODO
+	// 
 	/**
 	 * Makes the object move with friction
 	 * @param ob1
@@ -813,13 +813,13 @@ public class Level extends JPanel implements ActionListener {
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			// 
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			// 
 
 		}
 
@@ -917,14 +917,23 @@ public class Level extends JPanel implements ActionListener {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					// TODO make the planes move
-					/*
-					 * if(planeList.get(i).getR().contains(p)){
-					 * planeList.get(i).setX(x-TrashCan.WIDTH/2);
-					 * planeList.get(i).setY(y-TrashCan.HEIGHT/2);
-					 * planeList.get(i).getPosition().x = x-TrashCan.WIDTH/2;
-					 * planeList.get(i).getPosition().y = y-TrashCan.HEIGHT/2; }
-					 */
+					// TODO Theoriquement c'est suppose marcher
+					if( x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(p) <= 0.3 ){
+						x = x - planeList.get(i).getWidth()/2;
+						//y = planeList.get(i).getY(x);
+						planeList.get(i).getAnchor1().x = x;
+						planeList.get(i).getAnchor1().y = y;
+						planeList.get(i).setAnchor2X();
+						planeList.get(i).setAnchor2Y();
+					}
+					
+					for ( int j = 0; j < ropeList.size(); j++){
+						if (ropeList.get(j).isUsed() == 1 && ropeList.get(j).getAnchor2().distance(planeList.get(i).getAnchor1()) <= 0.3){
+							ropeList.get(j).setPlane(planeList.get(i));
+							ropeList.get(j).setXAnchored();
+							ropeList.get(j).setLength3();
+						}
+					}
 				}
 				for (int i = 0; i < ropeList.size(); i++) {
 					
