@@ -29,7 +29,6 @@ public class PlaneIncliningTestPanel extends JPanel{
 		setLayout(new BorderLayout());
 		addMouseMotionListener( new MouseDrag());
 		start.addActionListener(new ActionListener(){
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rope.setPulley(pulley);
@@ -67,6 +66,12 @@ public class PlaneIncliningTestPanel extends JPanel{
 		}
 		else if (rope.isUsed() == 2 || rope.isUsed() == 4){
 			int[] xPoints = {(int)(gUnit*rope.getAnchor1().x) + 50, (int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor3().x) + 50};
+			if (rope.isUsed() == 4){
+				plane.getPosition().x += (50/gUnit);
+				plane.setAnchor2();
+				xPoints[2] = (int)(gUnit * rope.getAnchor3().x);
+			}
+			
 			int[] yPoints = {(int)(gUnit*rope.getAnchor1().y), (int)(gUnit*rope.getAnchor2().y), (int)(gUnit*rope.getAnchor3().y)};
 			g.drawPolyline(xPoints, yPoints, 3);
 		}
@@ -81,6 +86,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 		g.drawLine((int)(gUnit * plane.getAnchor1().x), (int)(gUnit * plane.getAnchor1().y), (int)(gUnit * plane.getAnchor2().x), (int)(gUnit * plane.getAnchor2().y));
 		rope.setOb1(trash);
 		rope.setXAnchored();
+		
 	}
 	
 	class MouseDrag implements MouseMotionListener{
@@ -102,6 +108,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 					trash.setY(t1y);
 					
 					rope.pulleyMove(rope.getOb1().getPosition().x, y);
+					plane.setAngle();
 				}
 				repaint();
 		}
