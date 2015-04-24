@@ -32,6 +32,10 @@ public class MainFrame extends JFrame{
 	 */
 	private static final String CREDITSPANEL = "CreditsPanel";
 	/**
+	 * This is the identifier string the help JPanel
+	 */
+	private static final String HELPMENUPANEL = "HelpPanel";
+	/**
 	 * This is the array that contains the 10 level panels
 	 */
 	private static Level[] levels = new Level[10];
@@ -51,6 +55,10 @@ public class MainFrame extends JFrame{
 	 * A JPanel with a cardLayout used to hold all other JPanels.
 	 */
 	private static JPanel menus;
+	/**
+	 * This is the help menu panel.
+	 */
+	private static HelpMenu helpMenu = new HelpMenu();
 	/**
 	 * The image variable that will be used to set the icon of the JFrame.
 	 */
@@ -99,6 +107,7 @@ public class MainFrame extends JFrame{
 			menus.add(mainMenu, MAINMENUPANEL);
 		}
 		menus.add(credits, CREDITSPANEL);
+		menus.add(helpMenu, HELPMENUPANEL);
 		
 		getContentPane().add(menus, BorderLayout.CENTER);
 		
@@ -128,6 +137,10 @@ public class MainFrame extends JFrame{
 
 	public static String getMainmenupanel() {
 		return MAINMENUPANEL;
+	}
+	
+	public static String getHelpmenupanel(){
+		return HELPMENUPANEL;
 	}
 
 	public void setLevelSelectMenu(LevelSelectMenu levelSelectMenu) {
@@ -168,6 +181,14 @@ public class MainFrame extends JFrame{
 
 	public static void setLevelReached(int levelReached) {
 		MainFrame.levelReached = levelReached;
+	}
+
+	public static HelpMenu getHelpMenu() {
+		return helpMenu;
+	}
+
+	public static void setHelpMenu(HelpMenu helpMenu) {
+		MainFrame.helpMenu = helpMenu;
 	}
 	
 	

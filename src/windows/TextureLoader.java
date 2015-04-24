@@ -24,6 +24,7 @@ public class TextureLoader {
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
 	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
+	public Font fntPlayGame;
 	
 	public TextureLoader() {
 		
@@ -31,6 +32,7 @@ public class TextureLoader {
 			
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("Resources/BlackCarrot.ttf")));
+			fntPlayGame = Font.createFont(Font.TRUETYPE_FONT, new File("Resources/BlackCarrot.ttf")).deriveFont(Font.PLAIN, 22f);
 			
 			titoWalkingAnimation = new ImageIcon("Resources/titoWalking.png");
 			JOptionPaneBG = new ImageIcon("Resources/brickBG.png");
