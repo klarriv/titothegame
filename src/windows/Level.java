@@ -377,8 +377,18 @@ public class Level extends JPanel implements ActionListener {
 					ropeList.get(i).setTotalForce();
 				}
 				
+				// checks if there is a collision with the enemies
+				// TODO quoi faire quand tito se fait pogner?
+				for(int i=0; i<enemyList.size(); i++){
+					if(tito.getR().contains(enemyList.get(i).getR())){
+						System.out.println("You dead bitch");
+						tito = null;
+						t.stop();
+					}
+				}
+				
 				// checks if tito touches the right boundary to change level!
-				if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
+				if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 						t.stop();
 						loadObjects();
 						hasBeenCompleted = true;
@@ -386,7 +396,7 @@ public class Level extends JPanel implements ActionListener {
 						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 				}
-				else if(tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
+				else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
 					loadObjects();
 					hasBeenCompleted = true;
 					LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
@@ -619,7 +629,8 @@ public class Level extends JPanel implements ActionListener {
 			g.drawImage(enemyList.get(i).getTexture(), (int) (gUnit * enemyList.get(i).getPosition().x), (int) (gUnit * enemyList.get(i).getPosition().y), (int) (Enemy.WIDTH * gUnit), (int) (Enemy.HEIGHT * gUnit), null);
 		}
 		//TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		g.drawImage(sprite, (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
+		if(tito != null)
+			g.drawImage(sprite, (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
 		
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
