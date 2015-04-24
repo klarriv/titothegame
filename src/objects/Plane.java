@@ -54,6 +54,11 @@ public class Plane {
 	 */
 	private int planeVariable;
 	/**
+	 * 
+	 */
+	private boolean isMoving;
+	
+	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
 	 * @param x
 	 * @param y
@@ -240,6 +245,14 @@ public class Plane {
 	}
 	public void setLength(){
 		this.length = Math.abs(this.width/Math.cos(angle));
+	}
+
+	public boolean isMoving() {
+		return isMoving;
+	}
+
+	public void setMoving(boolean isMoving) {
+		this.isMoving = isMoving;
 	}
  
 }

@@ -877,7 +877,6 @@ public class Level extends JPanel implements ActionListener {
 				trashCanList.get(i).isMoving = false;
 				if (!trashCanList.get(i).isUsed())
 					trashCanList.get(i).resetPosition();
-				
 			}
 			for (int i = 0; i < ropeList.size(); i++) {
 				ropeList.get(i).isMoving = false;
@@ -924,7 +923,7 @@ public class Level extends JPanel implements ActionListener {
 				}
 				for (int i = 0; i < planeList.size(); i++) {
 					// TODO Theoriquement c'est suppose marcher
-					if( x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(p) <= 0.3 ){
+					if(planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(p) <= 0.3 ){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
