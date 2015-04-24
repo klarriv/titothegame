@@ -41,7 +41,7 @@ public class MainMenu extends JPanel implements ActionListener{
 	/**
 	 * These are the variables for the "play" and "new game" buttons.
 	 */
-	private static JButton playButton, newGameButton, exitButton, fullScreenButton, musicButton;
+	private static JButton playButton, newGameButton, exitButton, fullScreenButton, musicButton, helpButton;
 
 	private Timer t = new Timer(100, this);
 	private int yTitle = 20;
@@ -194,6 +194,21 @@ public class MainMenu extends JPanel implements ActionListener{
 			}
 		});
 		
+		helpButton = new JButton("?");
+		helpButton.setBorder(BorderFactory.createEmptyBorder());
+		helpButton.setFont(MainFrame.getTl().fntPlayGame.deriveFont(Font.PLAIN, 22f));
+		helpButton.setForeground(new Color(204, 213, 187));
+		helpButton.setContentAreaFilled(false);
+		helpButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), MainFrame.getHelpmenupanel());
+			}
+			
+		});
+		
 		musicButton = new JButton(new ImageIcon(MainFrame.getTl().mainMenuMusicButtonTexture));
 		musicButton.setBorder(BorderFactory.createEmptyBorder());
 		musicButton.setContentAreaFilled(false);
@@ -219,6 +234,7 @@ public class MainMenu extends JPanel implements ActionListener{
 		add(exitButton);
 		add(fullScreenButton);
 		add(musicButton);
+		add(helpButton);
 		t.start();
 	}
 
@@ -260,7 +276,8 @@ public class MainMenu extends JPanel implements ActionListener{
 		newGameButton.setBounds(541*getWidth()/1280, 498*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 		exitButton.setBounds(1256*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
 		fullScreenButton.setBounds(1235*getWidth()/1280, 10*getHeight()/720, 14*getWidth()/1280, 14*getHeight()/720);
-		musicButton.setBounds(10*getWidth()/1280, 10*getHeight()/720, 25*getWidth()/1280, 25*getHeight()/720);
+		musicButton.setBounds(40*getWidth()/1280, 10*getHeight()/720, 25*getWidth()/1280, 25*getHeight()/720);
+		helpButton.setBounds(10*getWidth()/1280, 10*getHeight()/720, 25*getWidth()/1280, 25*getHeight()/720);
 		
 		g.setColor(new Color(204, 213, 187));
 		// draws the exit button
