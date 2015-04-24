@@ -57,6 +57,11 @@ public class Plane {
 	 * 
 	 */
 	private boolean isMoving;
+	/**
+	 * 
+	 */
+	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	
 	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
@@ -254,5 +259,30 @@ public class Plane {
 	public void setMoving(boolean isMoving) {
 		this.isMoving = isMoving;
 	}
+	/**
+	 * 
+	 */
+	public void resetPosition(){
+		this.anchor1.x = this.defaultPosition.x;
+		this.anchor1.y = this.defaultPosition.y;
+	}
+	/**
+	 * 
+	 * @param position
+	 */
+	public void setDefaultPosition(DoublePoint position) {
+		this.defaultPosition .x =this.anchor1.x;
+		this.defaultPosition.y = this.anchor1.y;
+		
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public DoublePoint getDefaultPosition() {
+		
+		return defaultPosition;
+	}
+
  
 }
