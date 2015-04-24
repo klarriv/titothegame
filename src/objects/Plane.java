@@ -1,4 +1,11 @@
 package objects;
+
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+
+import windows.MainFrame;
+
 /**
  * 
  * @author CharlesPhilippe
@@ -25,6 +32,10 @@ public class Plane {
 	 * 
 	 */
 	private DoublePoint anchor2;
+	/**
+	 * 
+	 */
+	private BufferedImage texture;
 	/**
 	 * 
 	 */
@@ -87,7 +98,11 @@ public class Plane {
 		setFormula();
 		setAnchors();
 		setLength();
+		
+		texture = MainFrame.getTl().planeTexture;
 	}
+	
+	
 	
 	/**
 	 * Sets the anchors
@@ -304,6 +319,21 @@ public class Plane {
 
 	public void setMaisonNumber(int maisonNumber) {
 		this.maisonNumber = maisonNumber;
+	}
+	
+	public BufferedImage getTexture(){
+		return texture;
+	}
+	
+	
+	public void rotateImage(){
+		AffineTransform tx = new AffineTransform();
+		
+	    tx.rotate(angle - Math.PI, texture.getWidth()/2, texture.getHeight()/2);
+
+	    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+	   	texture = op.filter(texture, null);
+	   	//rotated = true;
 	}
 
  
