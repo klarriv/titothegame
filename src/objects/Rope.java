@@ -1,11 +1,5 @@
 package objects;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 public class Rope {
 	public final static double WIDTH = 0.15;
 	public final static double HEIGHT = 0.15;

@@ -1,11 +1,6 @@
 package objects;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import windows.MainFrame;
 
 public class Spring extends Physics {
@@ -17,7 +12,7 @@ public class Spring extends Physics {
 	public Spring(double x, double y){
 		
 		position = new DoublePoint(x, y);
-		r = new DoubleRectangle(position, 0.1, 0.2);
+		setR(new DoubleRectangle(position, 0.1, 0.2));
 		//loadImage();
 		texture = MainFrame.getTl().springTexture;
 	}
@@ -154,6 +149,14 @@ public class Spring extends Physics {
 	public double getWidth() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public DoubleRectangle getR() {
+		return r;
+	}
+
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 
 

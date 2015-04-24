@@ -1,17 +1,11 @@
 package objects;
 
-import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
 import windows.MainFrame;
-import RunningClasses.RunGame;
 import RunningClasses.SpriteSheet;
 
 public class TrashCan extends Physics {
