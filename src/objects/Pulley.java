@@ -9,6 +9,8 @@ public class Pulley extends Physics{
 	private BufferedImage texture;
 	private boolean isUsed = false;
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	public static final double HEIGHT = 0.16;
+	public static final double WIDTH = 0.28;		
 	
 	public Pulley(DoublePoint position, boolean visible){
 		this.position = position;
@@ -161,6 +163,14 @@ public class Pulley extends Physics{
 	public double getWidth() {
 		
 		return 0;
+	}
+
+	public double getHEIGHT() {
+		return HEIGHT;
+	}
+
+	public double getWIDTH() {
+		return WIDTH;
 	}
 
 

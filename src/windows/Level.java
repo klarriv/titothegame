@@ -384,6 +384,7 @@ public class Level extends JPanel implements ActionListener {
 						System.out.println("You dead bitch");
 						tito = null;
 						t.stop();
+						loadObjects();
 					}
 				}
 				
@@ -618,7 +619,7 @@ public class Level extends JPanel implements ActionListener {
 		// 9 PULLEY
 		for (int i = 0; i < pulleyList.size(); i++) {
 			if (pulleyList.get(i).isVisible())
-				g.drawImage(pulleyList.get(i).getTexture(), (int) (gUnit * pulleyList.get(i).getPosition().x) + 15, (int) (gUnit * pulleyList.get(i).getPosition().y), null);
+				g.drawImage(pulleyList.get(i).getTexture(), (int) (gUnit * pulleyList.get(i).getPosition().x) + 15, (int) (gUnit * pulleyList.get(i).getPosition().y), (int) (gUnit * Pulley.WIDTH), (int) (gUnit * Pulley.HEIGHT), null);
 		}
 		// 10 MAISON
 		for (int i = 0; i < maisonList.size(); i++) {
