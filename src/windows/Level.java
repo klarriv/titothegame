@@ -363,7 +363,7 @@ public class Level extends JPanel implements ActionListener {
 					ropeList.get(i).setXAnchored();
 					
 					//projectile motion of a trashcan attached to a pulley and another trashcan
-					if (ropeList.get(i).isUsed() == 2) {
+					if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4) {
 						double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
 
 						if (!ropeList.get(i).isMaxed() && t.isRunning()) {
@@ -574,13 +574,13 @@ public class Level extends JPanel implements ActionListener {
 		for (int i = 0; i < planeList.size(); i++) {
 			g.drawLine((int) (gUnit * (planeList.get(i).getAnchor1().x)), (int) (gUnit * (planeList.get(i).getAnchor1().y)), (int) (gUnit * (planeList.get(i).getAnchor2().x)), (int) (gUnit * planeList.get(i).getAnchor2().y));
 		}
-		// TODO image
 		// 5 ROPE
 		g.setColor(Color.yellow);
 		
 		for (int i = 0; i < ropeList.size(); i++) {
 			if (ropeList.get(i).isUsed() == -1) {
-				g.fillRect((int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * Rope.WIDTH), (int) (gUnit * Rope.HEIGHT));
+				g.drawImage(ropeList.get(i).getTexture(), (int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (Rope.WIDTH * gUnit), (int) (Rope.HEIGHT * gUnit), null);
+				
 			} else if (ropeList.get(i).isUsed() == 1 || ropeList.get(i).isUsed() == 3) {
 				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
 				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y) };
@@ -758,9 +758,9 @@ public class Level extends JPanel implements ActionListener {
 		double txf = p.getAnchor2().x;
 		double ty = p.getY(x);
 		
-		System.out.println(p.getAnchor1().x + " " + p.getPosition().x + " " +  p.getAnchor1().y + " " + p.getPosition().y);
+		//TODO sss
 		double width = ob1.getWidth();
-		if (y < ty && x > (tx - width) && x < (txf) && p.pointDistance(ob1.getPosition()) < 1)
+		if (y < ty && x > (tx - width) && x < (txf - width/2) && p.pointDistance(ob1.getPosition()) < 1)
 			return true;
 		else
 			return false;
@@ -905,6 +905,7 @@ public class Level extends JPanel implements ActionListener {
 			}
 			for (int i = 0; i < planeList.size(); i++){
 				planeList.get(i).setMoving(false);
+				//TODO isUsed of the plane !?
 				if(!planeList.get(i).isUsed()){
 					planeList.get(i).resetPosition();
 				}
@@ -955,6 +956,8 @@ public class Level extends JPanel implements ActionListener {
 						planeList.get(i).getAnchor1().y = y;
 						planeList.get(i).setAnchor2X();
 						planeList.get(i).setAnchor2Y();
+						
+						System.out.println(planeList.get(i).getAnchor1().x + " " + planeList.get(i).getAnchor1().y);
 					}
 					
 					for ( int j = 0; j < ropeList.size(); j++){
@@ -985,9 +988,7 @@ public class Level extends JPanel implements ActionListener {
 					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
 						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
-						/*
-						 * Stupidly complicated for nothing ffs
-						 */
+						
 						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
 							if (ropeList.size() != 0){
 								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){

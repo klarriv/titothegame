@@ -67,6 +67,10 @@ public class Plane {
 	/**
 	 * 
 	 */
+	private double frictionConstant = 0.5;
+	/**
+	 * 
+	 */
 	private boolean isMoving;
 	/**
 	 * 
@@ -88,7 +92,7 @@ public class Plane {
 		this.setMaisonNumber(maisonNumber);
 		this.width = width;
 		this.angle = angle;
-		if (this.angle >= Math.PI/2 && this.angle <= 3*Math.PI/2)
+		if (this.angle >= Math.PI/2 && this.angle <= Math.PI && this.angle >= 3*Math.PI/2)
 			setPlaneVariable(0);
 		else
 			setPlaneVariable(1);
@@ -110,6 +114,7 @@ public class Plane {
 	public void setAnchors(){
 		this.anchor1 = this.position;
 		this.anchor2 = new DoublePoint(position.x + width, getY(this.position.x + width));
+		setFormula();
 	}
 	
 	/**
@@ -125,6 +130,7 @@ public class Plane {
 	 * Sets the slope in the form mX + bY + c = 0
 	 */
 	public void setFormula(){
+		
 		this.m = Math.tan(angle);
 		
 		c = (b*position.y)-(m*position.x);
@@ -172,22 +178,27 @@ public class Plane {
 	}
 	public void setPosition(DoublePoint position) {
 		this.position = position;
+		setAngle();
+		setFormula();
 	}
 	public double getWidth() {
 		return width;
 	}
 	public void setWidth(double width) {
 		this.width = width;
+		setFormula();
 	}
 	public void setWidth(){
 		this.width = Math.abs(length * Math.cos(angle));
-		System.out.println(width);
+		
+		setFormula();
 	}
 	public DoublePoint getAnchor1() {
 		return anchor1;
 	}
 	public void setAnchor1(DoublePoint anchor1) {
 		this.anchor1 = anchor1;
+		setFormula();
 		setAngle();
 		setWidth();
 	}
@@ -197,18 +208,27 @@ public class Plane {
 			this.anchor1.y = this.anchor2.y - dy;
 		else 
 			this.anchor1.y = this.anchor2.y + dy;
+		setAngle();
+		setWidth();
+		setFormula();
 	}
 	public DoublePoint getAnchor2() {
 		return anchor2;
 	}
 	public void setAnchor2(DoublePoint anchor2) {
 		this.anchor2 = anchor2;
+		setFormula();
 		setAngle();
 		setWidth();
 	}
 	public void setAnchor2X(){
-		this.anchor2.x = this.anchor1.x + width;
+		if (planeVariable == 0)
+			this.anchor2.x = this.anchor1.x + width;
+		else if ( planeVariable == 1)
+			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
+		setFormula();
+		
 	}
 	public void setAnchor2Y(){
 		double dy = Math.sqrt((length * length) - (width * width));
@@ -216,6 +236,8 @@ public class Plane {
 			this.anchor2.y = this.anchor1.y + dy;
 		else 
 			this.anchor2.y = this.anchor1.y - dy;
+		
+		setFormula();
 	}
 	public boolean isUsed() {
 		return isUsed;
@@ -234,11 +256,16 @@ public class Plane {
 	}
 	public void setAngle(double angle) {
 		this.angle = angle;
+		setFormula();
+		setWidth();
+		setAnchor2X();
+		
 	}
 	public void setAngle(){
-		double dx = Math.abs(anchor1.x - anchor2.x);
-		double dy = Math.abs(anchor1.y - anchor2.y);
-		this.angle = Math.PI - Math.atan(dy/dx);
+		double dx = (anchor1.x - anchor2.x);
+		double dy = (anchor1.y - anchor2.y);
+		this.angle = Math.PI + Math.atan(dy/dx);
+		//System.out.println(dx + " " + dy + " " + Math.toDegrees(Math.atan(dy/dx)) + " " + Math.toDegrees(angle));
 		setFormula();
 		setWidth();
 		setAnchor2X();
@@ -294,6 +321,7 @@ public class Plane {
 		this.anchor1.y = this.defaultPosition.y;
 		this.setAnchor2X();
 		this.setAnchor2Y();
+		setFormula();
 	}
 	/**
 	 * 
@@ -334,6 +362,18 @@ public class Plane {
 	    AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
 	   	texture = op.filter(texture, null);
 	   	//rotated = true;
+	}
+
+
+
+	public double getFrictionConstant() {
+		return frictionConstant;
+	}
+
+
+
+	public void setFrictionConstant(double frictionConstant) {
+		this.frictionConstant = frictionConstant;
 	}
 
  

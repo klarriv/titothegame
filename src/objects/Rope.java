@@ -1,7 +1,11 @@
 package objects;
 
+import java.awt.image.BufferedImage;
+
+import windows.MainFrame;
+
 public class Rope {
-	public final static double WIDTH = 0.15;
+	public final static double WIDTH = 0.3;
 	public final static double HEIGHT = 0.15;
 	public boolean isMoving;
 	private DoublePoint anchor1;
@@ -17,13 +21,15 @@ public class Rope {
 	private boolean broken = false;
 	private DoubleRectangle r;
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
-	
+	private BufferedImage texture;
 	
 	
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
 		setDefaultPosition(anchor2);
 		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
+		
+		texture = MainFrame.getTl().ropeTexture;
 	}
 	
 	/**
@@ -145,6 +151,9 @@ public class Rope {
 			
 			if (!maxed)
 				anchor3.y = anchor2.y + distance2;
+			
+			if (isUsed() == 4)
+				plane.setAngle();
 		}
 		
 		
@@ -302,13 +311,7 @@ public class Rope {
 			this.anchor3.x = anchor2.x;
 		}
 		
-		if (u == 3 || u == 4){
-			//this.plane.getAnchor1().x += (50/gUnit);
-			pulley.getWidth();
-			this.plane.setAnchor2X();
-			this.plane.getAnchor2().y =2.5;
-			this.plane.setAnchor1Y();
-		}
+		
 	}
 
 	public boolean isBroken() {
@@ -353,7 +356,10 @@ public class Rope {
 		// TODO Auto-generated method stub
 		return defaultPosition;
 	}
-
+	
+	public BufferedImage getTexture(){
+		return texture;
+	}
 	
 	
 	

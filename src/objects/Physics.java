@@ -92,6 +92,14 @@ public abstract class Physics implements ObjectInterface{
 		return position;
 	}
 	
+	/**
+	 * Calculates the position of an object on an incline plane
+	 * @param position
+	 * @param vx
+	 * @param vy
+	 * @param delayS
+	 * @return
+	 */
 	public DoublePoint frictionMotion(DoublePoint position, double vx, double vy, int delayS){
 		//System.out.println("vx:  " + vx +  " vy : " + vy);
 		double delay = ((double)delayS/1000);
@@ -106,6 +114,25 @@ public abstract class Physics implements ObjectInterface{
 		
 		return position;
 	}
+	
+	public void frictionMotion(Plane p, Physics ob1, double delay){
+		double force = ob1.getWeight() * GRAVITY;
+		double frictionF = force * Math.sin(p.getAngle()) + force* Math.cos(p.getAngle()) * p.getFrictionConstant();
+		double a = frictionF/ob1.getWeight();
+		double ax = a * Math.sin(p.getAngle());
+		//TODO be sure it works every time
+		if (p.getPlaneVariable() == 1 )
+			ax = -ax;
+		//System.out.println(a * Math.sin(p.getAngle()));
+		//setAcceleration(p.getAngle(), ob1.getWeight(), p.getFrictionConstant());
+		
+		
+		
+		ob1.setVx(ob1.getVx() + ax * delay);
+		ob1.getPosition().x += ob1.getVx()*(delay) + (0.5 * ax*((delay) * (delay)));
+		ob1.setY(p.getY(ob1.getPosition().x) - ob1.getHeight());
+	}
+	
 	
 	/**
 	 * Calculates and returns the position of an object in movement
