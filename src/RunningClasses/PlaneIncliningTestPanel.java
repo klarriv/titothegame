@@ -23,7 +23,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 	private double gUnit;
 	private Timer t;
 	private Tito tito = new Tito(1.8, 1.7, 0, 0, t);
-	private Plane plane = new Plane(1.6, 2, Math.toRadians(0), 1, -1);
+	private Plane plane = new Plane(1.6, 2, Math.toRadians(180), 1, -1);
 	private TrashCan trash = new TrashCan(1, 1.5);
 	private Pulley pulley = new Pulley(2, 0.1, true);
 	private Rope rope = new Rope(3,2);
@@ -34,7 +34,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 		setLayout(new BorderLayout());
 		addMouseMotionListener( new MouseDrag());
 		
-		
+		System.out.println(plane.getPlaneVariable());
 		t = new Timer(1000/24, new ActionListener(){
 
 			@Override
@@ -121,10 +121,10 @@ public class PlaneIncliningTestPanel extends JPanel{
 		double r = 40.0 / gUnit;
 		DoublePoint dp = new DoublePoint(tito.getPosition().x + r, tito.getPosition().y + r);
 		double d = plane.pointDistance(dp);
-		if (plane.getPlaneVariable() == 0) {
+		if (plane.getPlaneVariable() == 1) {
 			if (d <= r && (dp.x) <= plane.getAnchor2().x && dp.x >= plane.getAnchor1().x)
 				return true;
-		} else if (plane.getPlaneVariable() == 1) {
+		} else if (plane.getPlaneVariable() == 0) {
 			if (d <= r && dp.x > plane.getAnchor2().x && dp.x < plane.getAnchor1().x)
 				return true;
 		}

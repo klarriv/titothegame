@@ -92,7 +92,7 @@ public class Plane {
 		this.setMaisonNumber(maisonNumber);
 		this.width = width;
 		this.angle = angle;
-		if (this.angle >= Math.PI/2 && this.angle <= Math.PI && this.angle >= 3*Math.PI/2)
+		if (this.angle >= Math.PI/2 && this.angle <= Math.PI || this.angle >= 3*Math.PI/2)
 			setPlaneVariable(0);
 		else
 			setPlaneVariable(1);
@@ -222,9 +222,9 @@ public class Plane {
 		setWidth();
 	}
 	public void setAnchor2X(){
-		if (planeVariable == 0)
+		if (planeVariable == 1)
 			this.anchor2.x = this.anchor1.x + width;
-		else if ( planeVariable == 1)
+		else if ( planeVariable == 0)
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
 		setFormula();
