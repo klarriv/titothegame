@@ -39,7 +39,7 @@ public class Plane {
 	/**
 	 * 
 	 */
-	private boolean isUsed = false;
+	private int isUsed = -1;
 	/**
 	 * 
 	 */
@@ -80,6 +80,9 @@ public class Plane {
 	 * 
 	 */
 	private int maisonNumber = -1;
+	
+	private double dy;
+	private double dx;
 	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
@@ -182,6 +185,7 @@ public class Plane {
 		setFormula();
 	}
 	public double getWidth() {
+		
 		return width;
 	}
 	public void setWidth(double width) {
@@ -203,7 +207,8 @@ public class Plane {
 		setWidth();
 	}
 	public void setAnchor1Y(){
-		double dy = Math.sqrt((length * length) - (width * width));
+		
+		setDy(0);
 		//if (planeVariable == 1)
 			this.anchor1.y = this.anchor2.y - dy;
 		//else 
@@ -227,14 +232,18 @@ public class Plane {
 		else if ( planeVariable == 0)
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
-		if (!isMoving())
+		if (!isMoving()){
+			System.out.println(0);
 			setAnchor1Y();
+		}
 		
 		setFormula();
 		setAngle();
 	}
 	public void setAnchor2Y(){
-		double dy = Math.sqrt((length * length) - (width * width));
+		
+		
+		setDy(0);
 		if (planeVariable == 1)
 			this.anchor2.y = this.anchor1.y + dy;
 		else 
@@ -243,10 +252,24 @@ public class Plane {
 		setFormula();
 		setAngle();
 	}
-	public boolean isUsed() {
+	/**
+	 *  Getting used 
+	 * -1 if not used,
+	 * 0 if used by a Maison,
+	 * and 1 if used by a rope.
+	 * @return
+	 */
+	public int isUsed() {
 		return isUsed;
 	}
-	public void setUsed(boolean isUsed) {
+	/**
+	 * Setting used 
+	 * -1 if not used,
+	 * 0 if used by a Maison,
+	 * and 1 if used by a rope.
+	 * @param isUsed
+	 */
+	public void setUsed(int isUsed) {
 		this.isUsed = isUsed;
 	}
 	public boolean isVisible() {
@@ -266,8 +289,9 @@ public class Plane {
 		
 	}
 	public void setAngle(){
-		double dx = (anchor1.x - anchor2.x);
-		double dy = (anchor1.y - anchor2.y);
+	
+		setDx();
+		setDy(1);
 		this.angle = Math.PI + Math.atan(dy/dx);
 		//System.out.println(dx + " " + dy + " " + Math.toDegrees(Math.atan(dy/dx)) + " " + Math.toDegrees(angle));
 		setFormula();
@@ -379,6 +403,21 @@ public class Plane {
 	public void setFrictionConstant(double frictionConstant) {
 		this.frictionConstant = frictionConstant;
 	}
-
+	
+	public void setDy(int i){
+		switch(i){
+		
+			case 0: this.dy = Math.sqrt((length * length) - (width * width));
+					break;
+			case 1: this.dy = (anchor1.y - anchor2.y);
+					break;
+			case 2: this.dy = Math.abs(length * Math.sin(angle));
+					break;
+		}
+	}
+	
+	public void setDx(){
+		this.dx = anchor1.x - anchor2.x;
+	}
  
 }

@@ -160,7 +160,7 @@ public class Maison {
 		 else if (this.plane2 == null && this.plane1 !=null)
 				this.plane2 = plane;
 		 
-		 plane.setUsed(true);
+		 plane.setUsed(0);
 	 }
 
 }

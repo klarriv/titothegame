@@ -908,7 +908,7 @@ public class Level extends JPanel implements ActionListener {
 			for (int i = 0; i < planeList.size(); i++){
 				planeList.get(i).setMoving(false);
 				//TODO isUsed of the plane !?
-				if(!planeList.get(i).isUsed()){
+				if(planeList.get(i).isUsed() != 1){
 					planeList.get(i).resetPosition();
 				}
 			}
@@ -951,7 +951,7 @@ public class Level extends JPanel implements ActionListener {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					if(!planeList.get(i).isUsed() && planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
+					if(planeList.get(i).isUsed() != 0 && planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
@@ -959,18 +959,19 @@ public class Level extends JPanel implements ActionListener {
 						planeList.get(i).setAnchor2X();
 						planeList.get(i).setAnchor2Y();
 						
-						System.out.println(planeList.get(i).getAnchor1().x + " " + planeList.get(i).getAnchor1().y);
+						//System.out.println(planeList.get(i).getAnchor1().x + " " + planeList.get(i).getAnchor1().y);
 					}
 					
 					for ( int j = 0; j < ropeList.size(); j++){
 						if (ropeList.get(j).isUsed() == 1 && ropeList.get(j).getAnchor2().distance(planeList.get(i).getAnchor1()) <= 0.3){
-							planeList.get(i).setUsed(true);
+							planeList.get(i).setUsed(1);
 							ropeList.get(j).setPlane(planeList.get(i));
 							ropeList.get(j).setXAnchored();
 							ropeList.get(j).setLength3();
 						}
 					}
 				}
+				System.out.println(planeList.get(0).isUsed());
 				for (int i = 0; i < ropeList.size(); i++) {
 					
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
