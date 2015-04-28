@@ -1095,7 +1095,7 @@ public class Level extends JPanel {
 						}
 					}
 				}
-				System.out.println(planeList.get(0).isUsed());
+				
 				for (int i = 0; i < ropeList.size(); i++) {
 					
 					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
@@ -1156,7 +1156,7 @@ public class Level extends JPanel {
 							}
 						}
 					}
-					System.out.println(" plane x: " + planeList.get(0).getPosition().x + " Plane y : " + planeList.get(0).getPosition().y);
+					
 					if (!t.isRunning())
 						repaint();
 				}

@@ -84,6 +84,13 @@ public class Plane {
 	private double dy;
 	private double dx;
 	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
 	 * @param x
@@ -175,37 +182,66 @@ public class Plane {
 		
 		return t;
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public DoublePoint getPosition() {
 		return position;
 	}
+	/**
+	 * 
+	 * @param position
+	 */
 	public void setPosition(DoublePoint position) {
 		this.position = position;
 		setAngle();
 		setFormula();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public double getWidth() {
 		
 		return width;
 	}
+	/**
+	 * 
+	 * @param width
+	 */
 	public void setWidth(double width) {
 		this.width = width;
 		setFormula();
 	}
+	/**
+	 * Sets the width of the plane (the base) from the current length and angle
+	 */
 	private void setWidth(){
 		this.width = Math.abs(length * Math.cos(angle));
 		
 		setFormula();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public DoublePoint getAnchor1() {
 		return anchor1;
 	}
+	/**
+	 * 
+	 * @param anchor1
+	 */
 	public void setAnchor1(DoublePoint anchor1) {
 		this.anchor1 = anchor1;
 		setFormula();
 		setAngle();
 		setWidth();
 	}
+	/**
+	 * Sets the y coordinate of the anchor1 relative to the current anchor2
+	 */
 	public void setAnchor1Y(){
 		
 		setDy(0);
@@ -217,15 +253,26 @@ public class Plane {
 		setWidth();
 		setFormula();
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public DoublePoint getAnchor2() {
 		return anchor2;
 	}
+	/**
+	 * 
+	 * @param anchor2
+	 */
 	public void setAnchor2(DoublePoint anchor2) {
 		this.anchor2 = anchor2;
 		setFormula();
 		setAngle();
 		setWidth();
 	}
+	/**
+	 * Sets the x coordinate of the anchor2 relative to the current anchor1
+	 */
 	public void setAnchor2X(){
 		if (planeVariable == 1)
 			this.anchor2.x = this.anchor1.x + width;
@@ -233,13 +280,15 @@ public class Plane {
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
 		if (!isMoving()){
-			System.out.println("Calling setAnchor1Y()");
 			setAnchor1Y();
 		}
 		
 		setFormula();
 		setAngle();
 	}
+	/**
+	 * Sets the y coordinate of the anchor2 relative to the current anchor1
+	 */
 	public void setAnchor2Y(){
 		
 		
@@ -274,16 +323,31 @@ public class Plane {
 	public void setUsed(int isUsed) {
 		this.isUsed = isUsed;
 	}
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean isVisible() {
 		return isVisible;
 	}
+	/**
+	 * 
+	 * @param isVisible
+	 */
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public double getAngle() {
 		return angle;
 	}
+	/**
+	 * 
+	 * @param angle
+	 */
 	public void setAngle(double angle) {
 		this.angle = angle;
 		setFormula();
@@ -291,6 +355,9 @@ public class Plane {
 		setAnchor2X();
 		
 	}
+	/**
+	 * 
+	 */
 	public void setAngle(){
 	
 		setDx();
