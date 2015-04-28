@@ -2,6 +2,7 @@ package RunningClasses;
 
 import java.awt.BorderLayout;
 import java.awt.Button;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,9 +23,9 @@ import objects.TrashCan;
 public class PlaneIncliningTestPanel extends JPanel{
 	private double gUnit;
 	private Timer t;
-	private Tito tito = new Tito(1.8, 1.7, 0, 0, t);
-	private Plane plane = new Plane(1.6, 2, Math.toRadians(180), 1, -1);
-	private TrashCan trash = new TrashCan(1, 1.5);
+	private Tito tito = new Tito(2.3, 1.7, 0, 0, t);
+	private Plane plane = new Plane(1.6, 2, Math.toRadians(0), 1, -1);
+	private TrashCan trash = new TrashCan(1, 1);
 	private Pulley pulley = new Pulley(2, 0.1, true);
 	private Rope rope = new Rope(3,2);
 	private Button place = new Button("Place");
@@ -34,17 +35,19 @@ public class PlaneIncliningTestPanel extends JPanel{
 		setLayout(new BorderLayout());
 		addMouseMotionListener( new MouseDrag());
 		
-		System.out.println(plane.getPlaneVariable());
+		//System.out.println(plane.getPlaneVariable());
 		t = new Timer(1000/24, new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//TODO
 				
-				if (planeColliding(plane)){
-					
+				if (isOnPlane(tito,plane))
 					tito.frictionMotion(plane, tito, (double)t.getDelay()/1000);
-				}
-					
+				/*else{
+					double x = tito.motion(tito.getPosition().x, tito.getVx(), t.getDelay());
+					tito.setX(x);
+				}*/
 				
 				
 				
@@ -131,6 +134,33 @@ public class PlaneIncliningTestPanel extends JPanel{
 		return false;
 
 	}
+	
+	
+	
+	/**
+	 * Determines whether an object is on the plane or not
+	 * @param ob1
+	 * @param p
+	 * @return
+	 */
+	public boolean isOnPlane(Physics ob1, Plane p){
+		double x = ob1.getPosition().x;
+		double y = ob1.getPosition().y;
+		double tx1 = p.getAnchor1().x;
+		double tx2 = p.getAnchor2().x;
+		double ty = p.getY(x);
+		
+		//TODO sss
+		double width = Math.abs((ob1.getWidth()/2.0) * Math.cos(p.getAngle()));
+		
+		if (y < ty && (x + width) > (tx1) && (x + width) < (tx2) && p.pointDistance(ob1.getPosition()) < 1)
+			return true;
+		else
+			return false;
+	}
+	
+	
+	
 	/**
 	 * Makes the object move with friction
 	 * @param ob1
@@ -165,7 +195,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 			g.drawPolyline(xPoints, yPoints, 2);
 		}
 		else if (rope.isUsed() == 2 || rope.isUsed() == 4){
-			int[] xPoints = {(int)(gUnit*rope.getAnchor1().x) + 50, (int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor3().x) + 50};
+			int[] xPoints = {(int)(gUnit*rope.getAnchor1().x), (int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor3().x) + 50};
 			if (rope.isUsed() == 4){
 				plane.getPosition().x += (50/gUnit);
 				plane.setAnchor2X();
@@ -184,7 +214,9 @@ public class PlaneIncliningTestPanel extends JPanel{
 		//g.drawLine((int)(gUnit*rope.getAnchor1().x ) + 50, (int)(gUnit*rope.getAnchor1().y)+ 50, (int)(gUnit*rope.getAnchor2().x)+ 50, (int)(gUnit*rope.getAnchor2().y)+ 50);
 		
 		g.drawLine((int)(gUnit * plane.getAnchor1().x), (int)(gUnit * plane.getAnchor1().y), (int)(gUnit * plane.getAnchor2().x), (int)(gUnit * plane.getAnchor2().y));
-		
+		g.setColor(Color.RED);
+		g.drawOval((int)(gUnit*plane.getAnchor1().x), (int)(gUnit*plane.getAnchor1().y), 10, 10);
+		g.drawOval((int)(gUnit*plane.getAnchor2().x), (int)(gUnit*(plane.getAnchor1().y + plane.getLength())), 10, 10);
 		g.drawImage(tito.getTexture(), (int)(256*tito.getPosition().x), (int)(256*tito.getPosition().y), 75, 75, null);
 		rope.setOb1(trash);
 		rope.setXAnchored();

@@ -127,6 +127,7 @@ public abstract class Physics implements ObjectInterface{
 		//setAcceleration(p.getAngle(), ob1.getWeight(), p.getFrictionConstant());
 		
 		
+		//System.out.println(ob1.getVx());
 		
 		ob1.setVx(ob1.getVx() + ax * delay);
 		ob1.getPosition().x += ob1.getVx()*(delay) + (0.5 * ax*((delay) * (delay)));

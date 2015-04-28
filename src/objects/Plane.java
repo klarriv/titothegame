@@ -188,7 +188,7 @@ public class Plane {
 		this.width = width;
 		setFormula();
 	}
-	public void setWidth(){
+	private void setWidth(){
 		this.width = Math.abs(length * Math.cos(angle));
 		
 		setFormula();
@@ -204,10 +204,10 @@ public class Plane {
 	}
 	public void setAnchor1Y(){
 		double dy = Math.sqrt((length * length) - (width * width));
-		if (planeVariable == 1)
+		//if (planeVariable == 1)
 			this.anchor1.y = this.anchor2.y - dy;
-		else 
-			this.anchor1.y = this.anchor2.y + dy;
+		//else 
+		//	this.anchor1.y = this.anchor2.y + dy;
 		setAngle();
 		setWidth();
 		setFormula();
@@ -227,8 +227,9 @@ public class Plane {
 		else if ( planeVariable == 0)
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
+		setAnchor1Y();
 		setFormula();
-		
+		setAngle();
 	}
 	public void setAnchor2Y(){
 		double dy = Math.sqrt((length * length) - (width * width));
@@ -238,6 +239,7 @@ public class Plane {
 			this.anchor2.y = this.anchor1.y - dy;
 		
 		setFormula();
+		setAngle();
 	}
 	public boolean isUsed() {
 		return isUsed;
@@ -268,7 +270,7 @@ public class Plane {
 		//System.out.println(dx + " " + dy + " " + Math.toDegrees(Math.atan(dy/dx)) + " " + Math.toDegrees(angle));
 		setFormula();
 		setWidth();
-		setAnchor2X();
+		//setAnchor2X();
 	}
 	public double getM() {
 		return m;
@@ -303,7 +305,7 @@ public class Plane {
 		this.length = length;
 	}
 	public void setLength(){
-		this.length = Math.abs(this.width/Math.cos(angle));
+		this.length = Math.abs((double)this.width/Math.cos(angle));
 	}
 
 	public boolean isMoving() {

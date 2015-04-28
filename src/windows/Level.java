@@ -317,6 +317,7 @@ public class Level extends JPanel implements ActionListener {
 						basicMove(trashCanList.get(i));
 						// //(" vyy: " + trashCanList.get(0).getVy());
 					}
+					//TODO for all planes
 					else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
 						if (isOnPlane(trashCanList.get(i), planeList.get(0)))
 							frictionMove(trashCanList.get(i));
@@ -754,13 +755,14 @@ public class Level extends JPanel implements ActionListener {
 	public boolean isOnPlane(Physics ob1, Plane p){
 		double x = ob1.getPosition().x;
 		double y = ob1.getPosition().y;
-		double tx = p.getAnchor1().x;
-		double txf = p.getAnchor2().x;
+		double tx1 = p.getAnchor1().x;
+		double tx2 = p.getAnchor2().x;
 		double ty = p.getY(x);
 		
 		//TODO sss
-		double width = ob1.getWidth();
-		if (y < ty && x > (tx - width) && x < (txf - width/2) && p.pointDistance(ob1.getPosition()) < 1)
+		double width = Math.abs((ob1.getWidth()/2.0) * Math.cos(p.getAngle()));
+		
+		if (y < ty && (x + width) > (tx1) && (x + width) < (tx2) && p.pointDistance(ob1.getPosition()) < 1)
 			return true;
 		else
 			return false;
