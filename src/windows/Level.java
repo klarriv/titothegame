@@ -25,7 +25,7 @@ import objects.Spring;
  * @author Keven-Matthew
  * @author Charles-Philippe
  */
-public class Level extends JPanel implements ActionListener {
+public class Level extends JPanel {
 
 	/**
 	 * This holds the object that represents Tito in the game.
@@ -126,12 +126,12 @@ public class Level extends JPanel implements ActionListener {
 		
 		this.levelNumber = levelNumber;
 
+		
 		// START OF PLAY/PAUSE/RESTART BUTTONS
 		jbtPlay = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPlay.setBorder(BorderFactory.createEmptyBorder());
 		jbtPlay.setContentAreaFilled(false);
 		jbtPlay.addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				for (int i = 0; i < ropeList.size(); i++) {
@@ -144,8 +144,11 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
-		jbtPlay.addComponentListener(new ButtonResizeListener());
 		
+		
+		
+		
+		jbtPlay.addComponentListener(new ButtonResizeListener());
 		jbtPause = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPause.setBorder(BorderFactory.createEmptyBorder());
 		jbtPause.setContentAreaFilled(false);
@@ -157,6 +160,9 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		
+		
+		
 		jbtPause.addComponentListener(new ButtonResizeListener());
 		
 		jbtRestart = new JButton(new ImageIcon(MainFrame.getTl().levelRestartTexture));
@@ -173,11 +179,15 @@ public class Level extends JPanel implements ActionListener {
 
 		});
 		
+		
+		
 		add(jbtPlay);
 		add(jbtPause);
 		add(jbtRestart);
+		
 		// END OF PLAY/RESTART BUTTONS
 
+		
 		// START OF PAUSE MENU ITEMS
 		// This block to the next comment is for the pause menu
 		jbtBackToGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuBackToGameTexture));
@@ -198,6 +208,10 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		
+		
+		
+		
 		jbtBackToGame.addComponentListener(new ButtonResizeListener());
 		
 		jbtBackToLevelSelect = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuLevelSelectionTexture));
@@ -220,6 +234,10 @@ public class Level extends JPanel implements ActionListener {
 				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
 			}
 		});
+		
+		
+		
+		
 		jbtBackToLevelSelect.addComponentListener(new ButtonResizeListener());
 		
 		jbtExitGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuExitGameTexture));
@@ -245,6 +263,8 @@ public class Level extends JPanel implements ActionListener {
 			}
 
 		});
+		
+		
 		jbtExitGame.addComponentListener(new ButtonResizeListener());
 
 		add(jbtBackToGame);
@@ -262,15 +282,27 @@ public class Level extends JPanel implements ActionListener {
 				pauseGameAction();
 			}
 		});
+		
 		// END OF PAUSE MENU ITEMS
 
+		
+		
 		// START OF LOADING STUFF
 		loadObjects();
 
 		spriteSheet = tito.getTexture();
 		// END OF LOADING STUFF
+		
+		
 		SpriteSheet ss = new SpriteSheet(spriteSheet);
 		sprite = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
+		
+		
+		
+		
+		
+		
+		
 		// START OF TIMER FOR MAKING TITO MOVE
 		t = new Timer(1000 / 25, new ActionListener() {
 
@@ -291,127 +323,174 @@ public class Level extends JPanel implements ActionListener {
 					titoYSprite++;
 				}
 				
+				if (t.isRunning());
+				engine();
 				
-				
-				
-				//Makes the trashcans fall
-				for (int i = 0; i < trashCanList.size(); i++) {
-					if (seesawList.size() != 0)
-					if ( trashCanList.get(i).single == 0 && seesawList.get(0).getContact(trashCanList.get(i))) {
-						trashCanList.get(i).setPlaneVariable(1);
-						if (seesawList.get(0).objectOn(tito)){
-							tito.setEnergyVelocity(trashCanList.get(i).getVy(),	trashCanList.get(i).getWeight(), tito.getWeight());
-							tito.setVx();
-							tito.setVy();
-						}
-						
-						trashCanList.get(i).single++;
-						
-						
-					}
-					
-					
-					if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
-						// (trash.getVx() + " " + trash.getVy());
-						projectileMotion(trashCanList.get(i));
-						basicMove(trashCanList.get(i));
-						// //(" vyy: " + trashCanList.get(0).getVy());
-					}
-					//TODO for all planes
-					else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
-						if (isOnPlane(trashCanList.get(i), planeList.get(0)))
-							frictionMove(trashCanList.get(i));
-						else{
-							trashCanList.get(i).setUsed(false);
-							trashCanList.get(i).setPlaneVariable(-1);
-							projectileMotion(trashCanList.get(i));
-							basicMove(trashCanList.get(i));
-						}
-					}
-				}
-				//Makes tito bounce on planes
-				boolean planeCollided = false;
-				for (int i = 0; i < planeList.size(); i++) {
-					Plane p = planeList.get(i);
-					planeCollided = planeColliding(planeList.get(i));
-					p = planeList.get(i);
-					//Tito's projectile motion
-					if (tito.getVy() > 0.5 && tito.getPosition().y <= 2) {
-						projectileMotion(tito);
-						xMove();
-						// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
-					} 
-					//if Tito's hit a plane
-					else if (planeCollided) {
-						planeCollision(p);
-						projectileMotion(tito);
-						xMove();
-
-					}
-					else {
-						projectileMotion(tito);
-						xMove();
-					}
-				}
-				
-				//hitting the walls of a Maison
-				for (int i = 0; i < maisonList.size(); i++) {
-					if (maisonList.get(i).colliding(tito.getPosition()))
-						tito.setVx(-1 * tito.getVx());
-				}
-				// ropes
-				for (int i = 0; i < ropeList.size(); i++) {
-					ropeList.get(i).setXAnchored();
-					
-					//projectile motion of a trashcan attached to a pulley and another trashcan
-					if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4) {
-						double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
-
-						if (!ropeList.get(i).isMaxed() && t.isRunning()) {
-							ropeList.get(i).getOb1().setY(y);
-							ropeList.get(i).getOb1().setVy();
-
-							ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
-						}
-
-					}
-					ropeList.get(i).setTotalForce();
-				}
-				
-				// checks if there is a collision with the enemies
-				// TODO quoi faire quand tito se fait pogner? genre jouer un son or something?
-				for(int i=0; i<enemyList.size(); i++){
-					if(tito!= null && tito.getR().contains(enemyList.get(i).getR())){
-						System.out.println("You dead bitch");
-						tito = null;
-						t.stop();
-						loadObjects();
-					}
-				}
-				
-				// checks if tito touches the right boundary to change level!
-				if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
-						t.stop();
-						loadObjects();
-						hasBeenCompleted = true;
-						LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
-						CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-						cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
-				}
-				else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
-					loadObjects();
-					hasBeenCompleted = true;
-					LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
-					CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-					cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
-				}
-				counter++;
 				repaint();
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
 	}
 	
+	
+	
+	
+	
+	
+	/**
+	 * Performs the physics of the game
+	 */
+	public void engine(){
+		
+		
+		//Makes the trashcans fall
+		
+		for (int i = 0; i < trashCanList.size(); i++) {
+			
+			if (seesawList.size() != 0)
+			if ( trashCanList.get(i).single == 0 && seesawList.get(0).getContact(trashCanList.get(i))) {
+				trashCanList.get(i).setPlaneVariable(1);
+				
+				if (seesawList.get(0).objectOn(tito)){
+					tito.setEnergyVelocity(trashCanList.get(i).getVy(),	trashCanList.get(i).getWeight(), tito.getWeight());
+					tito.setVx();
+					tito.setVy();
+				}
+				
+				trashCanList.get(i).single++;
+			}
+			
+			
+			if (trashCanList.get(i).getPosition().y < 2 && !trashCanList.get(i).isUsed()) {
+				// (trash.getVx() + " " + trash.getVy());
+				projectileMotion(trashCanList.get(i));
+				basicMove(trashCanList.get(i));
+				// //(" vyy: " + trashCanList.get(0).getVy());
+			}
+			
+			//TODO for all planes
+			else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() >-1){
+				if (isOnPlane(trashCanList.get(i), planeList.get(0)))
+					frictionMove(trashCanList.get(i));
+				else{
+					trashCanList.get(i).setUsed(false);
+					trashCanList.get(i).setPlaneVariable(-1);
+					projectileMotion(trashCanList.get(i));
+					basicMove(trashCanList.get(i));
+				}
+			}
+		}
+		
+		
+		
+		
+		//Makes tito bounce on planes
+		
+		boolean planeCollided = false;
+		for (int i = 0; i < planeList.size(); i++) {
+			Plane p = planeList.get(i);
+			planeCollided = planeColliding(planeList.get(i));
+			p = planeList.get(i);
+			//Tito's projectile motion
+			if (tito.getVy() > 0.5 && tito.getPosition().y <= 2) {
+				projectileMotion(tito);
+				xMove();
+				// //(" vx:" + tito.getVx() + " vy: " + tito.getVy() );
+			} 
+			//if Tito's hit a plane
+			else if (planeCollided) {
+				planeCollision(p);
+				projectileMotion(tito);
+				xMove();
+
+			}
+			else {
+				projectileMotion(tito);
+				xMove();
+			}
+		}
+		
+		//hitting the walls of a Maison
+		for (int i = 0; i < maisonList.size(); i++) {
+			if (maisonList.get(i).colliding(tito.getPosition()))
+				tito.setVx(-1 * tito.getVx());
+		}
+		
+		
+		
+		
+		
+		// ropes
+		
+		for (int i = 0; i < ropeList.size(); i++) {
+			ropeList.get(i).setXAnchored();
+			
+			//projectile motion of a trashcan attached to a pulley and another trashcan
+			if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4) {
+				double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
+
+				if (!ropeList.get(i).isMaxed() && t.isRunning()) {
+					ropeList.get(i).getOb1().setY(y);
+					ropeList.get(i).getOb1().setVy();
+
+					ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
+				}
+
+			}
+			ropeList.get(i).setTotalForce();
+		}
+		
+		
+		
+		
+		// checks if there is a collision with the enemies
+		// TODO quoi faire quand tito se fait pogner? genre jouer un son or something?
+		for(int i=0; i<enemyList.size(); i++){
+			if(tito!= null && tito.getR().contains(enemyList.get(i).getR())){
+				System.out.println("You dead bitch");
+				tito = null;
+				t.stop();
+				loadObjects();
+			}
+		}
+		
+		
+		// checks if tito touches the right boundary to change level!
+		if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
+				t.stop();
+				loadObjects();
+				hasBeenCompleted = true;
+				LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
+		}
+		
+		else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
+			loadObjects();
+			hasBeenCompleted = true;
+			LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
+			CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+			cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
+		}
+		counter++;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 */
 	protected void pauseGameAction(){
 		if (!isPaused) {
 			isPaused = true;
@@ -434,6 +513,7 @@ public class Level extends JPanel implements ActionListener {
 			jbtRestart.setVisible(true);
 		}
 	}
+	
 	
 	/**
 	 * Loads all of the objects in the Level
@@ -531,17 +611,7 @@ public class Level extends JPanel implements ActionListener {
 		levelSong.start();
 	}
 
-	/**
-	 * This repaints the level and calls the calculations
-	 * 
-	 * @param e
-	 *            ActionEvent
-	 */
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// 
-
-	}
+	
 
 	@Override
 	protected void paintComponent(Graphics g) {
@@ -557,6 +627,7 @@ public class Level extends JPanel implements ActionListener {
 		jbtExitGame.setBounds(541*getWidth()/1280, 400*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
+		
 		// 1 TREE
 		for (int i = 0; i < treeList.size(); i++) {
 			g.drawImage(treeList.get(i).getTexture(), (int) (gUnit * treeList.get(i).getPosition().x), (int) (gUnit * treeList.get(i).getPosition().y), (int) (2.9 * gUnit), (int) (3.5 * gUnit), null);
@@ -601,6 +672,7 @@ public class Level extends JPanel implements ActionListener {
 
 			}
 		}
+		
 		g.setColor(Color.black);
 		// 6 SEESAW
 		for (int i = 0; i < seesawList.size(); i++) {
@@ -642,7 +714,10 @@ public class Level extends JPanel implements ActionListener {
 		
 	}
 
-	// Physics moving and colliding methods
+	/*
+	 *  Physics moving and colliding methods
+	 */
+	
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
 	 * @param plane
@@ -680,6 +755,8 @@ public class Level extends JPanel implements ActionListener {
 		return false;
 
 	}
+	
+	
 	/**
 	 * Makes an object move with no friction
 	 * @param ob1
@@ -688,6 +765,8 @@ public class Level extends JPanel implements ActionListener {
 		double x = ob1.motion(ob1.getPosition().x, ob1.getVx(), t.getDelay());
 		ob1.setX(x);
 	}
+	
+	
 	/**
 	 * Makes an object move with no friction and collide with the frame
 	 */
@@ -724,6 +803,8 @@ public class Level extends JPanel implements ActionListener {
 			ob1.setVy();
 		}
 	}
+	
+	
 	/**
 	 * Puts the trashcan on the plane if it is near enough
 	 * @param ob1
@@ -746,6 +827,8 @@ public class Level extends JPanel implements ActionListener {
 			ob1.setAcceleration(0, 0, 0);
 		}
 	}
+	
+	
 	/**
 	 * Determines whether an object is on the plane or not
 	 * @param ob1
@@ -778,7 +861,9 @@ public class Level extends JPanel implements ActionListener {
 		 ob1.setVy();
 		 ob1.setVx();
 		 
-		 }
+	}
+	 
+	 
 	  /**
 	   * Sets the acceleration of an object on a plane
 	   * @param ob1
@@ -787,34 +872,73 @@ public class Level extends JPanel implements ActionListener {
 	  public void setAcceleration(Physics ob1, Plane p){
 		  ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5); 
 	  }
-	 
+	  
+	 /**
+	  * 
+	  * @return
+	  */
 	public boolean hasBeenCompleted() {
 		return hasBeenCompleted;
 	}
+	/**
+	 * 
+	 * @param hasBeenCompleted
+	 */
 	public void setHasBeenCompleted(boolean hasBeenCompleted) {
 		this.hasBeenCompleted = hasBeenCompleted;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtExitGame() {
 		return jbtExitGame;
 	}
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtBackToGame() {
 		return jbtBackToGame;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtBackToLevelSelect() {
 		return jbtBackToLevelSelect;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtPlay() {
 		return jbtPlay;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtRestart() {
 		return jbtRestart;
 	}
+	
+	/**
+	 * 
+	 * @return
+	 */
 	public JButton getJbtPause() {
 		return jbtPause;
 	}
 
 
+	
+	
+	
 	/**
 	 * Moving the objects with the mouse
 	 * @author Keven-Matthew & Charles-Philippe

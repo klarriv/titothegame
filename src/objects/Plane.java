@@ -272,6 +272,7 @@ public class Plane {
 	public void setUsed(int isUsed) {
 		this.isUsed = isUsed;
 	}
+	
 	public boolean isVisible() {
 		return isVisible;
 	}
