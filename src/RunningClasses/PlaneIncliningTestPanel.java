@@ -44,12 +44,10 @@ public class PlaneIncliningTestPanel extends JPanel{
 				
 				if (isOnPlane(tito,plane))
 					tito.frictionMotion(plane, tito, (double)t.getDelay()/1000);
-				/*else{
+				else{
 					double x = tito.motion(tito.getPosition().x, tito.getVx(), t.getDelay());
 					tito.setX(x);
-				}*/
-				
-				
+				}
 				
 				
 				rope.setXAnchored();
@@ -115,6 +113,11 @@ public class PlaneIncliningTestPanel extends JPanel{
 		add(place, BorderLayout.NORTH);
 		add(start, BorderLayout.SOUTH);
 	}
+	
+	
+	
+	
+	
 	/**
 	 * Determines if Tito is colliding with a plane
 	 * @param plane

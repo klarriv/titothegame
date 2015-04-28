@@ -208,7 +208,7 @@ public class Plane {
 			this.anchor1.y = this.anchor2.y - dy;
 		//else 
 		//	this.anchor1.y = this.anchor2.y + dy;
-		setAngle();
+		//setAngle();
 		setWidth();
 		setFormula();
 	}
@@ -227,7 +227,9 @@ public class Plane {
 		else if ( planeVariable == 0)
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
-		setAnchor1Y();
+		if (!isMoving())
+			setAnchor1Y();
+		
 		setFormula();
 		setAngle();
 	}
