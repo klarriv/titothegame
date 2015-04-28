@@ -1032,7 +1032,7 @@ public class Level extends JPanel {
 			for (int i = 0; i < planeList.size(); i++){
 				planeList.get(i).setMoving(false);
 				//TODO isUsed of the plane !?
-				if(planeList.get(i).isUsed() != 1){
+				if(planeList.get(i).isUsed() == -1){
 					planeList.get(i).resetPosition();
 				}
 			}
@@ -1156,6 +1156,7 @@ public class Level extends JPanel {
 							}
 						}
 					}
+					System.out.println(" plane x: " + planeList.get(0).getPosition().x + " Plane y : " + planeList.get(0).getPosition().y);
 					if (!t.isRunning())
 						repaint();
 				}

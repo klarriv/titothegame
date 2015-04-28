@@ -171,6 +171,7 @@ public abstract class Physics implements ObjectInterface{
 			return GRAVITY * mass;
 	}
 	
+	
 	/**
 	 * Calculates and returns the acceleration of an object using Newton's second law
 	 * @param weight
@@ -194,20 +195,8 @@ public abstract class Physics implements ObjectInterface{
 		return a;
 	}
 	
-	/**
-	 * Calculates and returns the force applied by the spring
-	 * @param k
-	 * @param dx
-	 * @return
-	 */
-	public int spring(double k, int dx){
-		return 0;
-	}
+
 	
-	/**Inverts the force*/
-	public void pulley(){
-		
-	}
 	/**
 	 * Reflecting an object bouncing on an inclined plane
 	 * @param angle

@@ -233,7 +233,7 @@ public class Plane {
 			this.anchor2.x = this.anchor1.x - width;
 		//this.anchor2.y = getY(this.anchor1.x + width);
 		if (!isMoving()){
-			System.out.println(0);
+			System.out.println("Calling setAnchor1Y()");
 			setAnchor1Y();
 		}
 		
@@ -252,6 +252,7 @@ public class Plane {
 		setFormula();
 		setAngle();
 	}
+	
 	/**
 	 *  Getting used 
 	 * -1 if not used,
@@ -262,6 +263,7 @@ public class Plane {
 	public int isUsed() {
 		return isUsed;
 	}
+	
 	/**
 	 * Setting used 
 	 * -1 if not used,
@@ -357,7 +359,7 @@ public class Plane {
 	 * @param position
 	 */
 	public void setDefaultPosition(DoublePoint position) {
-		this.defaultPosition.x =this.position.x;
+		this.defaultPosition.x = this.position.x;
 		this.defaultPosition.y = this.position.y;
 		
 	}
