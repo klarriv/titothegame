@@ -5,12 +5,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import objects.TestObject;
 import objects.Tito;
 
 public class VectorTestPanel extends JPanel {
@@ -23,6 +26,7 @@ public class VectorTestPanel extends JPanel {
 	private JButton rotate = new JButton("Rotate");
 	private JPanel p = new JPanel();
 	private JLabel answer = new JLabel();
+	
 	
 	private double vx = 100;
 	private double vy = -100;

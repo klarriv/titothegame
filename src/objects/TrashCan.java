@@ -17,9 +17,13 @@ public class TrashCan extends Physics {
 	private int weight = 10;
 	private boolean isVisible = true;
 	private boolean isUsed = false;
+	
 	private int planeVariable = -1;
+	
 	private BufferedImage texture;
 	private BufferedImage spriteSheet;
+	private SpriteSheet ss = new SpriteSheet();
+	
 	private DoublePoint position;
 	private double vx = 7;
 	private double vy = 10;
@@ -159,9 +163,9 @@ public class TrashCan extends Physics {
 		
 	}
 
-	@Override
+	@Override 
 	public BufferedImage getTexture() {
-		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		 this.ss.setSpriteSheet(spriteSheet);
 		
 		if (planeVariable == -1){
 			this.width = WIDTHFLAT;
@@ -232,7 +236,6 @@ public class TrashCan extends Physics {
 
 	@Override
 	public DoublePoint getDefaultPosition() {
-		// TODO Auto-generated method stub
 		return defaultPosition;
 	}
 

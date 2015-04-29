@@ -1,15 +1,33 @@
 package objects;
 
 import java.awt.image.BufferedImage;
+
 import javax.swing.Timer;
 
+import RunningClasses.SpriteSheet;
 import windows.MainFrame;
 
 public class Tito extends Physics{
 	private int weight = 9;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
+	
 	private BufferedImage texture;
+	private BufferedImage spriteSheet;
+	private SpriteSheet ss = new SpriteSheet();
+	private int counter = 0;
+	private int titoXSprite = 0;
+	private int titoYSprite = 0;
+	/**
+	 * 
+	 */
+	private int[] rollingx = { 4, 5, 0, 5, 5 };
+	/**
+	 * 
+	 */
+	private int[] rollingy = { 1, 1, 2, 0, 2 };
+	
+	
 	private DoublePoint position = new DoublePoint(10,10);
 	private double vx = 7;
 	private double vy = 10;
@@ -19,7 +37,7 @@ public class Tito extends Physics{
 	
 	public Tito(){
 		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
-		texture = MainFrame.getTl().titoTexture;
+		spriteSheet = MainFrame.getTl().titoTexture;
 	}
 	
 	/**
@@ -40,7 +58,7 @@ public class Tito extends Physics{
 		this.vy = vy;
 		this.t = t;
 		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
-		texture = MainFrame.getTl().titoTexture;
+		spriteSheet = MainFrame.getTl().titoTexture;
 		
 	}
 
@@ -141,10 +159,26 @@ public class Tito extends Physics{
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
+	/**
+	 * TODO work that booty
+	 */
 	@Override
 	public BufferedImage getTexture() {
-		
+		this.ss.setSpriteSheet(spriteSheet);
+		if (titoXSprite < rollingx.length) {
+			texture = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
+			if (counter % 2 == 0) {
+				titoXSprite++;
+				titoYSprite++;
+			}
+		} else {
+			titoXSprite = 0;
+			titoYSprite = 0;
+			texture = ss.grabSprite(rollingx[titoXSprite] * 300, rollingy[titoYSprite] * 250, 289, 250);
+			titoXSprite++;
+			titoYSprite++;
+		}
 		return texture;
 	}
 

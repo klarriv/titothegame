@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 
 import windows.MainFrame;
 
-public class Enemy {
+public class Jason {
 	
 	public static final double WIDTH = 0.5;
 	public static final double HEIGHT = 1;
@@ -12,7 +12,7 @@ public class Enemy {
 	private DoublePoint position;
 	private DoubleRectangle r;
 
-	public Enemy(double x, double y){
+	public Jason(double x, double y){
 		
 		setPosition(new DoublePoint(x, y));
 		texture = MainFrame.getTl().enemyTexture;
