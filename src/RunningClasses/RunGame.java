@@ -3,11 +3,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.net.URL;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import jSplashScreen.JSplash;
 
+import jSplashScreen.JSplash;
 import windows.*;
 
 /**
@@ -54,7 +55,7 @@ public class RunGame{
 			frame.setVisible(true);
 			frame.pack();
 			frame.setLocationRelativeTo(null);
-			RunGame.getFrame().getMainMenu().startMenuMusic();
+			MainFrame.getMainMenu().startMenuMusic();
 			
 		}catch(Exception e){
 			
