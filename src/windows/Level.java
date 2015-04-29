@@ -40,10 +40,7 @@ import objects.Tito;
 import objects.TrashCan;
 import objects.Tree;
 
-
-
 public class Level extends JPanel {
-
 
 	/**
 	 * 
@@ -114,9 +111,9 @@ public class Level extends JPanel {
 	 * resized.
 	 */
 	private double gUnit;
-	
-	//TODO Tito's sprite sheet loading shit
-	
+
+	// TODO Tito's sprite sheet loading shit
+
 	/**
 	 * 
 	 */
@@ -128,26 +125,25 @@ public class Level extends JPanel {
 	/**
 	 * 
 	 */
-	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart, jbtPause;
-	
-	
-	
+	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay,
+			jbtRestart, jbtPause;
+
 	/**
 	 * Making the magic happen
 	 */
-	
+
 	/**
 	 * This creates a new instance of level
 	 */
 	public Level(int levelNumber) {
 		setLayout(null);
-		
+
 		DragListener bob = new DragListener();
 		addMouseMotionListener(bob);
 		addMouseListener(bob);
-		
+
 		this.levelNumber = levelNumber;
-		
+
 		// START OF PLAY/PAUSE/RESTART BUTTONS
 		jbtPlay = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPlay.setBorder(BorderFactory.createEmptyBorder());
@@ -165,8 +161,7 @@ public class Level extends JPanel {
 			}
 
 		});
-		
-		
+
 		jbtPlay.addComponentListener(new ButtonResizeListener());
 		jbtPause = new JButton(new ImageIcon(MainFrame.getTl().levelPlayTexture));
 		jbtPause.setBorder(BorderFactory.createEmptyBorder());
@@ -179,11 +174,9 @@ public class Level extends JPanel {
 			}
 
 		});
-		
-		
-		
+
 		jbtPause.addComponentListener(new ButtonResizeListener());
-		
+
 		jbtRestart = new JButton(new ImageIcon(MainFrame.getTl().levelRestartTexture));
 		jbtRestart.setBorder(BorderFactory.createEmptyBorder());
 		jbtRestart.setContentAreaFilled(false);
@@ -197,14 +190,13 @@ public class Level extends JPanel {
 			}
 
 		});
-		
+
 		add(jbtPlay);
 		add(jbtPause);
 		add(jbtRestart);
-		
+
 		// END OF PLAY/RESTART BUTTONS
 
-		
 		// START OF PAUSE MENU ITEMS
 		// This block to the next comment is for the pause menu
 		jbtBackToGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuBackToGameTexture));
@@ -225,9 +217,9 @@ public class Level extends JPanel {
 			}
 
 		});
-		
+
 		jbtBackToGame.addComponentListener(new ButtonResizeListener());
-		
+
 		jbtBackToLevelSelect = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuLevelSelectionTexture));
 		jbtBackToLevelSelect.setBorder(BorderFactory.createEmptyBorder());
 		jbtBackToLevelSelect.setContentAreaFilled(false);
@@ -245,12 +237,12 @@ public class Level extends JPanel {
 				jbtRestart.setVisible(true);
 				repaint();
 				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				cardLayout.show(MainFrame.getMenus(), MainFrame.getLevelselectpanel());
+				cardLayout.show(MainFrame.getMenus(),MainFrame.getLevelselectpanel());
 			}
 		});
-		
+
 		jbtBackToLevelSelect.addComponentListener(new ButtonResizeListener());
-		
+
 		jbtExitGame = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuExitGameTexture));
 		jbtExitGame.setBorder(BorderFactory.createEmptyBorder());
 		jbtExitGame.setContentAreaFilled(false);
@@ -258,14 +250,14 @@ public class Level extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
-					if (MainFrame.getLevels()[i].hasBeenCompleted()){
+				for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
+					if (MainFrame.getLevels()[i].hasBeenCompleted()) {
 						try {
 							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
-							writer.print(i+1);
+							writer.print(i + 1);
 							writer.close();
 						} catch (FileNotFoundException e) {
-							// 
+							//
 							e.printStackTrace();
 						}
 					}
@@ -274,7 +266,7 @@ public class Level extends JPanel {
 			}
 
 		});
-		
+
 		jbtExitGame.addComponentListener(new ButtonResizeListener());
 
 		add(jbtBackToGame);
@@ -292,42 +284,36 @@ public class Level extends JPanel {
 				pauseGameAction();
 			}
 		});
-		
+
 		// END OF PAUSE MENU ITEMS
 
-		
-		
 		// START OF LOADING STUFF
 		loadObjects();
-		
-		
-		
-		//TODO work on the timer :) Tito
-		
+
+		// TODO work on the timer :) Tito
+
 		// END OF LOADING STUFF
-	
+
 		// START OF TIMER FOR MAKING TITO MOVE
 		t = new Timer(1000 / 25, new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				
-				
-				if (t.isRunning());
-					//engine();
-				
+
+				if (t.isRunning())
+					;
+				// engine();
+
 				repaint();
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
 	}
-	
-	
+
 	/**
 	 * 
 	 */
-	protected void pauseGameAction(){
+	protected void pauseGameAction() {
 		if (!isPaused) {
 			isPaused = true;
 			t.stop();
@@ -349,6 +335,7 @@ public class Level extends JPanel {
 			jbtRestart.setVisible(true);
 		}
 	}
+
 	/**
 	 * Loads all of the objects in the Level
 	 */
@@ -370,11 +357,11 @@ public class Level extends JPanel {
 			tito = new Tito(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), t);
 			// 1
 			double numberOfTree = reader.nextDouble();
-			for (int i = 0; i < numberOfTree; i++) 
+			for (int i = 0; i < numberOfTree; i++)
 				treeList.add(new Tree(reader.nextDouble(), reader.nextDouble()));
 			// 2
 			double numberOfBench = reader.nextDouble();
-			for (int i = 0; i < numberOfBench; i++) 
+			for (int i = 0; i < numberOfBench; i++)
 				benchList.add(new Bench(reader.nextDouble(), reader.nextDouble()));
 			// 3
 			double numberOfCone = reader.nextDouble();
@@ -383,7 +370,7 @@ public class Level extends JPanel {
 			// 4
 			double numberOfPlane = reader.nextDouble();
 			for (int i = 0; i < numberOfPlane; i++)
-				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble(),  reader.nextInt()));
+				planeList.add(new Plane(reader.nextDouble(), reader.nextDouble(), Math.toRadians(reader.nextDouble()), reader.nextDouble(), reader.nextInt()));
 			// 5
 			double numberOfRope = reader.nextDouble();
 			for (int i = 0; i < numberOfRope; i++)
@@ -406,9 +393,8 @@ public class Level extends JPanel {
 				maisonList.add(new Maison(reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextDouble(), reader.nextInt()));
 			// 10
 			jason = new Jason(reader.nextDouble(), reader.nextDouble());
-			
-			
-			//setting the planes to the maison
+
+			// setting the planes to the maison
 			for (int i = 0; i < numberOfPlane; i++)
 				if (planeList.get(i).getMaisonNumber() > -1 && planeList.get(i).getMaisonNumber() < maisonList.size())
 					maisonList.get(planeList.get(i).getMaisonNumber()).addPlanes(planeList.get(i));
@@ -417,29 +403,29 @@ public class Level extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * This starts the music in the levels
 	 */
 	public void startLevelMusic() {
 		levelSong.start();
 	}
-	
+
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		gUnit = getWidth() / 5;
-		
+
 		jbtPlay.setBounds(10, 10, 30, 30);
 		jbtPause.setBounds(50, 10, 30, 30);
 		jbtRestart.setBounds(90, 10, 30, 30);
-		
-		jbtBackToGame.setBounds(541*getWidth()/1280, 200*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
-		jbtBackToLevelSelect.setBounds(541*getWidth()/1280, 300*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
-		jbtExitGame.setBounds(541*getWidth()/1280, 400*getHeight()/720, 232*getWidth()/1280, 69*getHeight()/720);
+
+		jbtBackToGame.setBounds(541 * getWidth() / 1280, 200 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
+		jbtBackToLevelSelect.setBounds(541 * getWidth() / 1280, 300 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
+		jbtExitGame.setBounds(541 * getWidth() / 1280, 400 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
-		
+
 		// 1 TREE
 		for (int i = 0; i < treeList.size(); i++) {
 			g.drawImage(treeList.get(i).getTexture(), (int) (gUnit * treeList.get(i).getPosition().x), (int) (gUnit * treeList.get(i).getPosition().y), (int) (2.9 * gUnit), (int) (3.5 * gUnit), null);
@@ -460,40 +446,40 @@ public class Level extends JPanel {
 		}
 		// 5 ROPE
 		g.setColor(Color.yellow);
-		
+
 		for (int i = 0; i < ropeList.size(); i++) {
 			if (ropeList.get(i).isUsed() == -1) {
 				g.drawImage(ropeList.get(i).getTexture(), (int) (gUnit * ropeList.get(i).getAnchor2().x), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (Rope.WIDTH * gUnit), (int) (Rope.HEIGHT * gUnit), null);
-				
+
 			} else if (ropeList.get(i).isUsed() == 1 || ropeList.get(i).isUsed() == 3) {
-				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
-				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y) };
+				int[] xPoints = {(int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50 };
+				int[] yPoints = {(int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y) };
 				g.drawPolyline(xPoints, yPoints, 2);
 			} else if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4) {
-				int[] xPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
-				//TODO check if this works
-				if (ropeList.get(i).isUsed() == 4){
-					ropeList.get(i).getPlane().getPosition().x += (50/gUnit);
+				int[] xPoints = {(int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
+				// TODO check if this works
+				if (ropeList.get(i).isUsed() == 4) {
+					ropeList.get(i).getPlane().getPosition().x += (50 / gUnit);
 					ropeList.get(i).getPlane().setAnchor2X();
-					xPoints[2] = (int)(gUnit * ropeList.get(i).getAnchor3().x);
+					xPoints[2] = (int) (gUnit * ropeList.get(i).getAnchor3().x);
 				}
-				int[] yPoints = { (int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor3().y) };
+				int[] yPoints = {(int) (gUnit * ropeList.get(i).getAnchor1().y), (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor3().y) };
 				g.drawPolyline(xPoints, yPoints, 3);
 			} else if (ropeList.get(i).isUsed() == -2) {
 				g.drawLine((int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().y), (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().y) + 75);
 
 			}
 		}
-		
+
 		g.setColor(Color.black);
 		// 6 SEESAW
 		for (int i = 0; i < seesawList.size(); i++) {
-			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), (int)(gUnit * 1.1),(int)(gUnit * 0.33), null);
+			g.drawImage(seesawList.get(i).getTexture(), (int) (gUnit * seesawList.get(i).getPosition().x), (int) (gUnit * seesawList.get(i).getPosition().y), (int) (gUnit * 1.1), (int) (gUnit * 0.33), null);
 		}
-		
+
 		// 7 TRASHCAN
 		for (int i = 0; i < trashCanList.size(); i++) {
-			if (trashCanList.get(i).isVisible()){
+			if (trashCanList.get(i).isVisible()) {
 				g.drawImage(trashCanList.get(i).getTexture(), (int) (gUnit * trashCanList.get(i).getPosition().x), (int) (gUnit * trashCanList.get(i).getPosition().y), (int) (trashCanList.get(i).getWidth() * gUnit), (int) (trashCanList.get(i).getHeight() * gUnit), null);
 			}
 		}
@@ -510,27 +496,26 @@ public class Level extends JPanel {
 		// 10 ENEMY
 		if (jason != null)
 			g.drawImage(jason.getTexture(), (int) (gUnit * jason.getPosition().x), (int) (gUnit * jason.getPosition().y), (int) (Jason.WIDTH * gUnit), (int) (Jason.HEIGHT * gUnit), null);
-		
-		//TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		if(tito != null)
+
+		// TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+		if (tito != null)
 			g.drawImage(tito.getTexture(), (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
-		
-		
+
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
-		
+
 	}
-	
-	
+
 	/*
-	 *  Physics moving and colliding methods
+	 * Physics moving and colliding methods
 	 */
-	
+
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
+	 * 
 	 * @param plane
 	 */
 	public void planeCollision(Plane plane) {
@@ -546,33 +531,32 @@ public class Level extends JPanel {
 		tito.setVy();
 
 	}
-	
-	
-	//TODO Check whether this can be improved
+
+	// TODO Check whether this can be improved
 	/**
 	 * Determines if Tito is colliding with a plane
+	 * 
 	 * @param plane
 	 * @return
 	 */
 	public boolean planeColliding(Plane plane) {
 		double r = 40.0 / gUnit;
-		
+
 		DoublePoint dp = new DoublePoint(tito.getPosition().x + r, tito.getPosition().y + r);
-		
+
 		double d = plane.pointDistance(dp);
-		
+
 		if (plane.getWidth() > 0) {
 			if (d <= r && (dp.x) <= plane.getAnchor2().x && dp.x >= plane.getAnchor1().x)
 				return true;
-		} 
-		else if (plane.getWidth() < 0) {
+		} else if (plane.getWidth() < 0) {
 			if (d <= r && dp.x > plane.getAnchor2().x && dp.x < plane.getAnchor1().x)
 				return true;
 		}
 		return false;
 
 	}
-	
+
 	/**
 	 * Makes an object move with no friction and collide with the frame
 	 */
@@ -581,25 +565,24 @@ public class Level extends JPanel {
 
 		if (x <= 5 && x >= 0)
 			tito.setX(x);
-		
+
 		else if (Math.abs(0 - x) <= 0.1) {
 			tito.setX(0);
-			
-		} 
-		else if (Math.abs(5 - x) <= 0.1) {
+
+		} else if (Math.abs(5 - x) <= 0.1) {
 			tito.setX(5);
-		} 
-		else
+		} else
 			tito.setVx(-1 * tito.getVx());
 	}
-	
+
 	/**
 	 * Projectile motion of an object falling and hitting the ground
+	 * 
 	 * @param ob1
 	 */
 	public void projectileMotion(Physics ob1) {
 		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
-		
+
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
 
 			ob1.setY(2.5 - ob1.getHeight());
@@ -612,177 +595,173 @@ public class Level extends JPanel {
 			ob1.setVy();
 		}
 	}
-	
-	
+
 	/**
 	 * Puts the trashcan on the plane if it is near enough
+	 * 
 	 * @param ob1
 	 * @param p
 	 */
-	public void planeContact(TrashCan ob1, Plane p){
+	public void planeContact(TrashCan ob1, Plane p) {
 		double x = ob1.getPosition().x;
 		double ty = p.getY(x);
-		
+
 		double height = ob1.getHeight();
-		
-		if (isOnPlane(ob1, p)){
+
+		if (isOnPlane(ob1, p)) {
 			ob1.setUsed(true);
 			ob1.setY(ty - height);
 			ob1.setPlaneVariable(p.getPlaneVariable());
 			setAcceleration(ob1, p);
-		}
-		else{
+		} else {
 			ob1.setUsed(false);
 			ob1.setPlaneVariable(-1);
 			ob1.setAcceleration(0, 0, 0);
 		}
 	}
-		
+
 	/**
 	 * Determines whether an object is on the plane or not
+	 * 
 	 * @param ob1
 	 * @param p
 	 * @return
 	 */
-	public boolean isOnPlane(Physics ob1, Plane p){
+	public boolean isOnPlane(Physics ob1, Plane p) {
 		double x = ob1.getPosition().x;
 		double y = ob1.getPosition().y;
 		double tx1 = p.getAnchor1().x;
 		double tx2 = p.getAnchor2().x;
 		double ty = p.getY(x);
-		
-		//TODO sss
-		double width = Math.abs((ob1.getWidth()/2.0) * Math.cos(p.getAngle()));
-		
+
+		// TODO sss
+		double width = Math.abs((ob1.getWidth() / 2.0) * Math.cos(p.getAngle()));
+
 		if (y < ty && (x + width) > (tx1) && (x + width) < (tx2) && p.pointDistance(ob1.getPosition()) < 1)
 			return true;
 		else
 			return false;
 	}
-	
+
 	/**
-	   * Sets the acceleration of an object on a plane
-	   * @param ob1
-	   * @param p
-	   */
-	  public void setAcceleration(Physics ob1, Plane p){
-		  ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5); 
-	  }
-	  
-	  
-	  /**
-		  * 
-		  * @return
-		  */
-		public boolean hasBeenCompleted() {
-			return hasBeenCompleted;
-		}
-		/**
-		 * 
-		 * @param hasBeenCompleted
-		 */
-		public void setHasBeenCompleted(boolean hasBeenCompleted) {
-			this.hasBeenCompleted = hasBeenCompleted;
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtExitGame() {
-			return jbtExitGame;
-		}
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtBackToGame() {
-			return jbtBackToGame;
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtBackToLevelSelect() {
-			return jbtBackToLevelSelect;
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtPlay() {
-			return jbtPlay;
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtRestart() {
-			return jbtRestart;
-		}
-		
-		/**
-		 * 
-		 * @return
-		 */
-		public JButton getJbtPause() {
-			return jbtPause;
-		}
-		
-		
-		
-		
-		/**
-		 * Moving the objects with the mouse
-		 * @author Keven-Matthew & Charles-Philippe
-		 *
-		 */
-		class DragListener implements MouseListener, MouseMotionListener {
+	 * Sets the acceleration of an object on a plane
+	 * 
+	 * @param ob1
+	 * @param p
+	 */
+	public void setAcceleration(Physics ob1, Plane p) {
+		ob1.setAcceleration(p.getAngle(), ob1.getWeight(), 0.5);
+	}
 
-			@Override
-			public void mouseDragged(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	public boolean hasBeenCompleted() {
+		return hasBeenCompleted;
+	}
 
-			@Override
-			public void mouseMoved(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	/**
+	 * 
+	 * @param hasBeenCompleted
+	 */
+	public void setHasBeenCompleted(boolean hasBeenCompleted) {
+		this.hasBeenCompleted = hasBeenCompleted;
+	}
 
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtExitGame() {
+		return jbtExitGame;
+	}
 
-			@Override
-			public void mousePressed(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtBackToGame() {
+		return jbtBackToGame;
+	}
 
-			@Override
-			public void mouseReleased(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtBackToLevelSelect() {
+		return jbtBackToLevelSelect;
+	}
 
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtPlay() {
+		return jbtPlay;
+	}
 
-			@Override
-			public void mouseExited(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtRestart() {
+		return jbtRestart;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public JButton getJbtPause() {
+		return jbtPause;
+	}
+
+	/**
+	 * Moving the objects with the mouse
+	 * 
+	 * @author Keven-Matthew & Charles-Philippe
+	 *
+	 */
+	class DragListener implements MouseListener, MouseMotionListener {
+
+		@Override
+		public void mouseDragged(MouseEvent e) {
+			// TODO Auto-generated method stub
+
 		}
+
+		@Override
+		public void mouseMoved(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+	}
 }
