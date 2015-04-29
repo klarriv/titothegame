@@ -301,8 +301,7 @@ public class Level extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 
 				if (t.isRunning())
-					;
-				// engine();
+					engine();
 
 				repaint();
 			}
@@ -512,6 +511,104 @@ public class Level extends JPanel {
 	/*
 	 * Physics moving and colliding methods
 	 */
+	
+	public void engine(){
+		
+		//making the trashcans fall
+	
+		for ( int i = 0; i < trashCanList.size(); i++){
+			//looking if it falls on a seesaw
+		
+			//Checking contact with a see-saw
+			if(seesawList.size()!=0)//This is because I use seesawList in the condition...
+				if (trashCanList.get(i).single == 0 && seesawList.get(0).getContact(trashCanList.get(i))){
+					trashCanList.get(i).setPlaneVariable(1);
+					
+					//Throwing Tito in the air
+					if(seesawList.get(0).objectOn(tito)){
+						tito.setEnergyVelocity(trashCanList.get(i).getVy(), trashCanList.get(i).getWeight(), tito.getWeight());
+						tito.setVx();
+						tito.setVy();
+					}
+					
+					trashCanList.get(i).single++;
+				}
+				
+			//plane free fall
+			if (trashCanList.get(i).getPosition().y < (2.5 - TrashCan.HEIGHTFLAT) && !trashCanList.get(i).isUsed()){
+				projectileMotion(trashCanList.get(i));
+				basicMove(trashCanList.get(i));
+			}
+			
+			//plane incline plane fall
+			else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() > -1 && trashCanList.get(i).getPlane() > -1){
+				System.out.println(3);
+				if(isOnPlane(trashCanList.get(i), planeList.get(trashCanList.get(i).getPlane())))
+					frictionMove(trashCanList.get(i));
+				else{
+					trashCanList.get(i).setUsed(false);
+					trashCanList.get(i).setPlaneVariable(-1);
+					trashCanList.get(i).setPlane(-1);
+					projectileMotion(trashCanList.get(i));
+					basicMove(trashCanList.get(i));
+				}
+				
+			}
+		}//end trashcans
+		
+		
+		//Tito physics
+		
+		//making Tito bounce on planes
+		boolean planeCollided = false;
+		for(int i = 0; i< planeList.size(); i++){
+			
+			planeCollided = planeColliding(planeList.get(i));
+			//Tito's projectile motion
+			//TODO might have to change something here, it seems to work, though I don't know for every cases
+			//if (tito.getVy() > 0.5 && tito.getPosition().y <= (2.5 - tito.getHeight())){
+				projectileMotion(tito);
+				xMove();
+			
+			//if Tito hits a plane
+			 if (planeCollided){
+				planeCollision(planeList.get(i));
+				projectileMotion(tito);
+				xMove();
+			}
+			
+			
+			
+		}
+		
+		//hitting the walls of a Maison
+		for (int i = 0; i < maisonList.size(); i++) {
+			if (maisonList.get(i).colliding(tito.getPosition()))
+				tito.setVx(-1 * tito.getVx());
+		}
+		
+		
+		// ropes Physics 
+		//TODO check w/ planes...
+		for (int i = 0; i < ropeList.size(); i++){
+			ropeList.get(i).setXAnchored();
+			
+			//projectile motion of a trashcan attached to a pulley and another object
+			if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4){
+				double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
+				
+				if (!ropeList.get(i).isMaxed()){
+					ropeList.get(i).getOb1().setY(y);
+					ropeList.get(i).getOb1().setVy();
+					ropeList.get(i).pulleyMove(ropeList.get(i).getOb1().getPosition().x, y);
+				}
+			}
+			
+			ropeList.get(i).setTotalForce();
+		}
+		
+		
+	}
 
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
@@ -555,6 +652,15 @@ public class Level extends JPanel {
 		}
 		return false;
 
+	}
+	
+	/**
+	 * Makes an object move with no friction
+	 * @param ob1
+	 */
+	public void basicMove(Physics ob1) {
+		double x = ob1.motion(ob1.getPosition().x, ob1.getVx(), t.getDelay());
+		ob1.setX(x);
 	}
 
 	/**
@@ -602,7 +708,7 @@ public class Level extends JPanel {
 	 * @param ob1
 	 * @param p
 	 */
-	public void planeContact(TrashCan ob1, Plane p) {
+	public void planeContact(TrashCan ob1, Plane p, int planeNumber) {
 		double x = ob1.getPosition().x;
 		double ty = p.getY(x);
 
@@ -610,11 +716,13 @@ public class Level extends JPanel {
 
 		if (isOnPlane(ob1, p)) {
 			ob1.setUsed(true);
+			ob1.setPlane(planeNumber);
 			ob1.setY(ty - height);
 			ob1.setPlaneVariable(p.getPlaneVariable());
 			setAcceleration(ob1, p);
 		} else {
 			ob1.setUsed(false);
+			ob1.setPlane(-1);
 			ob1.setPlaneVariable(-1);
 			ob1.setAcceleration(0, 0, 0);
 		}
@@ -641,6 +749,17 @@ public class Level extends JPanel {
 			return true;
 		else
 			return false;
+	}
+	
+	/**
+	 * Makes the object move with friction
+	 * @param ob1
+	 */
+	 public void frictionMove(Physics ob1){
+		 ob1.frictionMotion(ob1.getPosition(),ob1.getVx(), ob1.getVy(), t.getDelay());
+		 ob1.setVy();
+		 ob1.setVx();
+		 
 	}
 
 	/**
@@ -893,17 +1012,19 @@ public class Level extends JPanel {
 								}
 								else
 									for (int jj = 0; jj < planeList.size(); jj++){
-										planeContact(trashCanList.get(i), planeList.get(jj));
+										planeContact(trashCanList.get(i), planeList.get(jj), jj);
 										if(trashCanList.get(i).isUsed())
 											break;
 									}
 							}
 							else
 								for (int jj = 0; jj < planeList.size(); jj++){
-									planeContact(trashCanList.get(i), planeList.get(jj));
-									if(trashCanList.get(i).isUsed())
+									planeContact(trashCanList.get(i), planeList.get(jj), jj);
+									if(trashCanList.get(i).isUsed())	
 										break;
+									
 								}
+						
 						for (int j = 0; j < trashCanList.size(); j++) {
 							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && !trashCanList.get(i).isUsed() && !trashCanList.get(j).isUsed() && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());

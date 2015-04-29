@@ -34,6 +34,7 @@ public class TrashCan extends Physics {
 	public static final double threshold = 300;
 	private double width;
 	private double height;
+	private int plane = -1;
 	
 	
 	public TrashCan(double x, double y){
@@ -245,6 +246,14 @@ public class TrashCan extends Physics {
 
 	public void setHeight(double height) {
 		this.height = height;
+	}
+
+	public int getPlane() {
+		return plane;
+	}
+
+	public void setPlane(int plane) {
+		this.plane = plane;
 	}
 
 	

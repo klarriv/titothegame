@@ -219,8 +219,8 @@ public class PlaneIncliningTestPanel extends JPanel{
 		
 		g.drawLine((int)(gUnit * plane.getAnchor1().x), (int)(gUnit * plane.getAnchor1().y), (int)(gUnit * plane.getAnchor2().x), (int)(gUnit * plane.getAnchor2().y));
 		g.setColor(Color.RED);
-		g.drawOval((int)(gUnit*plane.getAnchor1().x), (int)(gUnit*plane.getAnchor1().y), 10, 10);
-		g.drawOval((int)(gUnit*plane.getAnchor2().x), (int)(gUnit*(plane.getAnchor1().y + plane.getLength())), 10, 10);
+		//g.drawOval((int)(gUnit*plane.getAnchor1().x), (int)(gUnit*plane.getAnchor1().y), 10, 10);
+		//g.drawOval((int)(gUnit*plane.getAnchor2().x), (int)(gUnit*(plane.getAnchor1().y + plane.getLength())), 10, 10);
 		g.drawImage(tito.getTexture(), (int)(256*tito.getPosition().x), (int)(256*tito.getPosition().y), 75, 75, null);
 		rope.setOb1(trash);
 		rope.setXAnchored();
@@ -228,17 +228,24 @@ public class PlaneIncliningTestPanel extends JPanel{
 	}
 	
 	class MouseDrag implements MouseMotionListener{
-
+		double x;
+		double y;
+		DoublePoint dp = new DoublePoint(x, y);
+		double t1x = trash.getPosition().x;
+		double t1y = trash.getPosition().y;
+		double px = plane.getPosition().x;
+		double p2x = plane.getAnchor2().x;
+		
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			double x = (double)e.getX()/gUnit;
-			double y = (double)e.getY()/gUnit;
-			DoublePoint dp = new DoublePoint(x, y);
-			double t1x = trash.getPosition().x;
-			double t1y = trash.getPosition().y;
-			double px = plane.getPosition().x;
-			double p2x = plane.getAnchor2().x;
-			
+			 x = (double)e.getX()/gUnit;
+			 y = (double)e.getY()/gUnit;
+			 dp.x = x;
+			 dp.y = y;
+			 t1x = trash.getPosition().x;
+			 t1y = trash.getPosition().y;
+			 px = plane.getPosition().x;
+			 p2x = plane.getAnchor2().x;
 		
 			
 				if ( x >= t1x && x <= t1x +(100/gUnit) && y >= t1y && y <= t1y + (100/gUnit) ){
@@ -253,12 +260,15 @@ public class PlaneIncliningTestPanel extends JPanel{
 					plane.setAngle();
 				}
 				else if( x >= px && x <= p2x && plane.pointDistance(dp) <= 0.3 ){
+					plane.setMoving(true);
 					x = x - plane.getWidth()/2;
 					//y = plane.getY(x);
 					plane.getAnchor1().x = x;
 					plane.getAnchor1().y = y;
+					//plane.getAnchor2().x = plane.getAnchor1().x + plane.getWidth();
 					plane.setAnchor2X();
 					plane.setAnchor2Y();
+					plane.setMoving(false);
 				}
 				repaint();
 		}

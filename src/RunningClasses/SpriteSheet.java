@@ -3,7 +3,7 @@ import java.awt.image.BufferedImage;
 
 /** c'est un test pour l'animation, si on l'utilise on le changera de place sinon on le deletera*/
 public class SpriteSheet {
-	
+	BufferedImage sprite;
 	public BufferedImage spriteSheet;
 	
 	public SpriteSheet(){
@@ -16,7 +16,7 @@ public class SpriteSheet {
 	}
 	
 	public  BufferedImage grabSprite(int x, int y, int width, int height){
-		BufferedImage sprite = spriteSheet.getSubimage(x, y, width, height);
+		this.sprite = spriteSheet.getSubimage(x, y, width, height);
 		return sprite;
 	}
 	
