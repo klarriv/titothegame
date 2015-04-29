@@ -254,8 +254,9 @@ public class Level extends JPanel {
 					if (MainFrame.getLevels()[i].hasBeenCompleted()) {
 						try {
 							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
-							writer.print(i + 1);
+							writer.print((i + 1));
 							writer.close();
+							break;
 						} catch (FileNotFoundException e) {
 							//
 							e.printStackTrace();
@@ -1053,25 +1054,21 @@ public class Level extends JPanel {
 
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 		
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			// TODO Auto-generated method stub
 
 		}
 

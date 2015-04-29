@@ -18,6 +18,7 @@ public class TextureLoader {
 
 	private final String PATHFOFOBJECTS = "Resources/Objects/";
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture, enemyTexture;
+	public BufferedImage[] maison;
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture, levelPauseTexture;
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2, mainMenuHelpMenuButtonTexture;
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
@@ -47,10 +48,15 @@ public class TextureLoader {
 			planeTexture = ImageIO.read(new File(PATHFOFOBJECTS+"plane.png"));
 			ropeTexture = ImageIO.read(new File(PATHFOFOBJECTS+"rope.png"));
 			seesawTexture = ImageIO.read(new File(PATHFOFOBJECTS+"seeSawSprite.png"));
-			springTexture = ImageIO.read(new File(PATHFOFOBJECTS+"spring.png"));
 			trashCanTexture = ImageIO.read(new File(PATHFOFOBJECTS+"trashCanSprite.png"));
 			pulleyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"pulley.png"));
 			enemyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"jasonGerard.png"));
+			
+			// load les maisons
+			maison = new BufferedImage[5];
+			for (int i = 0; i<maison.length; i++){
+				maison[i] = ImageIO.read(new File(PATHFOFOBJECTS+"Maison"+i+".png"));
+			}
 			
 			// loads level buttons
 			levelBackgroundTexture = ImageIO.read(new File("Resources/Background.png"));

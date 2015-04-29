@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import windows.MainFrame;
+
 public class Maison {
 	private DoublePoint position = new DoublePoint(1,1);
 	private double width;
@@ -33,10 +35,7 @@ public class Maison {
 		this.width = width;
 		this.height = height;
 		
-		if (isVisible){
-			pathRelativeToThis = "Resources/Objects/Maison" + which +".png";
-			loadImage();
-		}
+		texture = MainFrame.getTl().maison[which];
 		
 	}
 	/**
@@ -112,17 +111,6 @@ public class Maison {
 		this.pathRelativeToThis = pathRelativeToThis;
 	}
 	
-	public void loadImage(){
-		try{
-		File file = new File(pathRelativeToThis);
-		texture = ImageIO.read(file);
-		}
-		catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}
 	public void addPlane1(Plane plane){
 		this.plane1 = plane;
 		

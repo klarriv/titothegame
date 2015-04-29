@@ -85,7 +85,8 @@ public class MainMenu extends JPanel implements ActionListener{
 			public void actionPerformed(ActionEvent arg0) {
 				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
 					if (MainFrame.getLevels()[i].hasBeenCompleted()){
-						writeToSaveFile(i+1);
+						writeToSaveFile((i+1));
+						break;
 					}
 				}
 				System.exit(0);		
