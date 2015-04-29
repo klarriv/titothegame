@@ -775,11 +775,15 @@ public class Level extends JPanel {
 
 		if (x <= 5 && x >= 0)
 			tito.setX(x);
+		
 		else if (Math.abs(0 - x) <= 0.1) {
 			tito.setX(0);
-		} else if (Math.abs(5 - x) <= 0.1) {
+			
+		} 
+		else if (Math.abs(5 - x) <= 0.1) {
 			tito.setX(5);
-		} else
+		} 
+		else
 			tito.setVx(-1 * tito.getVx());
 	}
 
@@ -791,6 +795,7 @@ public class Level extends JPanel {
 	 */
 	public void projectileMotion(Physics ob1) {
 		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
+		
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
 
 			ob1.setY(2.5 - ob1.getHeight());
