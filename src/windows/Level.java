@@ -1010,7 +1010,7 @@ public class Level extends JPanel {
 										trashCanList.get(i).setUsed(true);
 										ropeList.get(j).setXAnchored();
 								}
-								else
+								else//TODO why do we check plane contacts in the rope loop? O(n^3)...?
 									for (int jj = 0; jj < planeList.size(); jj++){
 										planeContact(trashCanList.get(i), planeList.get(jj), jj);
 										if(trashCanList.get(i).isUsed())
