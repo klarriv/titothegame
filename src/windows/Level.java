@@ -422,7 +422,7 @@ public class Level extends JPanel {
 
 		jbtBackToGame.setBounds((int) (2.11 * gUnit), (int) (0.78 * gUnit), (int) (0.91 * gUnit), (int) (0.27 * gUnit));
 		jbtBackToLevelSelect.setBounds((int) (2.11 * gUnit), (int) (1.17 * gUnit), (int) (0.91 * gUnit), (int) (0.27 * gUnit));
-		jbtExitGame.setBounds(541 * getWidth() / 1280, 400 * getHeight() / 720, 232 * getWidth() / 1280, (int) (0.27 * gUnit));
+		jbtExitGame.setBounds((int) (2.11 * gUnit), (int) (1.56 * gUnit), (int) (0.91 * gUnit), (int) (0.27 * gUnit));
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 
@@ -925,11 +925,8 @@ public class Level extends JPanel {
 							}
 						}
 					}
-					
-					if (!t.isRunning())
-						repaint();
-				}
-				
+				}	
+				repaint();
 			}
 		}
 
