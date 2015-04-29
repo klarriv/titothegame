@@ -420,9 +420,9 @@ public class Level extends JPanel {
 		jbtPause.setBounds(50, 10, 30, 30);
 		jbtRestart.setBounds(90, 10, 30, 30);
 
-		jbtBackToGame.setBounds(541 * getWidth() / 1280, 200 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
-		jbtBackToLevelSelect.setBounds(541 * getWidth() / 1280, 300 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
-		jbtExitGame.setBounds(541 * getWidth() / 1280, 400 * getHeight() / 720, 232 * getWidth() / 1280, 69 * getHeight() / 720);
+		jbtBackToGame.setBounds((int) (2.11 * gUnit), (int) (0.78 * gUnit), (int) (0.91 * gUnit), (int) (0.27 * gUnit));
+		jbtBackToLevelSelect.setBounds((int) (2.11 * gUnit), (int) (1.17 * gUnit), (int) (0.91 * gUnit), (int) (0.27 * gUnit));
+		jbtExitGame.setBounds(541 * getWidth() / 1280, 400 * getHeight() / 720, 232 * getWidth() / 1280, (int) (0.27 * gUnit));
 
 		g.drawImage(MainFrame.getTl().levelBackgroundTexture, 0, 0, getWidth(), getHeight(), null);
 
@@ -721,10 +721,216 @@ public class Level extends JPanel {
 	 */
 	class DragListener implements MouseListener, MouseMotionListener {
 
+		boolean isClicked;
+		double x;
+		double y;
+		DoublePoint mousePoint = new DoublePoint(0,0);
+		
 		@Override
-		public void mouseDragged(MouseEvent e) {
-			// TODO Auto-generated method stub
+		public void mousePressed(MouseEvent arg0) {
+			isClicked = true;
+			
+			x = (double) arg0.getX() / gUnit;
+			y = (double) arg0.getY() / gUnit;
+			mousePoint = new DoublePoint(x, y);
+			
+			for (int i = 0; i < benchList.size(); i++) {
+				if (benchList.get(i).getR() != null	&& benchList.get(i).getR().contains(mousePoint)) {
+					benchList.get(i).isMoving = true;
+					break;
+				}
+			}
+			for (int i = 0; i < coneList.size(); i++) {
+				if (coneList.get(i).getR() != null && coneList.get(i).getR().contains(mousePoint)) {
+					coneList.get(i).isMoving = true;
+					break;
+				}
+			}
+			for (int i = 0; i < trashCanList.size(); i++) {
+				if (trashCanList.get(i).getR() != null && trashCanList.get(i).getR().contains(mousePoint)) {
+					trashCanList.get(i).isMoving = true;
+					break;
+				}
+			}
+			for (int i = 0; i < ropeList.size(); i++){
+				if (ropeList.get(i).getR() != null && ropeList.get(i).getR().contains(mousePoint)){
+					ropeList.get(i).isMoving = true;
+					break;
+				}
+			}
+			for (int i = 0; i < planeList.size(); i++){
+				if(planeList.get(i).pointDistance(mousePoint) <= 0.3){
+					planeList.get(i).setMoving(true);
+					break;
+				}
+			}
+		}
 
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			isClicked = false;
+		
+			for (int i = 0; i < benchList.size(); i++) {
+				benchList.get(i).isMoving = false;
+				if (!benchList.get(i).isUsed()){
+					benchList.get(i).resetPosition();
+					repaint();
+				}	
+			}
+			for (int i = 0; i < coneList.size(); i++) {
+				coneList.get(i).isMoving = false;
+				if (!coneList.get(i).isUsed()){
+					coneList.get(i).resetPosition();
+					repaint();
+				}
+			}
+			for (int i = 0; i < trashCanList.size(); i++) {
+				trashCanList.get(i).isMoving = false;
+				if (!trashCanList.get(i).isUsed()){
+					trashCanList.get(i).resetPosition();
+					repaint();
+				}
+			}
+			for (int i = 0; i < ropeList.size(); i++) {
+				ropeList.get(i).isMoving = false;
+				if (ropeList.get(i).isUsed() == -1){
+					ropeList.get(i).resetPosition();
+					repaint();
+				}
+			}
+			for (int i = 0; i < planeList.size(); i++){
+				planeList.get(i).setMoving(false);
+				//TODO isUsed of the plane !?
+				if(planeList.get(i).isUsed() == -1){
+					planeList.get(i).resetPosition();
+					repaint();
+				}
+			}
+		}
+
+		@Override
+		public void mouseDragged(MouseEvent arg0) {
+			if(isClicked && !t.isRunning()){	
+	
+				double x = (double) arg0.getX() / gUnit;
+				double y = (double) arg0.getY() / gUnit;
+				
+				for (int i = 0; i < benchList.size(); i++) {
+					if (benchList.get(i).getR() != null	&& benchList.get(i).isMoving) {
+						benchList.get(i).setX(x - Bench.WIDTH / 2);
+						benchList.get(i).setY(y - Bench.HEIGHT / 2);
+					}
+					for(int j = 0; j<trashCanList.size(); j++){
+						if (trashCanList.get(j).getR() != null && benchList.get(i).getR() != null && trashCanList.get(j).getR().contains(benchList.get(i).getR())) {
+							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + benchList.get(i).getWeight());
+							benchList.get(i).setVisible(false);
+							benchList.get(i).setR(null);
+							benchList.get(i).setUsed(true);
+						}
+					}
+				}
+				for (int i = 0; i < coneList.size(); i++) {
+					if (coneList.get(i).getR() != null && coneList.get(i).isMoving) {
+						coneList.get(i).setX(x - Cone.WIDTH / 2);
+						coneList.get(i).setY(y - Cone.HEIGHT / 2);
+					}
+					for(int j = 0; j<trashCanList.size(); j++){
+						if (trashCanList.get(j).getR() != null && coneList.get(i).getR() != null && trashCanList.get(j).getR().contains(coneList.get(i).getR())) {
+							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + coneList.get(i).getWeight());
+							coneList.get(i).setVisible(false);
+							coneList.get(i).setR(null);
+							coneList.get(i).setUsed(true);
+						}
+					}
+				}
+				for (int i = 0; i < planeList.size(); i++) {
+					if(planeList.get(i).isUsed() != 0 && planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
+						x = x - planeList.get(i).getWidth()/2;
+						//y = planeList.get(i).getY(x);
+						planeList.get(i).getAnchor1().x = x;
+						planeList.get(i).getAnchor1().y = y;
+						planeList.get(i).setAnchor2X();
+						planeList.get(i).setAnchor2Y();
+						
+						//System.out.println(planeList.get(i).getAnchor1().x + " " + planeList.get(i).getAnchor1().y);
+					}
+					
+					for ( int j = 0; j < ropeList.size(); j++){
+						if (ropeList.get(j).isUsed() == 1 && ropeList.get(j).getAnchor2().distance(planeList.get(i).getAnchor1()) <= 0.3){
+							planeList.get(i).setUsed(1);
+							ropeList.get(j).setPlane(planeList.get(i));
+							ropeList.get(j).setXAnchored();
+							ropeList.get(j).setLength3();
+						}
+					}
+				}
+				
+				for (int i = 0; i < ropeList.size(); i++) {
+					
+					if(ropeList.get(i).getR() != null && ropeList.get(i).isMoving){
+						ropeList.get(i).setX(x- Rope.WIDTH /2);
+						ropeList.get(i).setY(y - Rope.HEIGHT / 2);
+	
+						for (int j = 0; j < pulleyList.size(); j++) {
+							if (ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3)
+								ropeList.get(i).setPulley(pulleyList.get(j));
+						}
+	
+					}
+					ropeList.get(i).setXAnchored();
+				}
+	
+				for (int i = 0; i < trashCanList.size(); i++) {
+					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
+						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
+						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
+						
+						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
+							if (ropeList.size() != 0){
+								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
+										trashCanList.get(i).setUsed(true);
+										ropeList.get(j).setXAnchored();
+								}
+								else
+									for (int jj = 0; jj < planeList.size(); jj++){
+										planeContact(trashCanList.get(i), planeList.get(jj));
+										if(trashCanList.get(i).isUsed())
+											break;
+									}
+							}
+							else
+								for (int jj = 0; jj < planeList.size(); jj++){
+									planeContact(trashCanList.get(i), planeList.get(jj));
+									if(trashCanList.get(i).isUsed())
+										break;
+								}
+						for (int j = 0; j < trashCanList.size(); j++) {
+							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && !trashCanList.get(i).isUsed() && !trashCanList.get(j).isUsed() && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
+								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
+								trashCanList.get(j).setVisible(false);
+								trashCanList.get(j).setR(null);
+								trashCanList.get(j).setUsed(true);
+							}
+						}
+						for (int j = 0; j < ropeList.size(); j++) {
+							if (trashCanList.get(i).getPosition().distance(ropeList.get(j).getAnchor2()) <= 0.3) {
+								if (ropeList.get(j).isUsed() == 0 && !trashCanList.get(i).isUsed()) {
+									ropeList.get(j).setOb1(trashCanList.get(i));
+									trashCanList.get(i).setUsed(true);
+	
+								} else if (ropeList.get(j).isUsed() == 1 && !trashCanList.get(i).isUsed()) {
+									ropeList.get(j).setOb2(trashCanList.get(i));
+									trashCanList.get(i).setUsed(true);
+								}
+							}
+						}
+					}
+					
+					if (!t.isRunning())
+						repaint();
+				}
+				
+			}
 		}
 
 		@Override
@@ -738,19 +944,7 @@ public class Level extends JPanel {
 			// TODO Auto-generated method stub
 
 		}
-
-		@Override
-		public void mousePressed(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void mouseReleased(MouseEvent e) {
-			// TODO Auto-generated method stub
-
-		}
-
+		
 		@Override
 		public void mouseEntered(MouseEvent e) {
 			// TODO Auto-generated method stub
