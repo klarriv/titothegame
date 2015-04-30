@@ -131,7 +131,7 @@ public class Plane {
 		
 		c = (b * anchor1.y) - (m * anchor1.x);
 		
-		//System.out.println(m + "x" + " + " + b + "y + (" + c + ") = 0");
+		System.out.println(m + "x" + " + " + b + "y + (" + c + ") = 0");
 	}
 	
 	/**
@@ -153,7 +153,7 @@ public class Plane {
 	 */
 	public double angleOfContact(double vx, double vy){
 		double t;
-		double o = Math.PI -angle;
+		double o = angle;//Math.PI -
 		
 		if (vx < 0){
 			t = Math.atan(vx/vy);
