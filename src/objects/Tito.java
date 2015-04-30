@@ -11,7 +11,7 @@ public class Tito extends Physics{
 	private int weight = 9;
 	private boolean isVisible = true;
 	private boolean isUsed = true;
-	
+	private boolean onPlane = false;
 	private BufferedImage texture;
 	private BufferedImage spriteSheet;
 	private SpriteSheet ss = new SpriteSheet();
@@ -219,6 +219,14 @@ public class Tito extends Physics{
 
 	public void setR(DoubleRectangle r) {
 		this.r = r;
+	}
+
+	public boolean isOnPlane() {
+		return onPlane;
+	}
+
+	public void setOnPlane(boolean onPlane) {
+		this.onPlane = onPlane;
 	}
 
 

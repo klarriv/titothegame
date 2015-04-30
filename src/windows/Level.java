@@ -560,36 +560,48 @@ public class Level extends JPanel {
 		
 		
 		//Tito physics
-		
-		//making Tito bounce on planes
-		boolean planeCollided = false;
-		for(int i = 0; i< planeList.size(); i++){
-			
-			planeCollided = planeColliding(planeList.get(i));
-			//Tito's projectile motion
-			//TODO might have to change something here, it seems to work, though I don't know for every cases
-			//if (tito.getVy() > 0.5 && tito.getPosition().y <= (2.5 - tito.getHeight())){
-			//System.out.println(i);
-			/*if (isOnPlane(tito,planeList.get(i))){
-				System.out.println(i);
-				System.out.println(574);
+		for(int i = 0; i < planeList.size(); i++){
+			if (isOnPlane(tito,planeList.get(i)) && tito.getVy() == 0){
+				tito.setOnPlane(true);
 				tito.frictionMotion(planeList.get(i), tito, (double)t.getDelay()/1000);
+
 				break;
 			}
-			else {*/
-				projectileMotion(tito);
-				xMove();
-
-				//if Tito hits a plane
-				if (planeCollided){
-					planeCollision(planeList.get(i));
-					projectileMotion(tito);
-					xMove();
-				}
-			//}
-			//tito.setVx();
+			else
+				tito.setOnPlane(false);
+			tito.setVx();
 		}
 		
+		//making Tito bounce on planes
+		if (!tito.isOnPlane()){
+			boolean planeCollided = false;
+			for(int i = 0; i< planeList.size(); i++){
+				
+				planeCollided = planeColliding(planeList.get(i));
+				//Tito's projectile motion
+				//TODO might have to change something here, it seems to work, though I don't know for every cases
+				//if (tito.getVy() > 0.5 && tito.getPosition().y <= (2.5 - tito.getHeight())){
+				//System.out.println(i);
+				/*if (isOnPlane(tito,planeList.get(i))){
+					System.out.println(i);
+					System.out.println(574);
+					tito.frictionMotion(planeList.get(i), tito, (double)t.getDelay()/1000);
+					break;
+				}
+				else {*/
+					projectileMotion(tito);
+					xMove();
+	
+					//if Tito hits a plane
+					if (planeCollided){
+						planeCollision(planeList.get(i));
+						projectileMotion(tito);
+						xMove();
+					}
+				//}
+				//tito.setVx();
+			}
+		}
 		//hitting the walls of a Maison
 		for (int i = 0; i < maisonList.size(); i++) {
 			if (maisonList.get(i).colliding(tito.getPosition()))
