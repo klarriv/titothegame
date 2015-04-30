@@ -147,7 +147,6 @@ public abstract class Physics implements ObjectInterface{
 	 */
 	public double motion(double position, double v, int delay){
 		position += v * ((double)delay/1000);
-		//System.out.println("x: " + position + " v: " +  v*((double)delay/1000));
 		return position;
 	}
 	
@@ -162,7 +161,7 @@ public abstract class Physics implements ObjectInterface{
 		double ek = 0.5 * weight * v * v;
 		double velocity = Math.sqrt((2* ek) / mass);
 		
-		this.vxi = velocity * Math.cos(Math.toRadians(135)); //setting always 45 degrees
+		this.vxi = velocity * Math.cos(Math.toRadians(45)); //setting always 45 degrees
 		this.vyi = velocity * Math.cos(Math.toRadians(135));
 	
 	}

@@ -103,12 +103,12 @@ public class Plane {
 		
 		this.anchor1 = new DoublePoint(x, y);
 		this.anchor2 = new DoublePoint(x, y);
-		setAnchor2();
+		
 		setDefaultPosition(anchor1);
 		setFormula();
-		setHeight();
 		setLength();
-		
+		setHeight();
+		setAnchor2();
 		texture = MainFrame.getTl().planeTexture;
 	}
 	
@@ -130,6 +130,8 @@ public class Plane {
 		this.m = Math.tan(angle);
 		
 		c = (b * anchor1.y) - (m * anchor1.x);
+		
+		//System.out.println(m + "x" + " + " + b + "y + (" + c + ") = 0");
 	}
 	
 	/**
@@ -288,22 +290,22 @@ public class Plane {
 	 */
 	public void setAnchor1(DoublePoint anchor1){
 		this.anchor1 = anchor1;
+		setFormula();
 	}
 	/**
 	 * Sets the Anchor1 with the current width, height and Anchor2's position
 	 */
-	//TODO Check if need of setAnchor1X & setAncor1Y...
 	public void setAnchor1(){
 		
-		if (planeVariable == 1)
+		if (planeVariable == 1){
 			this.anchor1.x = this.anchor2.x - width;
-		else 
-			this.anchor1.x = this.anchor2.x + width;
-		
-		if (this.angle >= 0 && this.angle < Math.PI)
 			this.anchor1.y = this.anchor2.y + height;
-		else
+		}
+		else {
+			this.anchor1.x = this.anchor2.x + width;
 			this.anchor1.y = this.anchor2.y - height;
+		}
+		setFormula();
 	}
 	
 	/**
@@ -319,7 +321,7 @@ public class Plane {
 	 * Sets the Y coordinate of the Anchor1 with the current width and anchor2's position
 	 */
 	public void setAnchor1Y(){
-		if (this.angle >= 0 && this.angle < Math.PI)
+		if (planeVariable == 0)
 			this.anchor1.y = this.anchor2.y + height;
 		else
 			this.anchor1.y = this.anchor2.y - height;
@@ -340,22 +342,21 @@ public class Plane {
 	 */
 	public void setAnchor2(DoublePoint anchor2){
 		this.anchor2 = anchor2;
+		setFormula();
 	}
 	/**
 	 * Sets the Anchor2 with the current width, height and Anchor2 position
 	 */
-	//TODO Check if need of setAnchor2X & setAnchor2Y...
 	public void setAnchor2(){
-		
-		if (planeVariable == 1)
+		if (planeVariable == 1){
 			this.anchor2.x = this.anchor1.x + width;
-		else 
-			this.anchor2.x = this.anchor1.x - width;
-		
-		if (this.angle >= 0 && this.angle < Math.PI)
-			this.anchor2.y = this.anchor1.y - height;
-		else
 			this.anchor2.y = this.anchor1.y + height;
+		}
+		else {
+			this.anchor2.x = this.anchor1.x + width;
+			this.anchor2.y = this.anchor1.y - height;
+		}
+		setFormula();
 	}
 	
 	/**
@@ -371,10 +372,11 @@ public class Plane {
 	 * Sets the Y coordinate of Anchor2 with the current width and Anchor1's position
 	 */
 	public void setAnchor2Y(){
-		if (this.angle >= 0 && this.angle < Math.PI)
-			this.anchor2.y = this.anchor1.y - height;
-		else
+		if (planeVariable == 1)
 			this.anchor2.y = this.anchor1.y + height;
+		else 
+			this.anchor2.y = this.anchor1.y - height;
+		
 	}
 	
 	/**

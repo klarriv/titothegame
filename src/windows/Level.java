@@ -458,7 +458,7 @@ public class Level extends JPanel {
 				int[] xPoints = {(int) (gUnit * ropeList.get(i).getAnchor1().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor2().x) + 50, (int) (gUnit * ropeList.get(i).getAnchor3().x) + 50 };
 				// TODO check if this works
 				if (ropeList.get(i).isUsed() == 4) {
-					ropeList.get(i).getPlane().getPosition().x += (50 / gUnit);
+					ropeList.get(i).getPlane().getAnchor1().x += (50 / gUnit);
 					ropeList.get(i).getPlane().setAnchor2X();
 					xPoints[2] = (int) (gUnit * ropeList.get(i).getAnchor3().x);
 				}
@@ -562,12 +562,23 @@ public class Level extends JPanel {
 			if (isOnPlane(tito,planeList.get(i)) && tito.getVy() == 0){
 				tito.setOnPlane(true);
 				tito.frictionMotion(planeList.get(i), tito, (double)t.getDelay()/1000);
-
+				tito.setVx();
 				break;
 			}
 			else
 				tito.setOnPlane(false);
-			tito.setVx();
+			
+		}
+		
+		//hitting the walls of a Maison
+		for (int i = 0; i < maisonList.size(); i++) {
+			//if (maisonList.get(i).colliding(tito.getPosition())){
+			if(maisonList.get(i).getR().contains(tito.getR())){
+				MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
+				System.out.println(609);
+				tito.setVx(-1 * tito.getVx());
+				break;
+			}
 		}
 		
 		//making Tito bounce on planes
@@ -577,16 +588,7 @@ public class Level extends JPanel {
 				
 				planeCollided = planeColliding(planeList.get(i));
 				//Tito's projectile motion
-				//TODO might have to change something here, it seems to work, though I don't know for every cases
-				//if (tito.getVy() > 0.5 && tito.getPosition().y <= (2.5 - tito.getHeight())){
-				//System.out.println(i);
-				/*if (isOnPlane(tito,planeList.get(i))){
-					System.out.println(i);
-					System.out.println(574);
-					tito.frictionMotion(planeList.get(i), tito, (double)t.getDelay()/1000);
-					break;
-				}
-				else {*/
+				
 					projectileMotion(tito);
 					xMove();
 	
@@ -601,23 +603,17 @@ public class Level extends JPanel {
 				//tito.setVx();
 			}
 		}
-		//hitting the walls of a Maison
-		for (int i = 0; i < maisonList.size(); i++) {
-			//if (maisonList.get(i).colliding(tito.getPosition())){
-			if(maisonList.get(i).getR().contains(tito.getR())){
-				MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
-				tito.setVx(-1 * tito.getVx());
-			}
-		}
+		
+		
 		
 		
 		// ropes Physics 
-		//TODO check w/ planes...
+		//TODO check w/ planes... wtf is going on
 		for (int i = 0; i < ropeList.size(); i++){
 			ropeList.get(i).setXAnchored();
-			
+		
 			//projectile motion of a trashcan attached to a pulley and another object
-			if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4){
+			if (ropeList.get(i).isUsed() == 2 || ropeList.get(i).isUsed() == 4 && ropeList.get(i).getOb1().getPosition().y <= (2.5 - ropeList.get(i).getOb1().getHeight())){
 				double y = ropeList.get(i).getOb1().projectileMotions(ropeList.get(i).getOb1().getWeight(), ropeList.get(i).getOb1().getPosition().y, ropeList.get(i).getOb1().getVy(), t.getDelay());
 				
 				if (!ropeList.get(i).isMaxed()){
@@ -642,8 +638,7 @@ public class Level extends JPanel {
 			t.stop();
 			loadObjects();
 		}
-				
-				
+					
 		// checks if tito touches the right boundary to change level!
 		if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
 				t.stop();
@@ -672,7 +667,7 @@ public class Level extends JPanel {
 	public void planeCollision(Plane plane) {
 
 		double angle = plane.angleOfContact(tito.getVx(), tito.getVy());
-		System.out.println(Math.toDegrees(angle));
+		//System.out.println(Math.toDegrees(angle));
 		if (!(Math.toDegrees(angle) < 10 && Math.toDegrees(angle) > -10))
 			if (tito.getVx() >= 0)
 				tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
@@ -726,7 +721,7 @@ public class Level extends JPanel {
 	 * Makes an object move with no friction and collide with the frame
 	 */
 	public void xMove() {
-		double x = tito.motion(tito.getPosition().x, -tito.getVx(), t.getDelay());
+		double x = tito.motion(tito.getPosition().x, tito.getVx(), t.getDelay());
 
 		if (x <= 5 && x >= 0)
 			tito.setX(x);
@@ -998,7 +993,7 @@ public class Level extends JPanel {
 	
 				double x = (double) arg0.getX() / gUnit;
 				double y = (double) arg0.getY() / gUnit;
-				
+				DoublePoint dp = new DoublePoint(x, y);
 				for (int i = 0; i < benchList.size(); i++) {
 					if (benchList.get(i).getR() != null	&& benchList.get(i).isMoving) {
 						benchList.get(i).setX(x - Bench.WIDTH / 2);
@@ -1030,15 +1025,12 @@ public class Level extends JPanel {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					if(planeList.get(i).isUsed() != 0 && planeList.get(i).isMoving() && x >= planeList.get(i).getPosition().x && x <= planeList.get(i).getAnchor2().x){
+					if(planeList.get(i).isUsed() != 0 && planeList.get(i).isMoving() && x >= planeList.get(i).getAnchor1().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(dp) < 0.3){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
 						planeList.get(i).getAnchor1().y = y;
-						planeList.get(i).setAnchor2X();
-						planeList.get(i).setAnchor2Y();
-						
-						//System.out.println(planeList.get(i).getAnchor1().x + " " + planeList.get(i).getAnchor1().y);
+						planeList.get(i).setAnchor2();
 					}
 					
 					for ( int j = 0; j < ropeList.size(); j++){
@@ -1075,7 +1067,7 @@ public class Level extends JPanel {
 						
 						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
 							if (ropeList.size() != 0){
-								System.out.println(trashCanList.get(i).isUsed());
+								//System.out.println(trashCanList.get(i).isUsed());
 								if (trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
 									MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
 									trashCanList.get(i).setUsed(true);

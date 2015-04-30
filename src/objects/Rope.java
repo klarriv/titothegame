@@ -312,6 +312,8 @@ public class Rope {
 			this.anchor1.x = anchor2.x;
 			this.anchor3.x = anchor2.x;
 		}
+		if (u == 4)
+			plane.setAnchor2();
 		
 		
 	}
