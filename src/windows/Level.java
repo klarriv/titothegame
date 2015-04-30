@@ -548,10 +548,11 @@ public class Level extends JPanel {
 			
 			//plane incline plane fall
 			else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() > -1 && trashCanList.get(i).getPlane() > -1){
-				//System.out.println(547);
+				System.out.println(551);
 				if(isOnPlane(trashCanList.get(i), planeList.get(trashCanList.get(i).getPlane())))
 					frictionMove(trashCanList.get(i));
 				else{
+					System.out.println(555);
 					trashCanList.get(i).setUsed(false);
 					trashCanList.get(i).setPlaneVariable(-1);
 					trashCanList.get(i).setPlane(-1);
@@ -780,7 +781,8 @@ public class Level extends JPanel {
 			ob1.setY(ty - height);
 			ob1.setPlaneVariable(p.getPlaneVariable());
 			setAcceleration(ob1, p);
-		} else {
+		} else if (ob1.getPlaneVariable() > -1) {
+			System.out.println(785);
 			ob1.setUsed(false);
 			ob1.setPlane(-1);
 			ob1.setPlaneVariable(-1);
@@ -809,10 +811,13 @@ public class Level extends JPanel {
 			ob1.setUsed(true);
 			return true;
 		}
-		else{
+		else if (ob1.getPlaneVariable() > -1){
+			System.out.println(815);
 			ob1.setUsed(false);
 			return false;
 		}
+		else
+			return false;
 	}
 	
 	/**
@@ -1068,6 +1073,7 @@ public class Level extends JPanel {
 				}
 	
 				for (int i = 0; i < trashCanList.size(); i++) {
+					System.out.println(i + " " + trashCanList.get(i).isUsed());
 					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
 						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
@@ -1076,9 +1082,9 @@ public class Level extends JPanel {
 							if (ropeList.size() != 0){
 								//System.out.println(trashCanList.get(i).isUsed());
 								if (trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
-									MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
 									trashCanList.get(i).setUsed(true);
 									ropeList.get(j).setXAnchored();
+									MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
 								}
 								else//TODO why do we check plane contacts in the rope loop? O(n^3)...?
 									for (int jj = 0; jj < planeList.size(); jj++){

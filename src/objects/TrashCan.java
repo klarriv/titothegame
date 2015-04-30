@@ -18,7 +18,7 @@ public class TrashCan extends Physics {
 	private boolean isVisible = true;
 	private boolean isUsed = false;
 	
-	private int planeVariable = -1;
+	
 	
 	private BufferedImage texture;
 	private BufferedImage spriteSheet;
@@ -34,7 +34,7 @@ public class TrashCan extends Physics {
 	public static final double threshold = 300;
 	private double width;
 	private double height;
-	private int plane = -1;
+	
 	
 	
 	public TrashCan(double x, double y){
@@ -168,19 +168,19 @@ public class TrashCan extends Physics {
 	public BufferedImage getTexture() {
 		 this.ss.setSpriteSheet(spriteSheet);
 		
-		if (planeVariable == -1){
+		if (super.getPlaneVariable() == -1){
 			this.width = WIDTHFLAT;
 			this.height = HEIGHTFLAT;
 			this.r.setWidth(WIDTHFLAT);
 			this.r.setHeight(HEIGHTFLAT);
 			texture = ss.grabSprite(0, 0, 389, 489);
 		}
-		else if(planeVariable == 0 || planeVariable == 1){
+		else if(super.getPlaneVariable() == 0 || super.getPlaneVariable() == 1){
 			this.width = WIDTHATANGLE;
 			this.height = HEIGHTATANGLE;
 			this.r.setWidth(WIDTHATANGLE);
 			this.r.setHeight(HEIGHTATANGLE);
-			texture = ss.grabSprite(planeVariable * 530, 600, 530, 600);
+			texture = ss.grabSprite(super.getPlaneVariable() * 530, 600, 530, 600);
 			
 		}
 		else{
@@ -194,13 +194,7 @@ public class TrashCan extends Physics {
 		return texture;
 	}
 	
-	public void setPlaneVariable(int planeVariable){
-		this.planeVariable = planeVariable;
-	}
 	
-	public int getPlaneVariable(){
-		return this.planeVariable;
-	}
 
 	public DoubleRectangle getR() {
 		return r;
@@ -248,13 +242,7 @@ public class TrashCan extends Physics {
 		this.height = height;
 	}
 
-	public int getPlane() {
-		return plane;
-	}
-
-	public void setPlane(int plane) {
-		this.plane = plane;
-	}
+	
 
 	
 

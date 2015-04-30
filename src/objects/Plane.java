@@ -131,7 +131,7 @@ public class Plane {
 		
 		c = (b * anchor1.y) - (m * anchor1.x);
 		
-		System.out.println(m + "x" + " + " + b + "y + (" + c + ") = 0");
+		//System.out.println(m + "x" + " + " + b + "y + (" + c + ") = 0");
 	}
 	
 	/**

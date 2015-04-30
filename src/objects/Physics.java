@@ -45,6 +45,10 @@ public abstract class Physics implements ObjectInterface{
 	/**
 	 * 
 	 */
+	private int plane = -1;
+	
+	private int planeVariable = -1;
+	
 	protected double ay;
 	public int weight;
 	public boolean isVisible;
@@ -243,6 +247,21 @@ public abstract class Physics implements ObjectInterface{
 			
 		}
 		
+	}
+	public int getPlane() {
+		return plane;
+	}
+
+	public void setPlane(int plane) {
+		this.plane = plane;
+	}
+	
+	public void setPlaneVariable(int planeVariable){
+		this.planeVariable = planeVariable;
+	}
+	
+	public int getPlaneVariable(){
+		return this.planeVariable;
 	}
 
 }
