@@ -11,26 +11,26 @@ import windows.MainFrame;
  * @author CharlesPhilippe
  *
  */
-public class PlaneRemastered {
-	
+@Deprecated
+public class Plane2_0 {
 	/**
-	 * The width/the side adjacent to the angle
+	 * The position of the plane
+	 */
+	private DoublePoint position;
+	/**
+	 * The width/ the side adjacent to the angle
 	 */
 	private double width = 1;
-	/**
-	 * The height/the side opposite to the angle
-	 */
-	private double height;
 	/**
 	 * 
 	 */
 	private double length;
 	/**
-	 * The position of the plane
+	 * 
 	 */
 	private DoublePoint anchor1;
 	/**
-	 * The position of the other side of the plane
+	 * 
 	 */
 	private DoublePoint anchor2;
 	/**
@@ -81,7 +81,16 @@ public class PlaneRemastered {
 	 * 
 	 */
 	private int maisonNumber = -1;
-
+	
+	private double dy;
+	private double dx;
+	
+	
+	
+	
+	
+	
+	
 	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
@@ -90,29 +99,37 @@ public class PlaneRemastered {
 	 * @param angle
 	 * @param width
 	 */
-	public PlaneRemastered(double x, double y, double angle, double width, int maisonNumber){
+	public Plane2_0(double x, double y, double angle, double width, int maisonNumber){
 		this.setMaisonNumber(maisonNumber);
-		
 		this.width = width;
 		this.angle = angle;
-		
 		if (this.angle >= Math.PI/2 && this.angle <= Math.PI || this.angle >= 3*Math.PI/2)
 			setPlaneVariable(0);
 		else
 			setPlaneVariable(1);
 		
-		this.anchor1 = new DoublePoint(x, y);
-		setDefaultPosition(anchor1);
+		this.position = new DoublePoint(x, y);
+		setDefaultPosition(position);
 		setFormula();
-		setHeight();
+		setAnchors();
 		setLength();
 		
 		texture = MainFrame.getTl().planeTexture;
 	}
 	
 	
+	
 	/**
-	 * Returns the position in y of the specified x value on the plane
+	 * Sets the anchors
+	 */
+	public void setAnchors(){
+		this.anchor1 = this.position;
+		this.anchor2 = new DoublePoint(position.x + width, getY(this.position.x + width));
+		setFormula();
+	}
+	
+	/**
+	 * Returns the position in y of the specified x value
 	 * @param x
 	 * @return
 	 */
@@ -127,7 +144,7 @@ public class PlaneRemastered {
 		
 		this.m = Math.tan(angle);
 		
-		c = (b * anchor1.y) - (m * anchor1.x);
+		c = (b*position.y)-(m*position.x);
 	}
 	
 	/**
@@ -167,156 +184,114 @@ public class PlaneRemastered {
 		return t;
 	}
 	
-	
 	/**
-	 * Returns the the angle of the plane in radians
-	 * @return The angle of the plane
-	 */
-	public double getAngle() {
-		return angle;
-	}
-	/**
-	 * Sets to the specified angle
-	 * @param angle
-	 */
-	public void setAngle(double angle) {
-		this.angle = angle;
-		
-	}
-	/**
-	 * Sets the angle of the plane with the current width and height
-	 */
-	public void setAngle(){
-	//TODO
-		this.angle = Math.PI + Math.atan(height/width);
-		
-	}
-	
-	/**
-	 * Returns the current width
+	 * Returns the position of the Plane
 	 * @return
 	 */
-	public double getWidth(){
-		return this.width;
+	public DoublePoint getPosition() {
+		return position;
 	}
+	
 	/**
-	 * Sets the width of the plane with the specified value
+	 * Sets the position
+	 * @param position
+	 */
+	public void setPosition(DoublePoint position) {
+		this.position = position;
+		//TODO;
+	}
+	
+	/**
+	 * Returns the width of the plane (the side adjacent to the angle)
+	 * @return
+	 */
+	public double getWidth() {
+		return width;
+	}
+	/**Sets the width the specified width
+	 * 
 	 * @param width
 	 */
-	public void setWidth(double width){
+	public void setWidth(double width) {
 		this.width = width;
-		//TODO setAnchor2()??
+		//TODO
 	}
 	/**
-	 * Sets the width of the plane with the current angle
+	 * Sets the width of the plane (the side adjacent to the angle) from the current length and angle
 	 */
-	public void setWidth(){
+	private void setWidth(){
+		setAngle();
 		this.width = Math.abs(length * Math.cos(angle));
 	}
-	
 	/**
-	 * Returns the height
+	 * Gets the position ( as Anchor1) of the plane
 	 * @return
 	 */
-	public double getHeight(){
-		return this.height;
+	public DoublePoint getAnchor1() {
+		return anchor1;
 	}
 	/**
-	 * Sets the height of the plane with the specified value
-	 * @param height
-	 */
-	public void setHeight(double height){
-		this.height = height;
-	}
-	/**
-	 * Sets the height of the plane with the current angle
-	 */
-	public void setHeight(){
-		this.height = Math.abs(length * Math.sin(angle));
-	}
-	/**
-	 * Returns the length of the plane/the hypotenuse
-	 * @return
-	 */
-	public double  getLength(){
-		return this.length;
-	}
-	/**
-	 * Sets the length of the plane to the specified value
-	 * @param length
-	 */
-	public void setLength(int length){
-		this.length = length;
-	}
-	/**
-	 * Sets the length of the plane with the current width and angle
-	 */
-	public void setLength(){
-			this.length = Math.abs((double)this.width/Math.cos(angle));
-	}
-	
-	/**
-	 * Returns the position of the plane/the anchor 1
-	 * @return
-	 */
-	public DoublePoint getAnchor1(){
-		return this.anchor1;
-	}
-	/**
-	 * Sets the Anchor1 to the specified position
+	 * sets the position of the plane 
 	 * @param anchor1
 	 */
-	public void setAnchor1(DoublePoint anchor1){
+	public void setAnchor1(DoublePoint anchor1) {
 		this.anchor1 = anchor1;
+		//TODO
 	}
 	/**
-	 * Sets the Anchor1 with the current width, height and Anchor2 position
+	 * Sets the y coordinate of the anchor1 relative to the current anchor2
 	 */
-	//TODO Check if need of setAnchor1X & setAncor1Y...
-	public void setAnchor1(){
+	public void setAnchor1Y(){
+		//TODO
+		setDy(0);
+			this.anchor1.y = this.anchor2.y - dy;
 		
-		if (planeVariable == 1)
-			this.anchor1.x = this.anchor2.x - width;
-		else 
-			this.anchor1.x = this.anchor2.x + width;
-		
-		if (this.angle >= 0 && this.angle < Math.PI)
-			this.anchor1.y = this.anchor2.y + height;
-		else
-			this.anchor1.y = this.anchor2.y - height;
 	}
-	
 	/**
-	 * Returns the position of the plane/the anchor2
-	 * @return
+	 * Returns the position of the anchor2
+	 * @return the second anchor
 	 */
-	public DoublePoint getAnchor2(){
-		return this.anchor2;
+	public DoublePoint getAnchor2() {
+		return anchor2;
 	}
 	/**
-	 * Sets the Anchor2 to the specified position
+	 * Sets the position of the Anchor2
 	 * @param anchor2
 	 */
-	public void setAnchor2(DoublePoint anchor2){
+	public void setAnchor2(DoublePoint anchor2) {
+		//TODO
 		this.anchor2 = anchor2;
+		
 	}
 	/**
-	 * Sets the Anchor2 with the current width, height and Anchor2 position
+	 * Sets the x coordinate of the anchor2 relative to the current anchor1
 	 */
-	//TODO Check if need of setAnchor2X & setAnchor2Y...
-	public void setAnchor2(){
-		
+	public void setAnchor2X(){
+		//TODO
+		setWidth();
 		if (planeVariable == 1)
 			this.anchor2.x = this.anchor1.x + width;
-		else 
+		else if ( planeVariable == 0)
 			this.anchor2.x = this.anchor1.x - width;
-		
-		if (this.angle >= 0 && this.angle < Math.PI)
-			this.anchor2.y = this.anchor1.y - height;
-		else
-			this.anchor2.y = this.anchor1.y + height;
+		//this.anchor2.y = getY(this.anchor1.x + width);
+		if (!isMoving()){
+			setAnchor1Y();
+		}
+		//(anchor2.x);
 	}
-	
+	/**
+	 * Sets the y coordinate of the anchor2 relative to the current anchor1
+	 */
+	public void setAnchor2Y(){
+		
+		//TODO
+		setDy(0);
+		if (planeVariable == 1)
+			this.anchor2.y = this.anchor1.y + dy;
+		else 
+			this.anchor2.y = this.anchor1.y - dy;
+		
+	}
 	
 	/**
 	 *  Getting used 
@@ -353,8 +328,70 @@ public class PlaneRemastered {
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
-	
-	
+	/**
+	 * 
+	 * @return
+	 */
+	public double getAngle() {
+		return angle;
+	}
+	/**
+	 * 
+	 * @param angle
+	 */
+	public void setAngle(double angle) {
+		//TODO
+		this.angle = angle;
+		
+		
+	}
+	/**
+	 * 
+	 */
+	public void setAngle(){
+	//TODO
+		setDx();
+		setDy(1);
+		this.angle = Math.PI + Math.atan(dy/dx);
+		setFormula();
+		
+	}
+	public double getM() {
+		return m;
+	}
+	public void setM(double m) {
+		this.m = m;
+	}
+	public double getB() {
+		return b;
+	}
+	public void setB(double b) {
+		this.b = b;
+	}
+	public double getC() {
+		return c;
+	}
+	public void setC(double c) {
+		this.c = c;
+	}
+	public int getPlaneVariable() {
+		return planeVariable;
+	}
+	public void setPlaneVariable(int planeVariable) {
+		this.planeVariable = planeVariable;
+	}
+
+	public double getLength() {
+		return length;
+	}
+
+	public void setLength(double length) {
+		this.length = length;
+	}
+	public void setLength(){
+		this.length = Math.abs((double)this.width/Math.cos(angle));
+	}
+
 	public boolean isMoving() {
 		return isMoving;
 	}
@@ -368,7 +405,8 @@ public class PlaneRemastered {
 	public void resetPosition(){
 		this.anchor1.x = this.defaultPosition.x;
 		this.anchor1.y = this.defaultPosition.y;
-		this.setAnchor2();
+		this.setAnchor2X();
+		this.setAnchor2Y();
 		setFormula();
 	}
 	/**
@@ -376,8 +414,8 @@ public class PlaneRemastered {
 	 * @param position
 	 */
 	public void setDefaultPosition(DoublePoint position) {
-		this.defaultPosition.x = position.x;
-		this.defaultPosition.y = position.y;
+		this.defaultPosition.x = this.position.x;
+		this.defaultPosition.y = this.position.y;
 		
 	}
 	/**
@@ -424,30 +462,20 @@ public class PlaneRemastered {
 		this.frictionConstant = frictionConstant;
 	}
 	
-	public double getM() {
-		return m;
+	public void setDy(int i){
+		switch(i){
+		
+			case 0: this.dy = Math.sqrt((length * length) - (width * width));
+					break;
+			case 1: this.dy = (anchor1.y - anchor2.y);
+					break;
+			case 2: this.dy = Math.abs(length * Math.sin(angle));
+					break;
+		}
 	}
-	public void setM(double m) {
-		this.m = m;
+	
+	public void setDx(){
+		this.dx = anchor1.x - anchor2.x;
 	}
-	public double getB() {
-		return b;
-	}
-	public void setB(double b) {
-		this.b = b;
-	}
-	public double getC() {
-		return c;
-	}
-	public void setC(double c) {
-		this.c = c;
-	}
-	public int getPlaneVariable() {
-		return planeVariable;
-	}
-	public void setPlaneVariable(int planeVariable) {
-		this.planeVariable = planeVariable;
-	}
-
-
+ 
 }

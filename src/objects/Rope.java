@@ -153,7 +153,7 @@ public class Rope {
 				anchor3.y = anchor2.y + distance2;
 			
 			if (isUsed() == 4)
-				plane.setAngle();
+				plane.mouvement();
 		}
 		
 		

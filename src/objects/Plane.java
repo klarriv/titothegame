@@ -12,24 +12,25 @@ import windows.MainFrame;
  *
  */
 public class Plane {
+	
 	/**
-	 * The position of the plane
-	 */
-	private DoublePoint position;
-	/**
-	 * The width/ the side adjacent to the angle
+	 * The width/the side adjacent to the angle
 	 */
 	private double width = 1;
+	/**
+	 * The height/the side opposite to the angle
+	 */
+	private double height;
 	/**
 	 * 
 	 */
 	private double length;
 	/**
-	 * 
+	 * The position of the plane
 	 */
 	private DoublePoint anchor1;
 	/**
-	 * 
+	 * The position of the other side of the plane
 	 */
 	private DoublePoint anchor2;
 	/**
@@ -80,16 +81,7 @@ public class Plane {
 	 * 
 	 */
 	private int maisonNumber = -1;
-	
-	private double dy;
-	private double dx;
-	
-	
-	
-	
-	
-	
-	
+
 	
 	/**
 	 * Constructs a new plane at a specified position width a specified angle and width
@@ -100,35 +92,29 @@ public class Plane {
 	 */
 	public Plane(double x, double y, double angle, double width, int maisonNumber){
 		this.setMaisonNumber(maisonNumber);
+		
 		this.width = width;
 		this.angle = angle;
+		
 		if (this.angle >= Math.PI/2 && this.angle <= Math.PI || this.angle >= 3*Math.PI/2)
 			setPlaneVariable(0);
 		else
 			setPlaneVariable(1);
 		
-		this.position = new DoublePoint(x, y);
-		setDefaultPosition(position);
+		this.anchor1 = new DoublePoint(x, y);
+		this.anchor2 = new DoublePoint(x, y);
+		setAnchor2();
+		setDefaultPosition(anchor1);
 		setFormula();
-		setAnchors();
+		setHeight();
 		setLength();
 		
 		texture = MainFrame.getTl().planeTexture;
 	}
 	
 	
-	
 	/**
-	 * Sets the anchors
-	 */
-	public void setAnchors(){
-		this.anchor1 = this.position;
-		this.anchor2 = new DoublePoint(position.x + width, getY(this.position.x + width));
-		setFormula();
-	}
-	
-	/**
-	 * Returns the position in y of the specified x value
+	 * Returns the position in y of the specified x value on the plane
 	 * @param x
 	 * @return
 	 */
@@ -143,7 +129,7 @@ public class Plane {
 		
 		this.m = Math.tan(angle);
 		
-		c = (b*position.y)-(m*position.x);
+		c = (b * anchor1.y) - (m * anchor1.x);
 	}
 	
 	/**
@@ -183,114 +169,212 @@ public class Plane {
 		return t;
 	}
 	
+	
 	/**
-	 * Returns the position of the Plane
-	 * @return
+	 * Returns the the angle of the plane in radians
+	 * @return The angle of the plane
 	 */
-	public DoublePoint getPosition() {
-		return position;
+	public double getAngle() {
+		return angle;
+	}
+	/**
+	 * Sets to the specified angle
+	 * @param angle
+	 */
+	public void setAngle(double angle) {
+		this.angle = angle;
+		
+	}
+	/**
+	 * Sets the angle of the plane with the current width and height
+	 */
+	public void setAngle(){
+	//TODO
+		this.angle = Math.PI + Math.atan(height/width);
+		
 	}
 	
 	/**
-	 * Sets the position
-	 * @param position
-	 */
-	public void setPosition(DoublePoint position) {
-		this.position = position;
-		//TODO;
-	}
-	
-	/**
-	 * Returns the width of the plane (the side adjacent to the angle)
+	 * Returns the current width
 	 * @return
 	 */
-	public double getWidth() {
-		return width;
+	public double getWidth(){
+		return this.width;
 	}
-	/**Sets the width the specified width
-	 * 
+	/**
+	 * Sets the width of the plane with the specified value
 	 * @param width
 	 */
-	public void setWidth(double width) {
+	public void setWidth(double width){
 		this.width = width;
-		//TODO
+		//TODO setAnchor2()??
 	}
 	/**
-	 * Sets the width of the plane (the side adjacent to the angle) from the current length and angle
+	 * Sets the width of the plane with the current angle
 	 */
-	private void setWidth(){
-		setAngle();
+	public void setWidth(){
 		this.width = Math.abs(length * Math.cos(angle));
 	}
+	
 	/**
-	 * Gets the position ( as Anchor1) of the plane
+	 * Returns the height
 	 * @return
 	 */
-	public DoublePoint getAnchor1() {
-		return anchor1;
+	public double getHeight(){
+		return this.height;
 	}
 	/**
-	 * sets the position of the plane 
+	 * Sets the height of the plane with the specified value
+	 * @param height
+	 */
+	public void setHeight(double height){
+		this.height = height;
+	}
+	/**
+	 * Sets the height of the plane with the current angle
+	 */
+	public void setHeight(){
+		this.height = Math.abs(length * Math.sin(angle));
+	}
+	/**
+	 * Returns the length of the plane/the hypotenuse
+	 * @return
+	 */
+	public double  getLength(){
+		return this.length;
+	}
+	/**
+	 * Sets the length of the plane to the specified value
+	 * @param length
+	 */
+	public void setLength(int length){
+		this.length = length;
+	}
+	/**
+	 * Sets the length of the plane with the current width and angle
+	 */
+	public void setLength(){
+			this.length = Math.abs((double)this.width/Math.cos(angle));
+	}
+	
+	
+	/**
+	 * This creates the gradually inclining movement of a plane attached to a rope.
+	 * Assuming the movement of Anchor1 in y and the Anchor2's y fixed,
+	 *  this sets the new angle,the new formula, the new width and new position for Anchor2.
+	 */
+	public void mouvement(){
+		setHeight(Math.abs(anchor1.y - anchor2.y));
+		setWidth(Math.sqrt(length * length - height * height));
+		setAngle();
+		setFormula();
+		setAnchor2X();
+		
+	}
+	
+	
+	
+	
+	/**
+	 * Returns the position of the plane/the anchor 1
+	 * @return
+	 */
+	public DoublePoint getAnchor1(){
+		return this.anchor1;
+	}
+	/**
+	 * Sets the Anchor1 to the specified position
 	 * @param anchor1
 	 */
-	public void setAnchor1(DoublePoint anchor1) {
+	public void setAnchor1(DoublePoint anchor1){
 		this.anchor1 = anchor1;
-		//TODO
 	}
 	/**
-	 * Sets the y coordinate of the anchor1 relative to the current anchor2
+	 * Sets the Anchor1 with the current width, height and Anchor2's position
+	 */
+	//TODO Check if need of setAnchor1X & setAncor1Y...
+	public void setAnchor1(){
+		
+		if (planeVariable == 1)
+			this.anchor1.x = this.anchor2.x - width;
+		else 
+			this.anchor1.x = this.anchor2.x + width;
+		
+		if (this.angle >= 0 && this.angle < Math.PI)
+			this.anchor1.y = this.anchor2.y + height;
+		else
+			this.anchor1.y = this.anchor2.y - height;
+	}
+	
+	/**
+	 * Sets the X coordinate of the Anchor1with the current width and anchor2's position
+	 */
+	public void setAnchor1X(){
+		if (planeVariable == 1)
+			this.anchor1.x = this.anchor2.x - width;
+		else 
+			this.anchor1.x = this.anchor2.x + width;
+	}
+	/**
+	 * Sets the Y coordinate of the Anchor1 with the current width and anchor2's position
 	 */
 	public void setAnchor1Y(){
-		//TODO
-		setDy(0);
-		
-			this.anchor1.y = this.anchor2.y - dy;
-		
+		if (this.angle >= 0 && this.angle < Math.PI)
+			this.anchor1.y = this.anchor2.y + height;
+		else
+			this.anchor1.y = this.anchor2.y - height;
 	}
+	
+	
+	
 	/**
-	 * Returns the position of the anchor2
+	 * Returns the position of the plane/the anchor2
 	 * @return
 	 */
-	public DoublePoint getAnchor2() {
-		return anchor2;
+	public DoublePoint getAnchor2(){
+		return this.anchor2;
 	}
 	/**
-	 * Sets the position of the Anchor2
+	 * Sets the Anchor2 to the specified position
 	 * @param anchor2
 	 */
-	public void setAnchor2(DoublePoint anchor2) {
-		//TODO
+	public void setAnchor2(DoublePoint anchor2){
 		this.anchor2 = anchor2;
-		
 	}
 	/**
-	 * Sets the x coordinate of the anchor2 relative to the current anchor1
+	 * Sets the Anchor2 with the current width, height and Anchor2 position
 	 */
-	public void setAnchor2X(){
-		//TODO
-		setWidth();
+	//TODO Check if need of setAnchor2X & setAnchor2Y...
+	public void setAnchor2(){
+		
 		if (planeVariable == 1)
 			this.anchor2.x = this.anchor1.x + width;
-		else if ( planeVariable == 0)
+		else 
 			this.anchor2.x = this.anchor1.x - width;
-		//this.anchor2.y = getY(this.anchor1.x + width);
-		if (!isMoving()){
-			setAnchor1Y();
-		}
-		//(anchor2.x);
+		
+		if (this.angle >= 0 && this.angle < Math.PI)
+			this.anchor2.y = this.anchor1.y - height;
+		else
+			this.anchor2.y = this.anchor1.y + height;
+	}
+	
+	/**
+	 * Sets the X coordinate of Anchor2 with the current width and Anchor1's position
+	 */
+	public void setAnchor2X(){
+		if (planeVariable == 1)
+			this.anchor2.x = this.anchor1.x + width;
+		else 
+			this.anchor2.x = this.anchor1.x - width;
 	}
 	/**
-	 * Sets the y coordinate of the anchor2 relative to the current anchor1
+	 * Sets the Y coordinate of Anchor2 with the current width and Anchor1's position
 	 */
 	public void setAnchor2Y(){
-		
-		//TODO
-		setDy(0);
-		if (planeVariable == 1)
-			this.anchor2.y = this.anchor1.y + dy;
-		else 
-			this.anchor2.y = this.anchor1.y - dy;
-		
+		if (this.angle >= 0 && this.angle < Math.PI)
+			this.anchor2.y = this.anchor1.y - height;
+		else
+			this.anchor2.y = this.anchor1.y + height;
 	}
 	
 	/**
@@ -328,70 +412,8 @@ public class Plane {
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
-	/**
-	 * 
-	 * @return
-	 */
-	public double getAngle() {
-		return angle;
-	}
-	/**
-	 * 
-	 * @param angle
-	 */
-	public void setAngle(double angle) {
-		//TODO
-		this.angle = angle;
-		
-		
-	}
-	/**
-	 * 
-	 */
-	public void setAngle(){
-	//TODO
-		setDx();
-		setDy(1);
-		this.angle = Math.PI + Math.atan(dy/dx);
-		setFormula();
-		
-	}
-	public double getM() {
-		return m;
-	}
-	public void setM(double m) {
-		this.m = m;
-	}
-	public double getB() {
-		return b;
-	}
-	public void setB(double b) {
-		this.b = b;
-	}
-	public double getC() {
-		return c;
-	}
-	public void setC(double c) {
-		this.c = c;
-	}
-	public int getPlaneVariable() {
-		return planeVariable;
-	}
-	public void setPlaneVariable(int planeVariable) {
-		this.planeVariable = planeVariable;
-	}
-
-	public double getLength() {
-		return length;
-	}
-
-	public void setLength(double length) {
-		this.length = length;
-	}
-	public void setLength(){
-		this.length = Math.abs((double)this.width/Math.cos(angle));
-	}
-
+	
+	
 	public boolean isMoving() {
 		return isMoving;
 	}
@@ -405,8 +427,7 @@ public class Plane {
 	public void resetPosition(){
 		this.anchor1.x = this.defaultPosition.x;
 		this.anchor1.y = this.defaultPosition.y;
-		this.setAnchor2X();
-		this.setAnchor2Y();
+		this.setAnchor2();
 		setFormula();
 	}
 	/**
@@ -414,8 +435,8 @@ public class Plane {
 	 * @param position
 	 */
 	public void setDefaultPosition(DoublePoint position) {
-		this.defaultPosition.x = this.position.x;
-		this.defaultPosition.y = this.position.y;
+		this.defaultPosition.x = position.x;
+		this.defaultPosition.y = position.y;
 		
 	}
 	/**
@@ -462,20 +483,30 @@ public class Plane {
 		this.frictionConstant = frictionConstant;
 	}
 	
-	public void setDy(int i){
-		switch(i){
-		
-			case 0: this.dy = Math.sqrt((length * length) - (width * width));
-					break;
-			case 1: this.dy = (anchor1.y - anchor2.y);
-					break;
-			case 2: this.dy = Math.abs(length * Math.sin(angle));
-					break;
-		}
+	public double getM() {
+		return m;
 	}
-	
-	public void setDx(){
-		this.dx = anchor1.x - anchor2.x;
+	public void setM(double m) {
+		this.m = m;
 	}
- 
+	public double getB() {
+		return b;
+	}
+	public void setB(double b) {
+		this.b = b;
+	}
+	public double getC() {
+		return c;
+	}
+	public void setC(double c) {
+		this.c = c;
+	}
+	public int getPlaneVariable() {
+		return planeVariable;
+	}
+	public void setPlaneVariable(int planeVariable) {
+		this.planeVariable = planeVariable;
+	}
+
+
 }

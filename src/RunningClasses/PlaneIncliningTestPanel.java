@@ -60,7 +60,6 @@ public class PlaneIncliningTestPanel extends JPanel{
 					if (!rope.isMaxed() && t.isRunning()) {
 						rope.getOb1().setY(y);
 						rope.getOb1().setVy();
-
 						rope.pulleyMove(rope.getOb1().getPosition().x, y);
 					}
 
@@ -201,8 +200,8 @@ public class PlaneIncliningTestPanel extends JPanel{
 		else if (rope.isUsed() == 2 || rope.isUsed() == 4){
 			int[] xPoints = {(int)(gUnit*rope.getAnchor1().x), (int)(gUnit*rope.getAnchor2().x) + 50, (int)(gUnit*rope.getAnchor3().x) + 50};
 			if (rope.isUsed() == 4){
-				plane.getPosition().x += (50/gUnit);
-				plane.setAnchor2X();
+				plane.getAnchor1().x += (50/gUnit);
+				plane.setAnchor2();
 				xPoints[2] = (int)(gUnit * rope.getAnchor3().x);
 			}
 			
@@ -233,7 +232,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 		DoublePoint dp = new DoublePoint(x, y);
 		double t1x = trash.getPosition().x;
 		double t1y = trash.getPosition().y;
-		double px = plane.getPosition().x;
+		double px = plane.getAnchor1().x;
 		double p2x = plane.getAnchor2().x;
 		
 		@Override
@@ -244,7 +243,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 			 dp.y = y;
 			 t1x = trash.getPosition().x;
 			 t1y = trash.getPosition().y;
-			 px = plane.getPosition().x;
+			 px = plane.getAnchor1().x;
 			 p2x = plane.getAnchor2().x;
 		
 			
@@ -266,8 +265,7 @@ public class PlaneIncliningTestPanel extends JPanel{
 					plane.getAnchor1().x = x;
 					plane.getAnchor1().y = y;
 					//plane.getAnchor2().x = plane.getAnchor1().x + plane.getWidth();
-					plane.setAnchor2X();
-					plane.setAnchor2Y();
+					plane.setAnchor2();
 					plane.setMoving(false);
 				}
 				repaint();
