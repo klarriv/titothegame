@@ -393,7 +393,7 @@ public class Level extends JPanel {
 			// 10
 			jason = new Jason(reader.nextDouble(), reader.nextDouble());
 
-			// setting the planes to the maison
+			//TODO setting the planes to the maison
 			for (int i = 0; i < numberOfPlane; i++)
 				if (planeList.get(i).getMaisonNumber() > -1 && planeList.get(i).getMaisonNumber() < maisonList.size())
 					maisonList.get(planeList.get(i).getMaisonNumber()).addPlanes(planeList.get(i));
@@ -781,7 +781,7 @@ public class Level extends JPanel {
 			ob1.setPlaneVariable(p.getPlaneVariable());
 			setAcceleration(ob1, p);
 		} else if (ob1.getPlaneVariable() > -1) {
-			System.out.println(785);
+			System.out.println(784);
 			ob1.setUsed(false);
 			ob1.setPlane(-1);
 			ob1.setPlaneVariable(-1);
@@ -811,7 +811,7 @@ public class Level extends JPanel {
 			return true;
 		}
 		else if (ob1.getPlaneVariable() > -1){
-			System.out.println(815);
+			
 			ob1.setUsed(false);
 			return false;
 		}
@@ -1036,7 +1036,7 @@ public class Level extends JPanel {
 					}
 				}
 				for (int i = 0; i < planeList.size(); i++) {
-					if(planeList.get(i).isUsed() != 0 && planeList.get(i).isMoving() && x >= planeList.get(i).getAnchor1().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(dp) < 0.3){
+					if(planeList.get(i).isUsed() !=0 && planeList.get(i).isMoving() && x >= planeList.get(i).getAnchor1().x && x <= planeList.get(i).getAnchor2().x && planeList.get(i).pointDistance(dp) < 0.3){
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
@@ -1072,7 +1072,6 @@ public class Level extends JPanel {
 				}
 	
 				for (int i = 0; i < trashCanList.size(); i++) {
-					System.out.println(i + " " + trashCanList.get(i).isUsed());
 					if (trashCanList.get(i).getR() != null && trashCanList.get(i).isMoving) {
 						trashCanList.get(i).setX(x - TrashCan.WIDTHFLAT / 2);
 						trashCanList.get(i).setY(y - TrashCan.HEIGHTFLAT / 2);
@@ -1093,13 +1092,14 @@ public class Level extends JPanel {
 									}
 								
 							}
-							else
+						/*	else
 								for (int jj = 0; jj < planeList.size(); jj++){
 									planeContact(trashCanList.get(i), planeList.get(jj), jj);
+									System.out.println(1089);
 									if(trashCanList.get(i).isUsed())	
 										break;
 								}
-						
+						*/
 						for (int j = 0; j < trashCanList.size(); j++) {
 							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && !trashCanList.get(i).isUsed() && !trashCanList.get(j).isUsed() && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
 								MainFrame.getTl().playSound(MainFrame.getTl().addObjectTrashcanSound);
