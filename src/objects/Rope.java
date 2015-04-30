@@ -217,6 +217,7 @@ public class Rope {
 			ob1 = null;
 			ob2 = null;
 			broken = true;
+			force = 0;
 		}
 		else
 			broken = false;
