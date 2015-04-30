@@ -23,9 +23,9 @@ public class HelpPage extends JPanel{
 		case 0:  g.drawImage(MainFrame.getTl().helpPages[0], 0, 0, getWidth(), getHeight(), null);
 				 break;
         case 1:  g.drawImage(MainFrame.getTl().helpPages[1], 0, 0, getWidth(), getHeight(), null);
-                 break;/*
-        case 2:  g.drawImage(img, x, y, width, height, observer);
                  break;
+        case 2:  g.drawImage(MainFrame.getTl().helpPages[2], 0, 0, getWidth(), getHeight(), null);
+                 break;/*
         case 3:  g.drawImage(img, x, y, width, height, observer);
                  break;
         case 4:  g.drawImage(img, x, y, width, height, observer);
