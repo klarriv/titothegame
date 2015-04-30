@@ -613,7 +613,6 @@ public class Level extends JPanel {
 		
 		
 		
-		
 		// ropes Physics 
 		//TODO check w/ planes... wtf is going on
 		for (int i = 0; i < ropeList.size(); i++){
