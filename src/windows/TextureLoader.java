@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -26,6 +29,8 @@ public class TextureLoader {
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
 	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
 	public Font fntPlayGame;
+	
+	public String bouncingSound, addObjectTrashcanSound, heySound, attachingRopeSound, ropeSnap;
 	
 	public TextureLoader() {
 		
@@ -93,6 +98,7 @@ public class TextureLoader {
 			pauseMenuExitGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/exitGameButton.png"));
 			pauseMenuLevelSelectionTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/levelSelectionButton.png"));
 			
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,6 +106,13 @@ public class TextureLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		bouncingSound = "Resources/Sounds/bouncingSound.wav";
+		addObjectTrashcanSound = "Resources/Sounds/addObjectTrashcan.wav";
+		heySound = "Resources/Sounds/heySound.wav";
+		attachingRopeSound = "Resources/Sounds/attachingRope.wav";
+		ropeSnap = "Resources/Sounds/ropeSnap.wav";
+		
 	}
 	
 	public void changeButtonImage(JButton jbutton, Image img){
@@ -116,6 +129,18 @@ public class TextureLoader {
         	Image scaled = img.getScaledInstance(size.width, size.height, java.awt.Image.SCALE_SMOOTH);
         	jbutton.setIcon(new ImageIcon(scaled));
         }
+	}
+	
+	public void playSound(String string) {
+		try {
+			Clip sound = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(string).getAbsoluteFile());
+			sound.open(ais);
+			sound.start();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 }
 
