@@ -975,6 +975,7 @@ public class Level extends JPanel {
 					}
 					for(int j = 0; j<trashCanList.size(); j++){
 						if (trashCanList.get(j).getR() != null && benchList.get(i).getR() != null && trashCanList.get(j).getR().contains(benchList.get(i).getR())) {
+							MainFrame.getTl().playSound(MainFrame.getTl().addObjectTrashcanSound);
 							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + benchList.get(i).getWeight());
 							benchList.get(i).setVisible(false);
 							benchList.get(i).setR(null);
@@ -989,6 +990,7 @@ public class Level extends JPanel {
 					}
 					for(int j = 0; j<trashCanList.size(); j++){
 						if (trashCanList.get(j).getR() != null && coneList.get(i).getR() != null && trashCanList.get(j).getR().contains(coneList.get(i).getR())) {
+							MainFrame.getTl().playSound(MainFrame.getTl().addObjectTrashcanSound);
 							trashCanList.get(j).setWeight(trashCanList.get(j).getWeight() + coneList.get(i).getWeight());
 							coneList.get(i).setVisible(false);
 							coneList.get(i).setR(null);
@@ -1061,6 +1063,7 @@ public class Level extends JPanel {
 						
 						for (int j = 0; j < trashCanList.size(); j++) {
 							if ((i!=j) && trashCanList.get(i).getR() != null && trashCanList.get(j).getR() != null && !trashCanList.get(i).isUsed() && !trashCanList.get(j).isUsed() && (trashCanList.get(i).getR().contains(trashCanList.get(j).getR()) || trashCanList.get(j).getR().contains(trashCanList.get(i).getR())) && (!trashCanList.get(j).isUsed() || !trashCanList.get(i).isUsed())) {
+								MainFrame.getTl().playSound(MainFrame.getTl().addObjectTrashcanSound);
 								trashCanList.get(i).setWeight(trashCanList.get(i).getWeight() + trashCanList.get(j).getWeight());
 								trashCanList.get(j).setVisible(false);
 								trashCanList.get(j).setR(null);
