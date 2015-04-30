@@ -499,14 +499,15 @@ public class Level extends JPanel {
 
 		// TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (tito != null)
-			g.drawImage(tito.getTexture(), (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * 0.25), (int) (gUnit * 0.25), null);
+			g.drawImage(tito.getTexture(), (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * tito.getHeight()), (int) (gUnit * tito.getHeight()), null);
 
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
-
+		
+		g.drawRect((int) (gUnit*tito.getR().getPosition().x), (int) (gUnit*tito.getR().getPosition().y), (int) (gUnit*tito.getR().getWidth()), (int)(gUnit*tito.getR().getHeight()));
 	}
 
 	/*
@@ -604,8 +605,11 @@ public class Level extends JPanel {
 		}
 		//hitting the walls of a Maison
 		for (int i = 0; i < maisonList.size(); i++) {
-			if (maisonList.get(i).colliding(tito.getPosition()))
+			//if (maisonList.get(i).colliding(tito.getPosition())){
+			if(maisonList.get(i).getR().contains(tito.getR())){
+				MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
 				tito.setVx(-1 * tito.getVx());
+			}
 		}
 		
 		

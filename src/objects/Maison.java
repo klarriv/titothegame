@@ -19,7 +19,8 @@ public class Maison {
 	private String pathRelativeToThis;
 	private Plane plane1 = null;
 	private Plane plane2 = null;
-	
+	private DoubleRectangle r;
+
 	/**
 	 * Creates a Maison with a texture
 	 * @param x
@@ -34,6 +35,19 @@ public class Maison {
 		this.position.y = y;
 		this.width = width;
 		this.height = height;
+		
+		switch (which){
+		case 0: setR(new DoubleRectangle(position.x+81*width/MainFrame.getTl().maison[0].getWidth(), position.y+95*height/MainFrame.getTl().maison[0].getHeight(), width-(81*width/MainFrame.getTl().maison[0].getWidth()), height-(95*height/MainFrame.getTl().maison[0].getHeight())));
+				break;
+		case 1: setR(new DoubleRectangle(position, width, height));
+				break;
+		case 2: setR(new DoubleRectangle(position.x+55*width/MainFrame.getTl().maison[2].getWidth(), position.y, width-(106*width/MainFrame.getTl().maison[2].getWidth()), height));
+				break;
+		case 3: setR(new DoubleRectangle(position.x, position.y+453*height/MainFrame.getTl().maison[3].getHeight(), width, height-453*height/MainFrame.getTl().maison[3].getHeight()));
+				break;
+		case 4: setR(new DoubleRectangle(position.x+104*width/MainFrame.getTl().maison[4].getWidth(), position.y+161*height/MainFrame.getTl().maison[4].getHeight(), width-218*width/MainFrame.getTl().maison[4].getWidth(), height-161*height/MainFrame.getTl().maison[4].getHeight()));
+				break;
+		}
 		
 		texture = MainFrame.getTl().maison[which];
 		
@@ -117,6 +131,14 @@ public class Maison {
 	}
 	public void addPlane2(Plane plane){
 		this.plane2 = plane;
+	}
+	
+	public DoubleRectangle getR() {
+		return r;
+	}
+	
+	public void setR(DoubleRectangle r) {
+		this.r = r;
 	}
 	/**
 	 * Not suggested

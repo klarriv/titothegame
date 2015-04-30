@@ -36,7 +36,7 @@ public class Tito extends Physics{
 	private DoubleRectangle r;
 	
 	public Tito(){
-		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
+		setR(new DoubleRectangle(position, HEIGHT-0.09, HEIGHT-0.03));
 		spriteSheet = MainFrame.getTl().titoTexture;
 	}
 	
@@ -57,7 +57,7 @@ public class Tito extends Physics{
 		this.vx = vx;
 		this.vy = vy;
 		this.t = t;
-		setR(new DoubleRectangle(position, HEIGHT, HEIGHT));
+		setR(new DoubleRectangle(position, HEIGHT-0.09, HEIGHT-0.03));
 		spriteSheet = MainFrame.getTl().titoTexture;
 		
 	}
