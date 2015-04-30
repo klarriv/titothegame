@@ -27,6 +27,7 @@ public class TextureLoader {
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
+	public BufferedImage level1star, level2stars, level3stars;
 	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
 	public Font fntPlayGame;
 	
@@ -92,6 +93,11 @@ public class TextureLoader {
 				levelSelectLevelTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + ".png"));
 				levelSelectLevelGlowTexture[i] = ImageIO.read(new File("Resources/Menus/LevelSelectMenu/lvl" + (i+1) + "Glow.png"));
 			}
+			
+			// loads the stars
+			level1star = ImageIO.read(new File("Resources/Menus/Level/1star.png"));
+			level2stars = ImageIO.read(new File("Resources/Menus/Level/2stars.png"));
+			level3stars = ImageIO.read(new File("Resources/Menus/Level/3stars.png"));
 			
 			// loads the buttons for the pause menu
 			pauseMenuBackToGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/backToGameButton.png"));
