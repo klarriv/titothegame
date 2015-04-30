@@ -30,7 +30,7 @@ public class TextureLoader {
 	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
 	public Font fntPlayGame;
 	
-	public String bouncingSound, addObjectTrashcanSound, heySound, attachingRopeSound, ropeSnap;
+	public String bouncingSound, addObjectTrashcanSound, heySound, attachingRopeSound, ropeSnap, levelChange, nonono;
 	
 	public TextureLoader() {
 		
@@ -112,6 +112,8 @@ public class TextureLoader {
 		heySound = "Resources/Sounds/heySound.wav";
 		attachingRopeSound = "Resources/Sounds/attachingRope.wav";
 		ropeSnap = "Resources/Sounds/ropeSnap.wav";
+		levelChange = "Resources/Sounds/levelChange.wav";
+		nonono = "Resources/Sounds/nonono.wav";
 		
 	}
 	

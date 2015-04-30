@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.sound.sampled.Clip;
@@ -290,8 +291,6 @@ public class Level extends JPanel {
 
 		// START OF LOADING STUFF
 		loadObjects();
-
-		// TODO work on the timer :) Tito
 
 		// END OF LOADING STUFF
 
@@ -632,7 +631,38 @@ public class Level extends JPanel {
 			ropeList.get(i).setTotalForce();
 		}
 		
+		// checks if there is a collision with the enemies
+		// TODO quoi faire quand tito se fait pogner? genre jouer un son or something?
+		if(tito!= null && tito.getR().contains(jason.getR())){
+			int x=(Math.random()<0.5)?0:1; 
+			if(x==1)
+				MainFrame.getTl().playSound(MainFrame.getTl().heySound);
+			else
+				MainFrame.getTl().playSound(MainFrame.getTl().nonono);
+			tito = null;
+			t.stop();
+			loadObjects();
+		}
+				
+				
+		// checks if tito touches the right boundary to change level!
+		if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
+				t.stop();
+				loadObjects();
+				hasBeenCompleted = true;
+				LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
+				MainFrame.getTl().playSound(MainFrame.getTl().levelChange);
+				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+				cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
+		}
 		
+		else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
+			loadObjects();
+			hasBeenCompleted = true;
+			LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
+			CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+			cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
+		}
 	}
 
 	/**
@@ -921,42 +951,44 @@ public class Level extends JPanel {
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			isClicked = false;
-		
-			for (int i = 0; i < benchList.size(); i++) {
-				benchList.get(i).isMoving = false;
-				if (!benchList.get(i).isUsed()){
-					benchList.get(i).resetPosition();
-					repaint();
-				}	
-			}
-			for (int i = 0; i < coneList.size(); i++) {
-				coneList.get(i).isMoving = false;
-				if (!coneList.get(i).isUsed()){
-					coneList.get(i).resetPosition();
-					repaint();
+			if(!t.isRunning()){
+				isClicked = false;
+			
+				for (int i = 0; i < benchList.size(); i++) {
+					benchList.get(i).isMoving = false;
+					if (!benchList.get(i).isUsed()){
+						benchList.get(i).resetPosition();
+						repaint();
+					}	
 				}
-			}
-			for (int i = 0; i < trashCanList.size(); i++) {
-				trashCanList.get(i).isMoving = false;
-				if (!trashCanList.get(i).isUsed()){
-					trashCanList.get(i).resetPosition();
-					repaint();
+				for (int i = 0; i < coneList.size(); i++) {
+					coneList.get(i).isMoving = false;
+					if (!coneList.get(i).isUsed()){
+						coneList.get(i).resetPosition();
+						repaint();
+					}
 				}
-			}
-			for (int i = 0; i < ropeList.size(); i++) {
-				ropeList.get(i).isMoving = false;
-				if (ropeList.get(i).isUsed() == -1){
-					ropeList.get(i).resetPosition();
-					repaint();
+				for (int i = 0; i < trashCanList.size(); i++) {
+					trashCanList.get(i).isMoving = false;
+					if (!trashCanList.get(i).isUsed()){
+						trashCanList.get(i).resetPosition();
+						repaint();
+					}
 				}
-			}
-			for (int i = 0; i < planeList.size(); i++){
-				planeList.get(i).setMoving(false);
-				//TODO isUsed of the plane !?
-				if(planeList.get(i).isUsed() == -1){
-					planeList.get(i).resetPosition();
-					repaint();
+				for (int i = 0; i < ropeList.size(); i++) {
+					ropeList.get(i).isMoving = false;
+					if (ropeList.get(i).isUsed() == -1){
+						ropeList.get(i).resetPosition();
+						repaint();
+					}
+				}
+				for (int i = 0; i < planeList.size(); i++){
+					planeList.get(i).setMoving(false);
+					//TODO isUsed of the plane !?
+					if(planeList.get(i).isUsed() == -1){
+						planeList.get(i).resetPosition();
+						repaint();
+					}
 				}
 			}
 		}
@@ -1027,8 +1059,10 @@ public class Level extends JPanel {
 						ropeList.get(i).setY(y - Rope.HEIGHT / 2);
 	
 						for (int j = 0; j < pulleyList.size(); j++) {
-							if (ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3)
+							if (ropeList.get(i).isUsed() != 0 &&ropeList.get(i).getAnchor2().distance(pulleyList.get(j).getPosition()) <= 0.3){
+								MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
 								ropeList.get(i).setPulley(pulleyList.get(j));
+							}
 						}
 	
 					}
@@ -1058,7 +1092,6 @@ public class Level extends JPanel {
 									planeContact(trashCanList.get(i), planeList.get(jj), jj);
 									if(trashCanList.get(i).isUsed())	
 										break;
-									
 								}
 						
 						for (int j = 0; j < trashCanList.size(); j++) {
