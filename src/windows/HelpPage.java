@@ -18,12 +18,12 @@ public class HelpPage extends JPanel{
 		
 		g.drawImage(MainFrame.getTl().JOptionPaneBG.getImage(), 0, 0, getWidth(), getHeight(), null);
 		// TODO add the actual images in the help menu
-		/**
+		
 		switch (pageNumber) {
-		case 0:  g.drawImage(img, x, y, width, height, observer);
+		case 0:  g.drawImage(MainFrame.getTl().helpPages[0], 0, 0, getWidth(), getHeight(), null);
 				 break;
-        case 1:  g.drawImage(img, x, y, width, height, observer);
-                 break;
+        case 1:  g.drawImage(MainFrame.getTl().helpPages[1], 0, 0, getWidth(), getHeight(), null);
+                 break;/*
         case 2:  g.drawImage(img, x, y, width, height, observer);
                  break;
         case 3:  g.drawImage(img, x, y, width, height, observer);
@@ -41,8 +41,8 @@ public class HelpPage extends JPanel{
         case 9:  g.drawImage(img, x, y, width, height, observer);
                  break;
         default: g.drawImage(img, x, y, width, height, observer);
-                 break;
-		}*/
+                 break;*/
+		}
 		g.drawString(pageNumber+"", 50, 50);
 	}
 }

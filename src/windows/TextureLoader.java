@@ -21,7 +21,7 @@ public class TextureLoader {
 
 	private final String PATHFOFOBJECTS = "Resources/Objects/";
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture, enemyTexture;
-	public BufferedImage[] maison;
+	public BufferedImage[] maison, helpPages;
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture, levelPauseTexture;
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2, mainMenuHelpMenuButtonTexture;
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
@@ -98,6 +98,10 @@ public class TextureLoader {
 			pauseMenuExitGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/exitGameButton.png"));
 			pauseMenuLevelSelectionTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/levelSelectionButton.png"));
 			
+			helpPages = new BufferedImage[2];
+			for(int i=0; i<helpPages.length; i++){
+				helpPages[i] = ImageIO.read(new File("Resources/Menus/HelpMenu/help"+i+".png"));
+			}
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

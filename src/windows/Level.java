@@ -505,8 +505,6 @@ public class Level extends JPanel {
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
-		
-		g.drawRect((int) (gUnit*tito.getR().getPosition().x), (int) (gUnit*tito.getR().getPosition().y), (int) (gUnit*tito.getR().getWidth()), (int)(gUnit*tito.getR().getHeight()));
 	}
 
 	/*
@@ -594,6 +592,7 @@ public class Level extends JPanel {
 	
 					//if Tito hits a plane
 					if (planeCollided){
+						MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
 						planeCollision(planeList.get(i));
 						projectileMotion(tito);
 						xMove();
@@ -1076,9 +1075,11 @@ public class Level extends JPanel {
 						
 						for(int j = 0; j < ropeList.size() || ropeList.size() == 0; j++)
 							if (ropeList.size() != 0){
-								if ( trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
-										trashCanList.get(i).setUsed(true);
-										ropeList.get(j).setXAnchored();
+								System.out.println(trashCanList.get(i).isUsed());
+								if (trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
+									MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
+									trashCanList.get(i).setUsed(true);
+									ropeList.get(j).setXAnchored();
 								}
 								else//TODO why do we check plane contacts in the rope loop? O(n^3)...?
 									for (int jj = 0; jj < planeList.size(); jj++){
@@ -1086,6 +1087,7 @@ public class Level extends JPanel {
 										if(trashCanList.get(i).isUsed())
 											break;
 									}
+								
 							}
 							else
 								for (int jj = 0; jj < planeList.size(); jj++){
