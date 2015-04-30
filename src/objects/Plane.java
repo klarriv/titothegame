@@ -277,7 +277,7 @@ public class Plane {
 		if (!isMoving()){
 			setAnchor1Y();
 		}
-		System.out.println(anchor2.x);
+		//(anchor2.x);
 	}
 	/**
 	 * Sets the y coordinate of the anchor2 relative to the current anchor1

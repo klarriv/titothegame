@@ -120,16 +120,18 @@ public abstract class Physics implements ObjectInterface{
 		double frictionF = force * Math.sin(p.getAngle()) + force* Math.cos(p.getAngle()) * p.getFrictionConstant();
 		double a = frictionF/ob1.getWeight();
 		double ax = a * Math.sin(p.getAngle());
+		double ay = a * Math.cos(p.getAngle());
+		
+		//System.out.println(125 + " " + ax + " " + ay + " " + Math.toDegrees(p.getAngle()));
 		//TODO be sure it works every time
 		if (p.getPlaneVariable() == 0 )
 			ax = -ax;
-		//System.out.println(a * Math.sin(p.getAngle()));
-		//setAcceleration(p.getAngle(), ob1.getWeight(), p.getFrictionConstant());
 		
-		
-		//System.out.println(ob1.getVx());
-		
+		ob1.setVy(ob1.getVy() + ay * delay);
 		ob1.setVx(ob1.getVx() + ax * delay);
+		
+		this.vyi = ob1.getVy();
+		this.vxi = ob1.getVx();
 		ob1.getPosition().x += ob1.getVx()*(delay) + (0.5 * ax*((delay) * (delay)));
 		ob1.setY(p.getY(ob1.getPosition().x) - ob1.getHeight());
 	}

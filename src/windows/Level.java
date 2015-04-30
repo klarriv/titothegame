@@ -527,6 +527,7 @@ public class Level extends JPanel {
 					
 					//Throwing Tito in the air
 					if(seesawList.get(0).objectOn(tito)){
+						//System.out.println(530);
 						tito.setEnergyVelocity(trashCanList.get(i).getVy(), trashCanList.get(i).getWeight(), tito.getWeight());
 						tito.setVx();
 						tito.setVy();
@@ -543,7 +544,7 @@ public class Level extends JPanel {
 			
 			//plane incline plane fall
 			else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() > -1 && trashCanList.get(i).getPlane() > -1){
-				System.out.println(3);
+				//System.out.println(547);
 				if(isOnPlane(trashCanList.get(i), planeList.get(trashCanList.get(i).getPlane())))
 					frictionMove(trashCanList.get(i));
 				else{
@@ -568,18 +569,25 @@ public class Level extends JPanel {
 			//Tito's projectile motion
 			//TODO might have to change something here, it seems to work, though I don't know for every cases
 			//if (tito.getVy() > 0.5 && tito.getPosition().y <= (2.5 - tito.getHeight())){
-				projectileMotion(tito);
-				xMove();
-			
-			//if Tito hits a plane
-			 if (planeCollided){
-				planeCollision(planeList.get(i));
-				projectileMotion(tito);
-				xMove();
+			//System.out.println(i);
+			/*if (isOnPlane(tito,planeList.get(i))){
+				System.out.println(i);
+				System.out.println(574);
+				tito.frictionMotion(planeList.get(i), tito, (double)t.getDelay()/1000);
+				break;
 			}
-			
-			
-			
+			else {*/
+				projectileMotion(tito);
+				xMove();
+
+				//if Tito hits a plane
+				if (planeCollided){
+					planeCollision(planeList.get(i));
+					projectileMotion(tito);
+					xMove();
+				}
+			//}
+			//tito.setVx();
 		}
 		
 		//hitting the walls of a Maison
@@ -619,11 +627,15 @@ public class Level extends JPanel {
 	public void planeCollision(Plane plane) {
 
 		double angle = plane.angleOfContact(tito.getVx(), tito.getVy());
-
-		if (tito.getVx() >= 0)
-			tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
-		else
-			tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
+		System.out.println(Math.toDegrees(angle));
+		if (!(Math.toDegrees(angle) < 10 && Math.toDegrees(angle) > -10))
+			if (tito.getVx() >= 0)
+				tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
+			else
+				tito.matrixMultiplication(angle * 2, tito.getVx(), tito.getVy());
+		else { //if (isOnPlane(tito,plane))
+				tito.frictionMotion(plane, tito, (double)t.getDelay()/1000);
+		}
 
 		tito.setVx();
 		tito.setVy();
@@ -647,7 +659,8 @@ public class Level extends JPanel {
 		if (plane.getWidth() > 0) {
 			if (d <= r && (dp.x) <= plane.getAnchor2().x && dp.x >= plane.getAnchor1().x)
 				return true;
-		} else if (plane.getWidth() < 0) {
+		} 
+		else if (plane.getWidth() < 0) {
 			if (d <= r && dp.x > plane.getAnchor2().x && dp.x < plane.getAnchor1().x)
 				return true;
 		}
@@ -745,11 +758,15 @@ public class Level extends JPanel {
 
 		// TODO sss
 		double width = Math.abs((ob1.getWidth() / 2.0) * Math.cos(p.getAngle()));
-
-		if (y < ty && (x + width) > (tx1) && (x + width) < (tx2) && p.pointDistance(ob1.getPosition()) < 1)
+		//System.out.println((y < ty) + " " + ((x+width) > tx1) + " " +((x+width) < tx2)  + " " + ( p.pointDistance(ob1.getPosition()) < 1) );
+		if (y < ty && (x + width) > (tx1) && (x + width) < (tx2) && p.pointDistance(ob1.getPosition()) < 1){
+			ob1.setUsed(true);
 			return true;
-		else
+		}
+		else{
+			ob1.setUsed(false);
 			return false;
+		}
 	}
 	
 	/**
