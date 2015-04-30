@@ -13,6 +13,7 @@ public class Bench extends Physics {
 	private DoublePoint position;
 	private boolean isUsed = false;
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	private int weight = 35;
 	
 	public Bench(double x, double y){
 		

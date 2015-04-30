@@ -441,7 +441,9 @@ public class Level extends JPanel {
 		}
 		// 4 PLANE
 		for (int i = 0; i < planeList.size(); i++) {
+			g.setColor(Color.WHITE);
 			g.drawLine((int) (gUnit * (planeList.get(i).getAnchor1().x)), (int) (gUnit * (planeList.get(i).getAnchor1().y)), (int) (gUnit * (planeList.get(i).getAnchor2().x)), (int) (gUnit * planeList.get(i).getAnchor2().y));
+			g.setColor(Color.BLACK);
 		}
 		// 5 ROPE
 		g.setColor(Color.yellow);
@@ -491,6 +493,8 @@ public class Level extends JPanel {
 		// 9 MAISON
 		for (int i = 0; i < maisonList.size(); i++) {
 			g.drawImage(maisonList.get(i).getTexture(), (int) (gUnit * maisonList.get(i).getPosition().x), (int) (gUnit * maisonList.get(i).getPosition().y), (int) (maisonList.get(i).getWidth() * gUnit), (int) (maisonList.get(i).getHeight() * gUnit), null);
+			g.setColor(Color.WHITE);
+			g.drawRect((int) (gUnit*maisonList.get(i).getR().getPosition().x), (int) (gUnit*maisonList.get(i).getR().getPosition().y), (int) (gUnit*maisonList.get(i).getR().getWidth()), (int) (gUnit*maisonList.get(i).getR().getHeight()));
 		}
 		// 10 ENEMY
 		if (jason != null)
@@ -505,6 +509,8 @@ public class Level extends JPanel {
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
+		g.setColor(Color.WHITE);
+		g.drawLine((int) (gUnit * (planeList.get(0).getAnchor1().x)), (int) (gUnit * (planeList.get(0).getAnchor1().y)), (int) (gUnit * (planeList.get(0).getAnchor2().x)), (int) (gUnit * planeList.get(0).getAnchor2().y));
 	}
 
 	/*
@@ -976,6 +982,7 @@ public class Level extends JPanel {
 						repaint();
 					}
 				}
+				/**
 				for (int i = 0; i < planeList.size(); i++){
 					planeList.get(i).setMoving(false);
 					//TODO isUsed of the plane !?
@@ -983,7 +990,7 @@ public class Level extends JPanel {
 						planeList.get(i).resetPosition();
 						repaint();
 					}
-				}
+				}*/
 			}
 		}
 
