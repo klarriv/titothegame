@@ -104,7 +104,6 @@ public class PlaneRemastered {
 		this.anchor1 = new DoublePoint(x, y);
 		setDefaultPosition(anchor1);
 		setFormula();
-		setAnchors();
 		setHeight();
 		setLength();
 		
@@ -249,10 +248,11 @@ public class PlaneRemastered {
 	public void setLength(int length){
 		this.length = length;
 	}
-	
+	/**
+	 * Sets the length of the plane with the current width and angle
+	 */
 	public void setLength(){
 			this.length = Math.abs((double)this.width/Math.cos(angle));
-		
 	}
 	
 	/**

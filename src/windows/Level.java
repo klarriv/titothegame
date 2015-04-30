@@ -40,7 +40,7 @@ import objects.Spring;
 import objects.Tito;
 import objects.TrashCan;
 import objects.Tree;
-
+//aille ca va faire les bibites a cette heure la...
 public class Level extends JPanel {
 
 	/**
