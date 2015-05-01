@@ -59,7 +59,7 @@ public class TextureLoader {
 			enemyTexture = ImageIO.read(new File(PATHFOFOBJECTS+"jasonGerard.png"));
 			
 			// load les maisons
-			maison = new BufferedImage[5];
+			maison = new BufferedImage[6];
 			for (int i = 0; i<maison.length; i++){
 				maison[i] = ImageIO.read(new File(PATHFOFOBJECTS+"Maison"+i+".png"));
 			}
