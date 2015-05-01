@@ -122,20 +122,18 @@ public abstract class Physics implements ObjectInterface{
 	public void frictionMotion(Plane p, Physics ob1, double delay){
 		ob1.setVy(0);
 		double force = ob1.getWeight() * GRAVITY;
-		double frictionF = force * Math.sin(p.getAngle()) + force* Math.cos(p.getAngle()) * p.getFrictionConstant();
+		double frictionF;
+		if (p.getPlaneVariable() == 1)
+			frictionF = force * Math.sin(p.getAngle()) + force* Math.cos(p.getAngle()) * p.getFrictionConstant();
+		else
+			frictionF = force * Math.sin(p.getAngle()) - force* Math.cos(p.getAngle()) * p.getFrictionConstant();
 		double a = frictionF/ob1.getWeight();
-		double ax = a * Math.sin(p.getAngle());
-		//double ay = a * Math.cos(p.getAngle());
+		double ax = a * Math.abs(Math.sin(p.getAngle()));
 		
-		//System.out.println(125 + " " + ax + " " + ay + " " + Math.toDegrees(p.getAngle()));
 		//TODO be sure it works every time
-		if (p.getPlaneVariable() == 0 )
-			ax = -ax;
-		
-		//ob1.setVy(ob1.getVy() + ay * delay);
+	
 		ob1.setVx(ob1.getVx() + ax * delay);
 		
-		//this.vyi = ob1.getVy();
 		this.vxi = ob1.getVx();
 		ob1.getPosition().x += ob1.getVx()*(delay) + (0.5 * ax*((delay) * (delay)));
 		ob1.setY(p.getY(ob1.getPosition().x) - ob1.getHeight());
