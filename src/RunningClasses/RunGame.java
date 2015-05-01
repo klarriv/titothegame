@@ -31,7 +31,7 @@ public class RunGame{
 			
 			JSplash splash = new JSplash(imgURL, true, true, false, "V1.0", null, Color.BLACK, Color.BLACK);
 			
-			/**
+			
 			splash.splashOn();
 			splash.setProgress(20, "Loading Files");
 			frame = new MainFrame();
@@ -50,8 +50,8 @@ public class RunGame{
 			splash.setProgress(90, "Waking up Tito");
 			Thread.sleep(1000);
 			splash.setProgress(100, "Done");
-			splash.splashOff();*/
-			frame = new MainFrame(); // To remove when we put the splash screen back
+			splash.splashOff();
+			//frame = new MainFrame(); // To remove when we put the splash screen back
 			frame.setVisible(true);
 			frame.pack();
 			frame.setLocationRelativeTo(null);
