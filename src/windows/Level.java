@@ -229,7 +229,8 @@ public class Level extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				t.stop();
+				loadObjects();
+				t.restart();
 				isPaused = false;
 				jbtBackToGame.setVisible(false);
 				jbtBackToLevelSelect.setVisible(false);

@@ -64,6 +64,10 @@ public class MainFrame extends JFrame{
 	 * Holds the number of the level reached contained in the .sav file
 	 */
 	private static int levelReached;
+	/**
+	 * 
+	 */
+	private static int[] numberOfStartsForLevel = new int[10];
 	
 	/**
 	 * This creates a new main JFrame
@@ -80,10 +84,14 @@ public class MainFrame extends JFrame{
 			File gameSave =  new File("Resources/gameSave.sav");
 			if(!gameSave.exists()){
 				levelReached = 0;
+				for(int i=0; i<numberOfStartsForLevel.length;i++)
+					numberOfStartsForLevel[i] = 0;
 			}
 			else{
 				Scanner reader = new Scanner(gameSave);
 				levelReached = reader.nextInt();
+				for(int i=0; i<numberOfStartsForLevel.length;i++)
+					numberOfStartsForLevel[i] = reader.nextInt();
 				reader.close();
 			}
 		} catch (IOException e) {
@@ -97,8 +105,10 @@ public class MainFrame extends JFrame{
 		for (int i=0; i<levels.length; i++){
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
-			if(i<=MainFrame.getLevelReached())
+			if(i<=MainFrame.getLevelReached()){
 				MainFrame.getLevels()[i].setHasBeenCompleted(true);
+				MainFrame.getLevels()[i].setNumberOfStars(numberOfStartsForLevel[i]);
+			}
 			levelSelectMenu = new LevelSelectMenu();
 			menus.add(levelSelectMenu, LEVELSELECTPANEL);
 			menus.add(mainMenu, MAINMENUPANEL);
@@ -186,6 +196,15 @@ public class MainFrame extends JFrame{
 
 	public static void setHelpMenu(HelpMenu helpMenu) {
 		MainFrame.helpMenu = helpMenu;
+	}
+
+	public static int[] getNumberOfStartsForLevel() {
+		return numberOfStartsForLevel;
+	}
+
+	public static void setNumberOfStartsForLevel(
+			int[] numberOfStartsForLevel) {
+		MainFrame.numberOfStartsForLevel = numberOfStartsForLevel;
 	}
 	
 	

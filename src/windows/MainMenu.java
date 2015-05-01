@@ -89,7 +89,7 @@ public class MainMenu extends JPanel implements ActionListener{
 					PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
 					for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
 						if (MainFrame.getLevels()[i].hasBeenCompleted()) {
-							writer.println((i + 1));
+							writer.println((i+1));
 							break;
 						}
 					}
