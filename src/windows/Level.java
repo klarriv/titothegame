@@ -563,6 +563,7 @@ public class Level extends JPanel {
 					//Throwing Tito in the air
 					if(seesawList.get(0).objectOn(tito)){
 						//System.out.println(530);
+						MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
 						tito.setEnergyVelocity(trashCanList.get(i).getVy(), trashCanList.get(i).getWeight(), tito.getWeight());
 						tito.setVx();
 						tito.setVy();
