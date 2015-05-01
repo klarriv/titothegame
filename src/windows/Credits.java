@@ -2,11 +2,13 @@ package windows;
 
 import java.awt.Graphics;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Credits extends JPanel{
 	
 	Credits(){
+		JButton exit = new JButton();
 		
 	}
 	

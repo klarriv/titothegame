@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 import javax.sound.sampled.Clip;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -22,6 +23,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
+
 import objects.Bench;
 import objects.Cone;
 import objects.DoublePoint;
@@ -693,7 +695,7 @@ public class Level extends JPanel {
 			LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
 			MainFrame.getTl().playSound(MainFrame.getTl().levelChange);
 			CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-			cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
+			cardLayout.show(MainFrame.getMenus(), "CreditsPanel");
 		}
 	}
 
