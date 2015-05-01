@@ -1096,18 +1096,22 @@ public class Level extends JPanel {
 						x = x - planeList.get(i).getWidth()/2;
 						//y = planeList.get(i).getY(x);
 						planeList.get(i).getAnchor1().x = x;
-						planeList.get(i).getAnchor1().y = y;
+						if(planeList.get(i).getPlaneVariable() == 0)
+							planeList.get(i).getAnchor1().y = y + planeList.get(i).getHeight()/2;
+						else
+							planeList.get(i).getAnchor1().y = y - planeList.get(i).getHeight()/2;
+							
 						planeList.get(i).setAnchor2();
 					}
 					
-					for ( int j = 0; j < ropeList.size(); j++){
+				/*	for ( int j = 0; j < ropeList.size(); j++){
 						if (ropeList.get(j).isUsed() == 1 && ropeList.get(j).getAnchor2().distance(planeList.get(i).getAnchor1()) <= 0.3){
 							planeList.get(i).setUsed(1);
 							ropeList.get(j).setPlane(planeList.get(i));
 							ropeList.get(j).setXAnchored();
 							ropeList.get(j).setLength3();
 						}
-					}
+					}*/
 				}
 				
 				for (int i = 0; i < ropeList.size(); i++) {
