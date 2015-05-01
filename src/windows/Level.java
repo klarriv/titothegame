@@ -463,9 +463,8 @@ public class Level extends JPanel {
 		}
 		// 4 PLANE
 		for (int i = 0; i < planeList.size(); i++) {
-			g.setColor(Color.WHITE);
-			g.drawLine((int) (gUnit * (planeList.get(i).getAnchor1().x)), (int) (gUnit * (planeList.get(i).getAnchor1().y)), (int) (gUnit * (planeList.get(i).getAnchor2().x)), (int) (gUnit * planeList.get(i).getAnchor2().y));
-			g.setColor(Color.BLACK);
+			if(planeList.get(i).getMaisonNumber()!=0)
+				g.drawLine((int) (gUnit * (planeList.get(i).getAnchor1().x)), (int) (gUnit * (planeList.get(i).getAnchor1().y)), (int) (gUnit * (planeList.get(i).getAnchor2().x)), (int) (gUnit * planeList.get(i).getAnchor2().y));
 		}
 		// 5 ROPE
 		g.setColor(Color.yellow);
@@ -515,8 +514,8 @@ public class Level extends JPanel {
 		// 9 MAISON
 		for (int i = 0; i < maisonList.size(); i++) {
 			g.drawImage(maisonList.get(i).getTexture(), (int) (gUnit * maisonList.get(i).getPosition().x), (int) (gUnit * maisonList.get(i).getPosition().y), (int) (maisonList.get(i).getWidth() * gUnit), (int) (maisonList.get(i).getHeight() * gUnit), null);
-			g.setColor(Color.WHITE);
-			g.drawRect((int) (gUnit*maisonList.get(i).getR().getPosition().x), (int) (gUnit*maisonList.get(i).getR().getPosition().y), (int) (gUnit*maisonList.get(i).getR().getWidth()), (int) (gUnit*maisonList.get(i).getR().getHeight()));
+			//g.setColor(Color.WHITE);
+			//g.drawRect((int) (gUnit*maisonList.get(i).getR().getPosition().x), (int) (gUnit*maisonList.get(i).getR().getPosition().y), (int) (gUnit*maisonList.get(i).getR().getWidth()), (int) (gUnit*maisonList.get(i).getR().getHeight()));
 		}
 		// 10 ENEMY
 		if (jason != null)
@@ -580,11 +579,9 @@ public class Level extends JPanel {
 			
 			//plane incline plane fall
 			else if (trashCanList.get(i).isUsed() && trashCanList.get(i).getPlaneVariable() > -1 && trashCanList.get(i).getPlane() > -1){
-				System.out.println(551);
 				if(isOnPlane(trashCanList.get(i), planeList.get(trashCanList.get(i).getPlane())))
 					frictionMove(trashCanList.get(i));
 				else{
-					System.out.println(555);
 					trashCanList.get(i).setUsed(false);
 					trashCanList.get(i).setPlaneVariable(-1);
 					trashCanList.get(i).setPlane(-1);
@@ -827,7 +824,6 @@ public class Level extends JPanel {
 			ob1.setPlaneVariable(p.getPlaneVariable());
 			setAcceleration(ob1, p);
 		} else if (ob1.getPlaneVariable() > -1) {
-			System.out.println(784);
 			ob1.setUsed(false);
 			ob1.setPlane(-1);
 			ob1.setPlaneVariable(-1);
