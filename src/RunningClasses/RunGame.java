@@ -46,9 +46,9 @@ public class RunGame{
 			splash.setProgress(70, "Finalising Levels");
 			Thread.sleep(1000);
 			splash.setProgress(80, "Waking up Tito");
-			Thread.sleep(1000);
+			Thread.sleep(900);
 			splash.setProgress(90, "Waking up Tito");
-			Thread.sleep(1000);
+			Thread.sleep(500);
 			splash.setProgress(100, "Done");
 			splash.splashOff();
 			//frame = new MainFrame(); // To remove when we put the splash screen back
