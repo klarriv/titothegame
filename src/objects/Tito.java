@@ -15,7 +15,7 @@ public class Tito extends Physics{
 	private BufferedImage texture;
 	private BufferedImage spriteSheet;
 	private SpriteSheet ss = new SpriteSheet();
-	private int counter = 0;
+	private int counter = 1;
 	private int titoXSprite = 0;
 	private int titoYSprite = 0;
 	/**
@@ -40,6 +40,7 @@ public class Tito extends Physics{
 		spriteSheet = MainFrame.getTl().titoTexture;
 	}
 	
+
 	/**
 	 * This creates a new instance of Tito
 	 * @param x
@@ -229,8 +230,11 @@ public class Tito extends Physics{
 		this.onPlane = onPlane;
 	}
 
+	public int getCounter() {
+		return counter;
+	}
 
-	
-	
-
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
 }

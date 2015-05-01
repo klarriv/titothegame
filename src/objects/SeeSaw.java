@@ -10,17 +10,17 @@ public class SeeSaw {
 	private int isUsed = 0;
 	private BufferedImage texture;
 	private BufferedImage spriteSheet;
+	SpriteSheet ss = new SpriteSheet(spriteSheet);
 	private DoublePoint position;
 
 	public SeeSaw(double x, double y){
 		
 		setPosition(new DoublePoint(x, y));
-		//loadImage();
 		spriteSheet = MainFrame.getTl().seesawTexture;
 	}
 
 	public BufferedImage getTexture() {
-		SpriteSheet ss = new SpriteSheet(spriteSheet);
+		this.ss = new SpriteSheet(spriteSheet);
 		if (isUsed == 0)
 			texture = ss.grabSprite(0, 170, 559, 170);
 			

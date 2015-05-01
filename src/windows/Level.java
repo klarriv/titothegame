@@ -12,9 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.Scanner;
-
 import javax.sound.sampled.Clip;
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -24,8 +22,6 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.Timer;
-
-import RunningClasses.SpriteSheet;
 import objects.Bench;
 import objects.Cone;
 import objects.DoublePoint;
@@ -36,11 +32,10 @@ import objects.Plane;
 import objects.Pulley;
 import objects.Rope;
 import objects.SeeSaw;
-import objects.Spring;
 import objects.Tito;
 import objects.TrashCan;
 import objects.Tree;
-//aille ca va faire les bibites a cette heure la...
+
 public class Level extends JPanel {
 
 	/**
@@ -118,7 +113,6 @@ public class Level extends JPanel {
 	private int chrono = 0;
 
 	// TODO Tito's sprite sheet loading shit
-
 	/**
 	 * 
 	 */
@@ -130,9 +124,9 @@ public class Level extends JPanel {
 	/**
 	 * 
 	 */
-	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay,
-			jbtRestart, jbtPause;
-
+	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart, jbtPause;
+	private boolean engineOn;
+	
 	/**
 	 * Making the magic happen
 	 */
@@ -162,7 +156,7 @@ public class Level extends JPanel {
 					else if (ropeList.get(i).isUsed() == 1)
 						ropeList.get(i).setLength2();
 				}
-				t.start();
+				engineOn=true;
 			}
 
 		});
@@ -189,7 +183,7 @@ public class Level extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				t.stop();
+				t.restart();
 				loadObjects();
 				repaint();
 			}
@@ -219,12 +213,13 @@ public class Level extends JPanel {
 				jbtPause.setVisible(true);
 				jbtPlay.setVisible(true);
 				jbtRestart.setVisible(true);
+				t.start();
+				tito.setCounter(1);
 			}
 
 		});
-
+		
 		jbtBackToGame.addComponentListener(new ButtonResizeListener());
-
 		jbtBackToLevelSelect = new JButton(new ImageIcon(MainFrame.getTl().pauseMenuLevelSelectionTexture));
 		jbtBackToLevelSelect.setBorder(BorderFactory.createEmptyBorder());
 		jbtBackToLevelSelect.setContentAreaFilled(false);
@@ -304,19 +299,24 @@ public class Level extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-					chrono += t.getDelay();
-					if(chrono >= 2000){
-						chrono = 0;
-						loadObjects();
-						t.stop();
-						pauseGameAction();
-					}
-					engine();
-
-				repaint();
+				if(!engineOn){
+					repaint();	
+				}
+				
+				else if(engineOn){
+						chrono += t.getDelay();
+						if(chrono >= 2000){
+							loadObjects();
+							t.stop();
+							pauseGameAction();
+						}
+						engine();
+						repaint();
+				}
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
+		t.start();
 	}
 
 	/**
@@ -350,6 +350,8 @@ public class Level extends JPanel {
 	 */
 	protected void loadObjects() {
 
+		chrono = 0;
+		engineOn = false;
 		treeList.clear();
 		benchList.clear();
 		coneList.clear();
@@ -530,7 +532,8 @@ public class Level extends JPanel {
 	public void engine(){
 		
 		//making the trashcans fall
-	
+		tito.setCounter(tito.getCounter()+1);
+		
 		for ( int i = 0; i < trashCanList.size(); i++){
 			//looking if it falls on a seesaw
 		
@@ -667,6 +670,7 @@ public class Level extends JPanel {
 		}
 		
 		else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
+			t.stop();
 			loadObjects();
 			hasBeenCompleted = true;
 			LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
@@ -975,7 +979,7 @@ public class Level extends JPanel {
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
-			if(!t.isRunning()){
+			if(!engineOn){
 				isClicked = false;
 			
 				for (int i = 0; i < benchList.size(); i++) {
@@ -1020,7 +1024,8 @@ public class Level extends JPanel {
 
 		@Override
 		public void mouseDragged(MouseEvent arg0) {
-			if(isClicked && !t.isRunning()){	
+			//if(isClicked && !t.isRunning()){	
+			if(isClicked && !engineOn){	
 	
 				double x = (double) arg0.getX() / gUnit;
 				double y = (double) arg0.getY() / gUnit;
@@ -1143,7 +1148,7 @@ public class Level extends JPanel {
 						}
 					}
 				}	
-				repaint();
+				//repaint();
 			}
 		}
 
