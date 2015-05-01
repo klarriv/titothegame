@@ -92,7 +92,6 @@ public class MainMenu extends JPanel implements ActionListener{
 					File saveFile = new File("Resources/gameSave.sav");
 					PrintWriter writer = new PrintWriter(saveFile);
 					for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
-						System.out.println(MainFrame.getLevels()[i].hasBeenCompleted() + " " + MainFrame.getLevels()[i].levelNumber + " i " +i);
 						if (MainFrame.getLevels()[i].hasBeenCompleted()) {
 							writer.println((i+1));
 							break;

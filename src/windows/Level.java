@@ -292,9 +292,7 @@ public class Level extends JPanel {
 		});
 
 		// END OF PAUSE MENU ITEMS
-
 		
-
 		// START OF TIMER FOR MAKING TITO MOVE
 		t = new Timer(1000 / 25, new ActionListener() {
 
@@ -693,6 +691,7 @@ public class Level extends JPanel {
 			loadObjects();
 			hasBeenCompleted = true;
 			LevelSelectMenu.getLvlButtons()[levelNumber].setEnabled(true);
+			MainFrame.getTl().playSound(MainFrame.getTl().levelChange);
 			CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
 			cardLayout.show(MainFrame.getMenus(), "CREDITSPANEL");
 		}
