@@ -40,6 +40,5 @@ public class HelpPage extends JPanel{
         default: g.drawImage(img, x, y, width, height, observer);
                  break;*/
 		}
-		g.drawString(pageNumber+"", 50, 50);
 	}
 }

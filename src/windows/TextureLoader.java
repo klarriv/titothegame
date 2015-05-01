@@ -105,7 +105,7 @@ public class TextureLoader {
 			pauseMenuExitGameTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/exitGameButton.png"));
 			pauseMenuLevelSelectionTexture = ImageIO.read(new File("Resources/Menus/PauseMenu/levelSelectionButton.png"));
 			
-			helpPages = new BufferedImage[3];
+			helpPages = new BufferedImage[6];
 			for(int i=0; i<helpPages.length; i++){
 				helpPages[i] = ImageIO.read(new File("Resources/Menus/HelpMenu/help"+i+".png"));
 			}
