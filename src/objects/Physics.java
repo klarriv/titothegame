@@ -135,7 +135,6 @@ public abstract class Physics implements ObjectInterface{
 		ob1.setVx(ob1.getVx() + ax * delay);
 		this.vyi = (ob1.getVy() + ay * delay);
 		this.vxi = ob1.getVx();
-		System.out.println(vyi);
 		ob1.getPosition().x += ob1.getVx()*(delay) + (0.5 * ax*((delay) * (delay)));
 		ob1.setY(p.getY(ob1.getPosition().x) - ob1.getHeight());
 	}

@@ -308,7 +308,7 @@ public class Level extends JPanel {
 				
 				else if(engineOn){
 					resetChrono += t.getDelay();
-					if(resetChrono >= 2000){
+					if(resetChrono >= 2500){
 						loadObjects();
 						t.stop();
 						pauseGameAction();
@@ -624,7 +624,7 @@ public class Level extends JPanel {
 		if (!tito.isOnPlane()){
 			boolean planeCollided = false;
 			for(int i = 0; i< planeList.size(); i++){
-				
+				tito.setVy();
 				planeCollided = planeColliding(planeList.get(i));
 				//Tito's projectile motion
 				
@@ -773,6 +773,7 @@ public class Level extends JPanel {
 	 * Makes an object move with no friction and collide with the frame
 	 */
 	public void xMove() {
+		
 		double x = tito.motion(tito.getPosition().x, tito.getVx(), t.getDelay());
 
 		if (x <= 5 && x >= 0)
@@ -857,7 +858,6 @@ public class Level extends JPanel {
 			return true;
 		}
 		else if (ob1.getPlaneVariable() > -1){
-			
 			ob1.setUsed(false);
 			return false;
 		}
