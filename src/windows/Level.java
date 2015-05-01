@@ -110,7 +110,9 @@ public class Level extends JPanel {
 	/**
 	 * Counts the time elapsed since the start of the timer
 	 */
-	private int chrono = 0;
+	private int resetChrono = 0;
+	private int achievementChrono = 0;
+	private int numberOfStars;
 
 	// TODO Tito's sprite sheet loading shit
 	/**
@@ -300,18 +302,19 @@ public class Level extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				if(!engineOn){
+					achievementChrono += t.getDelay();
 					repaint();	
 				}
 				
 				else if(engineOn){
-						chrono += t.getDelay();
-						if(chrono >= 2000){
-							loadObjects();
-							t.stop();
-							pauseGameAction();
-						}
-						engine();
-						repaint();
+					resetChrono += t.getDelay();
+					if(resetChrono >= 2000){
+						loadObjects();
+						t.stop();
+						pauseGameAction();
+					}
+					engine();
+					repaint();
 				}
 			}
 		});
@@ -350,7 +353,8 @@ public class Level extends JPanel {
 	 */
 	protected void loadObjects() {
 
-		chrono = 0;
+		resetChrono = 0;
+		achievementChrono = 0;
 		engineOn = false;
 		treeList.clear();
 		benchList.clear();
@@ -515,7 +519,18 @@ public class Level extends JPanel {
 		// TITO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		if (tito != null)
 			g.drawImage(tito.getTexture(), (int) (gUnit * tito.getPosition().x), (int) (gUnit * tito.getPosition().y), (int) (gUnit * tito.getHeight()), (int) (gUnit * tito.getHeight()), null);
-
+		
+		switch (numberOfStars){
+		case 0: g.drawImage(MainFrame.getTl().level0star, (int)(gUnit * 4.35), (int)(gUnit * 0.05), (int) (0.59 * gUnit), (int) (gUnit * 0.275), null);
+				break;
+		case 1: g.drawImage(MainFrame.getTl().level1star, (int)(gUnit * 4.35), (int)(gUnit * 0.05), (int) (0.59 * gUnit), (int) (gUnit * 0.275), null);
+				break;
+		case 2: g.drawImage(MainFrame.getTl().level2stars, (int)(gUnit * 4.35), (int)(gUnit * 0.05), (int) (0.59 * gUnit), (int) (gUnit * 0.275), null);
+				break;
+		case 3: g.drawImage(MainFrame.getTl().level3stars, (int)(gUnit * 4.35), (int)(gUnit * 0.05), (int) (0.59 * gUnit), (int) (gUnit * 0.275), null);
+				break;
+		}
+		
 		if (isPaused) {
 			g.setColor(new Color(0, 0, 0, 128));
 			g.fillRect(0, 0, getWidth(), getHeight());
