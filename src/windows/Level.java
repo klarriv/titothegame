@@ -1143,7 +1143,7 @@ public class Level extends JPanel {
 								if (trashCanList.get(i).equals(ropeList.get(j).getOb1()) || trashCanList.get(i).equals(ropeList.get(j).getOb2())){
 									trashCanList.get(i).setUsed(true);
 									ropeList.get(j).setXAnchored();
-									MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
+									//MainFrame.getTl().playSound(MainFrame.getTl().attachingRopeSound);
 								}
 								else//TODO why do we check plane contacts in the rope loop? O(n^3)...?
 									for (int jj = 0; jj < planeList.size(); jj++){
