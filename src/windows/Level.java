@@ -112,6 +112,10 @@ public class Level extends JPanel {
 	 * resized.
 	 */
 	private double gUnit;
+	/**
+	 * Counts the time elapsed since the start of the timer
+	 */
+	private int chrono = 0;
 
 	// TODO Tito's sprite sheet loading shit
 
@@ -299,8 +303,14 @@ public class Level extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				if (t.isRunning())
+				
+					chrono += t.getDelay();
+					if(chrono >= 2000){
+						chrono = 0;
+						loadObjects();
+						t.stop();
+						pauseGameAction();
+					}
 					engine();
 
 				repaint();
@@ -665,6 +675,16 @@ public class Level extends JPanel {
 		}
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
 	 * 
