@@ -791,6 +791,8 @@ public class Level extends JPanel {
 	 * @param ob1
 	 */
 	public void projectileMotion(Physics ob1) {
+		tito.setVx();
+		tito.setVy();
 		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
