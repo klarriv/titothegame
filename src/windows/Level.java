@@ -194,7 +194,6 @@ public class Level extends JPanel {
 
 		add(jbtPlay);
 		add(jbtPause);
-		
 		add(jbtRestart);
 
 		// END OF PLAY/RESTART BUTTONS
@@ -294,10 +293,7 @@ public class Level extends JPanel {
 
 		// END OF PAUSE MENU ITEMS
 
-		// START OF LOADING STUFF
-		loadObjects();
-
-		// END OF LOADING STUFF
+		
 
 		// START OF TIMER FOR MAKING TITO MOVE
 		t = new Timer(1000 / 25, new ActionListener() {
@@ -323,7 +319,11 @@ public class Level extends JPanel {
 			}
 		});
 		// END OF TIMER FOR MAKING TITO MOVE
-		t.start();
+		
+		// START OF LOADING STUFF
+		loadObjects();
+
+		// END OF LOADING STUFF
 	}
 
 	/**
@@ -421,6 +421,8 @@ public class Level extends JPanel {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		if(!t.isRunning())
+			t.start();
 	}
 
 	/**
@@ -791,8 +793,6 @@ public class Level extends JPanel {
 	 * @param ob1
 	 */
 	public void projectileMotion(Physics ob1) {
-		tito.setVx();
-		tito.setVy();
 		double y = ob1.projectileMotions(ob1.getWeight(), ob1.getPosition().y, ob1.getVy(), t.getDelay());
 
 		if (ob1.getVy() < 0 && y >= 2.5 - ob1.getHeight()) {
