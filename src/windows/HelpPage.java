@@ -16,29 +16,26 @@ public class HelpPage extends JPanel{
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		g.drawImage(MainFrame.getTl().JOptionPaneBG.getImage(), 0, 0, getWidth(), getHeight(), null);
-		// TODO add the actual images in the help menu
-		
 		switch (pageNumber) {
 		case 0:  g.drawImage(MainFrame.getTl().helpPages[0], 0, 0, getWidth(), getHeight(), null);
 				 break;
         case 1:  g.drawImage(MainFrame.getTl().helpPages[1], 0, 0, getWidth(), getHeight(), null);
                  break;
         case 2:  g.drawImage(MainFrame.getTl().helpPages[2], 0, 0, getWidth(), getHeight(), null);
+                 break;
+        case 3:  g.drawImage(MainFrame.getTl().helpPages[3], 0, 0, getWidth(), getHeight(), null);
+                 break;
+        case 4:  g.drawImage(MainFrame.getTl().helpPages[4], 0, 0, getWidth(), getHeight(), null);
+                 break;
+        case 5:  g.drawImage(MainFrame.getTl().helpPages[5], 0, 0, getWidth(), getHeight(), null);
                  break;/*
-        case 3:  g.drawImage(img, x, y, width, height, observer);
+        case 6:  g.drawImage(MainFrame.getTl().helpPages[6], 0, 0, getWidth(), getHeight(), null);
                  break;
-        case 4:  g.drawImage(img, x, y, width, height, observer);
+        case 7:  g.drawImage(MainFrame.getTl().helpPages[7], 0, 0, getWidth(), getHeight(), null);
                  break;
-        case 5:  g.drawImage(img, x, y, width, height, observer);
+        case 8:  g.drawImage(MainFrame.getTl().helpPages[8], 0, 0, getWidth(), getHeight(), null);
                  break;
-        case 6:  g.drawImage(img, x, y, width, height, observer);
-                 break;
-        case 7:  g.drawImage(img, x, y, width, height, observer);
-                 break;
-        case 8:  g.drawImage(img, x, y, width, height, observer);
-                 break;
-        case 9:  g.drawImage(img, x, y, width, height, observer);
+        case 9:  g.drawImage(MainFrame.getTl().helpPages[9], 0, 0, getWidth(), getHeight(), null);
                  break;
         default: g.drawImage(img, x, y, width, height, observer);
                  break;*/
