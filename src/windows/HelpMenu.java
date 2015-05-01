@@ -61,7 +61,7 @@ public class HelpMenu extends JPanel{
 		jbtBackToMenu.setBorder(BorderFactory.createRaisedBevelBorder());
 		jbtBackToMenu.setContentAreaFilled(false);
 		
-		helpPages = new HelpPage[10];
+		helpPages = new HelpPage[6];
 		helpCL = new JPanel(new CardLayout());
 		
 		for(int i = 0; i<helpPages.length; i++){

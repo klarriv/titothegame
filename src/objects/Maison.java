@@ -49,6 +49,8 @@ public class Maison {
 				break;
 		case 5: setR(new DoubleRectangle(position.x+236*width/MainFrame.getTl().maison[5].getWidth(), position.y+600*height/MainFrame.getTl().maison[5].getHeight(), width-236*width/MainFrame.getTl().maison[5].getWidth(), height-600*height/MainFrame.getTl().maison[5].getHeight()));
 				break;
+		case 6: setR(new DoubleRectangle(position.x+10*width/MainFrame.getTl().maison[5].getWidth(), position.y, width-25*width/MainFrame.getTl().maison[5].getWidth(), height));
+		break;
 		}
 		
 		texture = MainFrame.getTl().maison[which];
