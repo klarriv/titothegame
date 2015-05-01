@@ -63,6 +63,7 @@ public class MainMenu extends JPanel implements ActionListener{
 					MainFrame.setLevelReached(0);
 					for(int i=1; i<MainFrame.getLevels().length; i++){
 						MainFrame.getLevels()[i].setHasBeenCompleted(false);
+						MainFrame.getLevels()[i].setNumberOfStars(0);
 					}
 					for(int i=1; i<LevelSelectMenu.getLvlButtons().length; i++){
 						LevelSelectMenu.getLvlButtons()[i].setEnabled(false);
@@ -184,11 +185,17 @@ public class MainMenu extends JPanel implements ActionListener{
 		}
 	}
 	
-	private void writeToSaveFile(int i){
+	private void writeToSaveFile(int k){
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter(new File("Resources/gameSave.sav"));
-			writer.print(i);
+			writer.println(k);
+			if(k==0){
+				for(int i=0; i<MainFrame.getLevels().length; i++){
+					writer.println(0);
+					MainFrame.getLevels()[i].setNumberOfStars(0);
+				}
+			}
 			writer.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
