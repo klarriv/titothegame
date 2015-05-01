@@ -624,7 +624,7 @@ public class Level extends JPanel {
 		if (!tito.isOnPlane()){
 			boolean planeCollided = false;
 			for(int i = 0; i< planeList.size(); i++){
-				tito.setVy();
+				//tito.setVy();
 				planeCollided = planeColliding(planeList.get(i));
 				//Tito's projectile motion
 				
