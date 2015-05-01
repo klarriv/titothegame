@@ -194,6 +194,7 @@ public class Level extends JPanel {
 
 		add(jbtPlay);
 		add(jbtPause);
+		
 		add(jbtRestart);
 
 		// END OF PLAY/RESTART BUTTONS

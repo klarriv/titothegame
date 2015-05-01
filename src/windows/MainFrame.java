@@ -105,7 +105,7 @@ public class MainFrame extends JFrame{
 		for (int i=0; i<levels.length; i++){
 			levels[i] = new Level(i);
 			menus.add(levels[i], ("LEVEL"+i));
-			if(i<=MainFrame.getLevelReached()){
+			if(i<MainFrame.getLevelReached()){
 				MainFrame.getLevels()[i].setHasBeenCompleted(true);
 				MainFrame.getLevels()[i].setNumberOfStars(numberOfStartsForLevel[i]);
 			}

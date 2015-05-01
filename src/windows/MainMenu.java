@@ -5,6 +5,8 @@ import RunningClasses.RunGame;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -61,7 +63,7 @@ public class MainMenu extends JPanel implements ActionListener{
 				if(reply == JOptionPane.YES_OPTION){
 					writeToSaveFile(0);
 					MainFrame.setLevelReached(0);
-					for(int i=1; i<MainFrame.getLevels().length; i++){
+					for(int i=0; i<MainFrame.getLevels().length; i++){
 						MainFrame.getLevels()[i].setHasBeenCompleted(false);
 						MainFrame.getLevels()[i].setNumberOfStars(0);
 					}
@@ -87,12 +89,18 @@ public class MainMenu extends JPanel implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
+					File saveFile = new File("Resources/gameSave.sav");
+					PrintWriter writer = new PrintWriter(saveFile);
 					for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
+						System.out.println(MainFrame.getLevels()[i].hasBeenCompleted() + " " + MainFrame.getLevels()[i].levelNumber + " i " +i);
 						if (MainFrame.getLevels()[i].hasBeenCompleted()) {
 							writer.println((i+1));
 							break;
 						}
+						else if(i==0){
+							writer.println(0);
+						}
+						
 					}
 					for(int i = 0; i < MainFrame.getLevels().length; i++){
 						writer.println(MainFrame.getLevels()[i].getNumberOfStars());
