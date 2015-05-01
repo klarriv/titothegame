@@ -542,8 +542,6 @@ public class Level extends JPanel {
 			g.fillRect(0, 0, getWidth(), getHeight());
 			g.drawImage(MainFrame.getTl().levelPauseHeaderTexture, 248 * getWidth() / 1280, 10 * getHeight() / 720, MainFrame.getTl().levelPauseHeaderTexture.getWidth() * getWidth() / 1280, MainFrame.getTl().levelPauseHeaderTexture.getHeight() * getHeight() / 720, null);
 		}
-		g.setColor(Color.WHITE);
-		g.drawLine((int) (gUnit * (planeList.get(0).getAnchor1().x)), (int) (gUnit * (planeList.get(0).getAnchor1().y)), (int) (gUnit * (planeList.get(0).getAnchor2().x)), (int) (gUnit * planeList.get(0).getAnchor2().y));
 	}
 
 	/*
