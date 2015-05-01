@@ -1,9 +1,11 @@
 package windows;
 
 import RunningClasses.RunGame;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -83,11 +85,20 @@ public class MainMenu extends JPanel implements ActionListener{
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				for(int i = MainFrame.getLevels().length-1; i>=0; i--){
-					if (MainFrame.getLevels()[i].hasBeenCompleted()){
-						writeToSaveFile((i+1));
-						break;
+				try {
+					PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
+					for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
+						if (MainFrame.getLevels()[i].hasBeenCompleted()) {
+							writer.println((i + 1));
+							break;
+						}
 					}
+					for(int i = 0; i < MainFrame.getLevels().length; i++){
+						writer.println(MainFrame.getLevels()[i].getNumberOfStars());
+					}
+					writer.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
 				System.exit(0);		
 			}

@@ -252,18 +252,20 @@ public class Level extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
-					if (MainFrame.getLevels()[i].hasBeenCompleted()) {
-						try {
-							PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
-							writer.print((i + 1));
-							writer.close();
+				try {
+					PrintWriter writer = new PrintWriter(new File("Resources/gameSave.sav"));
+					for (int i = MainFrame.getLevels().length - 1; i >= 0; i--) {
+						if (MainFrame.getLevels()[i].hasBeenCompleted()) {
+							writer.println((i + 1));
 							break;
-						} catch (FileNotFoundException e) {
-							//
-							e.printStackTrace();
 						}
 					}
+					for(int i = 0; i < MainFrame.getLevels().length; i++){
+						writer.println(MainFrame.getLevels()[i].numberOfStars);
+					}
+					writer.close();
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
 				}
 				System.exit(0);
 			}
@@ -673,7 +675,7 @@ public class Level extends JPanel {
 					
 		// checks if tito touches the right boundary to change level!
 		if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
-			System.out.println(achievementChrono);
+			attributeStars(achievementChrono);
 			t.stop();
 			loadObjects();
 			hasBeenCompleted = true;
@@ -684,6 +686,7 @@ public class Level extends JPanel {
 		}
 		
 		else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
+			attributeStars(achievementChrono);
 			t.stop();
 			loadObjects();
 			hasBeenCompleted = true;
@@ -695,13 +698,14 @@ public class Level extends JPanel {
 
 	
 	
-	
-	
-	
-	
-	
-	
-	
+	private void attributeStars(int timeTaken){
+		if(timeTaken<7000)
+			numberOfStars = 3;
+		else if(timeTaken<14000)
+			numberOfStars = 2;
+		else
+			numberOfStars = 1;
+	}
 	
 	/**
 	 * Makes Tito bounce on a plane according to the angle relative to the plane
@@ -912,6 +916,18 @@ public class Level extends JPanel {
 	 */
 	public JButton getJbtBackToLevelSelect() {
 		return jbtBackToLevelSelect;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public int getNumberOfStars() {
+		return numberOfStars;
+	}
+
+	public void setNumberOfStars(int numberOfStars) {
+		this.numberOfStars = numberOfStars;
 	}
 
 	/**
