@@ -673,13 +673,14 @@ public class Level extends JPanel {
 					
 		// checks if tito touches the right boundary to change level!
 		if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber != 9){
-				t.stop();
-				loadObjects();
-				hasBeenCompleted = true;
-				LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
-				MainFrame.getTl().playSound(MainFrame.getTl().levelChange);
-				CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
-				cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
+			System.out.println(achievementChrono);
+			t.stop();
+			loadObjects();
+			hasBeenCompleted = true;
+			LevelSelectMenu.getLvlButtons()[levelNumber+1].setEnabled(true);
+			MainFrame.getTl().playSound(MainFrame.getTl().levelChange);
+			CardLayout cardLayout = (CardLayout) MainFrame.getMenus().getLayout();
+			cardLayout.show(MainFrame.getMenus(), "LEVEL" + (levelNumber+1));
 		}
 		
 		else if(tito != null && tito.getPosition().x + tito.getHeight() >= 5 && levelNumber == 9){
