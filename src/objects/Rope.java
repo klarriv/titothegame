@@ -208,7 +208,7 @@ public class Rope {
 		if (isUsed() == 2  )
 			force = ob1.getForce(ob1.getWeight()) + ob2.getForce(ob2.getWeight());
 		
-		if (force >= 300){
+		if (force >= 200){
 			MainFrame.getTl().playSound(MainFrame.getTl().ropeSnap);
 			if (ob1 != null)
 				ob1.setUsed(false);
