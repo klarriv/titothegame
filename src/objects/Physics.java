@@ -184,7 +184,7 @@ public abstract class Physics implements ObjectInterface{
 	 */
 	public double setAcceleration( double angle, double weight, double u){
 		double force = (weight * GRAVITY);
-		double f = Math.abs((force * Math.sin(angle)) - Math.abs(((force * Math.cos(angle)) * u)));
+		double f = Math.abs((force * Math.sin(angle)) + Math.abs(((force * Math.cos(angle)) * u)));
 		//if ( f >= 0)
 			this.a = f/ weight;
 		//else
