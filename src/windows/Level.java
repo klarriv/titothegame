@@ -607,10 +607,8 @@ public class Level extends JPanel {
 		
 		//hitting the walls of a Maison
 		for (int i = 0; i < maisonList.size(); i++) {
-			//if (maisonList.get(i).colliding(tito.getPosition())){
 			if(maisonList.get(i).getR().contains(tito.getR())){
 				MainFrame.getTl().playSound(MainFrame.getTl().bouncingSound);
-				System.out.println(609);
 				tito.setVx(-1 * tito.getVx());
 				break;
 			}
@@ -669,7 +667,7 @@ public class Level extends JPanel {
 			else
 				MainFrame.getTl().playSound(MainFrame.getTl().nonono);
 			tito = null;
-			t.stop();
+			t.restart();
 			loadObjects();
 		}
 					
