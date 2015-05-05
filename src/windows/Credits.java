@@ -9,11 +9,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Credits extends JPanel{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton exit;
 	private final Font FONT = MainFrame.getTl().fntPlayGame.deriveFont(Font.PLAIN, 18f);
 	
@@ -41,6 +44,11 @@ public class Credits extends JPanel{
 	}
 	
 	private class background extends JPanel{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		background(){
 			
 		}
