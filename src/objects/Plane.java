@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import windows.MainFrame;
 
 /**
- * 
+ * The class Plane is an object where Tito can bounce and trashcans slide
  * @author CharlesPhilippe
  *
  */
@@ -22,7 +22,7 @@ public class Plane {
 	 */
 	private double height;
 	/**
-	 * 
+	 * The length (hypothenuse)
 	 */
 	private double length;
 	/**
@@ -34,31 +34,32 @@ public class Plane {
 	 */
 	private DoublePoint anchor2;
 	/**
-	 * 
+	 * The texture none for the moment
 	 */
 	private BufferedImage texture;
 	/**
-	 * 
+	 * The usage of the plane
 	 */
 	private int isUsed = -1;
 	/**
-	 * 
+	 * The visibility of the plane
 	 */
 	private boolean isVisible = false;
 	/**
-	 * 
+	 * The angle of the plane
 	 */
 	private double angle;
 	/**
-	 * The slope of the plane
+	 * The slope of the plane for the formula in the form: mX + bY + c = 0.
 	 */
 	private double m;
 	/**
-	 * 
+	 * The value of b is usually one in our case (Java).
+	 * The b of the formula of the form: mX + bY + c = 0.
 	 */
 	private double b = 1;
 	/**
-	 * 
+	 * The c of the formula of the form: mX + bY + c = 0
 	 */
 	private double c;
 	/**
@@ -66,19 +67,19 @@ public class Plane {
 	 */
 	private int planeVariable;
 	/**
-	 * 
+	 * The constant of friction for the plane
 	 */
 	private double frictionConstant = 0.5;
 	/**
-	 * 
+	 * If the object is dragged 
 	 */
 	private boolean isMoving;
 	/**
-	 * 
+	 * The default position
 	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	/**
-	 * 
+	 * The index of the Maison where the plane is anchored
 	 */
 	private int maisonNumber = -1;
 
@@ -116,7 +117,7 @@ public class Plane {
 	/**
 	 * Returns the position in y of the specified x value on the plane
 	 * @param x
-	 * @return
+	 * @return The y relative to the x on the plane
 	 */
 	public double getY(double x){
 		return m*x + c;
@@ -137,7 +138,7 @@ public class Plane {
 	/**
 	 * Returns the distance between a point and a plane
 	 * @param point
-	 * @return
+	 * @return The distance
 	 */
 	public double pointDistance(DoublePoint point){
 		
@@ -149,7 +150,7 @@ public class Plane {
 	 * Returns the angle of contact of a vector hitting the plane
 	 * @param vx
 	 * @param vy
-	 * @return
+	 * @return The angle
 	 */
 	public double angleOfContact(double vx, double vy){
 		double t;
@@ -424,7 +425,7 @@ public class Plane {
 		this.isMoving = isMoving;
 	}
 	/**
-	 * 
+	 * Resets the position to its default position
 	 */
 	public void resetPosition(){
 		this.anchor1.x = this.defaultPosition.x;
@@ -432,19 +433,13 @@ public class Plane {
 		this.setAnchor2();
 		setFormula();
 	}
-	/**
-	 * 
-	 * @param position
-	 */
+
 	public void setDefaultPosition(DoublePoint position) {
 		this.defaultPosition.x = position.x;
 		this.defaultPosition.y = position.y;
 		
 	}
-	/**
-	 * 
-	 * @return
-	 */
+	
 	public DoublePoint getDefaultPosition() {
 		
 		return defaultPosition;
@@ -462,7 +457,7 @@ public class Plane {
 		return texture;
 	}
 	
-	
+	@Deprecated
 	public void rotateImage(){
 		AffineTransform tx = new AffineTransform();
 		

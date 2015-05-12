@@ -6,7 +6,11 @@ import javax.swing.Timer;
 
 import RunningClasses.SpriteSheet;
 import windows.MainFrame;
-
+/**
+ * Tito
+ * @author CharlesPhilippe
+ *
+ */
 public class Tito extends Physics{
 	private int weight = 9;
 	private boolean isVisible = true;
@@ -34,7 +38,9 @@ public class Tito extends Physics{
 	private final double HEIGHT = 0.25;
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	private DoubleRectangle r;
-	
+	/**
+	 * This creates a new Tito
+	 */
 	public Tito(){
 		setR(new DoubleRectangle(position, HEIGHT-0.09, HEIGHT-0.03));
 		spriteSheet = MainFrame.getTl().titoTexture;
@@ -62,84 +68,85 @@ public class Tito extends Physics{
 		spriteSheet = MainFrame.getTl().titoTexture;
 		
 	}
-
+	@Override
 	public void setWeight(int weight) {
 		this.weight = weight;
 		
 	}
-
+	@Override
 	public int getWeight() {
 		
 		return this.weight;
 	}
-
+	@Override
 	public void setVisible(boolean visible) {
 		
 		this.isVisible = visible;
 		
 	}
-
-	public boolean getVisible() {
+	@Override
+	public boolean isVisible() {
 		
 		return isVisible;
 	}
-	
+	@Override
 	public void setUsed(boolean used) {
 		
 		this.isUsed = used;
 		
 	}
-
-	public boolean getUsed() {
+	@Override
+	public boolean isUsed() {
 		
 		return isUsed;
 	}
-
+	@Override
 	public void setPosition(DoublePoint position) {
 		
 		this.position = position;
 		
 	}
-	
+	@Override
 	public void setX(double x){
 		
 		this.position.x =x;
 	}
-	
+	@Override
 	public void setY(double y){
 		
 		this.position.y = y;
 	}
-
+	@Override
 	public DoublePoint getPosition() {
 		
 		return this.position;
 	}
-
+	@Override
 	public void setVx(double vx) {
 		
 		this.vx = vx;
 		
 	}
+	@Override
 	public void setVx(){
 		this.vx = this.vxi;
 	}
-
+	@Override
 	public double getVx() {
 		
 		return this.vx;
 	}
-
+	@Override
 	public void setVy(double vy) {
 		
 		this.vy = vy;
 		
 	}
-	
+	@Override
 	public void setVy(){
 		this.vy = this.vyi;
 	}
-
+	@Override
 	public double getVy() {
 		
 		return this.vy;
@@ -149,21 +156,7 @@ public class Tito extends Physics{
 		return this.t.getDelay();
 	}
 
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isUsed() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	
-	/**
-	 * TODO work that booty
-	 */
 	@Override
 	public BufferedImage getTexture() {
 		this.ss.setSpriteSheet(spriteSheet);

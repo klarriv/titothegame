@@ -7,7 +7,11 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import windows.MainFrame;
-
+/**
+ * Object of a house where Tito bounces
+ * @author CharlesPhilippe
+ *
+ */
 public class Maison {
 	private DoublePoint position = new DoublePoint(1,1);
 	private double width;
@@ -71,6 +75,11 @@ public class Maison {
 		this.height = height;
 		
 	}
+	/**
+	 * Determines whether a point is inside the Maison
+	 * @param p
+	 * @return Collided
+	 */
 	public boolean colliding(DoublePoint p){
 		
 		if (p.x >= position.x && p.x <= position.x + width 
@@ -164,7 +173,7 @@ public class Maison {
 		}
 	}
 	/**
-	 * 
+	 * This adds a specified plane as a roof for the Maison
 	 * @param plane
 	 */
 	 public void addPlanes(Plane plane){

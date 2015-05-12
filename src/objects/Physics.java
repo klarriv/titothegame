@@ -39,17 +39,23 @@ public abstract class Physics implements ObjectInterface{
 	 */
 	protected double a = 0;
 	/**
-	 * 
+	 * The acceleration in x
 	 */
 	protected double ax;
 	/**
-	 * 
+	 * The acceleration in y
+	 */
+	protected double ay;
+	/**
+	 * The index of the plane the object is on
 	 */
 	private int plane = -1;
-	
+	/**
+	 * The property of the plane
+	 */
 	private int planeVariable = -1;
 	
-	protected double ay;
+	
 	public int weight;
 	public boolean isVisible;
 	public boolean isUsed;
@@ -58,7 +64,9 @@ public abstract class Physics implements ObjectInterface{
 	public double vy;
 	public boolean isMoving;
 	
-	
+	/**
+	 * Constructs a new Physics object
+	 */
 	public Physics(){
 		
 	}
@@ -118,7 +126,12 @@ public abstract class Physics implements ObjectInterface{
 		
 		return position;
 	}
-	
+	/**
+	 * Calculates and sets the position of an object on a specified plane
+	 * @param p
+	 * @param ob1
+	 * @param delay
+	 */
 	public void frictionMotion(Plane p, Physics ob1, double delay){
 		ob1.setVy(0);
 		double force = ob1.getWeight() * GRAVITY;
@@ -167,7 +180,11 @@ public abstract class Physics implements ObjectInterface{
 		this.vyi = velocity * Math.cos(Math.toRadians(135));
 	
 	}
-	
+	/**
+	 * Returns the force of an object using f = m*a
+	 * @param mass
+	 * @return force
+	 */
 	public double getForce(int mass){
 		if (this.ax != 0 && this.ax > 0 || this.ax < 0)
 			return this.ax * mass;
@@ -180,7 +197,7 @@ public abstract class Physics implements ObjectInterface{
 	 * Calculates and returns the acceleration of an object using Newton's second law
 	 * @param weight
 	 * @param force
-	 * @return
+	 * @return The acceleration
 	 */
 	public double setAcceleration( double angle, double weight, double u){
 		double force = (weight * GRAVITY);
@@ -246,10 +263,11 @@ public abstract class Physics implements ObjectInterface{
 		}
 		
 	}
+	
 	public int getPlane() {
 		return plane;
 	}
-
+	
 	public void setPlane(int plane) {
 		this.plane = plane;
 	}

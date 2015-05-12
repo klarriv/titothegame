@@ -7,7 +7,11 @@ import javax.swing.Timer;
 
 import windows.MainFrame;
 import RunningClasses.SpriteSheet;
-
+/**
+ * The TrashCan is a physics object used to make Tito escape.
+ * @author CharlesPhilippe
+ *
+ */
 public class TrashCan extends Physics {
 	
 	public static final double WIDTHFLAT = 0.30;
@@ -36,7 +40,11 @@ public class TrashCan extends Physics {
 	private double height;
 	
 	
-	
+	/**
+	 * Creates a new trashcan at the specified position
+	 * @param x
+	 * @param y
+	 */
 	public TrashCan(double x, double y){
 		
 		position = new DoublePoint(x, y);
@@ -71,7 +79,12 @@ public class TrashCan extends Physics {
 		texture = MainFrame.getTl().trashCanTexture;
 		setR(new DoubleRectangle(position, width, height));
 	}
-	
+	/**
+	 * Should use the sprite sheet technique.
+	 * Rotates the image with the specified angle
+	 * @param angle
+	 */
+	@Deprecated
 	public void rotate(double angle){
 		AffineTransform tx = new AffineTransform();
 		
@@ -81,71 +94,71 @@ public class TrashCan extends Physics {
 	   	texture = op.filter(texture, null);
 	   	rotated = true;
 	}
-	
+	@Override
 	public int getWeight() {
 		return weight;
 	}
 
-
+	@Override
 	public void setWeight(int weight) {
 		this.weight = weight;
 	}
 
-
+	@Override
 	public boolean isVisible() {
 		return isVisible;
 	}
 
-
+	@Override
 	public void setVisible(boolean isVisible) {
 		this.isVisible = isVisible;
 	}
 
-
+	@Override
 	public boolean isUsed() {
 		
 		return isUsed;
 	}
 
-
+	@Override
 	public void setUsed(boolean isUsed) {
 		this.isUsed = isUsed;
 	}
 
-
+	@Override
 	public DoublePoint getPosition() {
 		return position;
 	}
 
-
+	@Override
 	public void setPosition(DoublePoint position) {
 		this.position = position;
 	}
 
-
+	@Override
 	public double getVx() {
 		return vx;
 	}
-	
+	@Override
 	public void setVx(){
 		this.vx = this.vxi;
 	}
 
-
+	@Override
 	public void setVx(double vx) {
 		this.vx = vx;
 	}
 
-
+	@Override
 	public double getVy() {
 		return vy;
 	}
-	
+	@Override
 	public void setVy(){
 		this.vy = this.vyi;
 	}
 
-
+	@Override
 	public void setVy(double vy) {
 		this.vy = vy;
 	}

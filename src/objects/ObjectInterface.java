@@ -10,13 +10,13 @@ public interface ObjectInterface {
 	
 	/**
 	 * Returns the texture of the object
-	 * @return
+	 * @return The BufferedImage of the texture
 	 */
 	public BufferedImage getTexture();
 
 	/**
 	 * Returns the weight of the object
-	 * @return
+	 * @return The weight
 	 */
 	public int getWeight();
 
@@ -28,7 +28,7 @@ public interface ObjectInterface {
 
 	/**
 	 * Returns the visibility status of the object
-	 * @return
+	 * @return The visibility
 	 */
 	public boolean isVisible();
 
@@ -40,7 +40,7 @@ public interface ObjectInterface {
 
 	/**
 	 * Returns true if the object was used by the player
-	 * @return
+	 * @return The usage
 	 */
 	public boolean isUsed();
 
@@ -52,7 +52,7 @@ public interface ObjectInterface {
 
 	/**
 	 * Returns the position in game units of the object
-	 * @return
+	 * @return The position
 	 */
 	public DoublePoint getPosition();
 
@@ -76,7 +76,7 @@ public interface ObjectInterface {
 
 	/**
 	 * Returns the velocity in x of the object
-	 * @return
+	 * @return The velocity in x
 	 */
 	public double getVx();
 	
@@ -93,7 +93,7 @@ public interface ObjectInterface {
 
 	/**
 	 * Returns the velocity in y of the object
-	 * @return
+	 * @return The velocity in y
 	 */
 	public double getVy();
 	
@@ -110,13 +110,13 @@ public interface ObjectInterface {
 	
 	/**
 	 * Returns the height of the object from its Position to the bottom of its image
-	 * @return
+	 * @return The height
 	 */
 	public double getHeight();
 	
 	/**
 	 * Returns the width of the object
-	 * @return
+	 * @return The width
 	 */
 	public double getWidth();
 	

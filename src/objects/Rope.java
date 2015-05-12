@@ -3,7 +3,11 @@ package objects;
 import java.awt.image.BufferedImage;
 
 import windows.MainFrame;
-
+/**
+ * The Rope object is used to attach TrashCans to Pulleys
+ * @author CharlesPhilippe
+ *
+ */
 public class Rope {
 	public final static double WIDTH = 0.3;
 	public final static double HEIGHT = 0.15;
@@ -23,7 +27,11 @@ public class Rope {
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	private BufferedImage texture;
 	
-	
+	/**
+	 * Creates an unused rope at specified position
+	 * @param x
+	 * @param y
+	 */
 	public Rope(double x, double y){
 		this.anchor2 = new DoublePoint(x, y);
 		setDefaultPosition(anchor2);
@@ -71,7 +79,7 @@ public class Rope {
 	}
 	
 	/**
-	 * 
+	 * Creates a new rope with specified anchors 1 and 2
 	 * @param x1
 	 * @param y1
 	 * @param x2
@@ -91,7 +99,7 @@ public class Rope {
 	}
 	
 	/**
-	 * 
+	 * Creates a new rope with specified anchors 1 and 2
 	 * @param anchor1
 	 * @param anchor2
 	 */
@@ -102,13 +110,17 @@ public class Rope {
 		
 		setR(new DoubleRectangle(anchor2.x, anchor2.y, WIDTH, HEIGHT));
 	}
-	
+	/**
+	 * Sets the length of the rope when there are two objects attached to the pulley
+	 */
 	public void setLength3(){
 		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
 		length +=  Math.sqrt(Math.pow(anchor3.x - anchor2.x, 2) + Math.pow(anchor3.y - anchor2.y, 2));
 		
 	}
-	
+	/**
+	 * Sets the length of the rope when there is only one object attached to the pulley
+	 */
 	public void setLength2(){
 		
 		length = Math.sqrt(Math.pow(anchor1.x - anchor2.x, 2) + Math.pow(anchor1.y - anchor2.y, 2));
@@ -116,10 +128,11 @@ public class Rope {
 	}
 	
 	/**
-	 * 
+	 * This makes the objects move together without a puller
 	 * @param x
 	 * @param y
 	 */
+	@Deprecated
 	public void move(double x, double y){
 		double dx = x - anchor1.x;
 		double dy = y - anchor1.y;
@@ -132,7 +145,7 @@ public class Rope {
 		
 	}
 	/**
-	 * 
+	 * Makes the anchors move relatively to each other on a pulley.
 	 * @param x
 	 * @param y
 	 */
@@ -167,7 +180,7 @@ public class Rope {
 	 * 0 if it is attached to a pulley,
 	 * 1 if it is attached to a pulley and a TrashCan,
 	 * and 2 if it is attached to a pulley and two TrashCans
-	 * @return
+	 * @return The usage
 	 */
 	public int isUsed(){
 		boolean a = ob1 == null;
@@ -197,7 +210,8 @@ public class Rope {
 	}
 	
 	/**
-	 * Sets the total force applied on the rope
+	 * Sets the total force applied on the rope.
+	 * If the force is greater than 200, the rope breaks.
 	 */
 	public void setTotalForce(){
 		
