@@ -13,16 +13,48 @@ import windows.MainFrame;
  *
  */
 public class Maison {
+	/**
+	 * The current position of the Maison
+	 */
 	private DoublePoint position = new DoublePoint(1,1);
+	/**
+	 * The width of the Maison
+	 */
 	private double width;
+	/**
+	 * The height of the Maison
+	 */
 	private double height;
+	/**
+	 * The visibility of the Maison
+	 */
 	private boolean isVisible = false;
+	/**
+	 * The BufferedImage of the Maison
+	 */
 	private BufferedImage texture;
+	/**
+	 * Which Maison it is in order to use the good image with the good width and height
+	 */
 	@SuppressWarnings("unused")
 	private String which ="1";
+	/**
+	 * The path to the image
+	 */
 	private String pathRelativeToThis;
+	/**
+	 * Not used yet.
+	 * Adding a plane to the Maison in order to make a roof 
+	 */
 	private Plane plane1 = null;
+	/**
+	 * Not used yet.
+	 * Adding a plane to the Maison in order to make a roof 
+	 */
 	private Plane plane2 = null;
+	/**
+	 * The hit box of the Maison
+	 */
 	private DoubleRectangle r;
 
 	/**

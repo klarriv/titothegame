@@ -9,22 +9,73 @@ import windows.MainFrame;
  *
  */
 public class Rope {
+	/**
+	 * The width of an unused rope
+	 */
 	public final static double WIDTH = 0.3;
+	/**
+	 * The height of an unused rope.
+	 */
 	public final static double HEIGHT = 0.15;
+	/**
+	 * Whether the rope is being dragged or not.
+	 */
 	public boolean isMoving;
+	/**
+	 * The position of the first attached object.
+	 */
 	private DoublePoint anchor1;
+	/**
+	 * The position of the pulley
+	 */
 	private DoublePoint anchor2;
+	/**
+	 * The position of the second attached object.
+	 */
 	private DoublePoint anchor3;
+	/**
+	 * The length of the rope
+	 */
 	private double length;
+	/**
+	 * The first attached object.
+	 */
 	private Physics ob1;
+	/**
+	 * The second object attached to the rope.
+	 */
 	private Physics ob2;
+	/**
+	 * The plane attached to the rope.
+	 */
 	private Plane plane;
+	/**
+	 * The pulley attached to the rope.
+	 */
 	private Pulley pulley;
+	/**
+	 * Whether the rope is stretched to its maximum.
+	 */
 	private boolean maxed = false;
+	/**
+	 * The force applied to the rope.
+	 */
 	private double force = 0;
+	/**
+	 * If the rope is broken.
+	 */
 	private boolean broken = false;
+	/**
+	 * The hit box of an unused rope.
+	 */
 	private DoubleRectangle r;
+	/**
+	 * The default position of the rope.
+	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	/**
+	 * The BufferedImage of an unused rope.
+	 */
 	private BufferedImage texture;
 	
 	/**

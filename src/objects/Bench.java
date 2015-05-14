@@ -3,18 +3,51 @@ package objects;
 import java.awt.image.BufferedImage;
 import objects.DoubleRectangle;
 import windows.MainFrame;
-
+/**
+ * The Bench object used to add weight to a TrashCan.
+ * Extends physics for future use.
+ * @author CharlesPhilippe
+ *
+ */
 public class Bench extends Physics {
-	
+	/**
+	 * The width of the bench
+	 */
 	public static final double WIDTH = 0.4;
+	/**
+	 * The width of the bench
+	 */
 	public static final double HEIGHT = 0.7;
+	/**
+	 * The BufferedImage of the bench
+	 */
 	private BufferedImage texture;
+	/**
+	 * The hit box of the bench
+	 */
 	private DoubleRectangle r;
+	/**
+	 * The current position of the bench
+	 */
 	private DoublePoint position;
+	/**
+	 * The usage of the bench
+	 */
 	private boolean isUsed = false;
+	/**
+	 * The default position of the bench
+	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	/**
+	 * the weight of the bench
+	 */
 	private int weight = 35;
 	
+	/**
+	 * Creates a new Bench at specified psoition.
+	 * @param x
+	 * @param y
+	 */
 	public Bench(double x, double y){
 		
 		position = new DoublePoint(x, y);

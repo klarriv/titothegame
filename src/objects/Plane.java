@@ -221,7 +221,7 @@ public class Plane {
 	
 	/**
 	 * Returns the height
-	 * @return
+	 * @return The height/ the opposite side of the angle
 	 */
 	public double getHeight(){
 		return this.height;
@@ -241,7 +241,7 @@ public class Plane {
 	}
 	/**
 	 * Returns the length of the plane/the hypotenuse
-	 * @return
+	 * @return The length of the plane
 	 */
 	public double  getLength(){
 		return this.length;
@@ -280,7 +280,7 @@ public class Plane {
 	
 	/**
 	 * Returns the position of the plane/the anchor 1
-	 * @return
+	 * @return The anchor 1
 	 */
 	public DoublePoint getAnchor1(){
 		return this.anchor1;
@@ -332,7 +332,7 @@ public class Plane {
 	
 	/**
 	 * Returns the position of the plane/the anchor2
-	 * @return
+	 * @return The second anchor
 	 */
 	public DoublePoint getAnchor2(){
 		return this.anchor2;
@@ -403,7 +403,7 @@ public class Plane {
 	}
 	/**
 	 * 
-	 * @return
+	 * @return The visibility of the plane
 	 */
 	public boolean isVisible() {
 		return isVisible;

@@ -7,36 +7,82 @@ import javax.swing.Timer;
 import RunningClasses.SpriteSheet;
 import windows.MainFrame;
 /**
- * Tito
+ * Tito!
  * @author CharlesPhilippe
  *
  */
 public class Tito extends Physics{
+	/**
+	 * The weight of Tito
+	 */
 	private int weight = 9;
+	/**
+	 * The visibility of Tito
+	 */
 	private boolean isVisible = true;
+	/**
+	 * The usage of Tito
+	 */
 	private boolean isUsed = true;
+	/**
+	 * Whether Tito is on plane or not
+	 */
 	private boolean onPlane = false;
+	/**
+	 * The current image for Tito
+	 */
 	private BufferedImage texture;
+	/**
+	 * The Sprite sheet of Tito
+	 */
 	private BufferedImage spriteSheet;
+	/**
+	 * The SpriteSheet object for Tito
+	 */
 	private SpriteSheet ss = new SpriteSheet();
+	/**
+	 * The counter for the frames of Tito
+	 */
 	private int counter = 1;
+	/**
+	 * The position in x in the sprite sheet
+	 */
 	private int titoXSprite = 0;
+	/**
+	 * The position in y in the sprite sheet
+	 */
 	private int titoYSprite = 0;
 	/**
-	 * 
+	 * The animation pattern in x
 	 */
 	private int[] rollingx = { 4, 5, 0, 5, 5 };
 	/**
-	 * 
+	 * The animation pattern in y
 	 */
 	private int[] rollingy = { 1, 1, 2, 0, 2 };
-	
-	
+	/**
+	 * The position in game units
+	 */
 	private DoublePoint position = new DoublePoint(10,10);
+	/**
+	 * The velocity in x 
+	 */
 	private double vx = 7;
+	/**
+	 * The velocity in y
+	 */
 	private double vy = 10;
+	/**
+	 * The height of Tito
+	 */
 	private final double HEIGHT = 0.25;
+	/**
+	 * The default position
+	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	/**
+	 * The hit box for Tito
+	 */
 	private DoubleRectangle r;
 	/**
 	 * This creates a new Tito

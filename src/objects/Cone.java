@@ -2,19 +2,54 @@ package objects;
 
 import java.awt.image.BufferedImage;
 import windows.MainFrame;
-
+/**
+ * The Bench object is used to add weight to a TrashCan.
+ * @author CharlesPhilippe
+ *
+ */
 public class Cone extends Physics {
-	
+	/**
+	 * The width of the cone
+	 */
 	public static final double WIDTH = 0.2;
+	/**
+	 * The height of the cone
+	 */
 	public static final double HEIGHT = 0.2;
+	/**
+	 * The BufferedImage for the cone
+	 */
 	private BufferedImage texture;
+	/**
+	 * The current position
+	 */
 	private DoublePoint position;
+	/**
+	 * The hit box of the cone
+	 */
 	private DoubleRectangle r;
+	/**
+	 * The weight of the cone
+	 */
 	private int weight = 5;
+	/**
+	 * The visibility of the cone
+	 */
 	private boolean isVisible;
+	/**
+	 * The usage of the cone
+	 */
 	private boolean isUsed = false;
+	/**
+	 * The default position of the cone
+	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
 	
+	/**
+	 * Creates a new Cone at specified position
+	 * @param x
+	 * @param y
+	 */
 	public Cone(double x, double y){
 		
 		position = new DoublePoint(x,y);

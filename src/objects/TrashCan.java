@@ -13,30 +13,83 @@ import RunningClasses.SpriteSheet;
  *
  */
 public class TrashCan extends Physics {
-	
+	/**
+	 * The width of the trash can with no angle
+	 */
 	public static final double WIDTHFLAT = 0.30;
+	/**
+	 * The height of the trashCan width no angle
+	 */
 	public static final double HEIGHTFLAT = 0.40;
+	/**
+	 * The width of the trash can at an angle
+	 */
 	public static final double WIDTHATANGLE = 0.4;
+	/**
+	 * The height of the trash can at an angle
+	 */
 	public static final double HEIGHTATANGLE = 0.5;
+	/**
+	 * The weight of the trash can
+	 */
 	private int weight = 10;
+	/**
+	 * The visibility of the trash can
+	 */
 	private boolean isVisible = true;
+	/**
+	 * The usage of the trash can
+	 */
 	private boolean isUsed = false;
-	
-	
-	
+	/**
+	 * The current image of the trash can
+	 */
 	private BufferedImage texture;
+	/**
+	 * The sprite sheet of the trash can
+	 */
 	private BufferedImage spriteSheet;
+	/**
+	 * The spriteSheet object of the trash can
+	 */
 	private SpriteSheet ss = new SpriteSheet();
-	
+	/**
+	 * The current position of the trash can
+	 */
 	private DoublePoint position;
+	/**
+	 * The current velocity in x of the trash can
+	 */
 	private double vx = 7;
+	/**
+	 * The current velocity in y of the trash can
+	 */
 	private double vy = 10;
+	/**
+	 * Changes to 1 if it hit a see saw
+	 */
 	public int single = 0;
+	/**
+	 * The hit box of the trash can
+	 */
 	private DoubleRectangle r;
+	/**
+	 * Whether the trash can is rotated or not 
+	 */
 	public boolean rotated = false;
+	/**
+	 * The default position of the trash can
+	 */
 	private DoublePoint defaultPosition  = new DoublePoint(1, 1);
-	public static final double threshold = 300;
+	
+	//public static final double threshold = 300; da fuck is dis
+	/**
+	 * The width of the trash can
+	 */
 	private double width;
+	/**
+	 * The height of the trash can
+	 */
 	private double height;
 	
 	

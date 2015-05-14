@@ -3,15 +3,47 @@ package objects;
 import java.awt.image.BufferedImage;
 import windows.MainFrame;
 
+/**
+ * The Pulley objects attaches a rope and with TrashCan.
+ * Extends physics for future use
+ * @author CharlesPhilippe
+ *
+ */
 public class Pulley extends Physics{
+	/**
+	 * The current positon of the pulley.
+	 */
 	private DoublePoint position = new DoublePoint(1,1);
+	/**
+	 * The visibility of the pulley.
+	 */
 	private boolean isVisible;
+	/**
+	 * The BufferedImage of the pulley.
+	 */
 	private BufferedImage texture;
+	/**
+	 * The usage of the pulley.
+	 */
 	private boolean isUsed = false;
+	/**
+	 * The default position of the pulley.
+	 */
 	private DoublePoint defaultPosition = new DoublePoint(1, 1);
+	/**
+	 * The height of the pulley.
+	 */
 	public static final double HEIGHT = 0.16;
+	/**
+	 * The width of the pulley.
+	 */
 	public static final double WIDTH = 0.28;		
 	
+	/**
+	 * Creates a pulley at the specified position with the specified visibility
+	 * @param position
+	 * @param visible
+	 */
 	public Pulley(DoublePoint position, boolean visible){
 		this.position = position;
 		setDefaultPosition(position);
@@ -21,6 +53,12 @@ public class Pulley extends Physics{
 			texture = MainFrame.getTl().pulleyTexture;
 	}
 	
+	/**
+	 * Creates a pulley at the specified position with the specified visibility
+	 * @param x
+	 * @param y
+	 * @param visible
+	 */
 	public Pulley(double x, double y, boolean visible){
 		this.position.x = x;
 		this.position.y = y;

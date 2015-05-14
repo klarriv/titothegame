@@ -1,9 +1,24 @@
 package objects;
 
+/**
+ * The DoublePoint object is used like a Point using doubles instead of integers.
+ * @author CharlesPhilippe
+ *
+ */
 public class DoublePoint {
+	/**
+	 * The position in x in game units
+	 */
 	public double x = 0;
+	/** 
+	 * The position in y in game units
+	 */
 	public double y = 0;
-	
+	/**
+	 * Creates a  new point at the specified double position.
+	 * @param x
+	 * @param y
+	 */
 	public DoublePoint(double x, double y){
 		this.x = x;
 		this.y = y;
