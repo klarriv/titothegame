@@ -54,14 +54,33 @@ public abstract class Physics implements ObjectInterface{
 	 * The property of the plane
 	 */
 	private int planeVariable = -1;
-	
-	
-	public int weight;
-	public boolean isVisible;
-	public boolean isUsed;
-	public DoublePoint position;
+	/**
+	 * The velocity in x of the object
+	 */
 	public double vx;
+	/**
+	 * The velocity in y of the object
+	 */
 	public double vy;
+	/**
+	 * The weight of the object
+	 */
+	public int weight;
+	/**
+	 * The visibility of the object
+	 */
+	public boolean isVisible;
+	/**
+	 * The usage of the object
+	 */
+	public boolean isUsed;
+	/**
+	 * The current position of the object
+	 */
+	public DoublePoint position;
+	/**
+	 * Whether the object is being dragged or not
+	 */
 	public boolean isMoving;
 	
 	/**
@@ -206,13 +225,10 @@ public abstract class Physics implements ObjectInterface{
 			this.a = f/ weight;
 		//else
 		//	this.a = 0;
-		
+	
 		this.ay = -a * Math.sin(Math.PI - angle);
 		this.ax = a * Math.cos(Math.PI - angle);
-		
-		
-		//System.out.println("ax: " + this.ax + " ay: " + this.ay);
-		//System.out.println("force: "+ force + " friction: " + f + " a "   + a);
+	
 		return a;
 	}
 	

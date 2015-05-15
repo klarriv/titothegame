@@ -9,9 +9,18 @@ import javax.imageio.ImageIO;
 
 import objects.Cone;
 
-
+/**
+ * Loads a BufferedImage with the specific path
+ * @author CharlesPhilippe
+ *
+ */
 public class BufferedImageLoader {
-	
+	/**
+	 * Loads a new BufferedImage
+	 * @param pathRelativeToThis
+	 * @return
+	 * @throws IOException
+	 */
 	public BufferedImage loadImage(String pathRelativeToThis) throws IOException{
 		File file = new File(pathRelativeToThis);
 		URL url = file.toURI().toURL();
