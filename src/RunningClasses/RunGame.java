@@ -12,10 +12,17 @@ import windows.*;
  */
 public class RunGame{
 	
-	private static double gUnit = 1280/5;
-	private static MainFrame frame;
 	/**
-	 * 
+	 * The initial value of a gUnit.
+	 */
+	private static double gUnit = 1280/5;
+	/**
+	 * The frame that holds the game.
+	 */
+	private static MainFrame frame;
+	
+	/**
+	 * Main class that starts the game.
 	 * @param args
 	 */
 	public static void main(String[] args){

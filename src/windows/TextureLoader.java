@@ -19,21 +19,71 @@ import javax.swing.JButton;
 
 public class TextureLoader {
 
+	/**
+	 * Where all the objects are located.
+	 */
 	private final String PATHFOFOBJECTS = "Resources/Objects/";
+	/**
+	 * Contains the specified object texture.
+	 */
 	public BufferedImage titoTexture, treeTexture, benchTexture, coneTexture, planeTexture, ropeTexture, seesawTexture, springTexture, trashCanTexture, pulleyTexture, enemyTexture;
-	public BufferedImage[] maison, helpPages;
+	/**
+	 * Contains the textures for the houses.
+	 */
+	public BufferedImage[] maison;
+	/**
+	 * Contains the textures for the helpPages.
+	 */
+	public BufferedImage[] helpPages;
+	/**
+	 * Contains the texture for the specified element in the level page.
+	 */
 	public BufferedImage levelBackgroundTexture, levelPauseHeaderTexture, levelRestartTexture, levelPlayTexture, levelPauseTexture;
+	/**
+	 * Contains the texture for the specified element in the main menu.
+	 */
 	public BufferedImage mainMenuBackgroundTexture, mainMenuPlayButtonTexture, mainMenuPlayButtonHighlightTexture, mainMenuNewGameButtonTexture, mainMenuNewGameButtonHighlightTexture, mainMenuTitleTexture, mainMenuMusicButtonTexture, mainMenuMusicButtonTexture2, mainMenuHelpMenuButtonTexture;
+	/**
+	 * Contains the texture for the specified element in the level select menu
+	 */
 	public BufferedImage levelSelectBackgroundTexture, levelSelectBackButtonTexture, levelSelectBackButtonGlowTexture;
+	/**
+	 * Contains the textures for the buttons with and without glowing effect.
+	 */
 	public BufferedImage[] levelSelectLevelTexture, levelSelectLevelGlowTexture;
+	/**
+	 * Contains the texture for the specified element in the pause menu.
+	 */
 	public BufferedImage pauseMenuBackToGameTexture, pauseMenuExitGameTexture, pauseMenuLevelSelectionTexture;
+	/**
+	 * Contains the texture for the number of stars specified. 
+	 */
 	public BufferedImage level0star, level1star, level2stars, level3stars;
+	/**
+	 * Contains the background for the credits panel.
+	 */
 	public BufferedImage creditsBg;
-	public ImageIcon titoWalkingAnimation, JOptionPaneBG;
+	/**
+	 * Contains the new game popup background.
+	 */
+	public ImageIcon JOptionPaneBG;
+	/**
+	 * Contains the animation for when tito is walking.
+	 */
+	public ImageIcon titoWalkingAnimation;
+	/**
+	 * Contains the general font used throughout the game.
+	 */
 	public Font fntPlayGame;
 	
+	/**
+	 * Contains the path to the various sounds.
+	 */
 	public String bouncingSound, addObjectTrashcanSound, heySound, attachingRopeSound, ropeSnap, levelChange, nonono;
 	
+	/**
+	 * Creates a new texture loader. 
+	 */
 	public TextureLoader() {
 		
 		try {
@@ -131,6 +181,11 @@ public class TextureLoader {
 		
 	}
 	
+	/**
+	 * Changes the image in the specified button.
+	 * @param jbutton
+	 * @param img
+	 */
 	public void changeButtonImage(JButton jbutton, Image img){
         Dimension size = jbutton.getSize(); 
         Insets insets = jbutton.getInsets();
@@ -147,6 +202,10 @@ public class TextureLoader {
         }
 	}
 	
+	/**
+	 * Plays the specified sound from the string that is passed.
+	 * @param string
+	 */
 	public void playSound(String string) {
 		try {
 			Clip sound = AudioSystem.getClip();

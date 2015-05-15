@@ -113,27 +113,32 @@ public class Level extends JPanel {
 	 * Counts the time elapsed since the start of the timer
 	 */
 	private int resetChrono = 0;
-	private int achievementChrono = 0;
-	private int numberOfStars;
-
-	// TODO Tito's sprite sheet loading shit
 	/**
-	 * 
+	 * Counts the time elapsed for the player to place the objects. 
+	 */
+	private int achievementChrono = 0;
+	/**
+	 * Contains the number of stars the player has gotten for the specific level.
+	 */
+	private int numberOfStars;
+	/**
+	 * If the game is paused. Used to open the pause menu.
 	 */
 	private boolean isPaused = false;
 	/**
-	 * 
+	 * If the specified has been completed for the savefile. 
 	 */
 	private boolean hasBeenCompleted = false;
 	/**
-	 * 
+	 * Contains all the jbuttons in the level panel.
 	 */
 	private JButton jbtExitGame, jbtBackToGame, jbtBackToLevelSelect, jbtPlay, jbtRestart, jbtPause;
+	/**
+	 * If the physics engine has been activated. 
+	 */
 	private boolean engineOn;
 	
-	/**
-	 * Making the magic happen
-	 */
+	
 
 	/**
 	 * This creates a new instance of level
@@ -332,7 +337,7 @@ public class Level extends JPanel {
 	}
 
 	/**
-	 * 
+	 * Does all the actions necessary to put the game in pause. 
 	 */
 	protected void pauseGameAction() {
 		if (!isPaused) {
@@ -437,6 +442,9 @@ public class Level extends JPanel {
 		levelSong.start();
 	}
 
+	/**
+	 * Paints all the objects in the level. 
+	 */
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -548,10 +556,9 @@ public class Level extends JPanel {
 		}
 	}
 
-	/*
-	 * Physics moving and colliding methods
+	/**
+	 * Contains all the physics method to make the objects move and collide.
 	 */
-	
 	public void engine(){
 		
 		//making the trashcans fall
@@ -703,7 +710,10 @@ public class Level extends JPanel {
 	}
 
 	
-	
+	/**
+	 * Determines the numbers of strars given to a player upon completition of the level depending on the time taken to place the objects. 
+	 * @param timeTaken
+	 */
 	private void attributeStars(int timeTaken){
 		if(timeTaken<7000)
 			numberOfStars = 3;
@@ -735,11 +745,9 @@ public class Level extends JPanel {
 		tito.setVy();
 
 	}
-
-	// TODO Check whether this can be improved
+	
 	/**
-	 * Determines if Tito is colliding with a plane
-	 * 
+	 * Determines if Tito is colliding with a plane.
 	 * @param plane
 	 * @return
 	 */
@@ -792,7 +800,6 @@ public class Level extends JPanel {
 
 	/**
 	 * Projectile motion of an object falling and hitting the ground
-	 * 
 	 * @param ob1
 	 */
 	public void projectileMotion(Physics ob1) {
@@ -813,7 +820,6 @@ public class Level extends JPanel {
 
 	/**
 	 * Puts the trashcan on the plane if it is near enough
-	 * 
 	 * @param ob1
 	 * @param p
 	 */
@@ -839,7 +845,6 @@ public class Level extends JPanel {
 
 	/**
 	 * Determines whether an object is on the plane or not
-	 * 
 	 * @param ob1
 	 * @param p
 	 * @return
@@ -879,7 +884,6 @@ public class Level extends JPanel {
 
 	/**
 	 * Sets the acceleration of an object on a plane
-	 * 
 	 * @param ob1
 	 * @param p
 	 */
@@ -891,42 +895,22 @@ public class Level extends JPanel {
 		return hasBeenCompleted;
 	}
 
-	/**
-	 * 
-	 * @param hasBeenCompleted
-	 */
 	public void setHasBeenCompleted(boolean hasBeenCompleted) {
 		this.hasBeenCompleted = hasBeenCompleted;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtExitGame() {
 		return jbtExitGame;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtBackToGame() {
 		return jbtBackToGame;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtBackToLevelSelect() {
 		return jbtBackToLevelSelect;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public int getNumberOfStars() {
 		return numberOfStars;
 	}
@@ -935,35 +919,21 @@ public class Level extends JPanel {
 		this.numberOfStars = numberOfStars;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtPlay() {
 		return jbtPlay;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtRestart() {
 		return jbtRestart;
 	}
 
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getJbtPause() {
 		return jbtPause;
 	}
 
 	/**
 	 * Moving the objects with the mouse
-	 * 
 	 * @author Keven-Matthew & Charles-Philippe
-	 *
 	 */
 	class DragListener implements MouseListener, MouseMotionListener {
 

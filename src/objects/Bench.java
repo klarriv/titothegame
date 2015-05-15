@@ -44,7 +44,7 @@ public class Bench extends Physics {
 	private int weight = 35;
 	
 	/**
-	 * Creates a new Bench at specified psoition.
+	 * Creates a new Bench at specified position.
 	 * @param x
 	 * @param y
 	 */
@@ -162,12 +162,18 @@ public class Bench extends Physics {
 		return HEIGHT;
 	}
 	
+	/**
+	 * Resets the position to the default position.
+	 */
 	@Override
 	public void resetPosition(){
 		this.position.x = this.defaultPosition.x;
 		this.position.y = this.defaultPosition.y;
 	}
 
+	/**
+	 * Generates the default position from the initial position of the bench
+	 */
 	@Override
 	public void setDefaultPosition(DoublePoint position) {
 		this.defaultPosition.x =this.position.x;

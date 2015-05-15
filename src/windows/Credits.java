@@ -11,15 +11,25 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+
 public class Credits extends JPanel{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * The exit button used to go back to the main menu from the credits panel.
+	 */
 	private JButton exit;
+	/**
+	 * Font used in the credits panel. 
+	 */
 	private final Font FONT = MainFrame.getTl().fntPlayGame.deriveFont(Font.PLAIN, 18f);
 	
+	/**
+	 * Creates a new credits panel.
+	 */
 	Credits(){
 		
 		exit = new JButton("Exit to Main Menu");
@@ -43,6 +53,11 @@ public class Credits extends JPanel{
 	
 	}
 	
+	/**
+	 * Paints a background in a JPanel to be used in the credits panel.
+	 * @author Keven-Matthew
+	 *
+	 */
 	private class background extends JPanel{
 		/**
 		 * 
