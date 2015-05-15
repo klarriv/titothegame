@@ -172,13 +172,18 @@ public class Pulley extends Physics{
 	}
 
 	
-	
+	/**
+	 * Resets the position to the default position.
+	 */
 	@Override
 	public void resetPosition(){
 		this.position.x = this.defaultPosition.x;
 		this.position.y = this.defaultPosition.y;
 	}
-
+	
+	/**
+	 * Generates the default position from the initial position of the bench
+	 */
 	@Override
 	public void setDefaultPosition(DoublePoint position) {
 		this.defaultPosition.x =this.position.x;

@@ -222,6 +222,7 @@ public class Rope {
 		
 		
 	}
+	
 	public boolean isMaxed(){
 		return maxed;
 	}
@@ -409,12 +410,17 @@ public class Rope {
 			anchor2.y = y;
 	}
 	
-
+	/**
+	 * Resets the position to the default position.
+	 */
 	public void resetPosition(){
 		this.anchor2.x = this.defaultPosition.x;
 		this.anchor2.y = this.defaultPosition.y;
 	}
 
+	/**
+	 * Generates the default position from the initial position of the bench
+	 */
 	public void setDefaultPosition(DoublePoint position) {
 		this.defaultPosition.x =this.anchor2.x;
 		this.defaultPosition.y = this.anchor2.y;

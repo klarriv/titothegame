@@ -166,12 +166,18 @@ public class Cone extends Physics {
 	public DoublePoint getDefaultPosition() {
 		return defaultPosition;
 	}
-
+	
+	/**
+	 * Generates the default position from the initial position of the bench
+	 */
 	public void setDefaultPosition(DoublePoint defaultPosition) {
 		this.defaultPosition.x = defaultPosition.x;
 		this.defaultPosition.y = defaultPosition.y;
 	}
 	
+	/**
+	 * Resets the position to the default position.
+	 */
 	public void resetPosition(){
 		this.position.x = this.defaultPosition.x;
 		this.position.y = this.defaultPosition.y;
